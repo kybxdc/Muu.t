@@ -1,0 +1,114 @@
+----- DB 생성 -----
+-- DBeaver에서 바로 생성해서 작업해볼 수 있게 만든 sql문 입니다.
+-- 위에서부터 차례대로 실행하시면 테이블이 정상적으로 생성됩니다.
+
+--------------------------------------------------------------------
+-- 등급별 할인율 테이블 생성 (PK 포함)
+CREATE TABLE "DISCOUNT" (
+    "customer_grade"         VARCHAR2(100)   PRIMARY KEY, -- 등급명
+    "discount_rate"          VARCHAR2(100)                -- 할인율
+);
+
+-- 공연장 정보 테이블 생성 (PK 포함)
+CREATE TABLE "HALL_INFO" (
+    "hall_id"                NUMBER          PRIMARY KEY, -- 공연장 ID
+    "hall_name"              VARCHAR2(100),               -- 공연장 이름
+    "hall_image"             VARCHAR2(1000),              -- 공연장 이미지
+    "hall_addr"              VARCHAR2(1000),              -- 공연장 주소
+    "hall_seat_info"         VARCHAR2(1000)               -- 좌석 정보
+);
+
+-- 고객 테이블 생성 (PK, FK 포함)
+CREATE TABLE "CUSTOMER" (
+    "customer_num"            NUMBER          PRIMARY KEY, -- 고객번호
+    "customer_id"             VARCHAR2(100)   NOT NULL,    -- 고객 아이디
+    "customer_pw"             VARCHAR2(100),               -- 고객 비밀번호
+    "customer_name"           VARCHAR2(100),               -- 고객 이름
+    "customer_phone"          VARCHAR2(100),               -- 고객 전화번호
+    "customer_address"        VARCHAR2(1000),              -- 고객 주소
+    "customer_grade"          VARCHAR2(100)   NOT NULL,    -- 고객 등급
+    "customer_total_cash"     VARCHAR2(100),               -- 결제한 티켓 가격 총 누적합
+    CONSTRAINT "FK_CUSTOMER_TO_DISCOUNT_1" FOREIGN KEY ("customer_grade") REFERENCES "DISCOUNT" ("customer_grade")
+);
+
+-- 뮤지컬 테이블 생성 (PK, FK 포함)
+CREATE TABLE "MUSICAL" (
+    "musical_id"              NUMBER          PRIMARY KEY, -- 뮤지컬 ID
+    "hall_id"                 NUMBER          NOT NULL,    -- 공연장 ID
+    "musical_title"           VARCHAR2(100),               -- 뮤지컬 제목
+    "musical_description"     VARCHAR2(1000),              -- 뮤지컬 설명
+    "musical_genre"           VARCHAR2(100),               -- 뮤지컬 장르
+    "musical_run_time"        VARCHAR2(100),               -- 상영 시간
+    "musical_area"            VARCHAR2(1000),              -- 상영 지역
+    "musical_age"             VARCHAR2(100),               -- 관람 연령
+    "musical_entrpsnm"        VARCHAR2(100),               -- 기획사명
+    "musical_image"           VARCHAR2(1000),              -- 뮤지컬 이미지
+    "musical_seat_grade_info" VARCHAR2(1000),              -- 좌석 등급 정보
+    "musical_start_date"      DATE,                        -- 시작 날짜
+    "musical_end_date"        DATE,                        -- 종료 날짜
+    "actor"                   VARCHAR2(100),               -- 배우
+    CONSTRAINT "FK_MUSICAL_TO_HALL_INFO_1" FOREIGN KEY ("hall_id") REFERENCES "HALL_INFO" ("hall_id")
+);
+
+-- 뮤지컬 상세정보 테이블 생성 (PK, FK 포함)
+CREATE TABLE "MUSICAL_DETAIL" (
+    "performance_id"         NUMBER          PRIMARY KEY, -- 공연 ID
+    "musical_id"             NUMBER          NOT NULL,    -- 뮤지컬 ID
+    "hall_id"                NUMBER          NOT NULL,    -- 공연장 ID
+    "performance_date"       DATE,                        -- 공연 날짜
+    "performance_start_time" VARCHAR2(100),               -- 공연 시작 시간
+    CONSTRAINT "FK_MUSICAL_D_TO_HALL_INFO_1" FOREIGN KEY ("hall_id") REFERENCES "HALL_INFO" ("hall_id"),
+    CONSTRAINT "FK_MUSICAL_D_TO_MUSICAL_1" 	 FOREIGN KEY ("musical_id") REFERENCES "MUSICAL" ("musical_id")
+);
+
+-- 좌석 상태 테이블 생성 (PK 포함)
+CREATE TABLE "SEATING_STATUS" (
+    "seat_num"               VARCHAR2(1000),              -- 좌석 번호
+    "performance_id"         NUMBER,                      -- 공연 ID
+    PRIMARY KEY ("seat_num", "performance_id"),
+    CONSTRAINT "FK_MUSICAL_DETAIL_TO_SEAT_STAT" FOREIGN KEY ("performance_id") REFERENCES "MUSICAL_DETAIL" ("performance_id")
+);
+
+-- 예약 테이블 생성 (PK, FK 포함)
+CREATE TABLE "RESERVATION" (
+    "reservation_num"        NUMBER,                      -- 예약번호
+    "customer_num"           NUMBER          NOT NULL,    -- 고객번호
+    "reservation_date"       DATE,                        -- 예약 날짜
+    "payment_amount"         VARCHAR2(100),               -- 결제 금액
+    "seat_num"               VARCHAR2(1000)  NOT NULL,    -- 좌석 번호
+    "performance_id"         NUMBER          NOT NULL,    -- 공연 ID
+    PRIMARY KEY ("reservation_num", "customer_num"),
+    CONSTRAINT "FK_CUSTOMER_TO_RESERVATION_1" FOREIGN KEY ("customer_num") REFERENCES "CUSTOMER" ("customer_num"),
+    CONSTRAINT "FK_CUSTOMER_TO_SEAT_STAT_1"   FOREIGN KEY ("seat_num", "performance_id") REFERENCES "SEATING_STATUS" ("seat_num", "performance_id")
+);
+
+-- 리뷰 테이블 생성 (PK, FK 포함)
+CREATE TABLE "review" (
+    "customer_num"           NUMBER,                      -- 고객번호
+    "musical_id"             NUMBER,                      -- 뮤지컬 ID
+    "review_score"           NUMBER,                      -- 리뷰 점수
+    "review_content"         VARCHAR2(1000),              -- 리뷰 내용
+    "review_date"            DATE,                        -- 리뷰 날짜
+    PRIMARY KEY ("customer_num", "musical_id"),
+    CONSTRAINT "FK_CUSTOMER_TO_REVIEW_1" FOREIGN KEY ("customer_num") REFERENCES "CUSTOMER" ("customer_num"),
+    CONSTRAINT "FK_MUSICAL_TO_REVIEW_1"  FOREIGN KEY ("musical_id") REFERENCES "MUSICAL" ("musical_id")
+);
+
+-- 기대 테이블 생성 (PK, FK 포함)
+CREATE TABLE "expectation" (
+    "customer_num"           NUMBER,                      -- 고객번호
+    "musical_id"             NUMBER,                      -- 뮤지컬 ID
+    "expectation_content"    VARCHAR2(1000),              -- 기대 내용
+    "expectation_date"       DATE,                        -- 기대 작성 날짜
+    PRIMARY KEY ("customer_num", "musical_id"),
+    CONSTRAINT "FK_CUSTOMER_TO_EXPECTATION_1" FOREIGN KEY ("customer_num") REFERENCES "CUSTOMER" ("customer_num"),
+    CONSTRAINT "FK_MUSICAL_TO_EXPECTATION_1"  FOREIGN KEY ("musical_id") REFERENCES "MUSICAL" ("musical_id")
+);
+
+-- 미지정 테이블 생성 (PK, FK 포함)
+CREATE TABLE "Untitled" (
+    "hall_id"                NUMBER          PRIMARY KEY, -- 공연장 ID
+    "y"                      VARCHAR(255),                -- 임시 컬럼
+    CONSTRAINT "FK_HALL_INFO_TO_UNTITLED_1"  FOREIGN KEY ("hall_id") REFERENCES "HALL_INFO" ("hall_id")
+);
+
