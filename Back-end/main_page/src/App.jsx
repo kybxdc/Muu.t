@@ -9,7 +9,9 @@ function App() {
       {/* Header */}
       <header className="header width-limit">
         <div className="header-innner">
-          <div className="logo">Muu.t</div>
+          <div className="logo">
+            <img className="logo-image" src="./src/img/Muut_logo_v2.png"/>
+          </div>
 
           <div className="auth-buttons">
             <button>로그인</button>
