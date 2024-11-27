@@ -29,6 +29,4 @@ public class MusicalDetail {
     @Column(name = "performance_start_time", length = 100)
     private String performanceStartTime; // 공연 시작 시간
 
-    @OneToMany(mappedBy = "musicalDetail")
-    private List<SeatingStatus> seatingStatuses = new ArrayList<>();
 }

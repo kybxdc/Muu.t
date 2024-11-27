@@ -1,7 +1,5 @@
 package com.finalproject.mainpage.querydsl.entity;
 
-import java.util.ArrayList;
-import java.util.List;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +9,8 @@ import lombok.Setter;
 @Getter @Setter
 public class Musical {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_generator5")
+    @SequenceGenerator(name = "seq_generator5", sequenceName = "musical_sequence", allocationSize = 1)
     @Column(name = "musical_id")
     private Long musicalId; // 뮤지컬 ID
 
@@ -50,7 +49,4 @@ public class Musical {
 
     @Column(name = "actor", length = 100)
     private String actor; // 배우
-
-    @OneToMany(mappedBy = "musical")
-    private List<MusicalDetail> musicalDetails = new ArrayList<>();
 }
