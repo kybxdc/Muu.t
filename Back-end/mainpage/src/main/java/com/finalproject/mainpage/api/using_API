@@ -1,3 +1,0 @@
-- KOPIS API 사용법
-- performanceId만 조정해서 사용하면 된다.
-http://localhost:9090/performance?performanceId=PF132238
