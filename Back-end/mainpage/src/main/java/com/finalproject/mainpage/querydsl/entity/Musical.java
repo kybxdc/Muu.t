@@ -9,10 +9,10 @@ import lombok.Setter;
 @Getter @Setter
 public class Musical {
 
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_generator5")
-//    @SequenceGenerator(name = "seq_generator5", sequenceName = "musical_sequence", allocationSize = 1)
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_generator5")
+    @SequenceGenerator(name = "seq_generator5", sequenceName = "musical_sequence", allocationSize = 1)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "musical_id")
     private Long musicalId; // 뮤지컬 ID
 

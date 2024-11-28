@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
+//@Entity
 @Table(name = "MUSICAL_DETAIL")
 @Getter @Setter
 public class MusicalDetail {
