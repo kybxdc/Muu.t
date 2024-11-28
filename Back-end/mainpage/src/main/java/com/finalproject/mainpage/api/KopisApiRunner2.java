@@ -18,7 +18,6 @@ public class KopisApiRunner2 {
 	    	
 	    	EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
 			EntityManager em = emf.createEntityManager();
-			// transaction : 하나의 작업단위
 			EntityTransaction tx = em.getTransaction();
 			tx.begin();
 			

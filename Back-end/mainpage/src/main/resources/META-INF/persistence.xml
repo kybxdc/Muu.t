@@ -17,7 +17,7 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org
 			<!-- <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" /> -->
 			
 			<!-- db 테이블 설정(none, create, create-drop, update, validate 중 하나로 설정) -->
-			<property name="hibernate.hbm2ddl.auto" value="none" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
 			
 			<!-- 옵션 -->
 			<!-- 콘솔에 하이버네이트가 실행하는 SQL문 출력 -->
