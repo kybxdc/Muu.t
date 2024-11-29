@@ -12,7 +12,7 @@ public class MusicalDTO {
 	@JsonProperty("prfnm")
 	private String musicalTitle;
 	
-	@JsonProperty("sty")
+	@JsonProperty("styurls")
 	private String musicalDescription;
 
 	@JsonProperty("genrenm")
@@ -87,7 +87,6 @@ public class MusicalDTO {
 	public void setMusicalStartDate(java.util.Date musicalStartDate) {
 		this.musicalStartDate = musicalStartDate;
 	}
-	
 	
 	public void setMusicalEndDate(java.util.Date musicalEndDate) {
 		this.musicalEndDate = musicalEndDate;
