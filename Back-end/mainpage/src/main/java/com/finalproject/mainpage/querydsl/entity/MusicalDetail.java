@@ -15,11 +15,11 @@ public class MusicalDetail {
     @Column(name = "performance_id")
     private Long performanceId; // 공연 ID
 
-    @ManyToOne
+//    @ManyToOne
     @JoinColumn(name = "musical_id")
     private Musical musical; // 뮤지컬과의 연관관계
 
-    @ManyToOne
+//    @ManyToOne
     @JoinColumn(name = "hall_id")
     private HallInfo hallInfo; // 공연장과의 연관관계
 

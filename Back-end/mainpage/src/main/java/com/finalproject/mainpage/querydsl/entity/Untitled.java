@@ -16,7 +16,7 @@ public class Untitled {
     @Column(name = "y", length = 255)
     private String y; // 임시 컬럼
 
-    @ManyToOne
+//    @ManyToOne
     @JoinColumn(name = "hall_id", insertable = false, updatable = false)
     private HallInfo hallInfo; // 공연장과의 연관관계
 }
