@@ -1,6 +1,6 @@
 package com.finalproject.mainpage.api;
 
-import com.finalproject.mainpage.querydsl.entity.Musical;
+import com.finalproject.mainpage.entity.Musical;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
