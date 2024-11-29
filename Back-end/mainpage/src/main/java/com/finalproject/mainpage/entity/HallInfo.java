@@ -27,6 +27,6 @@ public class HallInfo {
     @Column(name = "hall_seat_info", length = 1000)
     private String hallSeatInfo; // 좌석 정보
 
-    @OneToMany(mappedBy = "hallInfo")
+//    @OneToMany(mappedBy = "hallInfo")
     private List<MusicalDetail> musicalDetails = new ArrayList<>();
 }

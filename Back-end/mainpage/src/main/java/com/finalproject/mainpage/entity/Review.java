@@ -13,11 +13,11 @@ public class Review {
     @Column(name = "review_id")
     private Long reviewId; // 리뷰 ID
 
-    @ManyToOne
+//    @ManyToOne
     @JoinColumn(name = "customer_num")
     private Customer customer; // 고객과의 연관관계
 
-    @ManyToOne
+//    @ManyToOne
     @JoinColumn(name = "musical_id")
     private Musical musical; // 뮤지컬과의 연관관계
 

@@ -13,11 +13,11 @@ public class Reservation {
     @Column(name = "reservation_num")
     private Long reservationNum; // 예약번호
 
-    @ManyToOne
+//    @ManyToOne
     @JoinColumn(name = "customer_num")
     private Customer customer; // 고객과의 연관관계
 
-    @ManyToOne
+//    @ManyToOne
     @JoinColumn(name = "performance_id")
     private MusicalDetail musicalDetail; // 공연과의 연관관계
 

@@ -13,7 +13,7 @@ public class SeatingStatus {
     @Column(name = "seat_num", length = 1000)
     private String seatNum; // 좌석 번호
 
-    @ManyToOne
+//    @ManyToOne
     @JoinColumn(name = "performance_id")
     private MusicalDetail musicalDetail; // 공연과의 연관관계
 }

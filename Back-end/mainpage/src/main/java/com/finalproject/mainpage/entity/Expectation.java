@@ -13,11 +13,11 @@ public class Expectation {
     @Column(name = "expectation_id")
     private Long expectationId; // 기대 ID
 
-    @ManyToOne
+//    @ManyToOne
     @JoinColumn(name = "customer_num")
     private Customer customer; // 고객과의 연관관계
 
-    @ManyToOne
+//    @ManyToOne
     @JoinColumn(name = "musical_id")
     private Musical musical; // 뮤지컬과의 연관관계
 

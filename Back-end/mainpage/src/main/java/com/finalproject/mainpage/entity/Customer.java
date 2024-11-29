@@ -35,7 +35,7 @@ public class Customer {
     @Column(name = "customer_total_cash", length = 100)
     private String customerTotalCash; // 결제한 티켓 가격 총 누적합
     
-    @ManyToOne
+//    @ManyToOne
     @JoinColumn(name = "customer_grade", insertable = false, updatable = false)
     private Discount discount; // 등급별 할인율과의 연관관계 매핑
 
