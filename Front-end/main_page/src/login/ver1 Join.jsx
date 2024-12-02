@@ -1,10 +1,9 @@
 import { useState } from "react";
-import {Link} from 'react-router-dom';
-import "./Login.css";
+import './Join.css'
 
 
-export default function Login() {
-    const [id, setId] = useState(''); // 아이디 상태
+export default function Join() {
+     const [id, setId] = useState(''); // 아이디 상태
     const [password, setPassword] = useState(''); // 비밀번호 상태
   
     const handleIdChange = (e) => {
@@ -21,12 +20,11 @@ export default function Login() {
           <img src="../muut.png" witdh="300px" height="300px" ></img>
         </header>
         <div>
+          <h2>회원 정보를 입력해 주세요</h2>
+          <p>이메일 주소를 아이디로 사용할게요.</p>
           <input type='text' value={id} placeholder='아이디'  onChange={handleIdChange}/><br/>
           <input type='text' value={password} placeholder='비밀번호' onChange={handlePasswordChange}/><br/>
-          <button className="login">로그인</button>
-          <hr/>
-          <button className="join"><Link to="/Join">회원가입</Link></button>
-          <p><span>아이디찾기</span> | <span>비밀번호찾기</span></p>
+          <button className="join">회원가입</button>
         </div>
   
       </>

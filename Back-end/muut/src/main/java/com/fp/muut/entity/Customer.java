@@ -54,9 +54,16 @@ public class Customer {
         this.customerTotalCash = customerTotalCash;
     }
 
+    
     @Override
     public String toString() {
         return "Customer [customerNum=" + customerNum + ", customerId=" + customerId + 
         		", customerName=" + customerName + ", customerGrade=" + customerGrade + "]";
     }
+
+	public Customer(Long customerNum, String customerId, String customerPw) {
+		this.customerNum = customerNum;
+		this.customerId = customerId;
+		this.customerPw = customerPw;
+	}
 }
