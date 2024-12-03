@@ -1,5 +1,7 @@
 package com.fp.muut.login;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fp.muut.entitybak.Customer;
+import com.fp.muut.entity.Customer;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -24,13 +26,7 @@ public class JoinController {
 	
 	private final CustomerRepository customerRepository;
 	private final CustomerService loginService;
-	
-//	
-//	@GetMapping("/join")
-//	public String addForm(@ModelAttribute("customer") Customer customer) {
-//		return "customer/addMemberForm";
-//	}
-	
+		
 	//회원가입
 	@PostMapping("/join")
 	public String add(@RequestBody Customer customer) throws IllegalAccessException {
@@ -40,19 +36,32 @@ public class JoinController {
 	}
 	
 	//로그인
+//	@PostMapping("/login")
+//	public String login(@RequestBody Map<String, String> loginData, HttpServletRequest request) {
+//		System.out.println(loginData);
+//		String customer_id = loginData.get("customer_id");
+//		String customer_pw = loginData.get("customer_pw");
+//		Customer customer = loginService.login(customer_id, customer_pw);
+//	    if(customer == null) {
+//	        return "login/loginForm";
+//	    }
+//	    // 로그인 성공 (세션에 로그인 정보 저장)
+//	    HttpSession session = request.getSession();
+//	    session.setAttribute("loginMember", customer);
+//	    return "redirect:" + redirectURL;
+//	}
+	
 	@PostMapping("/login")
-	public String login(@ModelAttribute LoginForm form, Model model, HttpServletRequest request, @RequestParam(defaultValue = "/") String redirectURL) {
-	  
-		Customer customer = loginService.login(form.getLoginId(), form.getPassword());
-	    if(customer == null) {
-	        model.addAttribute("msg", "로그인 실패");
-	        return "login/loginForm";
-	    }
-	    // 로그인 성공 (세션에 로그인 정보 저장)
-	    HttpSession session = request.getSession();
-	    //session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
-	    session.setAttribute("loginMember", customer);
-	    return "redirect:" + redirectURL;
+	public Customer login(@RequestBody Map<String, String> loginData) {
+		System.out.println(loginData);
+		String customer_id = loginData.get("customer_id");
+		String customer_pw = loginData.get("customer_pw");
+		Customer customer = loginService.login(customer_id, customer_pw);
+		if(customer == null) {
+			return null;
+		}
+		System.out.println(customer);
+		return customer;
 	}
 	
 	//로그아웃

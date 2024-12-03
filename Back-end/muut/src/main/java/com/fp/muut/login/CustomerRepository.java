@@ -8,7 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.fp.muut.entitybak.Customer;
+import com.fp.muut.entity.Customer;
 
 import jakarta.persistence.EntityManager;
 
@@ -40,14 +40,14 @@ public class CustomerRepository {
 	
 	//아이디로 조회
 		public List<Customer> findById(String customer_id){
-			return em.createQuery("select c from Customer c where c.customer_id = :customer_id", Customer.class).setParameter("customerId", customer_id).getResultList();
+			return em.createQuery("select c from Customer c where c.customer_id = :customer_id", Customer.class).setParameter("customer_id", customer_id).getResultList();
 		}
 
 	//로그인
 	public Customer findByLoginId(String loginId) {
 		List<Customer> all = findAll();
 		for (Customer m : all) {
-			if(m.getCustomerId().equals(loginId)) {
+			if(m.getCustomer_id().equals(loginId)) {
 				return m;
 			}
 		}
