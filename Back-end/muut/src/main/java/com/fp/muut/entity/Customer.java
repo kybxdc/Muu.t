@@ -35,7 +35,7 @@ public class Customer {
 	@ManyToOne
 	@JoinColumn(name = "customer_grade")
 	@Setter(value = AccessLevel.NONE)
-	private Discount discount;
+	private Grade grade;
 	
 	private String customer_total_cash;
 	
@@ -51,9 +51,9 @@ public class Customer {
 	@OneToMany(mappedBy = "customer")
 	private List<Expectation> expectations = new ArrayList<>();
 	
-	public void setDiscound(Discount discount) {
-		this.discount = discount;
-		discount.getCustomers().add(this);
+	public void setDiscound(Grade grade) {
+		this.grade = grade;
+		grade.getCustomers().add(this);
 	}
 	
 }
