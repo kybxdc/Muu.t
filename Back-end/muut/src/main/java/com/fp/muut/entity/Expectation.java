@@ -1,7 +1,5 @@
 package com.fp.muut.entity;
 
-import java.time.LocalDateTime;
-
 import com.fp.muut.entity.embedded.ExpectationPK;
 
 import jakarta.persistence.EmbeddedId;
@@ -34,16 +32,16 @@ public class Expectation {
 	private Customer customer;
 	
 	private String expectation_content;
-	private LocalDateTime expectation_date;
+	private java.util.Date expectation_date;
 	
 	public void setMusical(Musical musical) {
 		this.musical = musical;
-		musical.getExpectations().add(this);
+//		musical.getExpectations().add(this);
 	}
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
-		customer.getExpectations().add(this);
+//		customer.getExpectations().add(this);
 	}
 	
 }

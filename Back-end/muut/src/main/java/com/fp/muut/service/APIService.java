@@ -1,6 +1,7 @@
 package com.fp.muut.service;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,7 +11,7 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fp.muut.repository.APIRepository;
 import com.fp.muut.dto.Dbs;
 import com.fp.muut.dto.MusicalDTO;
-import com.fp.muut.entitybak.Musical;
+import com.fp.muut.entity.Musical;
 
 import lombok.RequiredArgsConstructor;
 
@@ -39,19 +40,19 @@ public class APIService {
             if (dbs != null && dbs.getMuDTOlist() != null) {
                 for (MusicalDTO mdto : dbs.getMuDTOlist()) {
                     Musical musical = new Musical();
-                    musical.setMusicalTitle(mdto.getMusicalTitle());
-                    musical.setHallId(1L);
-                    musical.setMusicalGenre(mdto.getMusicalGenre());
-                    musical.setMusicalRunTime(mdto.getMusicalRunTime());
-                    musical.setMusicalArea(mdto.getMusicalArea());
-                    musical.setMusicalAge(mdto.getMusicalAge());
-                    musical.setMusicalEntrpsnm(mdto.getMusicalEntrpsnm());
-                    musical.setMusicalImage(mdto.getMusicalImage());
-                    musical.setActor(mdto.getActor());
-                    musical.setMusicalStartDate(mdto.getMusicalStartDate());
-                    musical.setMusicalEndDate(mdto.getMusicalEndDate());
-                	musical.setMusicalSeatGradeInfo(mdto.getMusicalSeatGradeInfo());
-                	musical.setMusicalDescription(mdto.getMusicalDescription());
+                    musical.setMusical_title(mdto.getMusicalTitle());
+                    musical.setHall_Info(null);
+                    musical.setMusical_genre(mdto.getMusicalGenre());
+                    musical.setMusical_run_time(mdto.getMusicalRunTime());
+                    musical.setMusical_area(mdto.getMusicalArea());
+                    musical.setMusical_age(mdto.getMusicalAge());
+                    musical.setMusical_entrpsnm(mdto.getMusicalEntrpsnm());
+                    musical.setMusical_image(mdto.getMusicalImage());
+                    musical.setMusical_actor(mdto.getActor());
+                    musical.setMusical_start_date(mdto.getMusicalStartDate());
+                    musical.setMusical_end_date(mdto.getMusicalEndDate());
+                	musical.setMusical_seat_grade_info(mdto.getMusicalSeatGradeInfo());
+                	musical.setMusical_description(mdto.getMusicalDescription());
 
                     // 데이터베이스 저장
                     apiRepository.save(musical);

@@ -29,14 +29,14 @@ public class Hall_Info {
 	private String hall_seat_info;
 	
 	// Musical 양방향 매핑
-	@OneToMany(mappedBy = "hall_Info")
-	private List<Musical> musicals = new ArrayList<>();
+//	@OneToMany(mappedBy = "hall_Info")
+//	private List<Musical> musicals = new ArrayList<>();
 	
 	// Performance 양방향 매핑
-	@OneToMany(mappedBy = "hall_Info")
-	private List<Performance> performances = new ArrayList<>();
+//	@OneToMany(mappedBy = "hall_Info")
+//	private List<Performance> performances = new ArrayList<>();
 	
 	// Seat_Position 양방향 매핑
-	@OneToOne(mappedBy = "hall_Info")
-	private Seat_Position seat_Position;
+//	@OneToOne(mappedBy = "hall_Info")
+//	private Seat_Position seat_Position;
 }

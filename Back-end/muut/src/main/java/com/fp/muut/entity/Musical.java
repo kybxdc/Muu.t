@@ -1,10 +1,7 @@
 package com.fp.muut.entity;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.fp.muut.entity.embedded.ReviewPK;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -43,25 +40,25 @@ public class Musical {
 	private String musical_entrpsnm;
 	private String musical_image;
 	private String musical_seat_grade_info;
-	private LocalDateTime musical_start_date;
-	private LocalDateTime musical_end_date;
+	private java.util.Date musical_start_date;
+	private java.util.Date musical_end_date;
 	private String musical_actor;
 	
 	// Performance 양방향 매핑
-	@OneToMany(mappedBy = "musical")
-	private List<Performance> performances = new ArrayList<>();
+//	@OneToMany(mappedBy = "musical")
+//	private List<Performance> performances = new ArrayList<>();
 	
 	// Review 양방향 매핑
-	@OneToMany(mappedBy = "musical")
-	private List<Review> reviews = new ArrayList<>(); 
+//	@OneToMany(mappedBy = "musical")
+//	private List<Review> reviews = new ArrayList<>(); 
 
 	// Expectation 양방향 매핑
-	@OneToMany(mappedBy = "musical")
-	private List<Expectation> expectations = new ArrayList<>(); 
+//	@OneToMany(mappedBy = "musical")
+//	private List<Expectation> expectations = new ArrayList<>(); 
 	
 	public void setHall_Info(Hall_Info hall_Info) {
 		this.hall_Info = hall_Info;
-		hall_Info.getMusicals().add(this);
+//		hall_Info.getMusicals().add(this);
 	}
 	
 }
