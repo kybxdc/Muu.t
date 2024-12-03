@@ -5,20 +5,9 @@ import "./App.css";
 import Product_grid from "./app_conponent/Product_grid";
 
 function App() {
-  const [message, setMessage] = useState("");
   const [musicals, setMusicals] = useState([]); // Musical 데이터 상태
 
   useEffect(() => {
-    // Greeting API 호출
-    axios
-      .get("http://localhost:9090/api/greeting")
-      .then((response) => {
-        setMessage(response.data);
-      })
-      .catch((error) => {
-        console.error("There was an error!", error);
-      });
-
     // Musical 데이터 API 호출
     axios
       .get("http://localhost:9090/api/musicals")
@@ -42,7 +31,6 @@ function App() {
           <div className="auth-buttons">
             <button>로그인</button>
             <button>회원가입</button>
-            <button>{message}</button>
           </div>
         </div>
       </header>

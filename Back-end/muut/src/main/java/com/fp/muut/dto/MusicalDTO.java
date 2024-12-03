@@ -10,6 +10,9 @@ import lombok.Setter;
 @Getter @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MusicalDTO {
+	@JsonProperty("mt20id") 
+    private String musicalId;
+	
 	@JsonProperty("prfnm")
 	private String musicalTitle;
 	
