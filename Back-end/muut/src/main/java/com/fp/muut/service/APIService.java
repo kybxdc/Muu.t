@@ -24,7 +24,7 @@ public class APIService {
         int musicalIdStart = 132238;
         String musicalId = "";
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 30; i++) {
             musicalId = "PF" + (musicalIdStart + i);
 
             // 외부 API 호출

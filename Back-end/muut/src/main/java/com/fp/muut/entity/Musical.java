@@ -46,9 +46,11 @@ public class Musical {
     @Column(name = "musical_seat_grade_info", length = 1000)
     private String musicalSeatGradeInfo; // 좌석 등급 정보
 
+    @Temporal(TemporalType.DATE) // 날짜만 저장
     @Column(name = "musical_start_date")
     private java.util.Date musicalStartDate; // 시작 날짜
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "musical_end_date")
     private java.util.Date musicalEndDate; // 종료 날짜
 
