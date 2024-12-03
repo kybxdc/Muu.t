@@ -1,29 +1,47 @@
 package com.fp.muut.entity;
 
-import jakarta.persistence.*;
+import com.fp.muut.entity.embedded.ExpectationPK;
+
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
-//@Entity
-@Table(name = "EXPECTATION")
+@Entity
 @Getter @Setter
 public class Expectation {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "expectation_id")
-    private Long expectationId; // 기대 ID
+	@EmbeddedId
+	private ExpectationPK expectationPK;
+	
+	// musical_id를 외래키로 가져와서 복합키에 설정
+	@MapsId("musical_id")
+	@ManyToOne
+	@JoinColumn(name = "musical_id")
+	@Setter(value = AccessLevel.NONE)
+	private Musical musical;
 
-//    @ManyToOne
-    @JoinColumn(name = "customer_num")
-    private Customer customer; // 고객과의 연관관계
+	// customer_num을 외래키로 가져와서 복합키에 설정
+	@MapsId("customer_num")
+	@ManyToOne
+	@JoinColumn(name = "customer_num")
+	@Setter(value = AccessLevel.NONE)
+	private Customer customer;
+	
+	private String expectation_content;
+	private java.util.Date expectation_date;
+	
+	public void setMusical(Musical musical) {
+		this.musical = musical;
+//		musical.getExpectations().add(this);
+	}
 
-//    @ManyToOne
-    @JoinColumn(name = "musical_id")
-    private Musical musical; // 뮤지컬과의 연관관계
-
-    @Column(name = "expectation_content", length = 1000)
-    private String expectationContent; // 기대 내용
-
-    @Column(name = "expectation_date")
-    private java.util.Date expectationDate; // 기대 작성 날짜
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+//		customer.getExpectations().add(this);
+	}
+	
 }

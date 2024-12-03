@@ -1,4 +1,5 @@
 import { useState } from "react";
+import {Link} from 'react-router-dom';
 import "./Login.css";
 
 
@@ -13,9 +14,6 @@ export default function Login() {
     const handlePasswordChange = (e) => {
       setPassword(e.target.value); // 비밀번호 입력값 상태 업데이트
     };
-
-    // function joinUs(e)
-    // }
   
     return (
       <>
@@ -27,7 +25,7 @@ export default function Login() {
           <input type='text' value={password} placeholder='비밀번호' onChange={handlePasswordChange}/><br/>
           <button className="login">로그인</button>
           <hr/>
-          <button className="join" /*onClick={joinUs}*/>회원가입</button>
+          <button className="join"><Link to="/Join">회원가입</Link></button>
           <p><span>아이디찾기</span> | <span>비밀번호찾기</span></p>
         </div>
   
