@@ -1,4 +1,4 @@
-package com.fp.muut.entity;
+package com.fp.muut.entitybak;
 
 import jakarta.persistence.*;
 import lombok.Getter;

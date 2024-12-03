@@ -1,7 +1,5 @@
 package com.fp.muut.api;
 
-import com.fp.muut.entity.Musical;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
@@ -12,6 +10,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import com.fp.muut.entitybak.Musical;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
