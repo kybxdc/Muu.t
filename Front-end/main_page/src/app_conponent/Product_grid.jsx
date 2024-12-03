@@ -7,7 +7,7 @@ export default function Product_grid(props) {
         </div>
         <div className="product-info">
           <span>{props.title}</span><br/>
-          <span>{props.date}</span>
+          <span>{props.StartDate}~{props.EndDate}</span>
         </div>
       </a>
     </li>

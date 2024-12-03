@@ -64,7 +64,12 @@ function App() {
           <ul className="product-grid ">
             {musicals.map((musical, index) => (
               <li key={index}>
-                <Product_grid title={musical.musicalTitle} imageUrl={musical.musicalImage} date={musical.musicalStartDate}/>
+                <Product_grid 
+                  title={musical.musical_title} 
+                  imageUrl={musical.musical_image} 
+                  StartDate={musical.musical_start_date}
+                  EndDate={musical.musical_end_date}
+                />
               </li>
             ))}
           </ul>
