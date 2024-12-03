@@ -10,8 +10,12 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fp.muut.repository.APIRepository;
 import com.fp.muut.dto.Dbs;
+import com.fp.muut.dto.HallInfoDTO;
 import com.fp.muut.dto.MusicalDTO;
+import com.fp.muut.dto.dbs_hallInfo;
+import com.fp.muut.entity.Hall_Info;
 import com.fp.muut.entity.Musical;
+import com.fp.muut.entitybak.HallInfo;
 
 import lombok.RequiredArgsConstructor;
 
@@ -56,6 +60,44 @@ public class APIService {
 
                     // 데이터베이스 저장
                     apiRepository.save(musical);
+                }
+            }
+        }
+    }
+    
+    @Transactional
+    public void save_hallInfo() throws IOException {
+        int hallInfoIdStart = 1247;
+        String hallInfoId = "";
+
+        for (int i = 0; i < 30; i++) {
+        	hallInfoId = "FC00" + (hallInfoIdStart + i);
+            
+            
+            
+            // 외부 API 호출
+            String url = "http://kopis.or.kr/openApi/restful/prfplc/" + hallInfoId + "?service=3ca6587ae8704899b3e865e74484f3bb";
+            RestTemplate restTemplate = new RestTemplate();
+            String response = restTemplate.getForObject(url, String.class);
+
+            
+            // XML 파싱 및 데이터 변환
+            XmlMapper xmlMapper = new XmlMapper();
+            dbs_hallInfo dbs = xmlMapper.readValue(response, dbs_hallInfo.class);
+
+            System.out.println(response);
+            if(dbs.getHIDTOlist() == null) {
+            	System.out.println("asdfasfdadf");
+            }
+            
+            if (dbs != null && dbs.getHIDTOlist() != null) {
+                for (HallInfoDTO hdto : dbs.getHIDTOlist()) {
+                    Hall_Info hallInfo = new Hall_Info();
+                	
+                	hallInfo.setHall_name(hdto.getHall_name());;
+                	hallInfo.setHall_addr(hdto.getHall_addr());
+                    // 데이터베이스 저장
+                    apiRepository.save_hallInfo(hallInfo);
                 }
             }
         }
