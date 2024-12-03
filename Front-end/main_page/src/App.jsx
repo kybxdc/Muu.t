@@ -6,8 +6,10 @@ import Product_grid from "./app_conponent/Product_grid";
 
 function App() {
   const [message, setMessage] = useState("");
+  const [musicals, setMusicals] = useState([]); // Musical 데이터 상태
 
   useEffect(() => {
+    // Greeting API 호출
     axios
       .get("http://localhost:9090/api/greeting")
       .then((response) => {
@@ -15,6 +17,16 @@ function App() {
       })
       .catch((error) => {
         console.error("There was an error!", error);
+      });
+
+    // Musical 데이터 API 호출
+    axios
+      .get("http://localhost:9090/api/musicals")
+      .then((response) => {
+        setMusicals(response.data); // Musical 데이터 상태 업데이트
+      })
+      .catch((error) => {
+        console.error("There was an error fetching musicals!", error);
       });
   }, []);
 
@@ -50,22 +62,11 @@ function App() {
         </div>
         <section className="main-section width-limit section1">
           <ul className="product-grid ">
-            <Product_grid />
-            <Product_grid />
-            <Product_grid />
-            <Product_grid />
-            <Product_grid />
-            <Product_grid />
-            <Product_grid />
-            <Product_grid />
-            <Product_grid />
-            <Product_grid />
-            <Product_grid />
-            <Product_grid />
-            <Product_grid />
-            <Product_grid />
-            <Product_grid />
-            <Product_grid />
+            {musicals.map((musical, index) => (
+              <li key={index}>
+                <Product_grid title={musical.musicalTitle} imageUrl={musical.musicalImage} date={musical.musicalStartDate}/>
+              </li>
+            ))}
           </ul>
         </section>
       </main>

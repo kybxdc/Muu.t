@@ -1,12 +1,13 @@
-export default function Product_grid() {
+export default function Product_grid(props) {
   return (
     <li className="product-grid item">
       <a href="~" className="product-link">
         <div className="product-imgbox">
-          <img className="product-image" src="./src/img/Ngimg.jpg" />
+          <img className="product-image" src={props.imageUrl} />
         </div>
         <div className="product-info">
-          <p>귀여운 족제비를 드립니다</p>
+          <span>{props.title}</span><br/>
+          <span>{props.date}</span>
         </div>
       </a>
     </li>
