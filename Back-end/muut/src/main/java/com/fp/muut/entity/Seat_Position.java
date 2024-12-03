@@ -24,7 +24,7 @@ public class Seat_Position {
 	
 	public void setHall_Info(Hall_Info hall_Info) {
 		this.hall_Info = hall_Info;
-		hall_Info.setSeat_Position(this);
+//		hall_Info.setSeat_Position(this);
 	}
 	
 }

@@ -18,7 +18,7 @@ public class Grade {
 	private String discount_rate;
 	
 	// Customer 양방향 매핑
-	@OneToMany(mappedBy = "grade")
-	private List<Customer> customers = new ArrayList<>();
+//	@OneToMany(mappedBy = "grade")
+//	private List<Customer> customers = new ArrayList<>();
 	
 }

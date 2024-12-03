@@ -1,7 +1,5 @@
 package com.fp.muut.entity;
 
-import java.time.LocalDateTime;
-
 import com.fp.muut.entity.embedded.ReviewPK;
 
 import jakarta.persistence.EmbeddedId;
@@ -37,16 +35,16 @@ public class Review {
 	
 	private int review_score;
 	private String review_content;
-	private LocalDateTime review_date;
+	private java.util.Date review_date;
 	
 	public void setMusical(Musical musical) {
 		this.musical = musical;
-		musical.getReviews().add(this);
+//		musical.getReviews().add(this);
 	}
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
-		customer.getReviews().add(this);
+//		customer.getReviews().add(this);
 	}
 	
 }
