@@ -1,17 +1,24 @@
 package com.fp.muut.entity;
 
-import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
-//@Entity
-@Table(name = "DISCOUNT")
+@Entity
 @Getter @Setter
 public class Discount {
-    @Id
-    @Column(name = "customer_grade", length = 100)
-    private String customerGrade; // 등급명
-
-    @Column(name = "discount_rate", length = 100)
-    private String discountRate; // 할인율
+	@Id
+	private String customer_grade;
+	
+	private String discount_rate;
+	
+	// Customer 양방향 매핑
+	@OneToMany(mappedBy = "discount")
+	private List<Customer> customers = new ArrayList<>();
+	
 }
