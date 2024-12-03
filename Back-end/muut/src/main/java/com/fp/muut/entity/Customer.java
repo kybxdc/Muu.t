@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-//@Entity
+@Entity
 @Table(name = "CUSTOMER")
 @Getter @Setter
 public class Customer {
@@ -35,9 +35,9 @@ public class Customer {
     @Column(name = "customer_total_cash", length = 100)
     private String customerTotalCash; // 결제한 티켓 가격 총 누적합
     
-//    @ManyToOne
-    @JoinColumn(name = "customer_grade", insertable = false, updatable = false)
-    private Discount discount; // 등급별 할인율과의 연관관계 매핑
+////    @ManyToOne
+//    @JoinColumn(name = "customer_grade", insertable = false, updatable = false)
+//    private Discount discount; // 등급별 할인율과의 연관관계 매핑
 
     // 기본 생성자
     public Customer() {}
@@ -50,7 +50,7 @@ public class Customer {
         this.customerName = customerName;
         this.customerPhone = customerPhone;
         this.customerAddress = customerAddress;
-        this.customerGrade = customerGrade;
+        this.customerGrade = "Basic";
         this.customerTotalCash = customerTotalCash;
     }
 

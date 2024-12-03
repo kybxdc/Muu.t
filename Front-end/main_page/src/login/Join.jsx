@@ -20,7 +20,7 @@ export default function Join() {
     e.preventDefault();
     const user = {customerId, customerPw};
     try {
-      await axios.post('http://localhost:9090/api/join', user);
+      await axios.post('http://localhost:9090/member/join', user);
       alert('Muu.t의 회원이 되어주셔서 감사합니다!');
       console.log(customerPw);
       console.log(customerId)

@@ -20,10 +20,4 @@ public class Controller {
 	public String getGreeting() {
 		return "Hi ~~";
 	}
-	
-	@PostMapping("/join")
-	public String add(@RequestBody Customer customer) {
-		customerRepository.save(customer);
-		return "redirect:/";
-	}
 }
