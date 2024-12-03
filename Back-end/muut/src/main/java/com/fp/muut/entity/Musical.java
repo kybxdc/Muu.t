@@ -12,6 +12,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -40,7 +42,9 @@ public class Musical {
 	private String musical_entrpsnm;
 	private String musical_image;
 	private String musical_seat_grade_info;
+	@Temporal(TemporalType.DATE) // 날짜만 저장
 	private java.util.Date musical_start_date;
+	@Temporal(TemporalType.DATE) // 날짜만 저장
 	private java.util.Date musical_end_date;
 	private String musical_actor;
 	

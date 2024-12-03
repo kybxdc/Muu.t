@@ -5,8 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Getter;
+import lombok.Setter;
 
-@Getter
+@Getter @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MusicalDTO {
 	@JsonProperty("prfnm")
@@ -46,55 +47,5 @@ public class MusicalDTO {
 	
 	@JsonProperty("prfcast")
 	private String actor;
-	
-	
-	public void setMusicalTitle(String musicalTitle) {
-		this.musicalTitle = musicalTitle;
-	}
-	
-	public void setMusicalDescription(String musicalDescription) {
-		this.musicalDescription = musicalDescription;
-	}
-	
-	public void setMusicalGenre(String musicalGenre) {
-		this.musicalGenre = musicalGenre;
-	}
-	
-	public void setMusicalRunTime(String musicalRunTime) {
-		this.musicalRunTime = musicalRunTime;
-	}
-	
-	public void setMusicalArea(String musicalArea) {
-		this.musicalArea = musicalArea;
-	}
-	
-	public void setMusicalAge(String musicalAge) {
-		this.musicalAge = musicalAge;
-	}
-	
-	public void setMusicalEntrpsnm(String musicalEntrpsnm) {
-		this.musicalEntrpsnm = musicalEntrpsnm;
-	}
-	
-	public void setMusicalImage(String musicalImage) {
-		this.musicalImage = musicalImage;
-	}
-	
-	public void setMusicalSeatGradeInfo(String musicalSeatGradeInfo) {
-		this.musicalSeatGradeInfo = musicalSeatGradeInfo;
-	}
-	
-	public void setMusicalStartDate(java.util.Date musicalStartDate) {
-		this.musicalStartDate = musicalStartDate;
-	}
-	
-	public void setMusicalEndDate(java.util.Date musicalEndDate) {
-		this.musicalEndDate = musicalEndDate;
-	}
-	
-	public void setActor(String actor) {
-		this.actor = actor;
-	}
-	
 	
 }

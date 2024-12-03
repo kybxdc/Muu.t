@@ -21,6 +21,5 @@ public class APIController {
 		apiservice.save();
 		return "APIdataGet";
 	}
-	// test test
 	
 }
