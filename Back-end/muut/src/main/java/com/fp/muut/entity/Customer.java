@@ -56,4 +56,26 @@ public class Customer {
 //		grade.getCustomers().add(this);
 	}
 	
+	// 기본 생성자
+    public Customer() {}
+
+	public Customer(Long customer_num, String customer_id, String customer_pw, String customer_name,
+			String customer_phone, String customer_address, Discount discount, String customer_total_cash,
+			List<Reservation> reservations, List<Review> reviews, List<Expectation> expectations) {
+		super();
+		this.customer_num = customer_num;
+		this.customer_id = customer_id;
+		this.customer_pw = customer_pw;
+		this.customer_name = customer_name;
+		this.customer_phone = customer_phone;
+		this.customer_address = customer_address;
+		this.discount = discount;
+		this.customer_total_cash = customer_total_cash;
+		this.reservations = reservations;
+		this.reviews = reviews;
+		this.expectations = expectations;
+	}
+
+    
+	
 }
