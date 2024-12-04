@@ -25,4 +25,15 @@ function LogoContainer({ title, imageUrl, StartDate, EndDate }) {
   );
 }
 
+function getUniqueRandomNumbers(musicalCount) {
+  const uniqueNumbers = new Set();
+
+  while (uniqueNumbers.size < 10) {
+    const randomNum = Math.floor(Math.random() * (musicalCount + 1)); // 0부터 n까지의 무작위 정수
+    uniqueNumbers.add(randomNum); // Set은 중복을 허용하지 않음
+  }
+
+  return Array.from(uniqueNumbers); // Set을 배열로 변환
+}
+
 export default LogoContainer;

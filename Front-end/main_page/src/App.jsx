@@ -2,24 +2,25 @@ import { useEffect, useState } from "react";
 import React from "react";
 import axios from "axios";
 import "./App.css";
-// import "./App2.css";
 import Product_grid from "./mainpage_conponent/Product_grid";
-import LogoContainer from "./mainpage_conponent/LogoContainer";
+import LogoContainer from "./mainpage_conponent/TopBanner";
 
 function App() {
   const [musicals, setMusicals] = useState([]); // Musical 데이터 상태
 
   useEffect(() => {
-    // Musical 데이터 API 호출
+    // Musical 데이터 호출
     axios
       .get("http://localhost:9090/api/musicals")
       .then((response) => {
-        setMusicals(response.data); // Musical 데이터 상태 업데이트
+        setMusicals(response.data);
       })
       .catch((error) => {
         console.error("There was an error fetching musicals!", error);
       });
   }, []);
+
+  let musicalCount = musicals.length; 
 
   return (
     <div className="App">
