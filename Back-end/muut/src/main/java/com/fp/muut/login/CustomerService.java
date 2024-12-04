@@ -43,7 +43,7 @@ public class CustomerService {
 		
 	// 회원 단 건 조회
 	//@Transactional(readOnly = true)
-		public List<Customer> findId(String customerId) {
+		public Customer findId(String customerId) {
 			return customerRepository.findById(customerId);
 		}
 		
@@ -54,7 +54,10 @@ public class CustomerService {
 	//로그인
 		public Customer login(String loginId, String password) {
 			Customer customer = customerRepository.findByLoginId(loginId);
+			System.out.println(customer.getCustomer_id());
+			System.out.println(customer.getCustomer_pw());
 			if( customer != null && customer.getCustomer_id().equals(loginId) && customer.getCustomer_pw().equals(password)) {
+				System.out.println("로그인서비스"+customer);
 						return customer;
 				}
 			return null;

@@ -19,6 +19,7 @@ export default function Login() {
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
+        axios.defaults.withCredentials = true;
         await axios.post('http://localhost:9090/member/login',
           {customer_id: customer_id, customer_pw: customer_pw})
           .then((res) =>{
@@ -30,7 +31,7 @@ export default function Login() {
               console.log("======================", "로그인 성공");
               sessionStorage.setItem("customer_id", customer_id); 
               sessionStorage.setItem("customerName", res.data.customerName); 
-              alert("환영합니다. "+sessionStorage.getItem("customer_id"));
+              alert("환영합니다. "+sessionStorage.getItem("customerName"));
             }
         })
       } catch (error) {

@@ -52,15 +52,19 @@ public class JoinController {
 //	}
 	
 	@PostMapping("/login")
-	public Customer login(@RequestBody Map<String, String> loginData) {
-		System.out.println(loginData);
+	public Customer login(@RequestBody Map<String, String> loginData, HttpServletRequest request) {
 		String customer_id = loginData.get("customer_id");
 		String customer_pw = loginData.get("customer_pw");
 		Customer customer = loginService.login(customer_id, customer_pw);
-		if(customer == null) {
-			return null;
-		}
-		System.out.println(customer);
+			if(customer == null) {
+				return null;
+			}
+		// 로그인 성공 (세션에 로그인 정보 저장)
+	    HttpSession session = request.getSession(); 
+	    session.setAttribute("loginCustomer", customer);
+	    System.out.println("Session ID: " + session.getId());
+	    System.out.println("Logged in customer: " + session.getAttribute("loginCustomer"));
+	    
 		return customer;
 	}
 	

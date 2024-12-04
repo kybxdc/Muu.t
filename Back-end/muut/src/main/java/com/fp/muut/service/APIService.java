@@ -10,7 +10,7 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fp.muut.repository.APIRepository;
 import com.fp.muut.dto.Dbs;
 import com.fp.muut.dto.MusicalDTO;
-import com.fp.muut.entitybak.Musical;
+import com.fp.muut.entity.Musical;
 
 import lombok.RequiredArgsConstructor;
 
