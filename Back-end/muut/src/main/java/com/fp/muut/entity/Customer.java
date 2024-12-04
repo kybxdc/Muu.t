@@ -35,25 +35,25 @@ public class Customer {
 	@ManyToOne
 	@JoinColumn(name = "customer_grade")
 	@Setter(value = AccessLevel.NONE)
-	private Discount discount;
+	private Grade grade;
 	
 	private String customer_total_cash;
 	
 	// Resrvation 양방향 매핑
-	@OneToMany(mappedBy = "customer")
-	private List<Reservation> reservations = new ArrayList<>();
+//	@OneToMany(mappedBy = "customer")
+//	private List<Reservation> reservations = new ArrayList<>();
 
 	// Review 양방향 매핑
-	@OneToMany(mappedBy = "customer")
-	private List<Review> reviews = new ArrayList<>();
+//	@OneToMany(mappedBy = "customer")
+//	private List<Review> reviews = new ArrayList<>();
 
 	// Review 양방향 매핑
-	@OneToMany(mappedBy = "customer")
-	private List<Expectation> expectations = new ArrayList<>();
+//	@OneToMany(mappedBy = "customer")
+//	private List<Expectation> expectations = new ArrayList<>();
 	
-	public void setDiscound(Discount discount) {
-		this.discount = discount;
-		discount.getCustomers().add(this);
+	public void setDiscound(Grade grade) {
+		this.grade = grade;
+//		grade.getCustomers().add(this);
 	}
 	
 	// 기본 생성자
