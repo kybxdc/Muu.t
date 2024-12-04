@@ -23,7 +23,13 @@ public class APIService {
     @Transactional
     public void save() throws IOException {
         // 여러 공연 정보를 가져오는 API URL
-        String apiUrl = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=3ca6587ae8704899b3e865e74484f3bb&stdate=20230601&eddate=20230630&cpage=1&rows=10&shcate=GGGA";
+        String apiUrl = "http://www.kopis.or.kr/openApi/restful/pblprfr?"
+        		+ "service=3ca6587ae8704899b3e865e74484f3bb"
+        		+ "&stdate=20241101"
+        		+ "&eddate=20241130"
+        		+ "&cpage=1"
+        		+ "&rows=30"
+        		+ "&shcate=GGGA";
 
         // 외부 API 호출
         RestTemplate restTemplate = new RestTemplate();
