@@ -1,3 +1,5 @@
+import "./Product_grid.css"
+
 export default function Product_grid({ musical_title, musical_image, musical_start_date, musical_end_date }) {
   return (
       <a href="~" className="product-link">

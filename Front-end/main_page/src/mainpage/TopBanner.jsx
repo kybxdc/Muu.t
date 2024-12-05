@@ -1,31 +1,32 @@
 import React from "react";
+import "./TopBanner.css";
 
-function LogoContainer({ title, imageUrl, StartDate, EndDate }) {
+function TopBanner({ title, imageUrl, StartDate, EndDate }) {
   return (
-    <div className="main-div">
+    <div className="TopBanner main-div">
       {/* 흐릿한 배경 이미지 */}
       <div
-        className="background-image"
+        className="TopBanner background-image"
         style={{ backgroundImage: `url(${imageUrl})` }}
       ></div>
 
       {/* 텍스트와 이미지 콘텐츠 */}
-      <div className="content">
-        <div className="event-details">
+      <div className="TopBanner content">
+        <div className="TopBanner details">
           <h2>{title}</h2>
           <p>{StartDate} ~ {EndDate}</p>
         </div>
         <img
-          className="event-details-image"
+          className="TopBanner image"
           src={imageUrl}
-          alt="Highlighted Event"
+          alt="TopBanner image"
         />
       </div>
     </div>
   );
 }
 
-function getUniqueRandomNumbers(musicalCount) {
+function getRandomNumberList(musicalCount) {
   const uniqueNumbers = new Set();
 
   while (uniqueNumbers.size < 10) {
@@ -36,4 +37,4 @@ function getUniqueRandomNumbers(musicalCount) {
   return Array.from(uniqueNumbers); // Set을 배열로 변환
 }
 
-export default LogoContainer;
+export default TopBanner;
