@@ -11,14 +11,14 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter
-public class Discount {
+public class Grade {
 	@Id
 	private String customer_grade;
 	
 	private String discount_rate;
 	
 	// Customer 양방향 매핑
-	@OneToMany(mappedBy = "discount")
-	private List<Customer> customers = new ArrayList<>();
+//	@OneToMany(mappedBy = "grade")
+//	private List<Customer> customers = new ArrayList<>();
 	
 }

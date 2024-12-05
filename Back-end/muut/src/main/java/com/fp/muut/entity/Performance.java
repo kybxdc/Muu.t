@@ -1,6 +1,5 @@
 package com.fp.muut.entity;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,21 +37,21 @@ public class Performance {
 	@Setter(value = AccessLevel.NONE)
 	private Hall_Info hall_Info;
 	
-	private LocalDateTime performance_date;
+	private java.util.Date performance_date;
 	private String performance_start_time;
 	
 	// Reservation 양방향 매핑
-	@OneToMany(mappedBy = "performance")
-	private List<Reservation> reservations = new ArrayList<>();
+//	@OneToMany(mappedBy = "performance")
+//	private List<Reservation> reservations = new ArrayList<>();
 	
 	public void setMusical(Musical musical) {
 		this.musical = musical;
-		musical.getPerformances().add(this);
+//		musical.getPerformances().add(this);
 	}
 	
 	public void setHall_Info(Hall_Info hall_Info){
 		this.hall_Info = hall_Info;
-		hall_Info.getPerformances().add(this);
+//		hall_Info.getPerformances().add(this);
 	}
 	
 }

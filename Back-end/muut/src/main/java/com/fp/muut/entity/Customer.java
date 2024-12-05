@@ -35,33 +35,32 @@ public class Customer {
 	@ManyToOne
 	@JoinColumn(name = "customer_grade")
 	@Setter(value = AccessLevel.NONE)
-	private Discount discount;
+	private Grade grade;
 	
 	private String customer_total_cash;
 	
 	// Resrvation 양방향 매핑
-	@OneToMany(mappedBy = "customer")
-	private List<Reservation> reservations = new ArrayList<>();
+//	@OneToMany(mappedBy = "customer")
+//	private List<Reservation> reservations = new ArrayList<>();
 
 	// Review 양방향 매핑
-	@OneToMany(mappedBy = "customer")
-	private List<Review> reviews = new ArrayList<>();
+//	@OneToMany(mappedBy = "customer")
+//	private List<Review> reviews = new ArrayList<>();
 
 	// Review 양방향 매핑
-	@OneToMany(mappedBy = "customer")
-	private List<Expectation> expectations = new ArrayList<>();
+//	@OneToMany(mappedBy = "customer")
+//	private List<Expectation> expectations = new ArrayList<>();
 	
-	public void setDiscound(Discount discount) {
-		this.discount = discount;
-		discount.getCustomers().add(this);
+	public void setDiscound(Grade grade) {
+		this.grade = grade;
+//		grade.getCustomers().add(this);
 	}
 	
 	// 기본 생성자
     public Customer() {}
 
 	public Customer(Long customer_num, String customer_id, String customer_pw, String customer_name,
-			String customer_phone, String customer_address, Discount discount, String customer_total_cash,
-			List<Reservation> reservations, List<Review> reviews, List<Expectation> expectations) {
+			String customer_phone, String customer_address, Grade grade, String customer_total_cash) {
 		super();
 		this.customer_num = customer_num;
 		this.customer_id = customer_id;
@@ -69,11 +68,8 @@ public class Customer {
 		this.customer_name = customer_name;
 		this.customer_phone = customer_phone;
 		this.customer_address = customer_address;
-		this.discount = discount;
+		this.grade = grade;
 		this.customer_total_cash = customer_total_cash;
-		this.reservations = reservations;
-		this.reviews = reviews;
-		this.expectations = expectations;
 	}
 
     

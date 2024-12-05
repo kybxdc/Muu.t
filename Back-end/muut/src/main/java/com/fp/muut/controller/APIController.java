@@ -19,8 +19,8 @@ public class APIController {
 	@GetMapping("/APIget")
 	public String APIget() throws IOException {
 		apiservice.save();
+		apiservice.save_hallInfo();
 		return "APIdataGet";
 	}
-	// test test
 	
 }

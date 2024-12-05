@@ -1,7 +1,5 @@
 package com.fp.muut.entity;
 
-import java.time.LocalDateTime;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,7 +25,7 @@ public class Reservation {
 	@Setter(value = AccessLevel.NONE)
 	private Customer customer;
 	
-	private LocalDateTime reservation_date;
+	private java.util.Date reservation_date;
 	private String payment_amount;
 	private String seat_num;
 	
@@ -39,12 +37,12 @@ public class Reservation {
 	
 	public void setPerformance(Performance performance) {
 		this.performance = performance;
-		performance.getReservations().add(this);
+//		performance.getReservations().add(this);
 	}
 	
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
-		customer.getReservations().add(this);
+//		customer.getReservations().add(this);
 	}
 	
 }
