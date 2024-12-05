@@ -11,8 +11,10 @@ import org.springframework.stereotype.Repository;
 import com.fp.muut.entity.Customer;
 
 import jakarta.persistence.EntityManager;
+import lombok.RequiredArgsConstructor;
 
 @Repository
+@RequiredArgsConstructor
 public class CustomerRepository {
 
 	@Autowired
@@ -39,8 +41,8 @@ public class CustomerRepository {
 //	}
 	
 	//아이디로 조회
-		public List<Customer> findById(String customer_id){
-			return em.createQuery("select c from Customer c where c.customer_id = :customer_id", Customer.class).setParameter("customer_id", customer_id).getResultList();
+		public Customer findById(String customer_id){
+			return em.createQuery("select c from Customer c where c.customer_id = :customer_id", Customer.class).setParameter("customer_id", customer_id).getSingleResult();
 		}
 
 	//로그인
