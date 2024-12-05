@@ -2,8 +2,12 @@ import { useEffect, useState } from "react";
 import React from "react";
 import axios from "axios";
 import "./App.css";
+
 import Product_grid from "./mainpage_conponent/Product_grid";
 import LogoContainer from "./mainpage_conponent/TopBanner";
+import Join from "./login/Join";
+import Login from "./login/Login";
+import MyMain from "./mypage/MyMain";
 
 function App() {
   const [musicals, setMusicals] = useState([]); // Musical 데이터 상태

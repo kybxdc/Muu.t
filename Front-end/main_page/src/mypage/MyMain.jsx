@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect} from 'react';
 import './MyMain.css';
 import MyCalander from './MyCalender/MyCalender';
 import MyInfo from './MyInfo/MyInfo';
@@ -6,42 +6,55 @@ import MyReserv from './MyReserv/MyReserv';
 import DropOut from './MyInfo/DropOut';
 import MyAccount from './MyInfo/MyAccount';
 import GradeInfo from './GradeInfo';
-import { Member } from './MemberInfo';
+import axios from 'axios';
 
 export default function MyMain() {
     const [selectedMenu, setSelectedMenu] = useState();
     function handleSelect(menu) {
         setSelectedMenu(menu); // 선택한 메뉴 상태 업데이트
       }
-      let mainmenu;
-     
-      if (selectedMenu === 'GradeInfo') {
+
+    const [member, setMember] = useState();
+    useEffect(() => {
+      axios.defaults.withCredentials = true;
+      axios.get('http://localhost:9090/mypage/customer').then((response) => {
+            setMember(response.data);
+          })
+          .catch((error) => {
+            console.error("There was an error!", error);
+          });
+      }, []);
+    
+    
+      
+    let mainmenu; 
+    if (selectedMenu === 'GradeInfo') {
         mainmenu = <GradeInfo />;
-      } else if (selectedMenu === 'MyCalander') {
+    } else if (selectedMenu === 'MyCalander') {
         mainmenu = <MyCalander />;
-      } else if (selectedMenu === 'MyInfo') {
+    } else if (selectedMenu === 'MyInfo') {
         mainmenu = (<MyInfo 
-          grade={Member.grade}
-          memberId={Member.memberId}
-          name={Member.name}
-          password={Member.password}
-          phone={Member.phone}
-          addr={Member.addr}
+          grade={member?.customer_grade || 'null'}
+          memberId={member.customer_id}
+          name={member?.customer_name || 'null'}
+          password={member?.customer_pw|| 'null'}
+          phone={member?.customer_phone || 'null'}
+          addr={member?.customer_address || 'null'}
         />);
-      } else if (selectedMenu === 'MyReserv'){
+    } else if (selectedMenu === 'MyReserv'){
         mainmenu = <MyReserv />;
-      }else if (selectedMenu === 'MyAccount'){
+    }else if (selectedMenu === 'MyAccount'){
         mainmenu = <MyAccount />;
-      }else if (selectedMenu === 'DropOut'){
+    }else if (selectedMenu === 'DropOut'){
         mainmenu = <DropOut />;
-      }else {
+    }else {
         mainmenu = (
             <main className="content">
-                <h2>안녕하세요 [{Member.memberId}] 님</h2>
+                <h2>안녕하세요 [{member?.customer_name||'null'}] 님</h2>
                         <div className="user-info">
-                            <p>회원님은 <strong>{Member.grade}</strong>등급입니다.</p>
-                            <p>아이디: <strong>{Member.memberId}</strong></p>
-                            <p>이름: <strong>{Member.name}</strong></p>
+                            <p>회원님은 <strong>{member?.customer_grade || 'null'}</strong>등급입니다.</p>
+                            <p>아이디: <strong>{member?.customer_id|| 'null'}</strong></p>
+                            <p>이름: <strong>{member?.customer_name || 'null'}</strong></p>
                             <p>비밀번호: *****</p>
                             <p>최근 예약 내역 : 뮤지컬 상세 페이지로 연결</p>
                             <button className="submit-btn" onClick={() => {handleSelect("MyInfo")}}>회원정보수정</button>
