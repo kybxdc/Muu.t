@@ -10,6 +10,7 @@ import Login from "./login/Login";
 import MyMain from "./mypage/MyMain";
 
 function App() {
+
   const [musicals, setMusicals] = useState([]); // Musical 데이터 상태
 
   useEffect(() => {
@@ -69,6 +70,7 @@ function App() {
         </div>
       </footer>
     </div>
+
   );
 }
 
