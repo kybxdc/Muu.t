@@ -39,22 +39,22 @@ public class APIService {
             if (dbs != null && dbs.getMuDTOlist() != null) {
                 for (MusicalDTO mdto : dbs.getMuDTOlist()) {
                     Musical musical = new Musical();
-                    musical.setMusicalTitle(mdto.getMusicalTitle());
-                    musical.setHallId(1L);
-                    musical.setMusicalGenre(mdto.getMusicalGenre());
-                    musical.setMusicalRunTime(mdto.getMusicalRunTime());
-                    musical.setMusicalArea(mdto.getMusicalArea());
-                    musical.setMusicalAge(mdto.getMusicalAge());
-                    musical.setMusicalEntrpsnm(mdto.getMusicalEntrpsnm());
-                    musical.setMusicalImage(mdto.getMusicalImage());
-                    musical.setActor(mdto.getActor());
-                    musical.setMusicalStartDate(mdto.getMusicalStartDate());
-                    musical.setMusicalEndDate(mdto.getMusicalEndDate());
-                	musical.setMusicalSeatGradeInfo(mdto.getMusicalSeatGradeInfo());
-                	musical.setMusicalDescription(mdto.getMusicalDescription());
+//                    musical.setMusicalTitle(mdto.getMusicalTitle());
+//                    musical.setHallId(1L);
+//                    musical.setMusicalGenre(mdto.getMusicalGenre());
+//                    musical.setMusicalRunTime(mdto.getMusicalRunTime());
+//                    musical.setMusicalArea(mdto.getMusicalArea());
+//                    musical.setMusicalAge(mdto.getMusicalAge());
+//                    musical.setMusicalEntrpsnm(mdto.getMusicalEntrpsnm());
+//                    musical.setMusicalImage(mdto.getMusicalImage());
+//                    musical.setActor(mdto.getActor());
+//                    musical.setMusicalStartDate(mdto.getMusicalStartDate());
+//                    musical.setMusicalEndDate(mdto.getMusicalEndDate());
+//                	musical.setMusicalSeatGradeInfo(mdto.getMusicalSeatGradeInfo());
+//                	musical.setMusicalDescription(mdto.getMusicalDescription());
 
                     // 데이터베이스 저장
-                    apiRepository.save(musical);
+//                    apiRepository.save(musical);
                 }
             }
         }

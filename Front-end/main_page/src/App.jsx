@@ -8,13 +8,12 @@ import Login from "./login/Login";
 import MyMain from "./mypage/MyMain";
 
 function App() {
-  
   return (
-    <>
-    <Join />
-    <Login />
-    <MyMain />
-  </>
+  <>
+   <Join />
+   <Login />
+   <MyMain />
+   </>
   );
 }
 
