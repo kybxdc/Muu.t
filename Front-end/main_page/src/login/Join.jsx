@@ -1,5 +1,6 @@
 import { useState } from "react";
-import './Join.css'
+// import './Join.css'
+import styles from "./Join.module.css";
 import axios from "axios";
 
 
@@ -33,7 +34,7 @@ export default function Join() {
     return (
       <>
         <header>
-          <img src="../img/Muut_logo.png" witdh="300px" height="300px" ></img>
+          <img src="./src/img/Muut_logo.png" witdh="300px" height="300px" ></img>
         </header>
         <div>
           <h2>회원 정보를 입력해 주세요</h2>
@@ -41,7 +42,7 @@ export default function Join() {
           <form onSubmit={handleSubmit}>
           <input type='text' value={customer_id} placeholder='아이디(이메일 형식으로 입력해주세요)'  onChange={handleIdChange}/><br/>
           <input type='text' value={customer_pw} placeholder='비밀번호' onChange={handlePasswordChange}/><br/>
-          <button className="join" type="submit">회원가입</button>
+          <button className={styles.join} type="submit">회원가입</button>
           </form>
         </div>
   

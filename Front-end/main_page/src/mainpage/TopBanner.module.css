@@ -1,11 +1,11 @@
-.TopBanner.main-div {
+.TopBanner.main_div {
     position: relative;
     width: 100%;
     height: 500px; /* 원하는 높이로 조정 */
     overflow: hidden;
   }
   
-  .TopBanner.background-image {
+  .TopBanner.background_image {
     position: absolute;
     top: 0;
     left: 0;

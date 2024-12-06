@@ -1,23 +1,23 @@
 import React from "react";
-import "./TopBanner.css";
+import styles from "./TopBanner.module.css";
 
 function TopBanner({ title, imageUrl, StartDate, EndDate }) {
   return (
-    <div className="TopBanner main-div">
+    <div className={[styles.TopBanner, styles.main_div].join(" ")}>
       {/* 흐릿한 배경 이미지 */}
       <div
-        className="TopBanner background-image"
+        className={[styles.TopBanner, styles.background_image].join(" ")}
         style={{ backgroundImage: `url(${imageUrl})` }}
       ></div>
 
       {/* 텍스트와 이미지 콘텐츠 */}
-      <div className="TopBanner content">
-        <div className="TopBanner details">
+      <div className={[styles.TopBanner, styles.content].join(" ")}>
+        <div className={[styles.TopBanner, styles.details].join(" ")}>
           <h2>{title}</h2>
           <p>{StartDate} ~ {EndDate}</p>
         </div>
         <img
-          className="TopBanner image"
+          className={[styles.TopBanner, styles.image].join(" ")}
           src={imageUrl}
           alt="TopBanner image"
         />
