@@ -38,6 +38,7 @@ a{
   font-size: 1.8rem;
   font-weight: bold;
   color: #e60012;
+  cursor: pointer;
 }
 
 .logo_image{
@@ -64,12 +65,12 @@ a{
   color: #e60012;
 }
 
-.auth_buttons {
+.top_left {
   display: flex;
   gap: 10px;
 }
 
-.auth_buttons button {
+.top_left_buttons {
   padding: 8px 15px;
   width: 100px;
   height: 50px;
@@ -81,7 +82,7 @@ a{
   transition: background-color 0.3s;
 }
 
-.auth_buttons button:hover {
+.top_left_buttons:hover {
   background-color: #b3000e;
 }
 

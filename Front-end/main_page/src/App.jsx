@@ -13,8 +13,10 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <Mainpage />},
+      // login, join은 현재 modal 적용중
       // { path: "/login", element: <Login />, errorElement: <ErrorPage /> },
-      { path: "/join", element: <Join />, errorElement: <ErrorPage /> },
+      // { path: "/join", element: <Join />, errorElement: <ErrorPage /> },
+      { path: "/mypage", element: <MyMain />, errorElement: <ErrorPage /> },
     ]
   },
 ]);
