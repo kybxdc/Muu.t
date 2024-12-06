@@ -43,7 +43,7 @@ export default function Login() {
     return (
       <>
         <header>
-          <img src="../igm/Muut_logo.png" witdh="300px" height="300px" ></img>
+          <img src="./src/img/Muut_logo.png" witdh="300px" height="300px" ></img>
         </header>
         <div>
           <input type='text' value={customer_id} placeholder='아이디(아이디는 이메일형식입니다)'  onChange={handleIdChange}/><br/>

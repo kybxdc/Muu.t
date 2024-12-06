@@ -12,7 +12,7 @@
   width: 100%;
 }
 
-.width-limit{
+.width_limit{
   width: var(--all_width);
   margin: 0 auto;
 }
@@ -28,7 +28,7 @@ a{
   padding: 10px 20px;
 }
 
-.header-innner {
+.header_innner {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -40,7 +40,7 @@ a{
   color: #e60012;
 }
 
-.logo-image{
+.logo_image{
   width: 300px;
   height: 100px;
 }
@@ -64,12 +64,12 @@ a{
   color: #e60012;
 }
 
-.auth-buttons {
+.auth_buttons {
   display: flex;
   gap: 10px;
 }
 
-.auth-buttons button {
+.auth_buttons button {
   padding: 8px 15px;
   width: 100px;
   height: 50px;
@@ -81,13 +81,13 @@ a{
   transition: background-color 0.3s;
 }
 
-.auth-buttons button:hover {
+.auth_buttons button:hover {
   background-color: #b3000e;
 }
 
 /* --------- Main --------- */
 
-.product-grid {
+.product_grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 20px;
@@ -105,8 +105,44 @@ a{
   width: 100%;
 }
 
-.footer-info p {
+.footer_info p {
   margin: 5px 0;
   color: #666;
   font-size: 0.9rem;
 }
+/* ======= 모달 관련 추가한 부분 ======= */
+  /* 모달 배경 (overlay) */
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  /* 모달 내용 (login-modal) */
+  .login_modal {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    max-width: 90%;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* 닫기 버튼 */
+  .close_btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
