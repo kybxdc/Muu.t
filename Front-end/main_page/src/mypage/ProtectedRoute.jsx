@@ -10,5 +10,6 @@ const ProtectedRoute =({Children})=>{
     return Children; // 자식컴포넌트로 이동
 }
 
-export default ProtectedRoute // 추후 마이페이지 위아래에 씌워줘야함
-                // 이런식으로 path:"mypage" element:(<ProtectedRoute><MyMain /></ProtectedRoute>)
+export default ProtectedRoute
+// 추후 마이페이지 위아래에 씌워줘야함
+// 이런식으로 path:"mypage" element:(<ProtectedRoute><MyMain /></ProtectedRoute>)

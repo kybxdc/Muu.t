@@ -29,7 +29,6 @@ public class MypageService {
 	@Transactional
 	public Customer updateCustomer(@RequestBody Map<String, String> updatedData, HttpServletRequest request) {
 		Customer customer = customerRepository.findById(updatedData.get("customer_id"));
-		
 		customer.setCustomer_name(updatedData.get("customer_name"));
 		customer.setCustomer_pw(updatedData.get("customer_pw"));
 		customer.setCustomer_phone(updatedData.get("customer_phone"));

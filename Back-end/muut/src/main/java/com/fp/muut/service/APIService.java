@@ -102,6 +102,7 @@ public class APIService {
             
             // XML 파싱 및 데이터 변환
             XmlMapper xmlMapper = new XmlMapper();
+
             dbs_hallInfo dbs = xmlMapper.readValue(response, dbs_hallInfo.class);
 
             System.out.println(response);

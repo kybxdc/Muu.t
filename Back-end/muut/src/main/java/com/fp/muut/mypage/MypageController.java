@@ -45,7 +45,6 @@ public class MypageController {
 		
 		Customer customer =
 		mypagesevice.updateCustomer(updatedData, request);
-		
 		if (customer != null) {
 	        // 세션 업데이트: 수정된 정보로 세션에 저장
 	        HttpSession session = request.getSession();

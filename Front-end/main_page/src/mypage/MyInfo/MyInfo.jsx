@@ -39,10 +39,10 @@ export default function MyInfo({grade, memberId, name, password, phone, addr}) {
     function handleUpdate(){
       const updatedData = {
         customer_id: member.customer_id,  // 기존의 customer_id
-        newName: formData.newName,
-        newPassword: formData.newPassword,
-        newPhone: formData.newPhone,
-        newAddr: formData.newAddr,
+        customer_name: formData.newName,
+        customer_pw: formData.newPassword,
+        customer_phone: formData.newPhone,
+        customer_address: formData.newAddr,
       };
       axios.defaults.withCredentials = true;
       axios.post('http://localhost:9090/mypage/update', updatedData)
@@ -85,14 +85,14 @@ export default function MyInfo({grade, memberId, name, password, phone, addr}) {
             <td>
               {isEditing ? (
                 <input
-                  type="text"
+                  type="password"
                   name="newPassword"
                   required
                   value={formData.newPassword}
                   onChange={handleChange}
                 />
               ) : (
-                <span>{formData.newPassword}</span>
+                <span>*****</span>
               )}
             </td>
           </tr>
