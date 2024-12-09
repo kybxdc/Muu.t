@@ -48,6 +48,11 @@ public class Musical {
 	private java.util.Date musical_end_date;
 	private String musical_actor;
 	
+	// 임시
+	private String hall_name_tem;
+	private String hallId_mt10id;
+	
+	
 	// Performance 양방향 매핑
 //	@OneToMany(mappedBy = "musical")
 //	private List<Performance> performances = new ArrayList<>();

@@ -28,6 +28,10 @@ public class Hall_Info {
 	private String hall_addr;
 	private String hall_seat_info;
 	
+	// 임시
+	private String hallId_mt10id;
+	
+	
 	// Musical 양방향 매핑
 //	@OneToMany(mappedBy = "hall_Info")
 //	private List<Musical> musicals = new ArrayList<>();

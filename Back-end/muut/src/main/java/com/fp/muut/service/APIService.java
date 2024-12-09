@@ -24,16 +24,19 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class APIService {
     private final APIRepository apiRepository;
+    private static final String SERVICE_KEY = "3ca6587ae8704899b3e865e74484f3bb";
 
     @Transactional
     public void save() throws IOException {
         // 여러 공연 정보를 가져오는 API URL
         String apiUrl = "http://www.kopis.or.kr/openApi/restful/pblprfr?"
-        		+ "service=3ca6587ae8704899b3e865e74484f3bb"
+        		+ "service=" + SERVICE_KEY
         		+ "&stdate=20241201"
         		+ "&eddate=20241203"
         		+ "&cpage=1"
-        		+ "&rows=40"
+        		+ "&rows=30"
+        		+ "&signgucode=11"
+        		+ "&signgucodesub=1111"
         		+ "&shcate=GGGA";
 
         // 외부 API 호출
@@ -50,7 +53,10 @@ public class APIService {
             // 각 공연의 mt20id를 사용하여 상세 정보 처리
             for (MusicalDTO mdto : musicalDTOList) {
                 String mt20id = mdto.getMusicalId();
-                String detailUrl = "http://www.kopis.or.kr/openApi/restful/pblprfr/" + mt20id + "?service=3ca6587ae8704899b3e865e74484f3bb";
+                String detailUrl = "http://www.kopis.or.kr/openApi/restful/pblprfr/" 
+                					+ mt20id 
+                					+ "?service="
+                					+ SERVICE_KEY;
 
                 // 상세 정보 API 호출
                 String detailResponse = restTemplate.getForObject(detailUrl, String.class);
@@ -63,7 +69,7 @@ public class APIService {
                         // 엔티티 생성 및 데이터 매핑
                         Musical musical = new Musical();
                         musical.setMusical_title(detailMdto.getMusicalTitle());
-                        musical.setHall_Info(null);
+//                        musical.setHall_Info(null);
                         musical.setMusical_genre(detailMdto.getMusicalGenre());
                         musical.setMusical_run_time(detailMdto.getMusicalRunTime());
                         musical.setMusical_area(detailMdto.getMusicalArea());
@@ -75,49 +81,40 @@ public class APIService {
                         musical.setMusical_end_date(detailMdto.getMusicalEndDate());
                         musical.setMusical_seat_grade_info(detailMdto.getMusicalSeatGradeInfo());
                         musical.setMusical_description(detailMdto.getMusicalDescription());
+                        musical.setHall_name_tem(detailMdto.getHallName());
+                        musical.setHallId_mt10id(detailMdto.getHallId_mt10id());
+//                        // Hall_Info 설정
+                        Hall_Info hallInfo = apiRepository.findHallByID(detailMdto.getHallId_mt10id());
+//                        if (hallInfo != null) {
+//                            musical.setHall_Info(hallInfo);
+//                        }
+                        if (hallInfo == null) {
+                            // 4. 해당 홀 ID로 API 요청하여 홀 정보 저장
+                            String hallApiUrl = "http://kopis.or.kr/openApi/restful/prfplc/" 
+                            					+ detailMdto.getHallId_mt10id()
+                            					+ "?service="
+                            					+ SERVICE_KEY;
+                            String hallResponse = restTemplate.getForObject(hallApiUrl, String.class);
 
+                            dbs_hallInfo hallDbs = xmlMapper.readValue(hallResponse, dbs_hallInfo.class);
+                            if (hallDbs != null && hallDbs.getHIDTOlist() != null) {
+                                for (HallInfoDTO hallDto : hallDbs.getHIDTOlist()) {
+                                    hallInfo = new Hall_Info();
+                                    hallInfo.setHallId_mt10id(hallDto.getHallId_mt10id());
+                                    hallInfo.setHall_name(hallDto.getHall_name());
+                                    hallInfo.setHall_addr(hallDto.getHall_addr());
+
+                                    apiRepository.save_hallInfo(hallInfo);
+                                }
+                            }
+                        }
+
+                        // 5. 홀 정보 설정 후 뮤지컬 저장
+                        musical.setHall_Info(hallInfo);
+                        
                         // 데이터베이스 저장
                         apiRepository.save(musical);
                     }
-                }
-            }
-        }
-    }
-    
-    @Transactional
-    public void save_hallInfo() throws IOException {
-        int hallInfoIdStart = 1247;
-        String hallInfoId = "";
-
-        for (int i = 0; i < 30; i++) {
-        	hallInfoId = "FC00" + (hallInfoIdStart + i);
-            
-            
-            
-            // 외부 API 호출
-            String url = "http://kopis.or.kr/openApi/restful/prfplc/" + hallInfoId + "?service=3ca6587ae8704899b3e865e74484f3bb";
-            RestTemplate restTemplate = new RestTemplate();
-            String response = restTemplate.getForObject(url, String.class);
-
-            
-            // XML 파싱 및 데이터 변환
-            XmlMapper xmlMapper = new XmlMapper();
-
-            dbs_hallInfo dbs = xmlMapper.readValue(response, dbs_hallInfo.class);
-
-            System.out.println(response);
-            if(dbs.getHIDTOlist() == null) {
-            	System.out.println("asdfasfdadf");
-            }
-            
-            if (dbs != null && dbs.getHIDTOlist() != null) {
-                for (HallInfoDTO hdto : dbs.getHIDTOlist()) {
-                    Hall_Info hallInfo = new Hall_Info();
-                	
-                	hallInfo.setHall_name(hdto.getHall_name());;
-                	hallInfo.setHall_addr(hdto.getHall_addr());
-                    // 데이터베이스 저장
-                    apiRepository.save_hallInfo(hallInfo);
                 }
             }
         }
