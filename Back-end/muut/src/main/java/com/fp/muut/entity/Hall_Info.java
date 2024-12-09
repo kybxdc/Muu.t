@@ -26,6 +26,8 @@ public class Hall_Info {
 	private String hall_name;
 	private String hall_image;
 	private String hall_addr;
+	
+	@Column(length = 1000)
 	private String hall_seat_info;
 	
 	// Musical 양방향 매핑

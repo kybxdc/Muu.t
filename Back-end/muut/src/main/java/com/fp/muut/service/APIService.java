@@ -15,7 +15,6 @@ import com.fp.muut.dto.MusicalDTO;
 import com.fp.muut.dto.dbs_hallInfo;
 import com.fp.muut.entity.Hall_Info;
 import com.fp.muut.entity.Musical;
-import com.fp.muut.entitybak.HallInfo;
 
 
 import lombok.RequiredArgsConstructor;
