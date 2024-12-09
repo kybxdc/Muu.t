@@ -1,5 +1,5 @@
 import axios from 'axios';
-import './Myinfo.css'
+import classes from './Myinfo.module.css'
 import { useState, useEffect } from 'react';
 
 export default function MyInfo({grade, memberId, name, password, phone, addr}) {
@@ -58,16 +58,18 @@ export default function MyInfo({grade, memberId, name, password, phone, addr}) {
     
     return(
         <>
-         <main className="content">
-        <h2>회원정보수정</h2>
-        <p>회원님은 '{member?.customer_grade || 'null'}'등급입니다</p>
+         <main>
+        <h2 style={{ marginLeft: '20px', }}>회원정보수정</h2>
+        <p style={{ marginLeft: '20px'}}>회원님은 '{member?.customer_grade || 'null'}'등급입니다</p>
 
-        <tr>
-            <td>아이디</td>
-            {member?.customer_id|| 'null'}
+        <tr className={classes.info}>
+            <td className={classes.info1}>아이디</td>
+            <td className={classes.info}>
+            {member?.customer_id|| 'null'}</td>
         </tr>
-        <tr>
-            <td>회원이름</td>
+        <tr className={classes.info}>
+            <td className={classes.info1}>회원이름</td>
+            <td className={classes.info}>
             {isEditing ? (
              <input
              type="text"
@@ -78,11 +80,11 @@ export default function MyInfo({grade, memberId, name, password, phone, addr}) {
            />
          ) : (
            <span>{formData.newName}</span>
-         )}
+         )}</td>
         </tr>
-        <tr>
-            <td>비밀번호</td>
-            <td>
+        <tr className={classes.info}>
+            <td className={classes.info1}>비밀번호</td>
+            <td className={classes.info}>
               {isEditing ? (
                 <input
                   type="password"
@@ -96,9 +98,9 @@ export default function MyInfo({grade, memberId, name, password, phone, addr}) {
               )}
             </td>
           </tr>
-          <tr>
-            <td>연락처</td>
-            <td>
+          <tr className={classes.info}>
+            <td className={classes.info1}> 연락처</td>
+            <td className={classes.info}>
               {isEditing ? (
                 <input
                   type="text"
@@ -112,9 +114,9 @@ export default function MyInfo({grade, memberId, name, password, phone, addr}) {
               )}
             </td>
           </tr>
-          <tr>
-            <td>주소</td>
-            <td>
+          <tr className={classes.info}>
+            <td className={classes.info1}>주소</td>
+            <td className={classes.info}>
               {isEditing ? (
                 <input
                   type="text"
@@ -128,8 +130,7 @@ export default function MyInfo({grade, memberId, name, password, phone, addr}) {
               )}
             </td>
           </tr>
-      <button onClick={isEditing ? handleUpdate : handleEditClick}>
-        {isEditing ? '수정완료' : '회원정보수정'}
+      <button onClick={isEditing ? handleUpdate : handleEditClick} className={isEditing ? classes.changePassword : classes.submit_btn}> {isEditing ? '수정완료' : '회원정보수정'}
       </button>
     </main>
   </>

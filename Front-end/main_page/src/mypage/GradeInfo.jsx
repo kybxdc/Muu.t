@@ -1,12 +1,13 @@
-import './GradeInfo.css'
+import classes from './GradeInfo.module.css';
 export default function GradeInfo() {
     return(
-        <div className="gradeInfo-container">
+    <div style={{ marginLeft: '20px', marginTop: '20px' }}>
+        <div className={classes.gradeInfo_container}>
             <h2>
                 Muu.t의 우수고객은 최근 6개월의 실적(예매 확정 건)을<br />
                 기준으로 매월 10일에 등급이 부여됩니다.
             </h2>
-            <div className="gradeInfo">
+            <div className={classes.gradeInfo}>
                 [ 우수고객 등급 선정 기준 안내 ]
                 <br />
                 • VVIP - 예매 20건 이상, 결제 150만원 이상
@@ -15,7 +16,7 @@ export default function GradeInfo() {
                 <br />
                 • FAMILY - 예매 3건 이상, 결제 30만원 이상
             </div>
-            <div className="gradeInfo">
+            <div className={classes.gradeInfo}>
                 [ 우수고객 등급 조정 안내 ]
                 <br />
                 • Muu.t의 우수고객은 최근 6개월 구매 실적을 기준으로 하며,<br />
@@ -29,7 +30,7 @@ export default function GradeInfo() {
                 • 주문금액 조건과 주문 건수 조건이 현재 등급에<br />
                 하나라도 충족되지 않을 경우 하향 조정됩니다.
             </div>
-            <div className="gradeInfo">
+            <div className={classes.gradeInfo}>
                 [ 우수고객 등급 및 혜택 안내 ]
                 <br />
                 • VVIP - 바로접속을 통한 우수회원 15% 추가 할인
@@ -39,5 +40,6 @@ export default function GradeInfo() {
                 • FAMILY - 바로접속을 통한 우수회원 5% 추가 할인
             </div>
         </div>
+    </div>
     );
 }
