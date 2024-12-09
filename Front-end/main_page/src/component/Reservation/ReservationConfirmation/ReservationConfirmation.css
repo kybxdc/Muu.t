@@ -1,0 +1,25 @@
+.user-info-table{
+    width: 800px;
+    border: 1px solid #e5e5e5;
+    background-color: white;
+    border-collapse: collapse;
+}
+
+.tr-border-bottom{
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.tr-weight{
+    height: 50px;
+}
+
+.confirmation-main{
+    margin: 0 auto;
+}
+
+.asterisk{
+    color: red;
+    font-weight: bold;
+
+}
+
