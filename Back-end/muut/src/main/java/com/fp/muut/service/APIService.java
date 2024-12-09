@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fp.muut.repository.APIRepository;
 import com.fp.muut.dto.Dbs;
@@ -69,7 +70,6 @@ public class APIService {
                         // 엔티티 생성 및 데이터 매핑
                         Musical musical = new Musical();
                         musical.setMusical_title(detailMdto.getMusicalTitle());
-//                        musical.setHall_Info(null);
                         musical.setMusical_genre(detailMdto.getMusicalGenre());
                         musical.setMusical_run_time(detailMdto.getMusicalRunTime());
                         musical.setMusical_area(detailMdto.getMusicalArea());
@@ -80,14 +80,17 @@ public class APIService {
                         musical.setMusical_start_date(detailMdto.getMusicalStartDate());
                         musical.setMusical_end_date(detailMdto.getMusicalEndDate());
                         musical.setMusical_seat_grade_info(detailMdto.getMusicalSeatGradeInfo());
-                        musical.setMusical_description(detailMdto.getMusicalDescription());
+//                        musical.setMusical_description(detailMdto.getMusicalDescription());
                         musical.setHall_name_tem(detailMdto.getHallName());
                         musical.setHallId_mt10id(detailMdto.getHallId_mt10id());
-//                        // Hall_Info 설정
+                        // styurls를 JSON으로 변환
+                        if (detailMdto.getMusicalDescription() != null) {
+                            ObjectMapper objectMapper = new ObjectMapper();
+                            String styurlsJson = objectMapper.writeValueAsString(detailMdto.getMusicalDescription());
+                            musical.setMusical_description(styurlsJson);
+                        }
+                        // Hall_Info 외래키 설정
                         Hall_Info hallInfo = apiRepository.findHallByID(detailMdto.getHallId_mt10id());
-//                        if (hallInfo != null) {
-//                            musical.setHall_Info(hallInfo);
-//                        }
                         if (hallInfo == null) {
                             // 4. 해당 홀 ID로 API 요청하여 홀 정보 저장
                             String hallApiUrl = "http://kopis.or.kr/openApi/restful/prfplc/" 
