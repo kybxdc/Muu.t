@@ -1,5 +1,11 @@
 package com.fp.muut.seat.service;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Map.Entry;
 
 import org.springframework.stereotype.Service;
@@ -52,7 +58,33 @@ public class SeatService {
 
 	@Transactional
 	public void saveSeats(Long hall_id, String seats) {
-		seatRepository.saveSeats(hall_id, seats);
+		String seatPath = "./seatData/seatData"+hall_id+".json";
+		
+		try(OutputStream out = new FileOutputStream(seatPath)){
+			out.write(seats.getBytes());
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		seatRepository.saveSeats(hall_id, seatPath);
+	}
+
+	public String findSeatByPerformanceId(Long performance_id) {
+		String positionPath = seatRepository.findSeatByPerformanceId(performance_id);
+		
+		String seatData = null;
+		
+		try(InputStream in = new FileInputStream(positionPath)){
+			seatData = new String(in.readAllBytes(),"utf-8");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return seatData;
 	}
 	
 	

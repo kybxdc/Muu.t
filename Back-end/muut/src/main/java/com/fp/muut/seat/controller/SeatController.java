@@ -35,14 +35,22 @@ public class SeatController {
 	}
 	
 	@PostMapping("/saveposition/{hall_id}")
-	public ResponseEntity<String> postMethodName(@RequestBody String seats, @PathVariable Long hall_id) {
+	public ResponseEntity<String> savePosition(@RequestBody String seats, @PathVariable Long hall_id) {
 
 		seatService.saveSeats(hall_id, seats);
 		
 		return ResponseEntity.ok("좌석위치 잘 넣었음");
 	}
 	
-//	@GetMapping("")
-//	public Response
+	@GetMapping("/getseatposition/{performance_id}")
+	public ResponseEntity<String> getPosition(@PathVariable Long performance_id){
+		String seatData = seatService.findSeatByPerformanceId(performance_id);
+		
+		if(seatData!=null) {
+			return ResponseEntity.ok(seatData);
+		}
+		
+		return ResponseEntity.status(500).body("좌석 불러오기 실패");
+	}
 	
 }
