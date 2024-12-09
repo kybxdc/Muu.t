@@ -1,5 +1,5 @@
-import { useState, useEffect, styles} from 'react';
-import './MyMain.css';
+import { useState, useEffect} from 'react';
+import classes from './MyMain.module.css';
 import MyCalander from './MyCalender/MyCalender';
 import MyInfo from './MyInfo/MyInfo';
 import MyReserv from './MyReserv/MyReserv';
@@ -49,47 +49,47 @@ export default function MyMain() {
         mainmenu = <DropOut />;
     }else {
         mainmenu = (
-            <main className="content">
+            <main className={classes.content}>
                 <h2>안녕하세요 [{member?.customer_name||'null'}] 님</h2>
-                        <div className="user-info">
+                        <div className={classes.user_info}>
                             <p>회원님은 <strong>{member?.customer_grade || 'null'}</strong>등급입니다.</p>
                             <p>아이디: <strong>{member?.customer_id|| 'null'}</strong></p>
                             <p>이름: <strong>{member?.customer_name || 'null'}</strong></p>
                             <p>비밀번호: *****</p>
                             <p>최근 예약 내역 : 뮤지컬 상세 페이지로 연결</p>
-                            <button className="submit-btn" onClick={() => {handleSelect("MyInfo")}}>회원정보수정</button>
+                            <button className={classes.submit_btn} onClick={() => {handleSelect("MyInfo")}}>회원정보수정</button>
                         </div>
             </main>
         );
     }
     return (
         <>
-      <nav className="top-navbar">
-      <div className="logo" onClick={() => setSelectedMenu(null)}>마이페이지</div>
-      <div className="top-menu">
-      <div className="menu-item" id="GradeInfo"><a onClick={() => {handleSelect("GradeInfo")}}>회원등급</a></div>
-      <div className="menu-item" id="MyCalander"><a onClick={() => {handleSelect("MyCalander")}}>마이캘린더</a></div>
-      <div className="menu-item" id="MyInfo"><a onClick={() => {handleSelect("MyInfo")}}>회원정보수정</a></div>
-      </div>
+      <nav className={classes.top_navbar}>
+      <div className={classes.logo} onClick={() => setSelectedMenu(null)}>마이페이지</div>
+      <div className={classes.menu_item} id="GradeInfo"><a onClick={() => {handleSelect("GradeInfo")}}>회원등급</a></div>
+      <div className={classes.menu_item} id="MyCalander"><a onClick={() => {handleSelect("MyCalander")}}>마이캘린더</a></div>
+      <div className={classes.menu_item} id="MyInfo"><a onClick={() => {handleSelect("MyInfo")}}>회원정보수정</a></div>
       </nav>
-      <div className="container">
-      <aside className="sidebar">
-      <ul>
-          <li>
-          <div>예약관리</div></li>
-          <ul className="submenu">
-              <li><a onClick={() => {handleSelect("MyReserv")}}>예매내역확인/취소</a></li>
-              <li><a onClick={() => {handleSelect("MyCalander")}}>마이캘린더</a></li>
-          </ul>
-          <li><div>회원정보관리</div></li>
-          <ul className="submenu">
-              <li><a onClick={() => {handleSelect("MyAccount")}}>환불계좌관리</a></li>
-              <li><a onClick={() => {handleSelect("MyInfo")}}>회원정보수정</a></li>
-              <li><a onClick={() => {handleSelect("DropOut")}}>회원탈퇴</a></li>
-          </ul>
-      </ul>
-      </aside>
-      {mainmenu}  
+      <div className={classes.container}>
+        <aside className={classes.sidebar}>
+            <ul>
+                <li>
+                <div style={{ fontWeight: 'bold' }}>예약관리</div></li>
+                <ul className={classes.submenu}>
+                    <li><a className={classes.submenu} onClick={() => {handleSelect("MyReserv")}}>예매내역확인/취소</a></li>
+                    <li><a className={classes.submenu} onClick={() => {handleSelect("MyCalander")}}>마이캘린더</a></li>
+                </ul>
+                <li><div style={{ fontWeight: 'bold' }}>회원정보관리</div></li>
+                <ul className={classes.submenu}>
+                    <li><a className={classes.submenu} onClick={() => {handleSelect("MyAccount")}}>환불계좌관리</a></li>
+                    <li><a className={classes.submenu} onClick={() => {handleSelect("MyInfo")}}>회원정보수정</a></li>
+                    <li><a className={classes.submenu} onClick={() => {handleSelect("DropOut")}}>회원탈퇴</a></li>
+                </ul>
+            </ul>
+        </aside>
+        <div style={{ marginLeft: '20px', marginTop: '20px' }}>
+        {mainmenu}  
+        </div>
       </div>
       </>
   )

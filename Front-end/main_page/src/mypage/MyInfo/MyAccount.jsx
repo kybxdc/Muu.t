@@ -1,4 +1,4 @@
-import './MyAccount.css';
+import classes from './MyAccount.module.css';
 
 export default function MyAccount() {
     return(
@@ -10,7 +10,7 @@ export default function MyAccount() {
             <input type="text" placeholder="은행명"></input>
             <input type="text" placeholder="계좌번호(-없이 숫자만 입력해주세요)"></input>
             <br/><br/><br/>
-            <p><button>계좌등록</button></p>
+            <p><button className={classes.account_btn}>계좌등록</button></p>
         </form>
         </main>
         </>

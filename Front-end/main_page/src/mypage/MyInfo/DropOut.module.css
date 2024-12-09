@@ -1,19 +1,18 @@
-button {
+.dropout_btn {
   border-radius: 8px;
   border: 1px solid #fa2828;
-  color: #fa2828;
+  background-color: #fa2828;
+  color: white;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
   transition: border-color 0.25s;
+  margin-left: 20px;
+  margin-top: 20px;
 }
 
-html, body{
-  width: 100%;
-}
-.changePassword{
-  background-color: white;
-  color: #fa2828;
+.content{
+  padding : 20px;
 }
