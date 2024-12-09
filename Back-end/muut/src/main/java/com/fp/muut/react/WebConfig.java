@@ -15,6 +15,10 @@ public class WebConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**").allowedOrigins("http://localhost:5173")
                 .allowCredentials(true).allowedMethods("GET", "POST", "PUT", "DELETE");
+                
+                // 김영범 테스트용입니다.
+                registry.addMapping("/**").allowedOrigins("http://localhost:5174")
+                .allowCredentials(true).allowedMethods("GET", "POST", "PUT", "DELETE");
             }
         };
 	}
