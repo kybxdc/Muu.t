@@ -1,4 +1,4 @@
-import { useState, useEffect} from 'react';
+import { useState, useEffect, styles} from 'react';
 import './MyMain.css';
 import MyCalander from './MyCalender/MyCalender';
 import MyInfo from './MyInfo/MyInfo';
@@ -91,6 +91,6 @@ export default function MyMain() {
       </aside>
       {mainmenu}  
       </div>
-    </>
+      </>
   )
 }

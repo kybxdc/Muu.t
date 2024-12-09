@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fp.muut.entity.Customer;
 
@@ -20,7 +21,7 @@ public class CustomerRepository {
 	@Autowired
 	private EntityManager em;
 
-	//저장
+	//회원 저장
 	public void join(Customer customer) {
 		em.persist(customer);
 	}
@@ -54,5 +55,11 @@ public class CustomerRepository {
 			}
 		}
 		return null;
+	}
+	//회원 탈퇴 저장
+	@Transactional
+	public void save(Customer customer) {
+		em.merge(customer);
+		em.flush();
 	}
 }

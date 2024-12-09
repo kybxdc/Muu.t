@@ -8,9 +8,12 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.fp.muut.entity.Customer;
+import com.fp.muut.entity.Grade;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -62,6 +65,18 @@ public class CustomerService {
 				}
 			return null;
 		}
+
+	//회원탈퇴
+		public Customer dropOut(String customer_id) {
+				Customer customer = customerRepository.findById(customer_id);
+				Grade drop = new Grade();
+				drop.setCustomer_grade("drop");
+				drop.setDiscount_rate("0");
+				customer.setDiscound(drop);
+				customerRepository.save(customer);
+				return customer;
+		}
+	
 		
 		
 	}

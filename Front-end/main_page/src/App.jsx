@@ -1,10 +1,7 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
-import Join from "./login/Join";
-import Login from "./login/Login";
 import MyMain from "./mypage/MyMain";
-import Mainpage from "./mainpage/mainpage";
+import Mainpage from "./mainpage/Mainpage";
 import ErrorPage from "./mainpage/ErrorPage";
 
 const router = createBrowserRouter([

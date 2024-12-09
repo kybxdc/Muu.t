@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './MyCalender.css';
-import { Reservs } from '../MyReserv/Reservs';
+import axios from 'axios';
 
 export default function Calendar() {
   const today = new Date();
@@ -49,15 +49,27 @@ export default function Calendar() {
   const days = Array.from({ length: firstDay }, () => null).concat(
     Array.from({ length: daysInMonth }, (_, i) => i + 1)
   );
+  
+  //예약 내역 받아오기
+  const [reserveList, setReserveList] = useState([]);
+  useEffect(() => {
+    axios.defaults.withCredentials = true;
+    axios.get('http://localhost:9090/mypage/reserve').then((response) => {
+      setReserveList(response.data);
+        })
+        .catch((error) => {
+          console.error("There was an error!", error);
+        });
+    }, []);
 
  // 예약된 날짜와 이미지 매핑
- const reserveDates = Reservs.reduce((acc, reserv) => {
-  const reserveDate = new Date(reserv.date);
+ const reserveDates = reserveList.reduce((acc, reserv) => {
+  const reserveDate = new Date(reserv.performance_date);
   if (
     reserveDate.getFullYear() === currentYear &&
     reserveDate.getMonth() === currentMonth
   ) {
-    acc[reserveDate.getDate()] = reserv.img;
+    acc[reserveDate.getDate()] = reserv.musical_image;
   }
   return acc;
 }, {});

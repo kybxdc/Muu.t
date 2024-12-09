@@ -35,22 +35,6 @@ public class JoinController {
 		return "redirect:/";
 	}
 	
-	//로그인
-//	@PostMapping("/login")
-//	public String login(@RequestBody Map<String, String> loginData, HttpServletRequest request) {
-//		System.out.println(loginData);
-//		String customer_id = loginData.get("customer_id");
-//		String customer_pw = loginData.get("customer_pw");
-//		Customer customer = loginService.login(customer_id, customer_pw);
-//	    if(customer == null) {
-//	        return "login/loginForm";
-//	    }
-//	    // 로그인 성공 (세션에 로그인 정보 저장)
-//	    HttpSession session = request.getSession();
-//	    session.setAttribute("loginMember", customer);
-//	    return "redirect:" + redirectURL;
-//	}
-	
 	@PostMapping("/login")
 	public Customer login(@RequestBody Map<String, String> loginData, HttpServletRequest request) {
 		String customer_id = loginData.get("customer_id");
@@ -70,7 +54,7 @@ public class JoinController {
 	
 	//로그아웃
 		@PostMapping("/logout")
-			public String logoutV2(HttpServletRequest request) {
+			public String logout(HttpServletRequest request) {
 				//세션 삭제
 				HttpSession session = request.getSession(false);
 				if(session != null) {
@@ -79,12 +63,19 @@ public class JoinController {
 				return "redirect:/";
 			}
 	
-	//로그인 후 1시간 이내 반응 없을 시 자동로그아웃
-		@GetMapping("/home") //
-		public String home(HttpSession session) {
-		    if (session == null || session.getAttribute("user") == null) {
-		        return "redirect:/login";
-		    }
-		    return "home";
+	//회원 탈퇴
+	@GetMapping("/dropout")
+	public String dropOut(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		Customer loginCustomer = (Customer) session.getAttribute("loginCustomer");
+		String customer_id = loginCustomer.getCustomer_id();
+		
+		loginService.dropOut(customer_id);
+		
+		if(session != null) {
+			session.invalidate();
 		}
+		return "redirect:/";
+	}
+	
 }

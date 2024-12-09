@@ -1,5 +1,7 @@
 package com.fp.muut.entity;
 
+import java.util.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -43,6 +45,5 @@ public class Reservation {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 //		customer.getReservations().add(this);
-	}
-	
+	}	
 }

@@ -32,7 +32,9 @@ export default function Login() {
               console.log("======================", "로그인 성공");
               sessionStorage.setItem("customer_id", customer_id); 
               sessionStorage.setItem("customerName", res.data.customerName); 
-              alert("환영합니다. "+sessionStorage.getItem("customerName"));
+              if(sessionStorage.getItem("customerName") == "undefined"){
+                alert(`환영합니다. 익명`);
+              }else {alert("환영합니다. "+sessionStorage.getItem("customerName"))};
             }
         })
       } catch (error) {

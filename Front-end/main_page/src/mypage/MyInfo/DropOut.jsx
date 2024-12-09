@@ -1,10 +1,19 @@
+import axios from 'axios';
 import './DropOut.css'
 
 function handleDropout(){
     if(window.confirm("버튼을 누르면 취소하실 수 없습니다. 정말로 탈퇴하시겠습니까?")){
         //탈퇴처리하기
+        axios.defaults.withCredentials = true;
+        try {
+          axios.get('http://localhost:9090/member/dropout');
+          alert('그동안 이용해주셔서 감사합니다.');
+          window.location.href = '/';
+        } catch (error) {
+          console.log('회원 탈퇴 에러: ' + error);
+        }
+      };
     }
-}
 
 export default function DropOut() {
     return(

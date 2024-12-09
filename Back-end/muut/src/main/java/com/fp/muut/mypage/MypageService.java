@@ -1,5 +1,6 @@
 package com.fp.muut.mypage;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.fp.muut.dto.ReservationDTO;
 import com.fp.muut.entity.Customer;
+import com.fp.muut.entity.Reservation;
 import com.fp.muut.login.CustomerRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -37,5 +40,9 @@ public class MypageService {
 		mypageRepository.save(customer);
 		return customer;
 
+	}
+
+	public List<ReservationDTO> findItems(String customer_id) {
+		return mypageRepository.findAll(customer_id);
 	}
 }

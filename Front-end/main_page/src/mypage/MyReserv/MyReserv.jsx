@@ -1,44 +1,61 @@
-import { useState } from "react";
-import { Reservs } from "./Reservs.js"
+import { useEffect, useState } from "react";
 import './MyReserv.css'
+import axios from "axios";
 
 export default function MyReserv() {
 
-const [selectedReserve, setSelectedReserve] = useState("PreReservs"); // [저장공간,저장공간용Setter함수]
+const [selectedReserve, setSelectedReserve] = useState("PreReservs");
 const [activeColumn, setActiveColumn] = useState("PreReservs");
+const [reserveList, setReserveList] = useState();
 
 const today = new Date().toISOString().split('T')[0];
 // 지난 예약
-const pastReservs = Reservs.filter(res => res.date < today);
+const pastReservs = reserveList?.filter(reserv=>reserv.performance_date < today)||[];
 // 앞으로의 예약
-const PreReservs = Reservs.filter(res => res.date >= today);
+const PreReservs = reserveList?.filter(reserv => reserv.performance_date >= today)||[];
 
 function handleSelect(selectedButton) {
     setSelectedReserve(selectedButton);
     setActiveColumn(selectedButton);
 }
 
-let reserveContent;
 
+useEffect(() => {
+  axios.defaults.withCredentials = true;
+  axios.get('http://localhost:9090/mypage/reserve').then((response) => {
+    setReserveList(response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
+  }, []);
 
+  let myreserv = [];
+  
 if (selectedReserve === "PreReservs") {
-    reserveContent = PreReservs.map((reserv) => (
-      <tr key={reserv.index}>
-        <td><img src={reserv.img} style={{ width: '80px' }} /></td>
-        <td>{reserv.title}</td>
-        <td>{reserv.date}</td>
+  if(PreReservs.length > 0) {
+    myreserv = PreReservs.map((reserv) => (
+      <tr key={reserv.reservation_num}>
+        <td><img src={reserv.musical_image} style={{ width: '80px' }} /></td>
+        <td>{reserv.musical_title}</td>
+        <td>{reserv.performance_date} {reserv.performance_start_time}</td>
         <td><button className="detail">상세</button> <button>취소</button></td>
-      </tr>
-    ));
+      </tr>))
+    }else{
+      myreserv = <tr><td colSpan="4">아직 예매내역이 없습니다</td></tr>
+    };
   } else if (selectedReserve === "pastReservs") {
-    reserveContent = pastReservs.map((reserv) => (
-      <tr key={reserv.id}>
-        <td><img src={reserv.img} style={{ width: '80px' }} /></td>
-        <td>{reserv.title}</td>
-        <td>{reserv.date}</td>
-        <td><button className="detail">상세</button></td>
-      </tr>
-    ));
+    if(pastReservs.length > 0){
+      myreserv = pastReservs.map((reserv) => (
+        <tr key={reserv.reservation_num}>
+        <td><img src={reserv.musical_image} style={{ width: '80px' }} /></td>
+        <td>{reserv.musical_title}</td>
+        <td>{reserv.performance_date} {reserv.performance_start_time}</td>
+          <td><button className="detail">상세</button></td>
+        </tr>))
+    } else{
+      myreserv = <tr><td colSpan="4">아직 예매내역이 없습니다</td></tr>
+    };
   }
     return(
         <>
@@ -54,7 +71,7 @@ if (selectedReserve === "PreReservs") {
         </tr>
         </thead>
         <tbody>
-        {reserveContent}
+        {myreserv}
         </tbody>
         </table>
         </main>
