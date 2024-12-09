@@ -29,10 +29,10 @@ public class APIService {
         // 여러 공연 정보를 가져오는 API URL
         String apiUrl = "http://www.kopis.or.kr/openApi/restful/pblprfr?"
         		+ "service=3ca6587ae8704899b3e865e74484f3bb"
-        		+ "&stdate=20241101"
-        		+ "&eddate=20241130"
+        		+ "&stdate=20241201"
+        		+ "&eddate=20241203"
         		+ "&cpage=1"
-        		+ "&rows=30"
+        		+ "&rows=40"
         		+ "&shcate=GGGA";
 
         // 외부 API 호출

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {Link} from 'react-router-dom';
-import "./Login.css";
+// import "./Login.css";
+import styles from "./Login.module.css";
 import axios from "axios";
 
 
@@ -43,14 +44,14 @@ export default function Login() {
     return (
       <>
         <header>
-          <img src="../igm/Muut_logo.png" witdh="300px" height="300px" ></img>
+          <img src="./src/img/Muut_logo.png" witdh="300px" height="300px" ></img>
         </header>
         <div>
           <input type='text' value={customer_id} placeholder='아이디(아이디는 이메일형식입니다)'  onChange={handleIdChange}/><br/>
           <input type='text' value={customer_pw} placeholder='비밀번호' onChange={handlePasswordChange}/><br/>
-          <button className="login" onClick={handleSubmit}>로그인</button>
+          <button className={styles.login} onClick={handleSubmit}>로그인</button>
           <hr/>
-          <button className="join"><a href="/Join">회원가입</a></button>
+          <button className={styles.join}><a href="/Join">회원가입</a></button>
           <p><span>아이디찾기</span> | <span>비밀번호찾기</span></p>
         </div>
   
