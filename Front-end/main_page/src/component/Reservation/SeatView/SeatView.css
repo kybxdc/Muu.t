@@ -1,0 +1,46 @@
+.seat-no-index {
+  width: 10px;
+  height: 10px;
+  display: flex;
+  color: black;
+  background-color: powderblue;
+  font-weight: bold;
+  font-size: 10px;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid black;
+  border-radius: 2px;
+  position: absolute;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.seat-container {
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+  background-color: wheat;
+}
+
+.seat-layout {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.reservation-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.info-title {
+  margin: 0;
+  font-size: 23px;
+}
+
+.info-loc-date {
+  margin-top: 0;
+  font-size: 15px;
+  color: #292929;
+}

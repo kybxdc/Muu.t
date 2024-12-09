@@ -1,5 +1,6 @@
 package com.fp.muut.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -19,6 +20,7 @@ public class Seat_Position {
 	private Hall_Info hall_Info;
 	
 	// json 데이터로 넣을 예정
+	@Column(length = 1000)
 	private String position;
 
 	

@@ -1,0 +1,57 @@
+.control_container {
+    display: flex;
+    position: relative;
+    left: 1rem;
+}
+.control_container + .control_container {
+    margin-top: 0.7em;
+}
+.screen_reader { /* 스크린 리더를 고려해서 체크박스를 화면에서 숨김 */
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    margin: -1px;
+    clip-path: inset(50%);
+}
+.label_box {
+    position: relative;
+}
+.check_icon {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 1px solid gray;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.check_icon::before {
+    content: "";
+    position: absolute;
+    box-sizing: border-box;
+    width: 38%;
+    height: 55%;
+    left: 49%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-70%) rotateZ(40deg);
+    border-right: 1.7px solid gray;
+    border-bottom: 1.7px solid gray;
+}
+.label_box > label {
+    font-size: 15px;
+    padding-left: 1.5em;
+    position: relative;
+    cursor: pointer;
+}
+[type="checkbox"]:checked + .label_box .check_icon {
+    border-color:  black;
+    background-color: black;
+}
+[type="checkbox"]:checked + .label_box .check_icon::before {
+    border-color: #fff;
+}
