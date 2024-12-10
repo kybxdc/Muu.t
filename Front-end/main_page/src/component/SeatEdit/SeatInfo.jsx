@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import './SeatInfo.module.css'
 
 export default function SeatInfo() {
   const [cols, setCols] = useState("");
