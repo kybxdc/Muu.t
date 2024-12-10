@@ -138,10 +138,9 @@ export default function SeatInfo() {
                 placeholder="끝 번호"
               />
             </label>
-            <button onClick={()=>{console.log(colObject[col])}} hidden={true}>테스트를 위한 버튼</button>
           </div>
         ))}
-
+  <button onClick={()=>{console.log(sessionStorage.getItem("customer_id"))}} hidden={true}>테스트를 위한 버튼</button>
       <button
         type="submit"
         disabled={colObject["A"] ? false : true}

@@ -45,13 +45,13 @@ public class SeatRepository {
 
 	public String findSeatByPerformanceId(Long performance_id) {
 		// DB 정리되기 전까지 대기
-//		String position = em.createQuery("select sp.position from Musical m join m.hall_info hi join hi.seat_Position sp where m.musical_id=:musical_id",String.class)
-//			.setParameter("musical_id", musical_id)
-//			.getSingleResult();
+		String position = em.createQuery("select sp.position from Musical m join m.hall_info hi join hi.seat_Position sp where m.musical_id=:pserformance_id",String.class)
+			.setParameter("musical_id", performance_id)
+			.getSingleResult();
 		
-		Seat_Position seat_Position = em.find(Seat_Position.class, performance_id);
+//		Seat_Position seat_Position = em.find(Seat_Position.class, performance_id);
 		
-		return seat_Position.getPosition();
+		return null;
 	}
 
 }
