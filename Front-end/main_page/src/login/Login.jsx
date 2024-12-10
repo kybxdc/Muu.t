@@ -19,30 +19,37 @@ export default function Login() {
   
     const handleSubmit = async (e) => {
       e.preventDefault();
-      try {
-        axios.defaults.withCredentials = true;
-        await axios.post('http://localhost:9090/member/login',
-          {customer_id: customer_id, customer_pw: customer_pw})
-          .then((res) =>{
-            if (res.data.customer_id === undefined || res.data.customer_pw === null) {
-              console.log("======================", res.data.msg);
-              alert("ID, 혹은 비밀번호가 일치하지 않습니다.");
-            } else if (res.data.customer_id === customer_id) {
-              // id, pw 모두 일치 userId = userId1, msg = undefined
-              console.log("======================", "로그인 성공");
-              sessionStorage.setItem("customer_id", customer_id); 
-              sessionStorage.setItem("customer_name", res.data.customer_name); 
-              if(sessionStorage.getItem("customer_name") == 'null'){
-                alert(`현재 회원정보가 등록되어있지 않습니다. 회원정보를 입력해주세요`);
-              }else {alert("환영합니다. "+sessionStorage.getItem("customer_name"))};
-            }
-        })
-      } catch (error) {
-        alert('회원가입 에러: ' + error);
-      }
+      if(!customer_id || !customer_pw){
+        alert("ID와 비밀번호를 입력해주세요.");
+        return;
+      } else{
+          try {
+              axios.defaults.withCredentials = true;
+              await axios.post('http://localhost:9090/member/login',
+                {customer_id: customer_id, customer_pw: customer_pw})
+                .then((res) =>{
+                  if (res.data.customer_id === undefined || res.data.customer_pw === null) {
+                    console.log("======================", res.data.msg);
+                    alert("ID, 혹은 비밀번호가 일치하지 않습니다.");
+                  } else if (res.data.customer_id === customer_id) {
+                    // id, pw 모두 일치 userId = userId1, msg = undefined
+                    console.log("======================", "로그인 성공");
+                    sessionStorage.setItem("customer_id", customer_id); 
+                    sessionStorage.setItem("customer_name", res.data.customer_name); 
+
+                    if(sessionStorage.getItem("customer_name") == 'null'){
+                      alert(`현재 회원정보가 등록되어있지 않습니다. 회원정보를 입력해주세요`);
+                    }
+                    else {alert("환영합니다. "+sessionStorage.getItem("customer_name"))};
+                  }
+              })
+         } catch (error) {
+             alert('회원가입 에러: ' + error);
+        }                                     
       // 작업 완료 되면 페이지 이동(새로고침)
       document.location.href = "/";
-    };
+    }};
+
     return (
       <div className={styles.loginMain}>
         {currentView === "Login" && (

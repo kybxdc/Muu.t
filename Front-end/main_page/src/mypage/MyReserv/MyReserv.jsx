@@ -59,7 +59,7 @@ if (selectedReserve === "PreReservs") {
   }
     return(
         <>
-    <main className="content">
+    <main className="content" style={{marginTop:'5%', marginBottom:'20%'}}>
     <h2 style={{ marginLeft: '20px', marginTop: '20px' }}>예매내역 확인/취소 화면입니다</h2>
         <br/>
         <br/>

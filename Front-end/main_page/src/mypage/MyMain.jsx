@@ -7,6 +7,8 @@ import DropOut from './MyInfo/DropOut';
 import MyAccount from './MyInfo/MyAccount';
 import GradeInfo from './GradeInfo';
 import axios from 'axios';
+import Header from "../mainpage/components/Header";
+import Footer from "../mainpage/components/Footer";
 
 export default function MyMain() {
     const [selectedMenu, setSelectedMenu] = useState();
@@ -64,6 +66,8 @@ export default function MyMain() {
     }
     return (
         <>
+        <Header />
+        <div>
       <nav className={classes.top_navbar}>
       <div className={classes.logo} onClick={() => setSelectedMenu(null)}>마이페이지</div>
       <div className={classes.menu_item} id="GradeInfo"><a onClick={() => {handleSelect("GradeInfo")}}>회원등급</a></div>
@@ -91,6 +95,8 @@ export default function MyMain() {
         {mainmenu}  
         </div>
       </div>
+      </div>
+      <Footer />
       </>
   )
 }

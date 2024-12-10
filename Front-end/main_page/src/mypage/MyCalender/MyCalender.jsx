@@ -76,7 +76,7 @@ export default function Calendar() {
 
 
   return (
-    <div className="calendar">
+    <div className="calendar" style={{marginBottom:'20%'}}>
       <header className="calendar-header">
         <button onClick={prevMonth}>&lt;</button>
         <h2>{`${monthNames[currentMonth]} ${currentYear}`}</h2>
