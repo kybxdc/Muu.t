@@ -1,7 +1,7 @@
 import classes from './GradeInfo.module.css';
 export default function GradeInfo() {
     return(
-    <div style={{ marginLeft: '20px', marginTop: '20px' }}>
+    <div style={{ margin: '20px' , marginBottom :'20%'}}>
         <div className={classes.gradeInfo_container}>
             <h2>
                 Muu.t의 우수고객은 최근 6개월의 실적(예매 확정 건)을<br />
