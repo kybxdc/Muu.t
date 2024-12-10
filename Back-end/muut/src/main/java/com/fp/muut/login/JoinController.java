@@ -2,6 +2,9 @@ package com.fp.muut.login;
 
 import java.util.Map;
 
+import org.springframework.boot.web.servlet.server.Session.Cookie;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fp.muut.entity.Customer;
 
+import jakarta.servlet.ServletRequest;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
@@ -36,18 +41,28 @@ public class JoinController {
 	}
 	
 	@PostMapping("/login")
-	public Customer login(@RequestBody Map<String, String> loginData, HttpServletRequest request) {
+	public Customer login(@RequestBody Map<String, String> loginData, HttpServletRequest request, HttpServletResponse response) {
 		String customer_id = loginData.get("customer_id");
 		String customer_pw = loginData.get("customer_pw");
 		Customer customer = loginService.login(customer_id, customer_pw);
 			if(customer == null) {
 				return null;
 			}
+			
 		// 로그인 성공 (세션에 로그인 정보 저장)
 	    HttpSession session = request.getSession(); 
 	    session.setAttribute("loginCustomer", customer);
 	    System.out.println("Session ID: " + session.getId());
 	    System.out.println("Logged in customer: " + session.getAttribute("loginCustomer"));
+	    
+	    // 쿠키에 로그인 정보 저장
+	    ResponseCookie idCookie = ResponseCookie.from("id", customer_id)
+	            .httpOnly(true)
+	            .secure(false)
+	            .sameSite("None") // SameSite 설정
+	            .path("/")
+	            .build();
+	    response.addHeader(HttpHeaders.SET_COOKIE, idCookie.toString());
 	    
 		return customer;
 	}
