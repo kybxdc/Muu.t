@@ -1,4 +1,4 @@
-button.login {
+.login_btn {
   border: 1px solid #fa2828;
   background-color: #f9f9f9;
   color: #fa2828;
@@ -9,7 +9,7 @@ button.login {
   margin: 20px;
 }
 
-button.join {
+.join_btn {
   border: 1px solid #f9f9f9;
   background-color: #fa2828;
   color: #f9f9f9;
@@ -20,14 +20,18 @@ button.join {
   margin: 20px;
 }
 
-input {
+.login_input {
   width: 300px; 
   height: 50px;
   border: 1px solid;
   border-radius: 8px;
-  margin: 5px;
 }
 
-
-
-  
+.loginMain {
+  height: 100%; /* 높이를 100%로 설정 */
+  min-width: 320px;
+  display: flex; /* 플렉스 레이아웃 유지 */
+  flex-direction: column; /* 수직 정렬 */
+  align-items: center; /* 가로 중앙 정렬 */
+  position: relative; /* 상단 고정을 위한 상대 위치 */
+}
