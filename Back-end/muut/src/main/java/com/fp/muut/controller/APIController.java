@@ -15,12 +15,12 @@ import lombok.RequiredArgsConstructor;
 public class APIController {
 	private final APIService apiservice;
 	
-	// KOPIS API에서 뮤지컬 공연의 상세내용을 가져와 저장하기
+	// KOPIS API에서 뮤지컬 상세내용, 홀 정보를 가져와 저장하기
 	@GetMapping("/APIget")
-	public String APIget() throws IOException {
+	public String musicalDataGet() throws IOException {
 		apiservice.save();
-		apiservice.save_hallInfo();
-		return "APIdataGet";
+		return "APIDataGet";
 	}
+
 	
 }
