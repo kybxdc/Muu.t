@@ -9,6 +9,9 @@ import lombok.Setter;
 @Getter @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class HallInfoDTO {
+	@JsonProperty("mt10id")
+	private String hallId_mt10id;
+	
 	@JsonProperty("fcltynm")
 	private String hall_name;
 	
