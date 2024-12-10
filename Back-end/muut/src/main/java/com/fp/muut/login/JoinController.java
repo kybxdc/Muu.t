@@ -58,7 +58,7 @@ public class JoinController {
 	    // 쿠키에 로그인 정보 저장
 	    ResponseCookie idCookie = ResponseCookie.from("id", customer_id)
 	            .httpOnly(true)
-	            .secure(false)
+	            .secure(true)
 	            .sameSite("None") // SameSite 설정
 	            .path("/")
 	            .build();
@@ -69,18 +69,29 @@ public class JoinController {
 	
 	//로그아웃
 		@PostMapping("/logout")
-			public String logout(HttpServletRequest request) {
+			public String logout(HttpServletRequest request, HttpServletResponse response) {
 				//세션 삭제
 				HttpSession session = request.getSession(false);
 				if(session != null) {
 					session.invalidate();
 				}
+				//쿠키 삭제 
+				ResponseCookie cookie = ResponseCookie.from("id", "")
+				            .httpOnly(true)
+				            .secure(true)  // HTTPS 환경에서만 쿠키 전송
+				            .sameSite("None")
+				            .path("/")  // 쿠키의 경로는 로그인 시 설정한 것과 동일해야 함
+				            .maxAge(0)  // 만료 시간을 0으로 설정하여 쿠키 삭제
+				            .build();
+
+				    response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());  // 쿠키 삭제 헤더 추가
+
 				return "redirect:/";
 			}
 	
 	//회원 탈퇴
 	@GetMapping("/dropout")
-	public String dropOut(HttpServletRequest request) {
+	public String dropOut(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession(false);
 		Customer loginCustomer = (Customer) session.getAttribute("loginCustomer");
 		String customer_id = loginCustomer.getCustomer_id();
@@ -90,6 +101,16 @@ public class JoinController {
 		if(session != null) {
 			session.invalidate();
 		}
+		//쿠키 삭제 
+		ResponseCookie cookie = ResponseCookie.from("id", "")
+		            .httpOnly(true)
+		            .secure(true)  // HTTPS 환경에서만 쿠키 전송
+		            .sameSite("None")
+		            .path("/")  // 쿠키의 경로는 로그인 시 설정한 것과 동일해야 함
+		            .maxAge(0)  // 만료 시간을 0으로 설정하여 쿠키 삭제
+		            .build();
+
+		    response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());  // 쿠키 삭제 헤더 추가
 		return "redirect:/";
 	}
 	

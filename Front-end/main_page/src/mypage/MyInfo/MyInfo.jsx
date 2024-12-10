@@ -58,8 +58,8 @@ export default function MyInfo({grade, memberId, name, password, phone, addr}) {
     
     return(
         <>
-         <main>
-        <h2 style={{ marginLeft: '20px', }}>회원정보수정</h2>
+         <main style={{marginTop:'5%', marginBottom:'20%'}}>
+        <h2 style={{ marginLeft: '20px'}}>회원정보수정</h2>
         <p style={{ marginLeft: '20px'}}>회원님은 '{member?.customer_grade || 'null'}'등급입니다</p>
 
         <tr className={classes.info}>
@@ -72,6 +72,7 @@ export default function MyInfo({grade, memberId, name, password, phone, addr}) {
             <td className={classes.info}>
             {isEditing ? (
              <input
+             className={classes.info_input}
              type="text"
              name="newName"
              required
@@ -87,6 +88,7 @@ export default function MyInfo({grade, memberId, name, password, phone, addr}) {
             <td className={classes.info}>
               {isEditing ? (
                 <input
+                className={classes.info_input}
                   type="password"
                   name="newPassword"
                   required
@@ -103,6 +105,7 @@ export default function MyInfo({grade, memberId, name, password, phone, addr}) {
             <td className={classes.info}>
               {isEditing ? (
                 <input
+                className={classes.info_input}
                   type="text"
                   name="newPhone"
                   required
@@ -119,6 +122,7 @@ export default function MyInfo({grade, memberId, name, password, phone, addr}) {
             <td className={classes.info}>
               {isEditing ? (
                 <input
+                  className={classes.info_input}
                   type="text"
                   name="newAddr"
                   required
