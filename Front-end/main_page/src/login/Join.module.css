@@ -39,3 +39,10 @@
     align-items: center; /* 가로 중앙 정렬 */
     position: relative; /* 상단 고정을 위한 상대 위치 */
 }
+
+.pw_check{
+  margin:0;
+  text-align:left;
+  color: #fa2828;
+  display: none;
+}
