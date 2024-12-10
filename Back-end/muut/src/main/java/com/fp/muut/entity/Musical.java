@@ -34,6 +34,8 @@ public class Musical {
 	private Hall_Info hall_Info;
 	
 	private String musical_title;
+	
+	@Column(name = "musical_description", length = 1000)
 	private String musical_description;	
 	private String musical_genre;
 	private String musical_run_time;
@@ -47,6 +49,12 @@ public class Musical {
 	@Temporal(TemporalType.DATE) // 날짜만 저장
 	private java.util.Date musical_end_date;
 	private String musical_actor;
+	
+	// 임시
+	private String hall_name_tem;
+	private String hallId_mt10id;
+	
+	
 	
 	// Performance 양방향 매핑
 //	@OneToMany(mappedBy = "musical")
