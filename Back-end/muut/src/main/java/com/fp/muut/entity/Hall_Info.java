@@ -32,6 +32,8 @@ public class Hall_Info {
 	
 	// 임시
 	private String hallId_mt10id;
+	private String hall_la;
+	private String hall_lo;
 	
 	
 	// Musical 양방향 매핑
