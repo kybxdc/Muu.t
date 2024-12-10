@@ -1,0 +1,85 @@
+:root {
+    --all_width: 1120px;
+}
+  
+.App {
+    margin: 0;
+    background-color: #ffffff;
+    font-family: "Notosans", -apple-system, BlinkMacSystemFont, Apple SD Gothic Neo, "Malgun Gothic", Arial, sans-serif;
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+}
+  
+.width_limit{
+    width: var(--all_width);
+    margin: 0 auto;
+}
+  
+a{
+    text-decoration: none;
+}
+
+.header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 20px;
+}
+
+.header_innner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #e60012;
+    cursor: pointer;
+}
+
+.logo_image{
+    width: 300px;
+    height: 100px;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    padding: 0;
+    margin: 0;
+}
+
+.nav a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.nav a:hover {
+    color: #e60012;
+}
+
+.top_left {
+    display: flex;
+    gap: 10px;
+}
+
+.top_left_buttons {
+    padding: 8px 15px;
+    width: 100px;
+    height: 50px;
+    background-color: #e60012;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.top_left_buttons:hover {
+    background-color: #b3000e;
+}
