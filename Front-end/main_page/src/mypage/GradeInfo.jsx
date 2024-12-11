@@ -33,11 +33,11 @@ export default function GradeInfo() {
             <div className={classes.gradeInfo}>
                 [ 우수고객 등급 및 혜택 안내 ]
                 <br />
-                • VVIP - 바로접속을 통한 우수회원 15% 추가 할인
+                • VVIP - 우수회원 15% 추가 할인
                 <br />
-                • VIP - 바로접속을 통한 우수회원 10% 추가 할인
+                • VIP - 우수회원 10% 추가 할인
                 <br />
-                • FAMILY - 바로접속을 통한 우수회원 5% 추가 할인
+                • FAMILY - 우수회원 5% 추가 할인
             </div>
         </div>
     </div>

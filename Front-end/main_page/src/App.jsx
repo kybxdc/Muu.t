@@ -4,7 +4,6 @@ import MyMain from "./mypage/MyMain";
 import Mainpage from "./mainpage/mainpage";
 import Detailpage from "./detailpage/detailpage";
 import ErrorPage from "./mainpage/ErrorPage";
-
 import SeatEdit from './component/SeatEdit/SeatEdit'
 import SeatView from './component/Reservation/SeatView/SeatView'
 import ReservationConfirmation from './component/Reservation/ReservationConfirmation/ReservationConfirmation'
@@ -13,6 +12,7 @@ import SeatInfo from './component/SeatEdit/SeatInfo'
 import SeatGrade from './component/SeatEdit/SeatGrade'
 import SeatProvider from "./component/SeatEdit/seatContext";
 import Reservation from "./component/Reservation/Reservation";
+import AdminMain from "./adminpage/AdminMain";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +48,7 @@ const router = createBrowserRouter([
     path: '/admin',
     children: [
       {path: 'seatedit/:hall_id', element: <SeatProvider><SeatEdit /></SeatProvider>},
+      {path: 'main', element: <AdminMain />},
       {path: 'seatinfo/:hall_id', element: <SeatInfo />},
       {path: 'seatgrade/:performance_id', element: <SeatProvider><SeatGrade /></SeatProvider>}, // 공연이 아직 저장되지 않았으므로 테스트를 위해 hall_id로 함
     ]

@@ -9,6 +9,7 @@
     font-weight: bold;
     cursor: pointer;
     padding: 40px 40px;
+    margin-right: 40px;
   }
   
   .top_navbar .top_menu {
@@ -19,7 +20,7 @@
   .top_navbar .menu_item {
     position: relative;
     width: 200px;
-
+    margin-left: 30px;
   }
 
   .menu_item a {

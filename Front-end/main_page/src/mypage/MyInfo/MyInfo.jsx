@@ -24,6 +24,7 @@ export default function MyInfo({grade, memberId, name, password, phone, addr}) {
         }, []);
       
 
+
      function handleEditClick(){
          setIsEditing((editing)=>!editing);
      }
@@ -57,10 +58,11 @@ export default function MyInfo({grade, memberId, name, password, phone, addr}) {
     };
     
     return(
-        <>
+        <div className={classes.width_limit}>
          <main style={{marginTop:'5%', marginBottom:'20%'}}>
         <h2 style={{ marginLeft: '20px'}}>회원정보수정</h2>
-        <p style={{ marginLeft: '20px'}}>회원님은 '{member?.customer_grade || 'null'}'등급입니다</p>
+        <p style={{ marginLeft: '20px'}}>회원님은 
+          <span style={{color:"#fa2828"}}><strong> '{member?.customer_grade || 'null'}' </strong></span>등급입니다</p>
 
         <tr className={classes.info}>
             <td className={classes.info1}>아이디</td>
@@ -68,7 +70,7 @@ export default function MyInfo({grade, memberId, name, password, phone, addr}) {
             {member?.customer_id|| 'null'}</td>
         </tr>
         <tr className={classes.info}>
-            <td className={classes.info1}>회원이름</td>
+            <td className={classes.info1}>이름</td>
             <td className={classes.info}>
             {isEditing ? (
              <input
@@ -137,6 +139,6 @@ export default function MyInfo({grade, memberId, name, password, phone, addr}) {
       <button onClick={isEditing ? handleUpdate : handleEditClick} className={isEditing ? classes.changePassword : classes.submit_btn}> {isEditing ? '수정완료' : '회원정보수정'}
       </button>
     </main>
-  </>
+    </div>
   );
 }
