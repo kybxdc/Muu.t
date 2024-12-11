@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./Login.module.css";
 import axios from "axios";
-import Join from "./Join";
+import Join from "./Join.jsx";
 
 
 
