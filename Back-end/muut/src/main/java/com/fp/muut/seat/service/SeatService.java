@@ -86,6 +86,12 @@ public class SeatService {
 		
 		return seatData;
 	}
+
+	public Long getSeatDataByPerformance(Long performance_id) {
+		// performance_id로 hall_id 검색
+		Long hall_id = seatRepository.findHall_IdByPerformance_Id(performance_id);
+		return hall_id;
+	}
 	
 	
 }

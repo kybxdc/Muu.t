@@ -34,6 +34,12 @@ public class SeatController {
 		return ResponseEntity.ok(seatService.getSeat(hall_id));
 	}
 	
+	@GetMapping("getseat/performance/{performance_id}")
+	public ResponseEntity<Object> getSeatByPerformance(@PathVariable Long performance_id){
+		Long hall_id = seatService.getSeatDataByPerformance(performance_id);
+		return getSeat(hall_id);
+	} 
+	
 	@PostMapping("/saveposition/{hall_id}")
 	public ResponseEntity<String> savePosition(@RequestBody String seats, @PathVariable Long hall_id) {
 
