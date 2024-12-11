@@ -18,4 +18,10 @@ public class HallInfoDTO {
 	@JsonProperty("adres")
 	private String hall_addr;
 	
+	@JsonProperty("la")
+	private String hall_la;
+	
+	@JsonProperty("lo")
+	private String hall_lo;
+	
 }

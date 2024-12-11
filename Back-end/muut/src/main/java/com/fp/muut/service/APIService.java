@@ -105,6 +105,8 @@ public class APIService {
                                     hallInfo.setHallId_mt10id(hallDto.getHallId_mt10id());
                                     hallInfo.setHall_name(hallDto.getHall_name());
                                     hallInfo.setHall_addr(hallDto.getHall_addr());
+                                    hallInfo.setHall_la(hallDto.getHall_la());
+                                    hallInfo.setHall_lo(hallDto.getHall_lo());
 
                                     apiRepository.save_hallInfo(hallInfo);
                                 }
