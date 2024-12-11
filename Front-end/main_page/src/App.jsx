@@ -1,7 +1,8 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MyMain from "./mypage/MyMain";
-import Mainpage from "./mainpage/Mainpage";
+import Mainpage from "./mainpage/mainpage";
+import Detailpage from "./detailpage/detailpage";
 import ErrorPage from "./mainpage/ErrorPage";
 
 import SeatEdit from './component/SeatEdit/SeatEdit'
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
       // { path: "/join", element: <Join />, errorElement: <ErrorPage /> },
       { path: "/mypage", element: <MyMain />, errorElement: <ErrorPage /> },
       {path: "/test", element: <TestMap/>},
+      { path: "/detailpage", element: <Detailpage />, errorElement: <ErrorPage /> },
     ]
   },
   {
