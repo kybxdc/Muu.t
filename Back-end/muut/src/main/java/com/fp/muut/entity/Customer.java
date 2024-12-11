@@ -30,6 +30,7 @@ public class Customer {
 	private String customer_name;
 	private String customer_phone;
 	private String customer_address;
+	private String customer_status;
 	
 	// customer_grade 외래키 참조
 	@ManyToOne

@@ -11,6 +11,7 @@ import ReservationConfirmation from './component/Reservation/ReservationConfirma
 import Payment from './component/Reservation/Payment/Payment'
 import SeatInfo from './component/SeatEdit/SeatInfo'
 import SeatGrade from './component/SeatEdit/SeatGrade'
+import TestMap from "./component/Map/TestMap";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
       // { path: "/join", element: <Join />, errorElement: <ErrorPage /> },
       { path: "/mypage", element: <MyMain />, errorElement: <ErrorPage /> },
       { path: "/detailpage", element: <Detailpage />, errorElement: <ErrorPage /> },
+      { path: "/test", element: <TestMap/>},
     ]
   },
   {
