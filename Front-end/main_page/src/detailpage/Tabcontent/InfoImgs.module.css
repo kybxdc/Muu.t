@@ -1,0 +1,11 @@
+:root {
+    --all_width: 1120px;
+}
+
+.dIbox{
+    width: var(--all_width);
+}
+
+.description_img{
+    width: 100%;
+}

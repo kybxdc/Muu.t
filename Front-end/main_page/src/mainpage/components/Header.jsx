@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Modal from "../Modal";
 import Login from "../../login/Login";
-import Join from "../../login/Join";
+import Join from "../../login/Join.jsx";
 
 import styles from "./Header.module.css";
 

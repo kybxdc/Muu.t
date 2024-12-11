@@ -10,9 +10,23 @@ import styles from "./Detailpage.module.css";
 import Header from "../mainpage/components/Header";
 import Footer from "../mainpage/components/Footer";
 
+import ProductInfoDetail from "./ProductInfoDetail/ProductInfoDetail";
+import TabButton from "./Tabcontent/TabButton";
+import InfoImgs from "./Tabcontent/InfoImgs";
+import Review from "./Tabcontent/Review";
+import Place from "./Tabcontent/Place";
+
 export default function Detailpage() {
   const location = useLocation();
   const { musical } = location.state || {};
+
+  const [TabSelect, setTabSelect] = useState("InfoImgs");
+  const tabs = [
+    { id: "InfoImgs", label: "상세정보" },
+    { id: "Review", label: "관람후기" },
+    { id: "Place", label: "장소정보" },
+  ];
+
   return (
     <div>
       {/* Header */}
@@ -23,50 +37,29 @@ export default function Detailpage() {
         className={[styles.detail_main, styles.width_limit].join(" ")}
       >
         <section className={styles.product_info}>
-          <div className={styles.product_img_box}>
-            <img className={styles.product_image} src={musical.musical_image} />
-          </div>
-          <div className={styles.product_info_detail}>
-            <div className={styles.product_title_box}>
-                <h1 className={styles.product_title}>{musical.musical_title}</h1>
-            </div>
-            <div className={styles.product_description}>
-                <ul className={styles.product_desc_list_1}>
-                    <li className={styles.product_desc_list_item}>
-                        <span className={styles.product_list_col}>장소</span>
-                        <div className={styles.product_list_element}>{musical.hall_name_tem}</div>
-                    </li>
-                    <li className={styles.product_desc_list_item}>
-                        <span className={styles.product_list_col}>관람시간</span>
-                        <div className={styles.product_list_element}>{musical.musical_run_time}</div>
-                    </li>
-                    <li className={styles.product_desc_list_item}>
-                        <span className={styles.product_list_col}>기간</span>
-                        <div className={styles.product_list_element}>{musical.musical_start_date}~{musical.musical_end_date}</div>
-                    </li>
-                    <li className={styles.product_desc_list_item}>
-                        <span className={styles.product_list_col}>관람등급</span>
-                        <div className={styles.product_list_element}>{musical.musical_age}</div>
-                    </li>
-                </ul>
-                <ul className={styles.product_desc_list_2}>
-                    <li className={styles.product_desc_list_item}>
-                        <span className={styles.product_list_col}>가격</span>
-                        <div className={styles.product_list_element}>{musical.musical_seat_grade_info}</div>
-                    </li>
-                </ul>
-            </div>
+          <ProductInfoDetail musical={musical}/>
+        </section>
+        <section className={styles.product_reserve}>
+          <div className={styles.reserve_tab}>
+            예약칸 작성중...
           </div>
         </section>
-
-        <hr/>
-        <section className={styles.product_reserve}><h1>예약 부분 미완...</h1></section>
-        <hr/>
-        <section className={styles.product_tab}><h1>탭 부분 미완...</h1></section>
-        <hr/>
-        <section className={styles.product_content}></section>
-        <section className={styles.product_recommend}></section>
-        <section className={styles.product_top_summary}></section>
+        <section className={styles.product_tab}>
+          {tabs.map((tab) => (
+            <TabButton
+              key={tab.id}
+              onSelect={() => setTabSelect(tab.id)}
+              isSelected={TabSelect === tab.id}
+            >
+              {tab.label}
+            </TabButton>
+          ))}
+        </section>
+        <section className={styles.product_content}>
+          {TabSelect === "InfoImgs" && <InfoImgs descImgs={musical.musical_description} />}
+          {TabSelect === "Review" && <Review />}
+          {TabSelect === "Place" && <Place />}
+        </section>
       </main>
 
       {/* Footer */}
