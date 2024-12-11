@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 
 import com.fp.muut.entity.Hall_Info;
 import com.fp.muut.entity.Musical;
+import com.fp.muut.entity.Performance;
 
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,12 @@ public class APIRepository {
     public void save_hallInfo(Hall_Info hallInfo) {
         em.persist(hallInfo);
     }
+    
+    /*=================김영범 테스트용 공연 더미데이터===============*/
+    public void save_performan(Performance performance) {
+    	em.persist(performance);
+    }
+    /*=================김영범 테스트용 공연 더미데이터===============*/
     
     public Hall_Info findHallByID(String hallId_mt10id) {
         return em.createQuery("SELECT h FROM Hall_Info h WHERE h.hallId_mt10id = :hallId_mt10id", Hall_Info.class)
