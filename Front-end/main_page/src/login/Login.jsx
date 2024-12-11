@@ -4,7 +4,6 @@ import axios from "axios";
 import Join from "./Join.jsx";
 import { useNavigate } from "react-router-dom";
 
-
 export default function Login() {
     const [currentView, setCurrentView] = useState("Login");
     const [customer_id, setCustomer_id] = useState(''); // 아이디 상태
