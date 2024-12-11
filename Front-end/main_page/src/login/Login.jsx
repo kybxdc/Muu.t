@@ -1,8 +1,8 @@
 import { useState } from "react";
 import styles from "./Login.module.css";
 import axios from "axios";
-import Join from "./Join";
-
+import Join from "./Join.jsx";
+import { useNavigate } from "react-router-dom";
 
 
 export default function Login() {
@@ -10,6 +10,7 @@ export default function Login() {
     const [customer_id, setCustomer_id] = useState(''); // 아이디 상태
     const [customer_pw, setCustomer_pw] = useState(''); // 비밀번호 상태
   
+    const nav = useNavigate();
     const handleIdChange = (e) => {
       setCustomer_id(e.target.value); // 아이디 입력값 상태 업데이트
     };
@@ -43,16 +44,18 @@ export default function Login() {
 
                     if(sessionStorage.getItem("customer_name") == 'null'){
                      alert(`현재 회원정보가 등록되어있지 않습니다. 회원정보를 입력해주세요`);
-                    window.location.href = `${window.location.origin}/mypage`;
+                    // window.location.href = '/mypage';
+                    nav("/mypage");
+                    return;
                     }
-                    else {alert("환영합니다. "+sessionStorage.getItem("customer_name"))};
+                    else {alert("환영합니다. "+sessionStorage.getItem("customer_name"));
+                      document.location.href="/";
+                    };
                   }
-              })
+                })
          } catch (error) {
              alert('회원가입 에러: ' + error);
-        }                                     
-      // 작업 완료 되면 페이지 이동(새로고침)
-      document.location.href = "/";
+        }
     }};
     
     return (

@@ -1,3 +1,8 @@
+.width_limit{
+  width: var(--all_width);
+  margin: 0 auto;
+}
+
 .submit_btn {
   border-radius: 8px;
   border: 1px solid #fa2828;

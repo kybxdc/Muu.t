@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.SequenceGenerator;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -71,8 +72,6 @@ public class Customer {
 		this.customer_address = customer_address;
 		this.grade = grade;
 		this.customer_total_cash = customer_total_cash;
-	}
-
-    
+	}	
 	
 }

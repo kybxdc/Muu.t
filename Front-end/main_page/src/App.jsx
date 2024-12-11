@@ -4,7 +4,6 @@ import MyMain from "./mypage/MyMain";
 import Mainpage from "./mainpage/mainpage";
 import Detailpage from "./detailpage/detailpage";
 import ErrorPage from "./mainpage/ErrorPage";
-
 import SeatEdit from './component/SeatEdit/SeatEdit'
 import SeatView from './component/Reservation/SeatView/SeatView'
 import ReservationConfirmation from './component/Reservation/ReservationConfirmation/ReservationConfirmation'
@@ -12,6 +11,7 @@ import Payment from './component/Reservation/Payment/Payment'
 import SeatInfo from './component/SeatEdit/SeatInfo'
 import SeatGrade from './component/SeatEdit/SeatGrade'
 import TestMap from "./component/Map/TestMap";
+import AdminMain from "./adminpage/AdminMain";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +38,7 @@ const router = createBrowserRouter([
   {
     path: '/admin',
     children: [
+      {path: 'main', element: <AdminMain />},
       {path: 'seatedit/:hall_id', element: <SeatEdit />},
       {path: 'seatinfo/:hall_id', element: <SeatInfo />},
       {path: 'seatgrade/:performance_id', element: <SeatGrade />},
