@@ -1,5 +1,6 @@
 package com.fp.muut.login;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.boot.web.servlet.server.Session.Cookie;
@@ -68,7 +69,7 @@ public class JoinController {
 	}
 	
 	//로그아웃
-		@PostMapping("/logout")
+		@GetMapping("/logout")
 			public String logout(HttpServletRequest request, HttpServletResponse response) {
 				//세션 삭제
 				HttpSession session = request.getSession(false);
@@ -112,6 +113,14 @@ public class JoinController {
 
 		    response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());  // 쿠키 삭제 헤더 추가
 		return "redirect:/";
+	}
+	
+	//회원 조회
+	@GetMapping("/customer")
+	public List<Customer> customers(){
+//		List<Member> members = memberService.findMembers(); <<
+//		model.addAttribute("members", members); << 예전에 했던 프로젝트에서 참고용으로 가져옴
+		return loginService.findMembers();
 	}
 	
 }
