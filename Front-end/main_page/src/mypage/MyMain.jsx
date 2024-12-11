@@ -9,6 +9,7 @@ import GradeInfo from './GradeInfo';
 import axios from 'axios';
 import Header from "../mainpage/components/Header";
 import Footer from "../mainpage/components/Footer";
+import handleLogout from '../login/Logout';
 
 export default function MyMain() {
     const [selectedMenu, setSelectedMenu] = useState();
@@ -26,7 +27,6 @@ export default function MyMain() {
             console.error("There was an error!", error);
           });
       }, []);
-    
     
       
     let mainmenu; 
@@ -54,7 +54,8 @@ export default function MyMain() {
             <main className={classes.content}>
                 <h2>안녕하세요 [{member?.customer_name||'null'}] 님</h2>
                         <div className={classes.user_info}>
-                            <p>회원님은 <strong>{member?.customer_grade || 'null'}</strong>등급입니다.</p>
+                            <p>회원님은 
+                            <span style={{cursor: "pointer", color:"#fa2828"}} onClick={()=>{handleSelect("GradeInfo")}}><strong> {member?.customer_grade || 'null'} </strong></span>등급입니다.</p>
                             <p>아이디: <strong>{member?.customer_id|| 'null'}</strong></p>
                             <p>이름: <strong>{member?.customer_name || 'null'}</strong></p>
                             <p>비밀번호: *****</p>
@@ -88,6 +89,7 @@ export default function MyMain() {
                     <li><a className={classes.submenu} onClick={() => {handleSelect("MyAccount")}}>환불계좌관리</a></li>
                     <li><a className={classes.submenu} onClick={() => {handleSelect("MyInfo")}}>회원정보수정</a></li>
                     <li><a className={classes.submenu} onClick={() => {handleSelect("DropOut")}}>회원탈퇴</a></li>
+                    <li><a className={classes.submenu} style={{color:'#fa2828'}} onClick={handleLogout}>로그아웃</a></li>
                 </ul>
             </ul>
         </aside>
