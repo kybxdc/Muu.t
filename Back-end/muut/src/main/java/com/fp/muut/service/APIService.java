@@ -120,12 +120,12 @@ public class APIService {
                         apiRepository.save(musical);
                         
                         /*=================김영범 테스트용 공연 더미데이터===============*/
-                        	Performance p = new Performance();
-                        	p.setHall_Info(hallInfo);
-                        	p.setMusical(musical);
-                        	p.setPerformance_date(new java.util.Date());
-                        	p.setPerformance_start_time("11시");
-                        	apiRepository.save_performan(p);
+//                        	Performance p = new Performance();
+//                        	p.setHall_Info(hallInfo);
+//                        	p.setMusical(musical);
+//                        	p.setPerformance_date(new java.util.Date());
+//                        	p.setPerformance_start_time("11시");
+//                        	apiRepository.save_performan(p);
                         /*=================김영범 테스트용 공연 더미데이터===============*/
                         
                     }

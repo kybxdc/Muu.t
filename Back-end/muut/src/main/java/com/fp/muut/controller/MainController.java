@@ -20,5 +20,7 @@ public class MainController {
 	public List<Musical> getMusicalData() {
 		return mainService.findmusicalDatas();
 	}
+	
+	
 
 }
