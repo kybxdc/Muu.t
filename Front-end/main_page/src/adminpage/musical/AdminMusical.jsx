@@ -1,13 +1,21 @@
 import {useState, useEffect} from 'react';
 import classes from './AdminMusical.module.css';
 import axios from 'axios';
+import Modal from "../../mainpage/Modal";
+import MusicalDetail from './MusicalDetail';
 
 export default function AdminMusical(){
+
+    //상세정보 입력용 modal
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const openModal = () => setIsModalOpen(true);
+    const closeModal = () => setIsModalOpen(false);
+
 
     const [musicalList, setMusicalList] = useState([]);
     useEffect(() => {
         axios.defaults.withCredentials = true;
-        axios.get('http://localhost:9090/member/customer').then((response) => {
+        axios.get('http://localhost:9090/admin/showList').then((response) => {
             setMusicalList(response.data);
             })
             .catch((error) => {
@@ -36,7 +44,10 @@ export default function AdminMusical(){
                     <td className={classes.info}>{musical.musical_id}</td>
                     <td className={classes.info}>{musical.musical_title}</td>
                     <td className={classes.info}>{musical.musical_area}</td>
-                    <td className={classes.info}><button>입력</button></td>
+                    <td className={classes.info}><button onClick={openModal}>입력</button></td>
+                    <Modal isOpen={isModalOpen} onClose={closeModal}>
+                        <MusicalDetail />
+                    </Modal>
                 </tr>
             ))}
             </tbody>
