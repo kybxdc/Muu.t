@@ -62,7 +62,8 @@ public class Customer {
     public Customer() {}
 
 	public Customer(Long customer_num, String customer_id, String customer_pw, String customer_name,
-			String customer_phone, String customer_address, Grade grade, String customer_total_cash) {
+			String customer_phone, String customer_address, String customer_status, Grade grade,
+			String customer_total_cash) {
 		super();
 		this.customer_num = customer_num;
 		this.customer_id = customer_id;
@@ -70,8 +71,11 @@ public class Customer {
 		this.customer_name = customer_name;
 		this.customer_phone = customer_phone;
 		this.customer_address = customer_address;
+		this.customer_status = customer_status;
 		this.grade = grade;
 		this.customer_total_cash = customer_total_cash;
-	}	
+	}
+
+
 	
 }

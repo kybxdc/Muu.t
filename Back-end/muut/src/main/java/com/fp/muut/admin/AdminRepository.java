@@ -24,7 +24,7 @@ public class AdminRepository {
 	private EntityManager em;
 
 	//공연 상세 저장
-	public void join(Performance performance) {
+	public void update(Performance performance) {
 		em.persist(performance);
 	}
 

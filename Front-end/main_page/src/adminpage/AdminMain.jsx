@@ -6,6 +6,7 @@ import axios from 'axios';
 import MyInfo from '../mypage/MyInfo/MyInfo';
 import AdminMusical from './musical/AdminMusical';
 import AdminCustomer from './customer/AdminCustomer';
+import MusicaDetail from './musical/MusicalDetail';
 import { handleLogout } from '../login/Logout';
 
 export default function AdminMain() {
@@ -28,6 +29,8 @@ export default function AdminMain() {
      
     if (selectedMenu === 'AdminMusical') {
         adminmenu = <AdminMusical />;
+    } else if (selectedMenu === 'MusicaDetail') {
+        adminmenu = <MusicaDetail />;
     } else if (selectedMenu === 'AdminCustomer') {
         adminmenu = <AdminCustomer />;
     } else if (selectedMenu === 'MyInfo') {
@@ -69,6 +72,7 @@ export default function AdminMain() {
                         <div>공연 관리</div></li>
                         <ul className={classes.submenu}>
                             <li><a onClick={() => {handleSelect("AdminMusical")}}>공연 정보 관리</a></li>
+                            <li><a onClick={() => {handleSelect("MusicaDetail")}}>공연 상세 조회</a></li>
                             <li><a onClick={() => {handleSelect("")}}>공연장 정보 관리</a></li>
                         </ul>
                         <li><div>회원 관리</div></li>

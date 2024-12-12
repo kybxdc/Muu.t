@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fp.muut.entity.Customer;
 import com.fp.muut.entity.Grade;
@@ -26,20 +27,20 @@ public class AdminService {
 
 	//회원가입
 	@Transactional
-	public Long join(Performance performance) throws IllegalAccessException {
-		//validateMemberCheck(customer);
-		adminRepository.join(performance);
+	public Long update(Performance performance) {
+		
+		adminRepository.update(performance);
 		return performance.getId();
 	}
 	
-	//중복체크
-	public void validateShowCheck(Performance performance) throws IllegalAccessException {
-		Performance findShows = adminRepository.findById(performance.getId());
-		if(findShows != null) {
-			throw new IllegalAccessException("이미 존재하는 공연입니다.");
-		}
-	}	
-	
+//	//중복체크
+//	public void validateShowCheck(Performance performance) throws IllegalAccessException {
+//		Performance findShows = adminRepository.findById(performance.getId());
+//		if(findShows != null) {
+//			throw new IllegalAccessException("이미 존재하는 공연입니다.");
+//		}
+//	}	
+//	
 
 	// 뮤지컬 조회
 	//@Transactional(readOnly = true)
@@ -53,7 +54,6 @@ public class AdminService {
 			return adminRepository.findAll();
 		}
 	
-		
 		
 	}
 	

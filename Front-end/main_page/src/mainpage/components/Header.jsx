@@ -30,7 +30,7 @@ export default function Header() {
     >
       <div className={styles.header_innner}>
         <div className={styles.logo} onClick={toMainpage}>
-          <img className={styles.logo_image} src="./src/img/Muut_logo_v2.png" />
+          <img className={styles.logo_image} src="../src/img/Muut_logo_v2.png" />
         </div>
         <div className={styles.top_left}>
           <button className={styles.top_left_buttons} onClick={openLoginModal}>

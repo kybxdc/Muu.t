@@ -54,15 +54,5 @@ public class Performance {
 		this.hall_Info = hall_Info;
 //		hall_Info.getPerformances().add(this);
 	}
-
-	public Performance(Long id, Musical musical, Hall_Info hall_Info, Date performance_date,
-			String performance_start_time) {
-		super();
-		this.id = id;
-		this.musical = musical;
-		this.hall_Info = hall_Info;
-		this.performance_date = performance_date;
-		this.performance_start_time = performance_start_time;
-	}
 	
 }
