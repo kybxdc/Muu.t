@@ -62,7 +62,6 @@ function Mainpage() {
                 key={index}
                 className={[styles.product_grid, styles.item].join(" ")}
               >
-                {/* 나중에 상세페이지로 연결 */}
                 <Link to="/detailpage" state={{musical}}>
                   <Product_grid {...musical} />
                 </Link>

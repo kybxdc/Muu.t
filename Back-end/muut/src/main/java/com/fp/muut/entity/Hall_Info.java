@@ -45,6 +45,6 @@ public class Hall_Info {
 //	private List<Performance> performances = new ArrayList<>();
 	
 	// Seat_Position 양방향 매핑
-//	@OneToOne(mappedBy = "hall_Info")
-//	private Seat_Position seat_Position;
+	@OneToOne(mappedBy = "hall_Info")
+	private Seat_Position seat_Position;
 }

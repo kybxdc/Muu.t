@@ -1,6 +1,5 @@
 import Reservation from "../Reservation";
 import "./SeatView.css";
-import Draggable from "react-draggable";
 import { useParams, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -41,7 +40,7 @@ export default function SeatView() {
   
   return (
     <>
-      <Reservation isSeatView={true} locations="seatview" performance_id={performance_id} selectedSeats={selectedSeats}>
+      {/* <Reservation isSeatView={true} locations="seatview" performance_id={performance_id} selectedSeats={selectedSeats}> */}
         <div className="reservation-info">
           <h4 className="info-title">
             뮤지컬 지킬앤하이드 (Jekvll & Hvde)-20주년
@@ -54,8 +53,6 @@ export default function SeatView() {
           <div className="stage-position">
             <h1 id="stage">STAGE</h1>
           </div>
-          {/* <div className="seat-view"> */}
-          {/* <Draggable> */}
           <div className="seat-container">
             {seats.length>0&&seats.map((seat) => {
               return (
@@ -73,10 +70,8 @@ export default function SeatView() {
               );
             })}
           </div>
-          {/* </Draggable> */}
-          {/* </div> */}
         </div>
-      </Reservation>
+      {/* </Reservation> */}
     </>
   );
 }

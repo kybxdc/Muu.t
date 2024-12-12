@@ -10,7 +10,8 @@ import ReservationConfirmation from './component/Reservation/ReservationConfirma
 import Payment from './component/Reservation/Payment/Payment'
 import SeatInfo from './component/SeatEdit/SeatInfo'
 import SeatGrade from './component/SeatEdit/SeatGrade'
-import TestMap from "./component/Map/TestMap";
+import SeatProvider from "./component/SeatEdit/seatContext";
+import Reservation from "./component/Reservation/Reservation";
 import AdminMain from "./adminpage/AdminMain";
 
 const router = createBrowserRouter([
@@ -24,24 +25,32 @@ const router = createBrowserRouter([
       // { path: "/join", element: <Join />, errorElement: <ErrorPage /> },
       { path: "/mypage", element: <MyMain />, errorElement: <ErrorPage /> },
       { path: "/detailpage", element: <Detailpage />, errorElement: <ErrorPage /> },
-      { path: "/test", element: <TestMap/>},
     ]
   },
   {
     path: '/reservation',
+    element: <Reservation />,
     children: [
       {path: 'seatview/:performance_id', element: <SeatView/>},
       {path: 'reserve/:performance_id', element: <ReservationConfirmation />},
       {path: 'payment/:performance_id', element: <Payment/>},
     ]
   },
+  // {
+  //   path: '/reservation',
+  //   children: [
+  //     {path: 'seatview/:performance_id', element: <SeatView/>},
+  //     {path: 'reserve/:performance_id', element: <ReservationConfirmation />},
+  //     {path: 'payment/:performance_id', element: <Payment/>},
+  //   ]
+  // },
   {
     path: '/admin',
     children: [
+      {path: 'seatedit/:hall_id', element: <SeatProvider><SeatEdit /></SeatProvider>},
       {path: 'main', element: <AdminMain />},
-      {path: 'seatedit/:hall_id', element: <SeatEdit />},
       {path: 'seatinfo/:hall_id', element: <SeatInfo />},
-      {path: 'seatgrade/:performance_id', element: <SeatGrade />},
+      {path: 'seatgrade/:performance_id', element: <SeatProvider><SeatGrade /></SeatProvider>}, // 공연이 아직 저장되지 않았으므로 테스트를 위해 hall_id로 함
     ]
   },
 ]);

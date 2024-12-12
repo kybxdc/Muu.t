@@ -39,6 +39,7 @@
     position: absolute;
     cursor: pointer;
     transition: transform 0.2s;
+    user-select: none;
 }
 
 .selected-seat{
