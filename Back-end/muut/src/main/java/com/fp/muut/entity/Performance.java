@@ -1,6 +1,7 @@
 package com.fp.muut.entity;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -52,6 +53,16 @@ public class Performance {
 	public void setHall_Info(Hall_Info hall_Info){
 		this.hall_Info = hall_Info;
 //		hall_Info.getPerformances().add(this);
+	}
+
+	public Performance(Long id, Musical musical, Hall_Info hall_Info, Date performance_date,
+			String performance_start_time) {
+		super();
+		this.id = id;
+		this.musical = musical;
+		this.hall_Info = hall_Info;
+		this.performance_date = performance_date;
+		this.performance_start_time = performance_start_time;
 	}
 	
 }
