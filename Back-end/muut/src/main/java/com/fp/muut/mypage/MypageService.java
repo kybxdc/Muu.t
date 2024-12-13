@@ -42,7 +42,7 @@ public class MypageService {
 
 	}
 
-	public List<ReservationDTO> findItems(String customer_id) {
+	public List<ReservationDTO> findReserv(String customer_id) {
 		return mypageRepository.findAll(customer_id);
 	}
 }
