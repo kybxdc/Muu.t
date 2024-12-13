@@ -18,7 +18,7 @@ import Footer from "./components/Footer";
 function Mainpage() {
   // Musical 데이터 상태
   const [musicals, setMusicals] = useState([]); 
-  let musicalCount = musicals.length;
+  
 
   useEffect(() => {
     // Musical 데이터 호출
@@ -40,15 +40,7 @@ function Mainpage() {
 
       {/* Main */}
       <main className={[styles.mainpage, styles.main].join(" ")}>
-        {musicalCount > 11 && (
-          <TopBanner
-            title={musicals[11].musical_title}
-            imageUrl={musicals[11].musical_image}
-            StartDate={musicals[11].musical_start_date}
-            EndDate={musicals[11].musical_end_date}
-          />
-        )}
-
+            <TopBanner musicals = {musicals} />
         <section
           className={[
             styles.main_section,
