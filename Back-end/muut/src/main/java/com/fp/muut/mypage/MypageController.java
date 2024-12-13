@@ -64,7 +64,7 @@ public class MypageController {
 	public List<ReservationDTO> getReserve(HttpSession session, Model model) {
 		Customer loginCustomer = (Customer) session.getAttribute("loginCustomer");
 		String customer_id = loginCustomer.getCustomer_id();
-		List<ReservationDTO> reserv = mypageSevice.findItems(customer_id);
+		List<ReservationDTO> reserv = mypageSevice.findReserv(customer_id);
 		model.addAttribute("reserv", reserv);
 		return reserv;
 	}

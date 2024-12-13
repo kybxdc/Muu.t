@@ -1,8 +1,17 @@
 package com.fp.muut.admin;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.boot.web.servlet.server.Session.Cookie;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
@@ -10,11 +19,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fp.muut.entity.Customer;
 import com.fp.muut.entity.Musical;
@@ -43,10 +54,67 @@ public class AdminController {
 	
 	//뮤지컬 상세정보 추가
 	@PostMapping("/updateMusical")
-	public String updateMusical(@RequestBody Performance performance) throws IllegalAccessException {
-		adminService.join(performance);
-		System.out.println(performance);
-		return "redirect:/";
+	public String updateMusical(@RequestParam("id") long id, @RequestParam("file") MultipartFile file) {
+		System.out.println("Received ID: " + id);
+		System.out.println("File uploaded successfully: " + file.getOriginalFilename());
+		
+		String fileName = file.getOriginalFilename();
+		
+		try {
+		         Workbook workbook;
+		         
+		         if (fileName.endsWith(".xlsx")) {
+		             workbook = new XSSFWorkbook(file.getInputStream());
+		         } else if (fileName.endsWith(".xls")) {
+		             workbook = new HSSFWorkbook(file.getInputStream());
+		         } else {
+		             throw new IllegalArgumentException("Invalid file format. Only .xlsx and .xls are supported.");
+		         }
+		     
+			    Sheet worksheet = workbook.getSheetAt(0);
+			    
+			    for(int i=1;i<worksheet.getPhysicalNumberOfRows() ;i++) {
+			        Performance performance = new Performance();
+			           
+			        
+			        DataFormatter formatter = new DataFormatter();		        
+			        Row row = worksheet.getRow(i);
+			        
+			        String musical_name = formatter.formatCellValue(row.getCell(0));
+			        String hall_name = formatter.formatCellValue(row.getCell(1));
+			        Date performance_date = row.getCell(2).getDateCellValue();
+			        String performance_start_time = formatter.formatCellValue(row.getCell(3));
+			        
+			        System.out.println(musical_name);
+			        System.out.println(hall_name);
+			        System.out.println(performance_date);
+			        System.out.println(performance_start_time);
+			        
+			        Musical musical = new Musical();
+			        musical.setId(id);
+
+			        performance.setHall_Info(adminService.findByhall(hall_name));
+			        performance.setMusical(musical);
+			        performance.setPerformance_date(performance_date);
+			        performance.setPerformance_start_time(performance_start_time);
+	      
+			        adminService.update(performance);
+			    }
+		} catch (Exception e) {
+		        // 예외 처리
+		        e.printStackTrace();
+		        return "redirect:/error"; // 에러 발생 시 리디렉션
+			}
+			    return "redirect:/success"; 
+		}
+	
+	//뮤지컬 상세정보 조회
+	@GetMapping("/showList/{selectedMusicalId}")
+	public List<Performance> updateItemForm(@PathVariable("selectedMusicalId") long selectedMusicalId){
+		System.out.println("컨트롤러 : "+selectedMusicalId);
+		return adminService.showList(selectedMusicalId);
 	}
+	
+	
 	
 }

@@ -29,4 +29,5 @@
   flex-direction: column; /* 수직 정렬 */
   align-items: center; /* 가로 중앙 정렬 */
   position: relative; /* 상단 고정을 위한 상대 위치 */
+  margin-bottom: 3%;
 }
