@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fp.muut.entity.Customer;
 import com.fp.muut.entity.Grade;
+import com.fp.muut.entity.Hall_Info;
 import com.fp.muut.entity.Musical;
 import com.fp.muut.entity.Performance;
 
@@ -25,7 +26,7 @@ public class AdminService {
 	@Autowired
 	private final AdminRepository adminRepository;
 
-	//회원가입
+	//상세정보 입력
 	@Transactional
 	public Long update(Performance performance) {
 		
@@ -54,6 +55,22 @@ public class AdminService {
 			return adminRepository.findAll();
 		}
 	
+		//뮤지컬 제목 검색
+		public  Musical findByNumber(String musical_title){
+			return adminRepository.findByNumber(musical_title);
+		}
+				
+		//공연장 검색
+		public Hall_Info findByhall(String hall_name){
+			System.out.println("서비스 홀네임 : "+hall_name);
+			return adminRepository.findByhall(hall_name);
+		}
+		
+		//뮤지컬 상세정보 조회
+		public List<Performance> showList(long selectedMusicalId) {
+			System.out.println("서비스 : "+selectedMusicalId);
+			return adminRepository.showList(selectedMusicalId);
+		}
 		
 	}
 	
