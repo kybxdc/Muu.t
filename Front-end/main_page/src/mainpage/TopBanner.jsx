@@ -1,40 +1,58 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import styles from "./TopBanner.module.css";
 
-function TopBanner({ title, imageUrl, StartDate, EndDate }) {
-  return (
-    <div className={[styles.TopBanner, styles.main_div].join(" ")}>
-      {/* 흐릿한 배경 이미지 */}
-      <div
-        className={[styles.TopBanner, styles.background_image].join(" ")}
-        style={{ backgroundImage: `url(${imageUrl})` }}
-      ></div>
+export default function TopBanner({ musicals }) {
+  const [currentIndex, setCurrentIndex] = useState(0); // 현재 보여지는 배너의 인덱스
+  const [selectedMusicals, setSelectedMusicals] = useState([]);
 
-      {/* 텍스트와 이미지 콘텐츠 */}
-      <div className={[styles.TopBanner, styles.content].join(" ")}>
-        <div className={[styles.TopBanner, styles.details].join(" ")}>
-          <h2>{title}</h2>
-          <p>{StartDate} ~ {EndDate}</p>
+  // 랜덤으로 5개의 뮤지컬 선택
+  useEffect(() => {
+    if (musicals.length > 0) {
+      const randomIndexes = Array.from({ length: 5 }, () =>
+        Math.floor(Math.random() * musicals.length)
+      );
+      setSelectedMusicals(randomIndexes.map((index) => musicals[index]));
+    }
+  }, [musicals]);
+
+  // 3초마다 인덱스 변경
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === selectedMusicals.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 3000); // 3초
+    return () => clearInterval(interval); // 컴포넌트 언마운트 시 클리어
+  }, [selectedMusicals]);
+
+  const currentMusical = selectedMusicals[currentIndex];
+
+  if (!currentMusical) return null;
+
+  return (
+    <Link to="/detailpage" state={{ musical:currentMusical }}>
+      <div className={[styles.TopBanner, styles.main_div].join(" ")}>
+        <div
+          className={[styles.TopBanner, styles.background_image].join(" ")}
+          style={{ backgroundImage: `url(${currentMusical.musical_image})` }}
+        ></div>
+
+        <div className={[styles.TopBanner, styles.content].join(" ")}>
+          <div className={[styles.TopBanner, styles.details].join(" ")}>
+            <h2>{currentMusical.musical_title}</h2>
+            <p>
+              {currentMusical.musical_start_date} ~{" "}
+              {currentMusical.musical_end_date}
+            </p>
+          </div>
+          <img
+            className={[styles.TopBanner, styles.image].join(" ")}
+            src={currentMusical.musical_image}
+            alt="TopBanner image"
+          />
         </div>
-        <img
-          className={[styles.TopBanner, styles.image].join(" ")}
-          src={imageUrl}
-          alt="TopBanner image"
-        />
       </div>
-    </div>
+    </Link>
   );
 }
-
-function getRandomNumberList(musicalCount) {
-  const uniqueNumbers = new Set();
-
-  while (uniqueNumbers.size < 10) {
-    const randomNum = Math.floor(Math.random() * (musicalCount + 1)); // 0부터 n까지의 무작위 정수
-    uniqueNumbers.add(randomNum); // Set은 중복을 허용하지 않음
-  }
-
-  return Array.from(uniqueNumbers); // Set을 배열로 변환
-}
-
-export default TopBanner;

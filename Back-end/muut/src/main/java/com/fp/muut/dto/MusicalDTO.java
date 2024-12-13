@@ -52,11 +52,10 @@ public class MusicalDTO {
 	
 	@JsonProperty("prfcast")
 	private String actor;
-	
-	@JsonProperty("fcltynm")
-	private String hallName;
-	
+		
 	@JsonProperty("mt10id")
-	private String hallId_mt10id;
+	private String hall_API_id;
 	
+	private String hall_name;
+	private String hall_addr;
 }

@@ -2,7 +2,7 @@ import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MyMain from "./mypage/MyMain";
 import Mainpage from "./mainpage/mainpage";
-import Detailpage from "./detailpage/detailpage";
+import Detailpage from "./detailpage/Detailpage";
 import ErrorPage from "./mainpage/ErrorPage";
 import SeatEdit from './component/SeatEdit/SeatEdit'
 import SeatView from './component/Reservation/SeatView/SeatView'

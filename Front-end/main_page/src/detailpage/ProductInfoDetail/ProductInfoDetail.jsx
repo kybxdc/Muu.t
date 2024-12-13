@@ -15,7 +15,7 @@ export default function ProductInfoDetail({musical}) {
             <li className={styles.product_desc_list_item}>
               <span className={styles.product_list_col}>장소</span>
               <div className={styles.product_list_element}>
-                {musical.hall_name_tem}
+                {musical.hall_name}
               </div>
             </li>
             <li className={styles.product_desc_list_item}>
