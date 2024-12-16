@@ -15,6 +15,7 @@ import TabButton from "./Tabcontent/TabButton";
 import InfoImgs from "./Tabcontent/InfoImgs";
 import Review from "./Tabcontent/Review";
 import Place from "./Tabcontent/Place";
+import Reservation from "./Reservation/Reservation";
 
 export default function Detailpage() {
   const location = useLocation();
@@ -33,24 +34,16 @@ export default function Detailpage() {
       <Header userInfo={userInfo}/>
 
       {/* Main */}
-      <main
-        className={[styles.detail_main, styles.width_limit].join(" ")}
-      >
+      <main className={[styles.detail_main, styles.width_limit].join(" ")} >
         <section className={styles.product_info}>
           <ProductInfoDetail musical={musical}/>
         </section>
         <section className={styles.product_reserve}>
-          <div className={styles.reserve_tab}>
-            예약칸 작성중...
-          </div>
+          <Reservation />
         </section>
         <section className={styles.product_tab}>
           {tabs.map((tab) => (
-            <TabButton
-              key={tab.id}
-              onSelect={() => setTabSelect(tab.id)}
-              isSelected={TabSelect === tab.id}
-            >
+            <TabButton key={tab.id} onSelect={() => setTabSelect(tab.id)} isSelected={TabSelect === tab.id} >
               {tab.label}
             </TabButton>
           ))}
