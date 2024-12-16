@@ -5,7 +5,9 @@ import java.util.Map;
 
 import org.springframework.boot.web.servlet.server.Session.Cookie;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,6 +43,7 @@ public class JoinController {
 		return "redirect:/";
 	}
 	
+	// 로그인
 	@PostMapping("/login")
 	public Customer login(@RequestBody Map<String, String> loginData, HttpServletRequest request, HttpServletResponse response) {
 		String customer_id = loginData.get("customer_id");
@@ -68,27 +71,43 @@ public class JoinController {
 		return customer;
 	}
 	
+	// 세션에서 로그인 정보 가져오기
+	@GetMapping("/myinfo")
+	public ResponseEntity<?> getMyInfo(HttpServletRequest request) {
+	    HttpSession session = request.getSession(false); // 기존 세션 가져오기 (없으면 null 반환)
+	    if (session == null) {
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("No active session found");
+	    }
+
+	    Customer loginCustomer = (Customer) session.getAttribute("loginCustomer");
+	    if (loginCustomer == null) {
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("No logged-in user found in session");
+	    }
+
+	    return ResponseEntity.ok(loginCustomer); // 사용자 정보를 반환
+	}
+
 	//로그아웃
-		@GetMapping("/logout")
-			public String logout(HttpServletRequest request, HttpServletResponse response) {
-				//세션 삭제
-				HttpSession session = request.getSession(false);
-				if(session != null) {
-					session.invalidate();
-				}
-				//쿠키 삭제 
-				ResponseCookie cookie = ResponseCookie.from("id", "")
-				            .httpOnly(true)
-				            .secure(true)  // HTTPS 환경에서만 쿠키 전송
-				            .sameSite("None")
-				            .path("/")  // 쿠키의 경로는 로그인 시 설정한 것과 동일해야 함
-				            .maxAge(0)  // 만료 시간을 0으로 설정하여 쿠키 삭제
-				            .build();
+	@GetMapping("/logout")
+	public String logout(HttpServletRequest request, HttpServletResponse response) {
+		//세션 삭제
+		HttpSession session = request.getSession(false);
+		if(session != null) {
+			session.invalidate();
+		}
+		//쿠키 삭제 
+		ResponseCookie cookie = ResponseCookie.from("id", "")
+		            .httpOnly(true)
+		            .secure(true)  // HTTPS 환경에서만 쿠키 전송
+		            .sameSite("None")
+		            .path("/")  // 쿠키의 경로는 로그인 시 설정한 것과 동일해야 함
+		            .maxAge(0)  // 만료 시간을 0으로 설정하여 쿠키 삭제
+		            .build();
 
-				    response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());  // 쿠키 삭제 헤더 추가
+		    response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());  // 쿠키 삭제 헤더 추가
 
-				return "redirect:/";
-			}
+		return "redirect:/";
+	}
 	
 	//회원 탈퇴
 	@GetMapping("/dropout")

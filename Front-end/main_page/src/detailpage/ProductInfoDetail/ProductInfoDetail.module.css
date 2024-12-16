@@ -21,14 +21,15 @@
 
 .product_title_box{
     padding: 10px;
+    padding-left: 0px;
     border-bottom: 1px solid #242428;
 }
 
-.product_desc_list_1{
+.product_desc_list{
     list-style-type: none;
-    /* display: -webkit-box; */
     display: -webkit-flex;
     flex-wrap: wrap;
+    padding: 0;
 }
 
 .product_desc_list_item{
@@ -46,4 +47,5 @@
 
 .product_list_col{
     width: 70px;
+    color: gray;
 }

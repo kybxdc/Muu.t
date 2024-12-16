@@ -3,10 +3,9 @@
   --all_width: 1120px;
 }
 
-.App {
+.mainpage_wrap {
   margin: 0;
   background-color: #ffffff;
-  font-family: "Notosans", -apple-system, BlinkMacSystemFont, Apple SD Gothic Neo, "Malgun Gothic", Arial, sans-serif;
   margin: 0 auto;
   padding: 0;
   width: 100%;

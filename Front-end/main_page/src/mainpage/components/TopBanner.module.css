@@ -1,0 +1,117 @@
+.main_div {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden; /* 화면 밖 요소 숨김 */
+}
+
+.slide_container {
+  display: flex; /* 슬라이드 요소들을 가로로 배치 */
+  width: 100%;
+  height: 100%;
+  transition: transform 1s ease-in-out;
+}
+
+.slide {
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.background_image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120%; /* 확대를 고려하여 너비와 높이를 늘림 */
+  height: 120%;
+  background-size: cover;
+  background-position: center;
+  filter: blur(10px);
+  /* transform: scale(1.2); */
+  z-index: 1;
+}
+
+.content {
+  position: relative;
+  z-index: 2; /* 배경보다 위에 표시 */
+  display: flex; /* 텍스트와 이미지를 나란히 배치 */
+  /* align-items: center; 세로 중앙 정렬 */
+  justify-content: center; /* 가로 중앙 정렬 */
+  height: 100%;
+  gap: 110px;
+}
+
+.details {
+  left: 10px;
+  width: 500px;
+  text-align: left;
+  transform: translateY(10%);
+}
+
+.details h2 {
+  font-size: 2.5rem;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.details p {
+  font-size: 1.2rem;
+  color: white;
+}
+
+.image {
+  height: 400px;
+  width: 300px;
+  border-radius: 8px;
+  transform: translateY(10%);
+  margin-right: 100px;
+}
+
+.link {
+  display: block; /* 슬라이드 전체를 클릭 가능하게 */
+  width: 100%;
+  height: 100%;
+  text-decoration: none; 
+  color: inherit; /* 텍스트 색상 상속 */
+}
+
+.slide_button_container {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 10px;
+  position: absolute;
+  bottom: 40px;
+  left: 35%;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+
+.slide_button {
+  width: 50px;
+  height: 60px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-color: none;
+  border-radius: 10px;
+  opacity: 0.7;
+  transition: opacity 0.3s, background-color 0.3s;
+}
+
+.slide_button:hover {
+  border: 2px solid white;
+  opacity: 1;
+}
+
+.active {
+  border: 2px solid white;
+  opacity: 1;
+}
+
+.slide_button_img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 이미지가 버튼 안에 맞게 잘리도록 설정 */
+  border-radius: 10px;
+}

@@ -15,14 +15,6 @@
   display: flex;
 }
 
-.reserve_tab{
-  margin-top: 10px;
-  margin-bottom: 10px;
-  height: 100px;
-  border: 1px solid gray;
-  border-radius: 10px;
-}
-
 .product_tab {
   display: flex;
   justify-content: space-between;
