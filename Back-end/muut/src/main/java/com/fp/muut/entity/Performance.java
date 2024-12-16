@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -40,6 +41,10 @@ public class Performance {
 	
 	private java.util.Date performance_date;
 	private String performance_start_time;
+	
+	// Performance_Seats 양방향 매핑
+	@OneToOne(mappedBy = "performance")
+	private Performance_Seats performance_Seats;
 	
 	// Reservation 양방향 매핑
 //	@OneToMany(mappedBy = "performance")

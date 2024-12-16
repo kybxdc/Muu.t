@@ -13,7 +13,7 @@ export default function SeatView() {
   useEffect(() => {
     const fetchSeats = async () => {
       try {
-        const response = await fetch(`/api/seat/getseatposition/${performance_id}`);
+        const response = await fetch(`/api/seat/getseatposition/grade/${performance_id}`);
         
         const result = await response.json();
         setSeats(result);

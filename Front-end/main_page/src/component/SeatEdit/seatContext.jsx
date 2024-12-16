@@ -189,8 +189,9 @@ export default function SeatProvider({ children, apiLoc }) {
 
   const save_seats = async () => {
     console.log(JSON.stringify(seats));
+    let uri= hall_id ? `/api/seat/saveposition/h/${hall_id}` : `/api/seat/saveposition/p/${performance_id}`;
     try {
-      const response = await fetch(`/api/seat/saveposition/${hall_id||performance_id}`, {
+      const response = await fetch(uri , {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
