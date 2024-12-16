@@ -15,6 +15,8 @@ import Product_grid from "./Product_grid";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
+import SidePopup from "./SidePopup/SidePopup";
+
 function Mainpage() {
   // Musical 데이터 상태
   const [musicals, setMusicals] = useState([]); 
@@ -52,29 +54,32 @@ function Mainpage() {
   
 
   return (
-    <div className={styles.App}>
-      {/* Header */}
-      <Header userInfo={userInfo}/>
+    <>
+      <div className={styles.mainpage_wrap}>
+        {/* Header */}
+        <Header userInfo={userInfo}/>
 
-      {/* Main */}
-      <main className={[styles.mainpage, styles.main].join(" ")}>
-            <TopBanner musicals = {musicals} />
-        <section className={[styles.main_section, styles.width_limit, styles.section1].join(" ")} >
-          <ul className={styles.product_grid}>
-            {musicals.map((musical, index) => (
-              <li key={index} className={[styles.product_grid, styles.item].join(" ")} >
-                <Link to="/detailpage" state={{musical, userInfo}}>
-                  <Product_grid {...musical} />
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-      </main>
+        {/* Main */}
+        <main className={[styles.mainpage, styles.main].join(" ")}>
+          <TopBanner musicals={musicals} userInfo={userInfo}/>
+          <section className={[styles.main_section, styles.width_limit, styles.section1].join(" ")} >
+            <ul className={styles.product_grid}>
+              {musicals.map((musical, index) => (
+                <li key={index} className={[styles.product_grid, styles.item].join(" ")} >
+                  <Link to="/detailpage" state={{musical, userInfo}}>
+                    <Product_grid {...musical} />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        </main>
 
-      {/* Footer */}
-      <Footer/>
-    </div>
+        {/* Footer */}
+        <Footer/>
+      </div>
+      {/* <SidePopup /> */}
+    </>
   );
 }
 
