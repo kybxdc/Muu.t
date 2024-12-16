@@ -13,6 +13,7 @@ import SeatGrade from './component/SeatEdit/SeatGrade'
 import SeatProvider from "./component/SeatEdit/seatContext";
 import Reservation from "./component/Reservation/Reservation";
 import AdminMain from "./adminpage/AdminMain";
+import "./App.css"; // 폰트만 적용중
 
 const router = createBrowserRouter([
   {

@@ -10,7 +10,7 @@ import styles from "./Mainpage.module.css";
 // import Login from "../login/Login";
 // import Join from "../login/Join";
 
-import TopBanner from "./TopBanner";
+import TopBanner from "./components/TopBanner";
 import Product_grid from "./Product_grid";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -18,8 +18,8 @@ import Footer from "./components/Footer";
 function Mainpage() {
   // Musical 데이터 상태
   const [musicals, setMusicals] = useState([]); 
+  const [userInfo, setUserInfo] = useState(null);
   
-
   useEffect(() => {
     // Musical 데이터 호출
     axios
@@ -31,30 +31,39 @@ function Mainpage() {
         console.error("There was an error fetching musicals!", error);
       });
   }, []);
-
+  
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const response = await axios.get('http://localhost:9090/member/myinfo', { withCredentials: true });
+        setUserInfo(response.data); // 로그인 성공 시 사용자 정보 설정
+      } catch (error) {
+        if (error.response && error.response.status === 401) {
+          console.warn("No user logged in: Unauthorized");
+          setUserInfo(null); // 로그아웃 상태 처리
+        } else {
+          console.error('Unexpected error occurred:', error);
+        }
+      }
+    };
+  
+    fetchUserInfo();
+  }, []);
+  
 
   return (
     <div className={styles.App}>
       {/* Header */}
-      <Header />
+      <Header userInfo={userInfo}/>
 
       {/* Main */}
       <main className={[styles.mainpage, styles.main].join(" ")}>
             <TopBanner musicals = {musicals} />
-        <section
-          className={[
-            styles.main_section,
-            styles.width_limit,
-            styles.section1,
-          ].join(" ")}
-        >
+        <section className={[styles.main_section, styles.width_limit, styles.section1].join(" ")} >
           <ul className={styles.product_grid}>
             {musicals.map((musical, index) => (
-              <li
-                key={index}
-                className={[styles.product_grid, styles.item].join(" ")}
-              >
-                <Link to="/detailpage" state={{musical}}>
+              <li key={index} className={[styles.product_grid, styles.item].join(" ")} >
+                <Link to="/detailpage" state={{musical, userInfo}}>
                   <Product_grid {...musical} />
                 </Link>
               </li>

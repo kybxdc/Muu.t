@@ -18,7 +18,7 @@ import Place from "./Tabcontent/Place";
 
 export default function Detailpage() {
   const location = useLocation();
-  const { musical } = location.state || {};
+  const { musical, userInfo } = location.state || {};
 
   const [TabSelect, setTabSelect] = useState("InfoImgs");
   const tabs = [
@@ -30,7 +30,7 @@ export default function Detailpage() {
   return (
     <div>
       {/* Header */}
-      <Header />
+      <Header userInfo={userInfo}/>
 
       {/* Main */}
       <main
