@@ -2,7 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import styles from "./TopBanner.module.css";
 
-export default function TopBanner({ musicals, userInfo }) {
+
+export default function TopBanner({ musicals}) {
   const [currentIndex, setCurrentIndex] = useState(0); // 현재 보여지는 배너의 인덱스
   const [selectedMusicals, setSelectedMusicals] = useState([]);
   const slideInterval = useRef(null); // 슬라이드 타이머 참조
@@ -70,7 +71,7 @@ export default function TopBanner({ musicals, userInfo }) {
             {/* 콘텐츠: 설명과 이미지 */}
             <Link
               to="/detailpage"
-              state={{ musical, userInfo }}
+              state={{ musical }}
               className={styles.link}
             >
               <div className={styles.content}>

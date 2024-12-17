@@ -19,7 +19,7 @@ import Reservation from "./Reservation/Reservation";
 
 export default function Detailpage() {
   const location = useLocation();
-  const { musical, userInfo } = location.state || {};
+  const { musical } = location.state || {};
 
   const [TabSelect, setTabSelect] = useState("InfoImgs");
   const tabs = [
@@ -31,7 +31,7 @@ export default function Detailpage() {
   return (
     <div>
       {/* Header */}
-      <Header userInfo={userInfo}/>
+      <Header />
 
       {/* Main */}
       <main className={[styles.detail_main, styles.width_limit].join(" ")} >

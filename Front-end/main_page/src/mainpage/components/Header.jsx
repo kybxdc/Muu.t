@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -9,7 +10,8 @@ import Join from "../../login/Join.jsx";
 
 import styles from "./Header.module.css";
 
-export default function Header({userInfo}) {
+// export default function Header({userInfo}) {
+export default function Header() {
   // 로그인 modal 상태
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const openLoginModal = () => setIsLoginModalOpen(true);
@@ -18,6 +20,9 @@ export default function Header({userInfo}) {
   const [isJoinModalOpen, setIsJoinModalOpen] = useState(false);
   const openJoinModal = () => setIsJoinModalOpen(true);
   const closeJoinModal = () => setIsJoinModalOpen(false);
+
+  // 세션에서 사용자 정보 가져오기
+  const userName = sessionStorage.getItem("customer_name");
 
   const navigate = useNavigate();
   const toMainpage = () => {
@@ -28,7 +33,7 @@ export default function Header({userInfo}) {
     window.location.href = "/";
   };
 
-  if (!userInfo) {
+  if (!userName) {
     return (
       <header
         className={[styles.mainpage, styles.header, styles.width_limit].join(" ")}
@@ -65,8 +70,8 @@ export default function Header({userInfo}) {
           <img className={styles.logo_image} src="../src/img/Muut_logo_v2.png" />
         </div>
         <div className={styles.top_left}>
-          <p>{userInfo.customer_id}</p>
-          <Link to="/mypage" state={{userInfo}}>
+          <p>{userName}</p>
+          <Link to="/mypage" >
             <button className={styles.top_left_buttons} >
               마이페이지
             </button>
