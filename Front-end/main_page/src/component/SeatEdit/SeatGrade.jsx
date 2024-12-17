@@ -8,8 +8,10 @@ export default function SeatGrade() {
     handleSelectSeats,
     selectedSeats,
     grade,
+    price,
     handleChangeGrade,
     handleSubmitGrade,
+    handleChangePrice,
   } = useContext(Seat);
   return (
     <>
@@ -40,8 +42,9 @@ export default function SeatGrade() {
             top: "10px",
           }}
         >
-          <input type="text" onChange={handleChangeGrade} value={grade} />
-          <button className="button" onClick={handleSubmitGrade}>
+          <input type="text" onChange={handleChangeGrade} value={grade} placeholder="등급"/>
+          <input type="text" onChange={handleChangePrice} value={price} placeholder="가격"/>
+          <button className="button" onClick={handleSubmitGrade} disabled={price&&grade ? false : true}>
             등급적용
           </button>
         </div>

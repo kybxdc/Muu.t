@@ -22,6 +22,11 @@ public class ReserveRepository {
 		return em.createQuery("select p.musical from Performance p where p.id=:performance_id",Musical.class)
 				.setParameter("performance_id", performance_id).getSingleResult();
 	}
+
+	public String getHallName(Long performance_id) {
+		return em.createQuery("select hi.hall_name from Performance p join p.hall_Info hi where p.id=:performance_id",String.class)
+				.setParameter("performance_id", performance_id).getSingleResult();
+	}
 	
 	
 }

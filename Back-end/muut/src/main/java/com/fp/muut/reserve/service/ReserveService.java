@@ -1,10 +1,13 @@
 package com.fp.muut.reserve.service;
 
+import java.text.SimpleDateFormat;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fp.muut.entity.Musical;
 import com.fp.muut.entity.Performance;
+import com.fp.muut.reserve.dto.ReserveDTO;
 import com.fp.muut.reserve.repository.ReserveRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -15,12 +18,23 @@ import lombok.RequiredArgsConstructor;
 public class ReserveService {
 	private final ReserveRepository reserveRepository;
 	
-	public Performance getPerformance(Long performance_id) {
-		return reserveRepository.getPerformanceById(performance_id);
-	}
-
-	public Musical getMusical(Long performance_id) {
-		return reserveRepository.getMusicalById(performance_id);
+	public ReserveDTO getReserveInfo(Long performance_id) {
+		Performance performance = reserveRepository.getPerformanceById(performance_id);
+		Musical musical = reserveRepository.getMusicalById(performance_id);
+		String hallName = reserveRepository.getHallName(performance_id);
+		
+		ReserveDTO reserve = new ReserveDTO();
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd(E)");
+		String date = sdf.format(performance.getPerformance_date());
+		
+		reserve.setDate(date);
+		reserve.setHall_name(hallName);
+		reserve.setPoster(musical.getMusical_image());
+		reserve.setTitle(musical.getMusical_title());
+		reserve.setStart_time(performance.getPerformance_start_time());
+		
+		return reserve;
 	}
 
 }

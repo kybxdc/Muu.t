@@ -26,26 +26,17 @@ const router = createBrowserRouter([
       // { path: "/join", element: <Join />, errorElement: <ErrorPage /> },
       { path: "/mypage", element: <MyMain />, errorElement: <ErrorPage /> },
       { path: "/detailpage", element: <Detailpage />, errorElement: <ErrorPage /> },
-      { path: "/test/:performance_id", element: <ReservationProvider />},   // 테스트용
     ]
   },
   {
     path: '/reservation/:performance_id',
-    element: <Reservation />,
+    element: <ReservationProvider><Reservation /></ReservationProvider>,
     children: [
       {path: 'seatview', element: <SeatView/>},
       {path: 'reserve', element: <ReservationConfirmation />},
       {path: 'payment', element: <Payment/>},
     ]
   },
-  // {
-  //   path: '/reservation',
-  //   children: [
-  //     {path: 'seatview/:performance_id', element: <SeatView/>},
-  //     {path: 'reserve/:performance_id', element: <ReservationConfirmation />},
-  //     {path: 'payment/:performance_id', element: <Payment/>},
-  //   ]
-  // },
   {
     path: '/admin',
     children: [
