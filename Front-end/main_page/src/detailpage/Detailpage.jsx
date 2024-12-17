@@ -17,6 +17,9 @@ import Review from "./Tabcontent/Review";
 import Place from "./Tabcontent/Place";
 import Reservation from "./Reservation/Reservation";
 
+import Cookies from "js-cookie";
+
+
 export default function Detailpage() {
   const location = useLocation();
   const { musical } = location.state || {};
@@ -28,6 +31,7 @@ export default function Detailpage() {
     { id: "Place", label: "장소정보" },
   ];
 
+  console.log(Cookies.get("customer_id"))
   return (
     <div>
       {/* Header */}

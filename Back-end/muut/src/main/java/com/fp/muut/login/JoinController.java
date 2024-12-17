@@ -60,8 +60,8 @@ public class JoinController {
 	    System.out.println("Logged in customer: " + session.getAttribute("loginCustomer"));
 	    
 	    // 쿠키에 로그인 정보 저장
-	    ResponseCookie idCookie = ResponseCookie.from("id", customer_id)
-	            .httpOnly(true)
+	    ResponseCookie idCookie = ResponseCookie.from("customer_id", customer_id)
+	            .httpOnly(false) // JavaScript에서의 접근 가능여부 설정(true:불가, false:가능)
 	            .secure(true)
 	            .sameSite("None") // SameSite 설정
 	            .path("/")
@@ -96,8 +96,8 @@ public class JoinController {
 			session.invalidate();
 		}
 		//쿠키 삭제 
-		ResponseCookie cookie = ResponseCookie.from("id", "")
-		            .httpOnly(true)
+		ResponseCookie cookie = ResponseCookie.from("customer_id", "")
+		            .httpOnly(false)
 		            .secure(true)  // HTTPS 환경에서만 쿠키 전송
 		            .sameSite("None")
 		            .path("/")  // 쿠키의 경로는 로그인 시 설정한 것과 동일해야 함
@@ -122,8 +122,8 @@ public class JoinController {
 			session.invalidate();
 		}
 		//쿠키 삭제 
-		ResponseCookie cookie = ResponseCookie.from("id", "")
-		            .httpOnly(true)
+		ResponseCookie cookie = ResponseCookie.from("customer_id", "")
+		            .httpOnly(false)
 		            .secure(true)  // HTTPS 환경에서만 쿠키 전송
 		            .sameSite("None")
 		            .path("/")  // 쿠키의 경로는 로그인 시 설정한 것과 동일해야 함
