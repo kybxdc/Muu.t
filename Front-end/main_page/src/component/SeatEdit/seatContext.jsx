@@ -14,8 +14,10 @@ export const Seat = createContext({
   save_seats: () => {},
   setSeats: () => {},
   grade: undefined,
-  handleChangeGrade: ()=>{},
-  handleSubmitGrade: ()=>{},
+  price: undefined,
+  handleChangeGrade: () => {},
+  handleSubmitGrade: () => {},
+  handleChangePrice: () => {},
 });
 
 export default function SeatProvider({ children, apiLoc }) {
@@ -25,6 +27,7 @@ export default function SeatProvider({ children, apiLoc }) {
   const [seatData, setSeatData] = useState({});
   const [seats, setSeats] = useState([]);
   const [grade, setGrade] = useState("");
+  const [price, setPrice] = useState("");
   const GRID_SIZE = useRef(30);
 
   useEffect(() => {
@@ -48,7 +51,7 @@ export default function SeatProvider({ children, apiLoc }) {
           );
           const response2 = await fetch(
             `/api/seat/getseat/performance/${performance_id}`
-          )
+          );
           const result = await response.json();
           const data = await response2.json();
           setSeatData(data);
@@ -62,8 +65,8 @@ export default function SeatProvider({ children, apiLoc }) {
   }, [hall_id]);
 
   useEffect(() => {
-    if(hall_id!=undefined){
-        setSeats(makeSeats);
+    if (hall_id != undefined) {
+      setSeats(makeSeats);
     }
   }, [seatData]);
 
@@ -189,8 +192,11 @@ export default function SeatProvider({ children, apiLoc }) {
 
   const save_seats = async () => {
     console.log(JSON.stringify(seats));
+    let uri = hall_id
+      ? `/api/seat/saveposition/h/${hall_id}`
+      : `/api/seat/saveposition/p/${performance_id}`;
     try {
-      const response = await fetch(`/api/seat/saveposition/${hall_id||performance_id}`, {
+      const response = await fetch(uri, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -208,17 +214,26 @@ export default function SeatProvider({ children, apiLoc }) {
     }
   };
 
-  function handleChangeGrade(e){
+  function handleChangeGrade(e) {
     setGrade(e.target.value.toUpperCase());
   }
+  function handleChangePrice(e) {
+    if (isNaN(e.target.value)) {
+      alert("숫자를 입력하세요")
+      e.target.value = "";
+    }else{
+      setPrice(e.target.value);
+    }
+    
+  }
 
-  function handleSubmitGrade(){
-    seats.map((seat)=>{
-        if(selectedSeats.includes(seat.id)){
-            seat["grade"] = grade;
-            console.log(seat);
-        }
-    })
+  function handleSubmitGrade() {
+    seats.map((seat) => {
+      if (selectedSeats.includes(seat.id)) {
+        seat["grade"] = {grade:grade, price:price};
+        console.log(seat);
+      }
+    });
   }
 
   const seatCtx = {
@@ -234,8 +249,10 @@ export default function SeatProvider({ children, apiLoc }) {
     save_seats: save_seats,
     setSeats: setSeats,
     grade: grade,
+    price: price,
     handleChangeGrade: handleChangeGrade,
     handleSubmitGrade: handleSubmitGrade,
+    handleChangePrice: handleChangePrice,
   };
 
   return <Seat.Provider value={seatCtx}>{children}</Seat.Provider>;

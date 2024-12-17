@@ -13,6 +13,7 @@ import SeatGrade from './component/SeatEdit/SeatGrade'
 import SeatProvider from "./component/SeatEdit/seatContext";
 import Reservation from "./component/Reservation/Reservation";
 import AdminMain from "./adminpage/AdminMain";
+import ReservationProvider from "./component/Reservation/reservationContext";
 import "./App.css"; // 폰트만 적용중
 
 const router = createBrowserRouter([
@@ -29,29 +30,21 @@ const router = createBrowserRouter([
     ]
   },
   {
-    path: '/reservation',
-    element: <Reservation />,
+    path: '/reservation/:performance_id',
+    element: <ReservationProvider><Reservation /></ReservationProvider>,
     children: [
-      {path: 'seatview/:performance_id', element: <SeatView/>},
-      {path: 'reserve/:performance_id', element: <ReservationConfirmation />},
-      {path: 'payment/:performance_id', element: <Payment/>},
+      {path: 'seatview', element: <SeatView/>},
+      {path: 'reserve', element: <ReservationConfirmation />},
+      {path: 'payment', element: <Payment/>},
     ]
   },
-  // {
-  //   path: '/reservation',
-  //   children: [
-  //     {path: 'seatview/:performance_id', element: <SeatView/>},
-  //     {path: 'reserve/:performance_id', element: <ReservationConfirmation />},
-  //     {path: 'payment/:performance_id', element: <Payment/>},
-  //   ]
-  // },
   {
     path: '/admin',
     children: [
       {path: 'seatedit/:hall_id', element: <SeatProvider><SeatEdit /></SeatProvider>},
       {path: 'main', element: <AdminMain />},
       {path: 'seatinfo/:hall_id', element: <SeatInfo />},
-      {path: 'seatgrade/:performance_id', element: <SeatProvider><SeatGrade /></SeatProvider>}, // 공연이 아직 저장되지 않았으므로 테스트를 위해 hall_id로 함
+      {path: 'seatgrade/:performance_id', element: <SeatProvider><SeatGrade /></SeatProvider>},
     ]
   },
 ]);
