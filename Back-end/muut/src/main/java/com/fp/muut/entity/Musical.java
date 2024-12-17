@@ -51,8 +51,8 @@ public class Musical {
 	private String musical_actor;
 	
 	// 임시
-	private String hall_name_tem;
-	private String hallId_mt10id;
+//	private String hall_name_tem;
+//	private String hallId_mt10id;
 	
 	
 	

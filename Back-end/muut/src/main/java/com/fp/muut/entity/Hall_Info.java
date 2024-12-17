@@ -31,7 +31,7 @@ public class Hall_Info {
 	private String hall_seat_info;
 	
 	// 임시
-	private String hallId_mt10id;
+	private String hall_API_id;
 	private String hall_la;
 	private String hall_lo;
 	

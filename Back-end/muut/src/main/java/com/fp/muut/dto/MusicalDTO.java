@@ -1,5 +1,6 @@
 package com.fp.muut.dto;
 
+import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -44,19 +45,18 @@ public class MusicalDTO {
 	
 	@JsonProperty("prfpdfrom")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy.MM.dd")
-	private java.util.Date musicalStartDate;
+	private Date musicalStartDate;
 	
 	@JsonProperty("prfpdto")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy.MM.dd")
-	private java.util.Date musicalEndDate;
+	private Date musicalEndDate;
 	
 	@JsonProperty("prfcast")
 	private String actor;
-	
-	@JsonProperty("fcltynm")
-	private String hallName;
-	
+		
 	@JsonProperty("mt10id")
-	private String hallId_mt10id;
+	private String hall_API_id;
 	
+	private String hall_name;
+	private String hall_addr;
 }

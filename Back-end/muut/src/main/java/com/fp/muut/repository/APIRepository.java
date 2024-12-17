@@ -30,9 +30,9 @@ public class APIRepository {
     }
     /*=================김영범 테스트용 공연 더미데이터===============*/
     
-    public Hall_Info findHallByID(String hallId_mt10id) {
-        return em.createQuery("SELECT h FROM Hall_Info h WHERE h.hallId_mt10id = :hallId_mt10id", Hall_Info.class)
-                 .setParameter("hallId_mt10id", hallId_mt10id)
+    public Hall_Info findHallByID(String hall_API_id) {
+        return em.createQuery("SELECT h FROM Hall_Info h WHERE h.hall_API_id = :hall_API_id", Hall_Info.class)
+                 .setParameter("hall_API_id", hall_API_id)
                  .getResultStream()
                  .findFirst()
                  .orElse(null);

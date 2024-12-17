@@ -1,15 +1,28 @@
 .product_image {
-    width: 100%;
-    height: 350px;
-    border-radius: 8px;
-    object-fit: cover;
-    transition: transform 0.3s;
-  }
-  
-  .product_image:hover {
-    transform: scale(1.05);
-  }
-  
-  .product_info{
-    color: black;
-  }
+  width: 100%;
+  height: 350px;
+  border-radius: 8px;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.product_image:hover {
+  transform: scale(1.05);
+}
+
+.product_info {
+  color: black;
+}
+
+.product_miniInfo{
+  margin-top: 10px;
+}
+
+.product_miniInfo_title{
+  color: black;
+  font-size: 20px;
+}
+
+.product_miniInfo_date{
+  color: gray;
+}

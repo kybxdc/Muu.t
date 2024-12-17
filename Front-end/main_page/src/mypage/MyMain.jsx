@@ -1,4 +1,6 @@
 import { useState, useEffect} from 'react';
+import { useLocation } from "react-router-dom";
+
 import classes from './MyMain.module.css';
 import MyCalander from './MyCalender/MyCalender';
 import MyInfo from './MyInfo/MyInfo';
@@ -12,6 +14,9 @@ import Footer from "../mainpage/components/Footer";
 import handleLogout from '../login/Logout';
 
 export default function MyMain() {
+    const location = useLocation();
+    const { userInfo } = location.state || {};
+
     const [selectedMenu, setSelectedMenu] = useState();
     function handleSelect(menu) {
         setSelectedMenu(menu); // 선택한 메뉴 상태 업데이트
@@ -67,7 +72,7 @@ export default function MyMain() {
     }
     return (
         <>
-        <Header />
+        <Header userInfo={userInfo}/>
         <div>
       <nav className={classes.top_navbar}>
       <div className={classes.logo} onClick={() => setSelectedMenu(null)}>마이페이지</div>

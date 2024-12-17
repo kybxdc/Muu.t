@@ -20,10 +20,13 @@ import com.fp.muut.entity.Performance;
 
 import lombok.RequiredArgsConstructor;
 
+import com.fp.muut.service.CutUnnecessaryParts;
+
 @Service
 @RequiredArgsConstructor
 public class APIService {
     private final APIRepository apiRepository;
+    private final CutUnnecessaryParts cutUnnecessaryParts;
     private static final String SERVICE_KEY = "3ca6587ae8704899b3e865e74484f3bb";
 
     @Transactional
@@ -68,7 +71,7 @@ public class APIService {
                     for (MusicalDTO detailMdto : detailDbs.getMuDTOlist()) {
                         // 엔티티 생성 및 데이터 매핑
                         Musical musical = new Musical();
-                        musical.setMusical_title(detailMdto.getMusicalTitle());
+                        musical.setMusical_title(cutUnnecessaryParts.cutName(detailMdto.getMusicalTitle(), "["));
                         musical.setMusical_genre(detailMdto.getMusicalGenre());
                         musical.setMusical_run_time(detailMdto.getMusicalRunTime());
                         musical.setMusical_area(detailMdto.getMusicalArea());
@@ -79,21 +82,18 @@ public class APIService {
                         musical.setMusical_start_date(detailMdto.getMusicalStartDate());
                         musical.setMusical_end_date(detailMdto.getMusicalEndDate());
                         musical.setMusical_seat_grade_info(detailMdto.getMusicalSeatGradeInfo());
-//                        musical.setMusical_description(detailMdto.getMusicalDescription());
-                        musical.setHall_name_tem(detailMdto.getHallName());
-                        musical.setHallId_mt10id(detailMdto.getHallId_mt10id());
-                        // styurls를 JSON으로 변환
+                        // 뮤지컬 상세설명 이미지 styurls(JSON)를 String으로 변환
                         if (detailMdto.getMusicalDescription() != null) {
                             ObjectMapper objectMapper = new ObjectMapper();
                             String styurlsJson = objectMapper.writeValueAsString(detailMdto.getMusicalDescription());
                             musical.setMusical_description(styurlsJson);
                         }
                         // Hall_Info 외래키 설정
-                        Hall_Info hallInfo = apiRepository.findHallByID(detailMdto.getHallId_mt10id());
+                        Hall_Info hallInfo = apiRepository.findHallByID(detailMdto.getHall_API_id());
                         if (hallInfo == null) {
                             // 4. 해당 홀 ID로 API 요청하여 홀 정보 저장
                             String hallApiUrl = "http://kopis.or.kr/openApi/restful/prfplc/" 
-                            					+ detailMdto.getHallId_mt10id()
+                            					+ detailMdto.getHall_API_id()
                             					+ "?service="
                             					+ SERVICE_KEY;
                             String hallResponse = restTemplate.getForObject(hallApiUrl, String.class);
@@ -102,8 +102,8 @@ public class APIService {
                             if (hallDbs != null && hallDbs.getHIDTOlist() != null) {
                                 for (HallInfoDTO hallDto : hallDbs.getHIDTOlist()) {
                                     hallInfo = new Hall_Info();
-                                    hallInfo.setHallId_mt10id(hallDto.getHallId_mt10id());
-                                    hallInfo.setHall_name(hallDto.getHall_name());
+                                    hallInfo.setHall_API_id(hallDto.getHall_API_id());
+                                    hallInfo.setHall_name(cutUnnecessaryParts.cutName(hallDto.getHall_name(), "("));
                                     hallInfo.setHall_addr(hallDto.getHall_addr());
                                     hallInfo.setHall_la(hallDto.getHall_la());
                                     hallInfo.setHall_lo(hallDto.getHall_lo());
@@ -119,18 +119,10 @@ public class APIService {
                         // 데이터베이스 저장
                         apiRepository.save(musical);
                         
-//                        /*=================김영범 테스트용 공연 더미데이터===============*/
-//                        	Performance p = new Performance();
-//                        	p.setHall_Info(hallInfo);
-//                        	p.setMusical(musical);
-//                        	p.setPerformance_date(new java.util.Date());
-//                        	p.setPerformance_start_time("11시");
-//                        	apiRepository.save_performan(p);
-                        /*=================김영범 테스트용 공연 더미데이터===============*/
-                        
                     }
                 }
             }
         }
     }
+    
 }
