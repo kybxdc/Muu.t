@@ -1,5 +1,9 @@
+import styles from "./Review.module.css";
+
 export default function Review(){
     return(
-        <h1>Review</h1>
+        <div className={styles.Review}>
+            <h1>Review</h1>
+        </div>
     )
 }

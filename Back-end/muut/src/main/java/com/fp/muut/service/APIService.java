@@ -20,10 +20,13 @@ import com.fp.muut.entity.Performance;
 
 import lombok.RequiredArgsConstructor;
 
+import com.fp.muut.service.CutUnnecessaryParts;
+
 @Service
 @RequiredArgsConstructor
 public class APIService {
     private final APIRepository apiRepository;
+    private final CutUnnecessaryParts cutUnnecessaryParts;
     private static final String SERVICE_KEY = "3ca6587ae8704899b3e865e74484f3bb";
 
     @Transactional
@@ -68,7 +71,7 @@ public class APIService {
                     for (MusicalDTO detailMdto : detailDbs.getMuDTOlist()) {
                         // 엔티티 생성 및 데이터 매핑
                         Musical musical = new Musical();
-                        musical.setMusical_title(cutName(detailMdto.getMusicalTitle(), "["));
+                        musical.setMusical_title(cutUnnecessaryParts.cutName(detailMdto.getMusicalTitle(), "["));
                         musical.setMusical_genre(detailMdto.getMusicalGenre());
                         musical.setMusical_run_time(detailMdto.getMusicalRunTime());
                         musical.setMusical_area(detailMdto.getMusicalArea());
@@ -79,7 +82,7 @@ public class APIService {
                         musical.setMusical_start_date(detailMdto.getMusicalStartDate());
                         musical.setMusical_end_date(detailMdto.getMusicalEndDate());
                         musical.setMusical_seat_grade_info(detailMdto.getMusicalSeatGradeInfo());
-                        // 뮤지컬 상세설명 이미지 styurls를 JSON으로 변환
+                        // 뮤지컬 상세설명 이미지 styurls(JSON)를 String으로 변환
                         if (detailMdto.getMusicalDescription() != null) {
                             ObjectMapper objectMapper = new ObjectMapper();
                             String styurlsJson = objectMapper.writeValueAsString(detailMdto.getMusicalDescription());
@@ -100,7 +103,7 @@ public class APIService {
                                 for (HallInfoDTO hallDto : hallDbs.getHIDTOlist()) {
                                     hallInfo = new Hall_Info();
                                     hallInfo.setHall_API_id(hallDto.getHall_API_id());
-                                    hallInfo.setHall_name(cutName(hallDto.getHall_name(), "("));
+                                    hallInfo.setHall_name(cutUnnecessaryParts.cutName(hallDto.getHall_name(), "("));
                                     hallInfo.setHall_addr(hallDto.getHall_addr());
                                     hallInfo.setHall_la(hallDto.getHall_la());
                                     hallInfo.setHall_lo(hallDto.getHall_lo());
@@ -122,13 +125,4 @@ public class APIService {
         }
     }
     
-    // 불필요한 부분을 제거한 데이터 얻기
-    public String cutName(String input, String target) {
-        int index = input.indexOf(target); 
-        if (index == -1) {
-            return input; 
-        }
-        return input.substring(0, index); 
-    }
-
 }
