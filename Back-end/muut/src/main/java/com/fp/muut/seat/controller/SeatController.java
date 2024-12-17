@@ -40,17 +40,38 @@ public class SeatController {
 		return getSeat(hall_id);
 	} 
 	
-	@PostMapping("/saveposition/{hall_id}")
+	@PostMapping("/saveposition/h/{hall_id}")
 	public ResponseEntity<String> savePosition(@RequestBody String seats, @PathVariable Long hall_id) {
 
-		seatService.saveSeats(hall_id, seats);
+		seatService.saveSeats(hall_id, seats,"h");
+		
+		return ResponseEntity.ok("좌석위치 잘 넣었음");
+	}
+	
+	@PostMapping("/saveposition/p/{performance_id}")
+	public ResponseEntity<String> savePositions(@RequestBody String seats, @PathVariable Long performance_id) {
+
+		seatService.saveSeats(performance_id, seats,"p");
 		
 		return ResponseEntity.ok("좌석위치 잘 넣었음");
 	}
 	
 	@GetMapping("/getseatposition/{performance_id}")
 	public ResponseEntity<String> getPosition(@PathVariable Long performance_id){
-		String seatData = seatService.findSeatByPerformanceId(performance_id);
+		System.out.println(performance_id);
+		String seatData = seatService.findSeatByPerformanceId(performance_id, "non_grade");
+		
+		if(seatData!=null) {
+			return ResponseEntity.ok(seatData);
+		}
+		
+		return ResponseEntity.status(500).body("좌석 불러오기 실패");
+	}
+	
+	@GetMapping("/getseatposition/grade/{performance_id}")
+	public ResponseEntity<String> getGradePosition(@PathVariable Long performance_id){
+		System.out.println(performance_id);
+		String seatData = seatService.findSeatByPerformanceId(performance_id, "grade");
 		
 		if(seatData!=null) {
 			return ResponseEntity.ok(seatData);

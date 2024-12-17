@@ -57,8 +57,15 @@ public class SeatService {
 	}
 
 	@Transactional
-	public void saveSeats(Long hall_id, String seats) {
-		String seatPath = "./seatData/seatData"+hall_id+".json";
+	public void saveSeats(Long id, String seats, String id_type) {
+		String seatPath = "./seatData/";
+		if(id_type.equals("h")) {
+			seatPath+= "seatData"+id+".json";
+		}else if(id_type.equals("p")) {
+			seatPath+= "PerFormance"+id+".json";
+		}else {
+			seatPath=null;
+		}
 		
 		try(OutputStream out = new FileOutputStream(seatPath)){
 			out.write(seats.getBytes());
@@ -68,11 +75,11 @@ public class SeatService {
 			e.printStackTrace();
 		}
 		
-		seatRepository.saveSeats(hall_id, seatPath);
+		seatRepository.saveSeats(id, seatPath, id_type);
 	}
 
-	public String findSeatByPerformanceId(Long performance_id) {
-		String positionPath = seatRepository.findSeatByPerformanceId(performance_id);
+	public String findSeatByPerformanceId(Long performance_id, String seat_type) {
+		String positionPath = seatRepository.findSeatByPerformanceId(performance_id, seat_type);
 		
 		String seatData = null;
 		
