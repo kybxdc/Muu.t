@@ -7,3 +7,22 @@
 .member{
     border: 1px solid #e7e7e7;
 }
+
+.customerMain{
+  height: 100%; /* 높이를 100%로 설정 */
+  min-width: 320px;
+  display: flex; /* 플렉스 레이아웃 유지 */
+  align-items: center; /* 가로 중앙 정렬 */
+  position: relative; /* 상단 고정을 위한 상대 위치 */
+  margin: 5%;
+}
+
+.input_btn {
+border: 1px solid #fa2828;
+background-color: #f9f9f9;
+color: #fa2828;
+cursor: pointer;
+padding: 10px 20px;
+border-radius: 8px;
+font-weight: bold;
+}

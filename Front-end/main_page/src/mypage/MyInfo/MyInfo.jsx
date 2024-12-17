@@ -62,7 +62,7 @@ export default function MyInfo({grade, memberId, name, password, phone, addr}) {
          <main style={{marginTop:'5%', marginBottom:'20%'}}>
         <h2 style={{ marginLeft: '20px'}}>회원정보수정</h2>
         <p style={{ marginLeft: '20px'}}>회원님은 
-          <span style={{color:"#fa2828"}}><strong> '{member?.customer_grade || 'null'}' </strong></span>등급입니다</p>
+          <span style={{color:"#fa2828"}}><strong> '{member?.grade?.customer_grade || 'null'}' </strong></span>등급입니다</p>
 
         <tr className={classes.info}>
             <td className={classes.info1}>아이디</td>
