@@ -5,8 +5,10 @@ import java.text.SimpleDateFormat;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fp.muut.entity.Customer;
 import com.fp.muut.entity.Musical;
 import com.fp.muut.entity.Performance;
+import com.fp.muut.reserve.dto.ReserveCustomerDTO;
 import com.fp.muut.reserve.dto.ReserveDTO;
 import com.fp.muut.reserve.repository.ReserveRepository;
 
@@ -35,6 +37,17 @@ public class ReserveService {
 		reserve.setStart_time(performance.getPerformance_start_time());
 		
 		return reserve;
+	}
+
+	public ReserveCustomerDTO getCustomerInfo(String customer_email) {
+		Customer customer = reserveRepository.getCustomerByEmail(customer_email);
+		ReserveCustomerDTO customerDto = new ReserveCustomerDTO();
+		
+		customerDto.setCustomer_email(customer_email);
+		customerDto.setCustomer_name(customer.getCustomer_name());
+		customerDto.setCustomer_phone(customer.getCustomer_phone());
+		
+		return customerDto;
 	}
 
 }

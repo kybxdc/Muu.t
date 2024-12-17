@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fp.muut.reserve.dto.ReserveCustomerDTO;
 import com.fp.muut.reserve.dto.ReserveDTO;
 import com.fp.muut.reserve.service.ReserveService;
 
@@ -22,5 +23,11 @@ public class ReserveController {
 		ReserveDTO reserve = reserveService.getReserveInfo(performance_id);
 		
 		return ResponseEntity.ok(reserve);
+	}
+	
+	@GetMapping("{customer_email}")
+	public ReserveCustomerDTO getUserDto(@PathVariable String customer_email) {
+		ReserveCustomerDTO customer = reserveService.getCustomerInfo(customer_email);
+		return customer;
 	}
 }

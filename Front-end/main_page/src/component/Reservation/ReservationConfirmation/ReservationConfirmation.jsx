@@ -6,13 +6,13 @@ import { useContext, useEffect } from "react";
 import { ReservationCtx } from "../reservationContext";
 
 export default function ReservationConfirmation() {
-    const {isChecked, setIsChecked, isChecked2, setIsChecked2} = useContext(ReservationCtx);
-  
+    const {isChecked, setIsChecked, isChecked2, setIsChecked2, customer} = useContext(ReservationCtx);
+
     useEffect(()=>{
       setIsChecked(false);
       setIsChecked2(false);
     },[])
-
+    
   return (
       <div className="confirmation-main">
         <Table
@@ -22,7 +22,7 @@ export default function ReservationConfirmation() {
               이름 <span className="asterisk">*</span>
             </>
           }
-          td1={"홍길동"}
+          td1={customer.customer_name?customer.customer_name:"익명"}
           th2={
             <>
               휴대폰 번호 <span className="asterisk">*</span>
@@ -30,13 +30,13 @@ export default function ReservationConfirmation() {
           }
           td2={
             <div className="input-block">
-              <Input type="text" defaultValue="01012341234" />
+              <Input type="text" defaultValue={customer.customer_phone} disabled={true} />
             </div>
           }
           th3="이메일"
           td3={
             <div className="input-block">
-              <Input type="email" defaultValue="myEmail@gmail.com" />
+              <Input type="email" defaultValue={customer.customer_email} disabled={true} />
             </div>
           }
         />

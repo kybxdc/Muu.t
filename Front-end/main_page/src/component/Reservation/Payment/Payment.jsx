@@ -18,7 +18,7 @@ export default function Payment() {
       totalPayAmount: `${totalPrice}`,
       taxScopeAmount: `${totalPrice}`,
       taxExScopeAmount: "0",
-      returnUrl: "https://developers.pay.naver.com/user/sand-box/payment",
+      returnUrl: "",
     });
   }
 

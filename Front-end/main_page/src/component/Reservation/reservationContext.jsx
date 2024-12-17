@@ -1,5 +1,6 @@
 import { createContext, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
+import Cookies from "js-cookie";
 
 export const ReservationCtx = createContext({
   reserveInfo: {},
@@ -10,6 +11,7 @@ export const ReservationCtx = createContext({
   isChecked2: true,
   totalPrice: 0,
   charge: 0,
+  customer: {},
   handleSeatClick: () => {},
   setIsChecked: () => {},
   setIsChecked2: () => {},
@@ -20,11 +22,12 @@ export default function ReservationProvider({ children }) {
   const [reserveInfo, setReserveInfo] = useState({});
   const [seats, setSeats] = useState([]);
   const [selectedSeats, setSelectedSeats] = useState([]);
-  const [ticketPrice, setTicketPrice] = useState(0);
+  const [ticketPrice, setTicketPrice] = useState(JSON.parse(sessionStorage.getItem("ticketPrice"))||0);
   const [isChecked, setIsChecked] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
-  const totalPrice = useRef();
-  const charge = useRef(); // 수수료
+  const [customer, setCustomer] = useState({});
+  const totalPrice = useRef(ticketPrice+Number(ticketPrice*0.03));
+  const charge = useRef(ticketPrice*0.03); // 수수료
 
   useEffect(() => {
     const fetchInfo = async () => {
@@ -48,6 +51,9 @@ export default function ReservationProvider({ children }) {
 
         const result = await response.json();
         setSeats(result);
+        if(JSON.parse(sessionStorage.getItem("selectedSeats"))){
+          setSelectedSeats(JSON.parse(sessionStorage.getItem("selectedSeats")));
+        }
       } catch (error) {
         console.log(error);
       }
@@ -56,6 +62,15 @@ export default function ReservationProvider({ children }) {
     fetchSeats();
   }, []);
 
+  useEffect(()=>{
+    const fetchUser = async () => {
+      const response = await fetch(`/api/reserve/${Cookies.get("customer_id")}`);
+      const result = await response.json();
+      setCustomer(result);
+    }
+    fetchUser();
+  },[])
+
   function handleSeatClick(e, seatId) {
     let findSeat = seats.find((seat) => seat.id == seatId);
     if (!selectedSeats.includes(seatId)) {
@@ -63,30 +78,38 @@ export default function ReservationProvider({ children }) {
         alert("최대 4개까지 선택 가능합니다.");
         return;
       }
-      setSelectedSeats((prevSelect) => [...prevSelect, seatId].sort());
+      setSelectedSeats((prevSelect) => {
+        const seats = [...prevSelect, seatId].sort();
+        sessionStorage.setItem("selectedSeats",JSON.stringify(seats));
+        return seats;
+      });
       setTicketPrice(
         (prevPrice) =>{ 
             const price = Number(prevPrice) + Number(findSeat.grade.price);
-            charge.current = (price*0.03).toLocaleString();
-            totalPrice.current = (price+Number(price*0.03)).toLocaleString();
+            charge.current = (price*0.03);
+            totalPrice.current = (price+Number(price*0.03));
+            sessionStorage.setItem("ticketPrice",price)
             return price;
         }
       );
     } else {
-      setSelectedSeats((prevSelect) => prevSelect.filter((id) => id != seatId));
+      setSelectedSeats((prevSelect) => {
+        const seats = prevSelect.filter((id) => id != seatId)
+        sessionStorage.setItem("selectedSeats",JSON.stringify(seats));
+        return seats;
+      });
       setTicketPrice(
         (prevPrice) => {
             const price = Number(prevPrice) - Number(findSeat.grade.price)
-            charge.current = (price*0.03).toLocaleString();
-            totalPrice.current = (price+Number(price*0.03)).toLocaleString();
+            charge.current = (price*0.03);
+            totalPrice.current = (price+Number(price*0.03));
+            sessionStorage.setItem("ticketPrice",price)
             return price;
         }
       );
-      charge.current = (ticketPrice*0.03).toLocaleString();
-      totalPrice.current = (ticketPrice+charge.current).toLocaleString();
     }
   }
-
+  
   const reserveCtx = {
     reserveInfo: reserveInfo,
     seats: seats,
@@ -96,6 +119,7 @@ export default function ReservationProvider({ children }) {
     isChecked2: isChecked2,
     totalPrice: totalPrice.current,
     charge: charge.current,
+    customer: customer,
     setIsChecked: setIsChecked,
     setIsChecked2: setIsChecked2,
     handleSeatClick: handleSeatClick,
