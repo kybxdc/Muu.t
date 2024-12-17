@@ -42,10 +42,14 @@ export default function Login() {
                     sessionStorage.setItem("customer_name", res.data.customer_name); 
 
                     if(sessionStorage.getItem("customer_name") == 'null'){
-                     alert(`현재 회원정보가 등록되어있지 않습니다. 회원정보를 입력해주세요`);
+                      if (confirm(`현재 회원정보가 등록되어있지 않습니다. 회원정보를 입력해주세요`)){
                     // window.location.href = '/mypage';
                     nav("/mypage");
                     return;
+                  }else{
+                      alert("환영합니다. 익명");
+                      document.location.href="/";
+                    }
                     }
                     else {alert("환영합니다. "+sessionStorage.getItem("customer_name"));
                       document.location.href="/";

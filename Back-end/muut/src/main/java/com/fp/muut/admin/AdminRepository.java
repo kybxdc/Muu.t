@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fp.muut.dto.MusicalDTO;
+import com.fp.muut.dto.MusicalListDTO;
 import com.fp.muut.entity.Customer;
 import com.fp.muut.entity.Hall_Info;
 import com.fp.muut.entity.Musical;
@@ -30,8 +32,14 @@ public class AdminRepository {
 	}
 
 	//전체조회
-	public List<Musical> findAll(){
-		return em.createQuery("select m from Musical m", Musical.class).getResultList();
+	public List<MusicalListDTO> findAll(){
+		List<Musical> ml = em.createQuery("select m from Musical m", Musical.class).getResultList();
+		List<MusicalListDTO> musicalList = new ArrayList<>();
+		for (Musical m : ml) {
+		    MusicalListDTO dto = new MusicalListDTO(m);
+		    musicalList.add(dto);
+		}
+		return musicalList;
 	}
 	
 	//이름으로 조회(뮤지컬 검색용)

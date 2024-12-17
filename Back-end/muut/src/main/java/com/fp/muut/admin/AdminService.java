@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fp.muut.dto.MusicalDTO;
+import com.fp.muut.dto.MusicalListDTO;
 import com.fp.muut.entity.Customer;
 import com.fp.muut.entity.Grade;
 import com.fp.muut.entity.Hall_Info;
@@ -51,7 +53,7 @@ public class AdminService {
 		
 
 		//뮤지컬 전체목록 조회
-		public List<Musical> findMusicals() {
+		public List<MusicalListDTO> findMusicals() {
 			return adminRepository.findAll();
 		}
 	

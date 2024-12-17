@@ -9,7 +9,19 @@ export default function AdminMusical(){
     //상세정보 입력용 modal
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
-   
+    const [musicalList, setMusicalList] = useState([]);
+    
+    useEffect(() => {
+        axios.defaults.withCredentials = true;
+        axios.get('http://localhost:9090/admin/showList').then((response) => {
+            setMusicalList(response.data);
+            console.log(response.data)
+            })
+            .catch((error) => {
+              console.error("There was an error!", error);
+            });
+        }, []);
+
     const openModal = (id) => {
         setSelectedId(id); // 선택된 ID 저장
         setIsModalOpen(true);
@@ -19,19 +31,6 @@ export default function AdminMusical(){
         setSelectedId(null); // 선택된 ID 초기화
         setIsModalOpen(false);
     };
-
-
-    const [musicalList, setMusicalList] = useState([]);
-    useEffect(() => {
-        axios.defaults.withCredentials = true;
-        axios.get('http://localhost:9090/admin/showList').then((response) => {
-            setMusicalList(response.data);
-            })
-            .catch((error) => {
-              console.error("There was an error!", error);
-            });
-        }, []);
-
 
     return(
         <div>

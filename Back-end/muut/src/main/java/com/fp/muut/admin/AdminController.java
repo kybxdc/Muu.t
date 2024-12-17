@@ -27,6 +27,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fp.muut.dto.MusicalDTO;
+import com.fp.muut.dto.MusicalListDTO;
 import com.fp.muut.entity.Customer;
 import com.fp.muut.entity.Musical;
 import com.fp.muut.entity.Performance;
@@ -48,7 +50,7 @@ public class AdminController {
 		
 	//뮤지컬 목록 조회
 	@GetMapping("/showList")
-	public List<Musical> musicals(){
+	public List<MusicalListDTO> musicals(){
 		return adminService.findMusicals();
 	}
 	
