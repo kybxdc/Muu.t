@@ -60,7 +60,7 @@ export default function AdminCustomer(){
                         <td className={classes.info}>{member?.customer_name||'null'}</td>
                         <td className={classes.info}>{member?.grade?.customer_grade||'null'}</td>
                         <td className={classes.info}>{member.customer_status}</td>
-                        <td><button className={classes.input_btn} onClick={()=>openModal(customer_num)}>보기</button></td>
+                        <td><button className={classes.input_btn} onClick={()=>openModal(member.customer_num)}>보기</button></td>
                     </tr>
                     ))}
                 </tbody>
@@ -71,7 +71,8 @@ export default function AdminCustomer(){
                 {selectedMember ? (
                     <CustomerModal id={selectedId} member={selectedMember} />
                 ) : (
-                    <div>로딩 중...</div> // selectedMember가 null일 때 로딩 표시
+                    <div>로딩 중
+                    </div> // selectedMember가 null일 때 로딩 표시
                 )}
             </Modal>
         </div>

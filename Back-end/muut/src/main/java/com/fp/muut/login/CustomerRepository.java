@@ -45,6 +45,13 @@ public class CustomerRepository {
 		public Customer findById(String customer_id){
 			return em.createQuery("select c from Customer c where c.customer_id = :customer_id", Customer.class).setParameter("customer_id", customer_id).getSingleResult();
 		}
+	
+	//회원 넘버로 조회
+		public Customer findByNum(String customer_num){
+			Customer a = em.createQuery("select c from Customer c where c.customer_num = :customer_num", Customer.class).setParameter("customer_num", customer_num).getSingleResult();
+			System.out.println(a);
+			return a;
+		}
 
 	//로그인
 	public Customer findByLoginId(String loginId) {

@@ -1,5 +1,9 @@
 package com.fp.muut.admin;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +23,8 @@ import com.fp.muut.entity.Grade;
 import com.fp.muut.entity.Hall_Info;
 import com.fp.muut.entity.Musical;
 import com.fp.muut.entity.Performance;
+import com.fp.muut.login.CustomerRepository;
+import com.fp.muut.mypage.MypageRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +34,10 @@ import lombok.RequiredArgsConstructor;
 public class AdminService {
 	@Autowired
 	private final AdminRepository adminRepository;
+	@Autowired
+	private final CustomerRepository customerRepository;
+	@Autowired
+	private final MypageRepository mypageRepository;
 
 	//상세정보 입력
 	@Transactional
@@ -75,10 +85,44 @@ public class AdminService {
 		}
 		
 		//회원 정보 수정
+		@Transactional
 		public Customer updateCustomer(Map<String, String> updatedData, HttpServletRequest request) {
-			// TODO Auto-generated method stub
-			return null;
-		}
+				Customer customer = customerRepository.findByNum(updatedData.get("customer_num"));
+				customer.setCustomer_id(updatedData.get("customer_id"));
+				customer.setCustomer_name(updatedData.get("customer_name"));
+				customer.setCustomer_pw(updatedData.get("customer_pw"));
+				customer.setCustomer_phone(updatedData.get("customer_phone"));
+				customer.setCustomer_address(updatedData.get("customer_address"));
+				customer.setCustomer_status(updatedData.get("customer_status"));
+				//customer.setDiscound(null);
+				
+				mypageRepository.save(customer);
+				
+				return customer;
+			}
+
+		//뮤지컬 상세정보수정
+//		@Transactional
+//		public Performance updateShow(Map<String, String> updatedData, HttpServletRequest request) {
+//			Performance performance = adminRepository.findById(updatedData.get("id"));
+//     		String performanceDateStr = updatedData.get("performance_date");
+//     		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//             try {
+//                 // String → java.util.Date 변환
+//                 java.util.Date performanceDate = dateFormat.parse(performanceDateStr);
+//                 System.out.println("Converted Date: " + performanceDate);
+//             } catch (ParseException e) {
+//                 System.out.println("Date parsing error: " + e.getMessage());
+//             }
+//			performance.setPerformance_date(performanceDate);
+//			performance.setPerformance_start_time(updatedData.get("performance_time"));
+//			
+//			
+//			adminRepository.update(performance);
+//			return performance;
+//		}
+//		
+		
 		
 	}
 	

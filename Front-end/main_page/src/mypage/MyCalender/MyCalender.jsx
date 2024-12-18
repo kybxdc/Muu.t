@@ -56,6 +56,7 @@ export default function Calendar() {
     axios.defaults.withCredentials = true;
     axios.get('http://localhost:9090/mypage/reserve').then((response) => {
       setReserveList(response.data);
+      
         })
         .catch((error) => {
           console.error("There was an error!", error);
@@ -64,15 +65,15 @@ export default function Calendar() {
 
  // 예약된 날짜와 이미지 매핑
  const reserveDates = reserveList.reduce((acc, reserv) => {
-  const reserveDate = new Date(reserv.performance_date);
-  if (
-    reserveDate.getFullYear() === currentYear &&
-    reserveDate.getMonth() === currentMonth
-  ) {
-    acc[reserveDate.getDate()] = reserv.musical_image;
-  }
-  return acc;
-}, {});
+    const reserveDate = new Date(reserv.performance_date);
+    if (
+      reserveDate.getFullYear() === currentYear &&
+      reserveDate.getMonth() === currentMonth
+    ) {
+      acc[reserveDate.getDate()] = reserv.musical_image;
+    }
+    return acc;
+  }, {});
 
 
   return (

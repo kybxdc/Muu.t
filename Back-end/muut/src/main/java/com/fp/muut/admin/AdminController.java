@@ -119,18 +119,25 @@ public class AdminController {
 	
 	//회원정보변경
 	@PostMapping("/update")
-	public Customer updateCustomer(@RequestBody Map<String, String> updatedData, HttpServletRequest request) {
-		
+	public Customer modifyCustomer(@RequestBody Map<String, String> updatedData, HttpServletRequest request) {
 		Customer customer = adminService.updateCustomer(updatedData, request);
 		if (customer != null) {
-	        // 세션 업데이트: 수정된 정보로 세션에 저장
-	        HttpSession session = request.getSession();
-	        session.setAttribute("loginCustomer", customer);
 	        return customer;
 	    } else {
 	        return null;
 	    }
 	}
+	
+	//뮤지컬 상세정보변경
+//	@PostMapping("/updateShow")
+//	public Performance updateShow(@RequestBody Map<String, String> updatedData, HttpServletRequest request) {
+//		Performance performance = adminService.updateShow(updatedData, request);
+//		if (performance != null) {
+//	        return performance;
+//	    } else {
+//	        return null;
+//	    }
+//	}
 	
 	
 }
