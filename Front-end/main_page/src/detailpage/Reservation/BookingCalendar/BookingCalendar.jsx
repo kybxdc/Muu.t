@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "./BookingCalendar.module.css";
 
-export default function BookingCalendar({ selectedDate, setSelectedDate }) {
+export default function BookingCalendar({ selectedDate, setSelectedDate, musical }) {
   return (
     <div>
       <DatePicker

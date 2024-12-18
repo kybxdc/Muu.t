@@ -1,0 +1,102 @@
+[
+  {
+    "musicalId": 1,
+    "performanceDate": "2024-12-20",
+    "performanceStartTime": "18:00"
+  },
+  {
+    "musicalId": 2,
+    "performanceDate": "2024-12-21",
+    "performanceStartTime": "19:00"
+  },
+  {
+    "musicalId": 3,
+    "performanceDate": "2024-12-22",
+    "performanceStartTime": "20:00"
+  },
+  {
+    "musicalId": 4,
+    "performanceDate": "2024-12-23",
+    "performanceStartTime": "15:00"
+  },
+  {
+    "musicalId": 5,
+    "performanceDate": "2024-12-24",
+    "performanceStartTime": "16:00"
+  },
+  {
+    "musicalId": 6,
+    "performanceDate": "2024-12-25",
+    "performanceStartTime": "17:00"
+  },
+  {
+    "musicalId": 7,
+    "performanceDate": "2024-12-26",
+    "performanceStartTime": "18:00"
+  },
+  {
+    "musicalId": 8,
+    "performanceDate": "2024-12-27",
+    "performanceStartTime": "19:00"
+  },
+  {
+    "musicalId": 9,
+    "performanceDate": "2024-12-28",
+    "performanceStartTime": "20:00"
+  },
+  {
+    "musicalId": 10,
+    "performanceDate": "2024-12-29",
+    "performanceStartTime": "21:00"
+  },
+  {
+    "musicalId": 1,
+    "performanceDate": "2024-12-30",
+    "performanceStartTime": "14:00"
+  },
+  {
+    "musicalId": 2,
+    "performanceDate": "2024-12-31",
+    "performanceStartTime": "15:00"
+  },
+  {
+    "musicalId": 3,
+    "performanceDate": "2025-01-01",
+    "performanceStartTime": "16:00"
+  },
+  {
+    "musicalId": 4,
+    "performanceDate": "2025-01-02",
+    "performanceStartTime": "17:00"
+  },
+  {
+    "musicalId": 5,
+    "performanceDate": "2025-01-03",
+    "performanceStartTime": "18:00"
+  },
+  {
+    "musicalId": 6,
+    "performanceDate": "2025-01-04",
+    "performanceStartTime": "19:00"
+  },
+  {
+    "musicalId": 7,
+    "performanceDate": "2025-01-05",
+    "performanceStartTime": "20:00"
+  },
+  {
+    "musicalId": 8,
+    "performanceDate": "2025-01-06",
+    "performanceStartTime": "21:00"
+  },
+  {
+    "musicalId": 9,
+    "performanceDate": "2025-01-07",
+    "performanceStartTime": "14:00"
+  },
+  {
+    "musicalId": 10,
+    "performanceDate": "2025-01-08",
+    "performanceStartTime": "15:00"
+  }
+]

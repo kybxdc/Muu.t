@@ -43,7 +43,7 @@ export default function Detailpage() {
           <ProductInfoDetail musical={musical}/>
         </section>
         <section className={styles.product_reserve}>
-          <Reservation />
+          <Reservation musical={musical}/>
         </section>
         <section className={styles.product_tab}>
           {tabs.map((tab) => (
