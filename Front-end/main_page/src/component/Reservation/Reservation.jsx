@@ -81,8 +81,6 @@ export default function Reservation() {
               <button className="button rn-btn" onClick={()=>navigate(nextLoc)} disabled={
                 (curLoc=="reserve"&&(!isChecked||!isChecked2))||(curLoc=="seatview"&&selectedSeats.length<1)
                 }>다음</button>}
-              {curLoc=="payment"&&
-              <button className="button rn-btn" onClick={()=>navigate(prevLoc)}>결제</button>}
             </div>
           </nav>
         </div>

@@ -1,12 +1,16 @@
 package com.fp.muut.reserve.service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fp.muut.entity.Customer;
 import com.fp.muut.entity.Musical;
 import com.fp.muut.entity.Performance;
@@ -85,6 +89,24 @@ public class ReserveService {
 		reservation.setSeat_num(seat_num);
 		
 		reserveRepository.saveReserve(reservation);
+	}
+
+	public List<String> findSoldSeats(Long performnace_id) {
+		List<String> soldSeats = reserveRepository.findSoldSeats(performnace_id);
+		List<String> mergedList = new ArrayList<>();
+		
+		ObjectMapper om = new ObjectMapper();
+		
+		try {
+			for(String seats : soldSeats) {
+				List<String> parsed = om.readValue(seats, new TypeReference<List<String>>() {});
+				mergedList.addAll(parsed);
+			}			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return mergedList; 
 	}
 
 }
