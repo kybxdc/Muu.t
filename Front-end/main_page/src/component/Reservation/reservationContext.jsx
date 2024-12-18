@@ -12,6 +12,7 @@ export const ReservationCtx = createContext({
   totalPrice: 0,
   charge: 0,
   customer: {},
+  performance_id: 0,
   handleSeatClick: () => {},
   setIsChecked: () => {},
   setIsChecked2: () => {},
@@ -60,10 +61,6 @@ export default function ReservationProvider({ children }) {
     };
 
     fetchSeats();
-    return (()=>{
-      sessionStorage.removeItem("selectedSeats");
-      sessionStorage.removeItem("ticketPrice");
-    })
   }, []);
 
   useEffect(()=>{
@@ -124,6 +121,7 @@ export default function ReservationProvider({ children }) {
     totalPrice: totalPrice.current,
     charge: charge.current,
     customer: customer,
+    performance_id: performance_id,
     setIsChecked: setIsChecked,
     setIsChecked2: setIsChecked2,
     handleSeatClick: handleSeatClick,

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import com.fp.muut.entity.Customer;
 import com.fp.muut.entity.Musical;
 import com.fp.muut.entity.Performance;
+import com.fp.muut.entity.Reservation;
 
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +33,10 @@ public class ReserveRepository {
 	public Customer getCustomerByEmail(String customer_email) {
 		return em.createQuery("select c from Customer c where c.customer_id=:customer_email",Customer.class)
 				.setParameter("customer_email", customer_email).getSingleResult();
+	}
+
+	public void saveReserve(Reservation reservation) {
+		em.persist(reservation);
 	}
 	
 	
