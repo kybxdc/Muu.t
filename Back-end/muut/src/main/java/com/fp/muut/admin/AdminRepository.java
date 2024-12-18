@@ -54,7 +54,7 @@ public class AdminRepository {
 		}
 		
 	//공연상세 중복체크용
-		public Performance findById(long performance_id){
+		public Performance findById(String performance_id){
 			return em.createQuery("select p from Performance p where p.performance_id = :performance_id", Performance.class).setParameter("performance_id", performance_id).getSingleResult();
 		}
 		
@@ -72,7 +72,6 @@ public class AdminRepository {
 	//공연 상세 목록 조회
 		public List<PerformanceDTO> showList(long selectedMusicalId) {
 			List<PerformanceDTO> performanceList = em.createQuery("select new com.fp.muut.dto.PerformanceDTO(p.id, p.performance_date, p.performance_start_time) from Performance p where p.musical.id = :musical_id", PerformanceDTO.class).setParameter("musical_id", selectedMusicalId).getResultList();
-			System.out.println("상세목록 :"+performanceList);
 			return performanceList;
 		}
 		

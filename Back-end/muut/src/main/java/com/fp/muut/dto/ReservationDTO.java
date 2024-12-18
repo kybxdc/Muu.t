@@ -14,12 +14,12 @@ public class ReservationDTO {
 	private String customer_name;
 	private java.util.Date performance_date;
 	private String performance_start_time;
-	private String musical_image;
 	private String musical_title;
+	private String musical_image;
 	
 	
 	public ReservationDTO(Long reservation_num, String customer_name, Date performance_date,
-			String performance_start_time, String musical_image, String musical_title) {
+			String performance_start_time, String musical_title, String musical_image) {
 		super();
 		this.reservation_num = reservation_num;
 		this.customer_name = customer_name;

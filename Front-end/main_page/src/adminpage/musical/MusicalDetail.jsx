@@ -5,7 +5,7 @@ import DetailModal from "./DetailModal";
 import Modal from "../../mainpage/Modal";
 
 export default function MusicaDetail(){
-    const [selectedMusical, setSelectedMusical] = useState();
+      const [selectedMusical, setSelectedMusical] = useState();
       const [showMusical, setShowMusical] = useState([]);
       const [musicalList, setMusicalList] = useState([]);
 
@@ -16,9 +16,12 @@ export default function MusicaDetail(){
           //정보수정용 modal
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
+    const [selectedDetail, setselectedDetail] = useState([]);
    
     const openModal = (id) => {
         setSelectedId(id); // 선택된 ID 저장
+        const show = musicalList.find((m) => m.id === id);
+        setselectedDetail(show);
         setIsModalOpen(true);
     };
 
@@ -52,7 +55,7 @@ export default function MusicaDetail(){
             }}}, [selectedMusical]);// selectedMusical 값이 바뀔 때마다 실행
      
     return(
-         <div className={classes.AdminMain}>
+         <div className={classes.DetailMain}>
             <h2>등록한 공연을 확인하실 수 있습니다.</h2>
             <select onChange={handleSelect} className={classes.input_btn}>
             {musicalList.map((musical) => (
@@ -84,7 +87,7 @@ export default function MusicaDetail(){
         </table> 
 
         <Modal isOpen={isModalOpen} onClose={closeModal}>
-                        <DetailModal showMusical={showMusical} id={selectedId}/>
+                        <DetailModal showMusical={selectedDetail} />
                     </Modal>
     </div>
     )
