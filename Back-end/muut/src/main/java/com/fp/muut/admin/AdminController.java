@@ -29,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fp.muut.dto.MusicalDTO;
 import com.fp.muut.dto.MusicalListDTO;
+import com.fp.muut.dto.PerformanceDTO;
 import com.fp.muut.entity.Customer;
 import com.fp.muut.entity.Musical;
 import com.fp.muut.entity.Performance;
@@ -112,11 +113,24 @@ public class AdminController {
 	
 	//뮤지컬 상세정보 조회
 	@GetMapping("/showList/{selectedMusicalId}")
-	public List<Performance> updateItemForm(@PathVariable("selectedMusicalId") long selectedMusicalId){
-		System.out.println("컨트롤러 : "+selectedMusicalId);
+	public List<PerformanceDTO> detailShowList(@PathVariable("selectedMusicalId") long selectedMusicalId){
 		return adminService.showList(selectedMusicalId);
 	}
 	
+	//회원정보변경
+	@PostMapping("/update")
+	public Customer updateCustomer(@RequestBody Map<String, String> updatedData, HttpServletRequest request) {
+		
+		Customer customer = adminService.updateCustomer(updatedData, request);
+		if (customer != null) {
+	        // 세션 업데이트: 수정된 정보로 세션에 저장
+	        HttpSession session = request.getSession();
+	        session.setAttribute("loginCustomer", customer);
+	        return customer;
+	    } else {
+	        return null;
+	    }
+	}
 	
 	
 }

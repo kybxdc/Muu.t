@@ -15,7 +15,7 @@ public class MusicalListDTO {
 	private Date musical_start_date;
 	private Date musical_end_date;
 	
-	 public MusicalListDTO(Musical musical) {
+	public MusicalListDTO(Musical musical) {
 	        this.id = musical.getId();
 	        this.musical_title = musical.getMusical_title();
 	        this.musical_area = musical.getMusical_area();

@@ -10,14 +10,18 @@ export default function AdminCustomer(){
     //상세정보 입력용 modal
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
+    const [selectedMember, setSelectedMember] = useState([]);
    
     const openModal = (id) => {
         setSelectedId(id); // 선택된 ID 저장
+        const member = memberList.find((m) => m.customer_num === id);
+        setSelectedMember(member);
         setIsModalOpen(true);
     };
 
     const closeModal = () => {
         setSelectedId(null); // 선택된 ID 초기화
+        setSelectedMember(null);
         setIsModalOpen(false);
     };
 
@@ -56,15 +60,20 @@ export default function AdminCustomer(){
                         <td className={classes.info}>{member?.customer_name||'null'}</td>
                         <td className={classes.info}>{member?.grade?.customer_grade||'null'}</td>
                         <td className={classes.info}>{member.customer_status}</td>
-                        <td><button className={classes.input_btn} onClick={()=>openModal(member.customer_num)}>보기</button></td>
+                        <td><button className={classes.input_btn} onClick={()=>openModal(customer_num)}>보기</button></td>
                     </tr>
                     ))}
                 </tbody>
             </table>
             </main>
-            <Modal isOpen={isModalOpen} onClose={closeModal}>
-                        <CustomerModal id={selectedId}/>
-                    </Modal>
+             {/* Modal 열기 전에 selectedMember가 정의된 후 렌더링 */}
+             <Modal isOpen={isModalOpen} onClose={closeModal}>
+                {selectedMember ? (
+                    <CustomerModal id={selectedId} member={selectedMember} />
+                ) : (
+                    <div>로딩 중...</div> // selectedMember가 null일 때 로딩 표시
+                )}
+            </Modal>
         </div>
     )
 }

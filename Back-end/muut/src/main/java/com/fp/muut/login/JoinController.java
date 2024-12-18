@@ -60,7 +60,7 @@ public class JoinController {
 	    System.out.println("Logged in customer: " + session.getAttribute("loginCustomer"));
 	    
 	    // 쿠키에 로그인 정보 저장
-	    ResponseCookie idCookie = ResponseCookie.from("id", customer_id)
+	    ResponseCookie idCookie = ResponseCookie.from("customer_id", customer_id)
 	            .httpOnly(true)
 	            .secure(true)
 	            .sameSite("None") // SameSite 설정
