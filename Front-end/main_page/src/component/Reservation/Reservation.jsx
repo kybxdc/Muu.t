@@ -66,10 +66,8 @@ export default function Reservation() {
                 </div>
                 <p className="contents-lists"><span>일시 <span>{reserveInfo.date} {reserveInfo.start_time}</span></span></p>
                 <p className="contents-lists"><span>티켓금액 <span>{ticketPrice.toLocaleString()}원</span></span></p>
-                <p className="contents-lists"><span>예매수수료 <span>{charge}원</span></span></p>
-                <p className="contents-lists"><span>총결제 <span>{totalPrice}원</span></span></p>
-                {/* <p className="contents-lists"><span>취소기한: </span></p>
-                <p className="contents-lists"><span>취소수수료:티켓금액의0~30%</span></p> */}
+                <p className="contents-lists"><span>예매수수료 <span>{charge.toLocaleString()}원</span></span></p>
+                <p className="contents-lists"><span>총결제 <span>{totalPrice.toLocaleString()}원</span></span></p>
               </div>
             </div>
 

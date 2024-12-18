@@ -1,12 +1,17 @@
 package com.fp.muut.reserve.service;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fp.muut.entity.Customer;
 import com.fp.muut.entity.Musical;
 import com.fp.muut.entity.Performance;
+import com.fp.muut.entity.Reservation;
+import com.fp.muut.reserve.dto.ReserveCustomerDTO;
 import com.fp.muut.reserve.dto.ReserveDTO;
 import com.fp.muut.reserve.repository.ReserveRepository;
 
@@ -35,6 +40,51 @@ public class ReserveService {
 		reserve.setStart_time(performance.getPerformance_start_time());
 		
 		return reserve;
+	}
+
+	public ReserveCustomerDTO getCustomerInfo(String customer_email) {
+		Customer customer = reserveRepository.getCustomerByEmail(customer_email);
+		ReserveCustomerDTO customerDto = new ReserveCustomerDTO();
+		
+		customerDto.setCustomer_email(customer_email);
+		customerDto.setCustomer_name(customer.getCustomer_name());
+		customerDto.setCustomer_phone(customer.getCustomer_phone());
+		
+		return customerDto;
+	}
+
+	@Transactional
+	public void saveReserve(Map<String, Object> reserveData) {
+		Reservation reservation = new Reservation();
+		Customer customer = null;
+		Performance performance = null;
+		String payment_amount = null;
+		String seat_num = null;
+		Date reservation_date = new Date();
+		
+		for(Map.Entry<String, Object> e : reserveData.entrySet()) {
+			switch(e.getKey()) {
+			case "customer":
+				customer = reserveRepository.getCustomerByEmail((String)e.getValue());
+				break;
+			case "payment_amount":
+				payment_amount=(String)e.getValue();
+				break;
+			case "seat_num":
+				seat_num=(String)e.getValue();
+				break;
+			case "performance":
+				performance = reserveRepository.getPerformanceById(Long.parseLong((String)e.getValue()));
+				break;
+			}
+		}
+		reservation.setCustomer(customer);
+		reservation.setPayment_amount(payment_amount);
+		reservation.setPerformance(performance);
+		reservation.setReservation_date(reservation_date);
+		reservation.setSeat_num(seat_num);
+		
+		reserveRepository.saveReserve(reservation);
 	}
 
 }

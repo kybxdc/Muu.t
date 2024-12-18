@@ -15,6 +15,7 @@ import Reservation from "./component/Reservation/Reservation";
 import AdminMain from "./adminpage/AdminMain";
 import ReservationProvider from "./component/Reservation/reservationContext";
 import "./App.css"; // 폰트만 적용중
+import PaymentSuc from "./component/Reservation/Payment/PaymentSuc";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
       // { path: "/join", element: <Join />, errorElement: <ErrorPage /> },
       { path: "/mypage", element: <MyMain />, errorElement: <ErrorPage /> },
       { path: "/detailpage", element: <Detailpage />, errorElement: <ErrorPage /> },
+      {path:"/paymentsuc", element: <PaymentSuc/>}
     ]
   },
   {
