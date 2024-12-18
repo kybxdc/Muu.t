@@ -14,8 +14,6 @@ import Footer from "../mainpage/components/Footer";
 import handleLogout from '../login/Logout';
 
 export default function MyMain() {
-    const location = useLocation();
-    const { userInfo } = location.state || {};
 
     const [selectedMenu, setSelectedMenu] = useState();
     function handleSelect(menu) {
@@ -41,8 +39,8 @@ export default function MyMain() {
         mainmenu = <MyCalander />;
     } else if (selectedMenu === 'MyInfo') {
         mainmenu = (<MyInfo 
-          grade={member?.customer_grade || 'null'}
-          memberId={member.customer_id}
+          grade={member?.grade?.customer_grade || 'null'}
+          memberId={member?.customer_id || 'null'}
           name={member?.customer_name || 'null'}
           password={member?.customer_pw|| 'null'}
           phone={member?.customer_phone || 'null'}
@@ -60,7 +58,7 @@ export default function MyMain() {
                 <h2>안녕하세요 [{member?.customer_name||'null'}] 님</h2>
                         <div className={classes.user_info}>
                             <p>회원님은 
-                            <span style={{cursor: "pointer", color:"#fa2828"}} onClick={()=>{handleSelect("GradeInfo")}}><strong> {member?.customer_grade || 'null'} </strong></span>등급입니다.</p>
+                            <span style={{cursor: "pointer", color:"#fa2828"}} onClick={()=>{handleSelect("GradeInfo")}}><strong> {member?.grade?.customer_grade || 'null'} </strong></span>등급입니다.</p>
                             <p>아이디: <strong>{member?.customer_id|| 'null'}</strong></p>
                             <p>이름: <strong>{member?.customer_name || 'null'}</strong></p>
                             <p>비밀번호: *****</p>
@@ -72,7 +70,8 @@ export default function MyMain() {
     }
     return (
         <>
-        <Header userInfo={userInfo}/>
+        {/* <Header userInfo={userInfo}/> */}
+        <Header />
         <div>
       <nav className={classes.top_navbar}>
       <div className={classes.logo} onClick={() => setSelectedMenu(null)}>마이페이지</div>

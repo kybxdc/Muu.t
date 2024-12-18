@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.fp.muut.dto.ReservationDTO;
 import com.fp.muut.entity.Customer;
+import com.fp.muut.entity.Grade;
 import com.fp.muut.entity.Reservation;
 import com.fp.muut.login.CustomerRepository;
 
@@ -36,7 +37,6 @@ public class MypageService {
 		customer.setCustomer_pw(updatedData.get("customer_pw"));
 		customer.setCustomer_phone(updatedData.get("customer_phone"));
 		customer.setCustomer_address(updatedData.get("customer_address"));
-		
 		mypageRepository.save(customer);
 		return customer;
 

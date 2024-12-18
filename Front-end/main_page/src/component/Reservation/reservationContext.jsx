@@ -60,6 +60,10 @@ export default function ReservationProvider({ children }) {
     };
 
     fetchSeats();
+    return (()=>{
+      sessionStorage.removeItem("selectedSeats");
+      sessionStorage.removeItem("ticketPrice");
+    })
   }, []);
 
   useEffect(()=>{

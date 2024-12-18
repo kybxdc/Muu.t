@@ -61,7 +61,7 @@ public class JoinController {
 	    
 	    // 쿠키에 로그인 정보 저장
 	    ResponseCookie idCookie = ResponseCookie.from("customer_id", customer_id)
-	            .httpOnly(false)
+	            .httpOnly(false) // JavaScript에서의 접근 가능여부 설정(true:불가, false:가능)
 	            .secure(true)
 	            .sameSite("None") // SameSite 설정
 	            .path("/")

@@ -21,5 +21,18 @@ public class Grade {
 //	@OneToMany(mappedBy = "grade")
 //	private List<Customer> customers = new ArrayList<>();
 	
-	
+	  public String getDiscountRate() {
+	        switch (customer_grade) {
+		        case "ADMIN":
+	                return "30";    
+		        case "VVIP":
+	                return "15"; 
+	            case "VIP":
+	                return "10"; 
+	            case "FAMILY":
+	                return "5";
+	            default:
+	                return "0";
+	        }
+	    }
 }

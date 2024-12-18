@@ -60,4 +60,5 @@ public class Performance {
 //		hall_Info.getPerformances().add(this);
 	}
 	
-}
+	}
+

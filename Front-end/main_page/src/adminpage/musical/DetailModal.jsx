@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import classes from './MusicalModal.module.css';
+import axios from 'axios';
 
 export default function DetailModal({ showMusical, selectedMusical }){
     const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState({
-        newDate: showMusical.performance_date,
+        newDate: new Date(showMusical.performance_date).toISOString().split('T')[0],
         newTime:showMusical.performance_start_time,
       });
+      const [performance, setPerformance] = useState();
 
         function handleEditClick(){
                setIsEditing((editing)=>!editing);
@@ -19,7 +21,6 @@ export default function DetailModal({ showMusical, selectedMusical }){
                 }));
               }
       
-        const [performance, setPerformance] = useState();
           function handleUpdate(){
             const updatedData = {
               id: showMusical.id,
@@ -63,11 +64,11 @@ export default function DetailModal({ showMusical, selectedMusical }){
                                   type="date"
                                   name="newDate"
                                   required
-                                  value={showMusical.performance_date}
+                                  value={formData.newDate}
                                   onChange={handleChange}
                                 />
                               ) : (
-                                <span>{showMusical.performance_date}</span>
+                                <span>{new Date(showMusical.performance_date).toLocaleDateString()}</span>
                               )}
                             </td>
                           </tr>
@@ -80,7 +81,7 @@ export default function DetailModal({ showMusical, selectedMusical }){
                                   type="text"
                                   name="newTime"
                                   required
-                                  value={showMusical.performance_start_time}
+                                  value={formData.newTime}
                                   onChange={handleChange}
                                 />
                               ) : (

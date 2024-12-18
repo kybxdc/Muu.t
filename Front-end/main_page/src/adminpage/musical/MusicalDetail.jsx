@@ -84,7 +84,7 @@ export default function MusicaDetail(){
         </table> 
 
         <Modal isOpen={isModalOpen} onClose={closeModal}>
-                        <DetailModal id={selectedId}/>
+                        <DetailModal showMusical={showMusical} id={selectedId}/>
                     </Modal>
     </div>
     )
