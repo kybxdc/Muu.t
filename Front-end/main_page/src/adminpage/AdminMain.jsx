@@ -35,7 +35,7 @@ export default function AdminMain() {
         adminmenu = <AdminCustomer />;
     } else if (selectedMenu === 'MyInfo') {
         adminmenu = (<MyInfo 
-          grade={member?.customer_grade || 'null'}
+          grade={member?.grade?.customer_grade || 'null'}
           memberId={member.customer_id}
           name={member?.customer_name || 'null'}
           password={member?.customer_pw|| 'null'}

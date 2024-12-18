@@ -1,15 +1,19 @@
-import Reservation from "../Reservation";
 import "./ReservationConfirmation.css";
 import Table from "../../Util/Table/Table";
 import Input from "../../Util/Input/Input";
 import Checkbox from "../../Util/Checkbox/Checkbox";
-import { useParams, useLocation } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { ReservationCtx } from "../reservationContext";
 
 export default function ReservationConfirmation() {
-  const performance_id = useParams().performance_id;
-  const selectedSeats = useLocation().state || {};
+    const {isChecked, setIsChecked, isChecked2, setIsChecked2} = useContext(ReservationCtx);
+  
+    useEffect(()=>{
+      setIsChecked(false);
+      setIsChecked2(false);
+    },[])
+
   return (
-    <Reservation locations="reserve" performance_id={performance_id} selectedSeats={selectedSeats}>
       <div className="confirmation-main">
         <Table
           titleName={"주문자 정보"}
@@ -45,6 +49,8 @@ export default function ReservationConfirmation() {
                   "주문자 확인 및 예매처리를 위해 개인정보를 수집하며, 이용목적 달성 이후 파기합니다."
                 }
                 id = "checkbox1"
+                isChecked={isChecked}
+                setIsChecked={setIsChecked}
               />
             }
             td3={
@@ -53,11 +59,12 @@ export default function ReservationConfirmation() {
                   "개인정보 제3자 제공에 동의합니다.(고객응대 및 관람정보안내 등을 위함)"
                 }
                 id = "checkbox2"
+                isChecked={isChecked2}
+                setIsChecked={setIsChecked2}
               />
             }
           />
         </div>
       </div>
-    </Reservation>
   );
 }
