@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -9,7 +10,11 @@ import Join from "../../login/Join.jsx";
 
 import styles from "./Header.module.css";
 
-export default function Header({userInfo}) {
+import Cookies from "js-cookie";
+
+
+// export default function Header({userInfo}) {
+export default function Header() {
   // 로그인 modal 상태
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const openLoginModal = () => setIsLoginModalOpen(true);
@@ -19,6 +24,25 @@ export default function Header({userInfo}) {
   const openJoinModal = () => setIsJoinModalOpen(true);
   const closeJoinModal = () => setIsJoinModalOpen(false);
 
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    // 컴포넌트가 마운트될 때 쿠키 값을 가져옴
+    const id = Cookies.get("customer_id");
+    setUserId(id);
+
+    // 쿠키 값이 변경되었을 때 자동 업데이트
+    const checkCookie = setInterval(() => {
+      const updatedId = Cookies.get("customer_id");
+      if (updatedId !== userId) setUserId(updatedId);
+    }, 1000);
+
+    return () => clearInterval(checkCookie); // 정리
+  }, [userId]);
+
+  // 세션에서 사용자 정보 가져오기
+  // const userName = sessionStorage.getItem("customer_name");
+  
   const navigate = useNavigate();
   const toMainpage = () => {
     // 새로고침 x
@@ -28,7 +52,7 @@ export default function Header({userInfo}) {
     window.location.href = "/";
   };
 
-  if (!userInfo) {
+  if (!userId) {
     return (
       <header
         className={[styles.mainpage, styles.header, styles.width_limit].join(" ")}
@@ -65,8 +89,8 @@ export default function Header({userInfo}) {
           <img className={styles.logo_image} src="../src/img/Muut_logo_v2.png" />
         </div>
         <div className={styles.top_left}>
-          <p>{userInfo.customer_id}</p>
-          <Link to="/mypage" state={{userInfo}}>
+          <p>{userId}</p>
+          <Link to="/mypage" >
             <button className={styles.top_left_buttons} >
               마이페이지
             </button>

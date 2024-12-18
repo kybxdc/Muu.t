@@ -14,8 +14,6 @@ import Footer from "../mainpage/components/Footer";
 import handleLogout from '../login/Logout';
 
 export default function MyMain() {
-    const location = useLocation();
-    const { userInfo } = location.state || {};
 
     const [selectedMenu, setSelectedMenu] = useState();
     function handleSelect(menu) {
@@ -72,7 +70,8 @@ export default function MyMain() {
     }
     return (
         <>
-        <Header userInfo={userInfo}/>
+        {/* <Header userInfo={userInfo}/> */}
+        <Header />
         <div>
       <nav className={classes.top_navbar}>
       <div className={classes.logo} onClick={() => setSelectedMenu(null)}>마이페이지</div>
