@@ -1,5 +1,6 @@
 package com.fp.muut.reserve.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
@@ -42,12 +43,15 @@ public class ReserveController {
 	
 	@PostMapping("save")
 	public ResponseEntity<String> saveReserve(@RequestBody Map<String, Object> reserveData) {
-		for(Map.Entry<String , Object> e : reserveData.entrySet()) {
-			System.out.println("key: "+ e.getKey() +" val: "+e.getValue());
-		}
-		
 		reserveService.saveReserve(reserveData);
 		
 		return ResponseEntity.ok("예약정보 저장 성공");
 	}
+	
+	@GetMapping("/sold/{performance_id}")
+	public ResponseEntity<Object> checkSoldSeats(@PathVariable Long performance_id) {
+		List<String> soldSeats = reserveService.findSoldSeats(performance_id);
+		return ResponseEntity.ok(soldSeats);
+	}
+	
 }

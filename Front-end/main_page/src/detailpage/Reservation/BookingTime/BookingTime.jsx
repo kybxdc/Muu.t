@@ -1,9 +1,22 @@
 import styles from "./BookingTime.module.css";
 
-export default function BookingTime({ selectedDate }) {
+export default function BookingTime({ selectedDate, performances, onPerformanceSelect }) {
   return (
     <div>
-      <h4>선택된 날짜: {selectedDate ? selectedDate.toLocaleDateString() : "날짜를 선택해주세요"}</h4>
+      {performances && performances.length > 0 ? (
+        performances.map((performance, index) => (
+          <div
+            key={index}
+            className={styles.performance_start_time}
+            onClick={() => onPerformanceSelect(performance.id)} // 선택된 Performance ID 전달
+            style={{ cursor: "pointer" }} // 클릭 가능한 UI 표시
+          >
+            {performance.performance_start_time}
+          </div>
+        ))
+      ) : (
+        <p>해당 날짜에 공연이 없습니다.</p>
+      )}
     </div>
   );
 }

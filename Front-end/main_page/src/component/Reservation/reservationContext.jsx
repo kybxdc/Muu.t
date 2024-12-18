@@ -13,6 +13,7 @@ export const ReservationCtx = createContext({
   charge: 0,
   customer: {},
   performance_id: 0,
+  soldSeats: [],
   handleSeatClick: () => {},
   setIsChecked: () => {},
   setIsChecked2: () => {},
@@ -27,6 +28,7 @@ export default function ReservationProvider({ children }) {
   const [isChecked, setIsChecked] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
   const [customer, setCustomer] = useState({});
+  const [soldSeats, setSoldSeats] = useState([]);
   const totalPrice = useRef(ticketPrice+Number(ticketPrice*0.03));
   const charge = useRef(ticketPrice*0.03); // 수수료
 
@@ -70,6 +72,19 @@ export default function ReservationProvider({ children }) {
       setCustomer(result);
     }
     fetchUser();
+  },[])
+
+  useEffect(()=>{
+    const fetchSoldSeats = async()=>{
+      try{
+        const response = await fetch(`/api/reserve/sold/${performance_id}`);
+        const result = await response.json();
+        setSoldSeats(result);
+      }catch(e){
+        console.log(e);
+      }
+    }
+    fetchSoldSeats();
   },[])
 
   function handleSeatClick(e, seatId) {
@@ -122,6 +137,7 @@ export default function ReservationProvider({ children }) {
     charge: charge.current,
     customer: customer,
     performance_id: performance_id,
+    soldSeats: soldSeats,
     setIsChecked: setIsChecked,
     setIsChecked2: setIsChecked2,
     handleSeatClick: handleSeatClick,

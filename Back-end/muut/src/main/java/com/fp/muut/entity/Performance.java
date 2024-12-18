@@ -40,7 +40,7 @@ public class Performance {
 	@Setter(value = AccessLevel.NONE)
 	private Hall_Info hall_Info;
 	
-	private java.util.Date performance_date;
+	private Date performance_date;
 	private String performance_start_time;
 	
 	// Performance_Seats 양방향 매핑

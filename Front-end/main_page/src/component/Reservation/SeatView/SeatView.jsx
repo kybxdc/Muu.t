@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { ReservationCtx } from "../reservationContext";
 
 export default function SeatView() {
-  const {reserveInfo, seats, selectedSeats, handleSeatClick} = useContext(ReservationCtx);
+  const {reserveInfo, seats, selectedSeats, handleSeatClick, soldSeats} = useContext(ReservationCtx);
 
   return (
     <>
@@ -29,8 +29,14 @@ export default function SeatView() {
                     position: "absolute",
                     left: `${seat.position.x / 1.7 + 3.5}px`,
                     top: `${seat.position.y / 1.7 + 3.5}px`,
+                    background: `${soldSeats.includes(seat.id) ? "rgb(129 129 131)" : "powderblue"}`,
+                    cursor: `${soldSeats.includes(seat.id)? "default" : "pointer"}`
                   }}
-                  onClick={(e) => handleSeatClick(e, seat.id)}
+                  onClick={(e) => {
+                    if(!soldSeats.includes(seat.id)){
+                      handleSeatClick(e, seat.id)
+                    }
+                  }}
                 >
                 </div>
               );
