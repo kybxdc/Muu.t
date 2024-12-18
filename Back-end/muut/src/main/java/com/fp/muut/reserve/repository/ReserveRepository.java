@@ -1,5 +1,7 @@
 package com.fp.muut.reserve.repository;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.fp.muut.entity.Customer;
@@ -37,6 +39,11 @@ public class ReserveRepository {
 
 	public void saveReserve(Reservation reservation) {
 		em.persist(reservation);
+	}
+
+	public List<String> findSoldSeats(Long performance_id) {
+		return em.createQuery("select r.seat_num from Reservation r join r.performance p where p.id=:performance_id",String.class)
+				.setParameter("performance_id", performance_id).getResultList();
 	}
 	
 	
