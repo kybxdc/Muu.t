@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fp.muut.dto.MusicalDTO;
 import com.fp.muut.dto.MusicalListDTO;
+import com.fp.muut.dto.PerformanceDTO;
 import com.fp.muut.entity.Customer;
 import com.fp.muut.entity.Grade;
 import com.fp.muut.entity.Hall_Info;
@@ -69,9 +70,14 @@ public class AdminService {
 		}
 		
 		//뮤지컬 상세정보 조회
-		public List<Performance> showList(long selectedMusicalId) {
-			System.out.println("서비스 : "+selectedMusicalId);
+		public List<PerformanceDTO> showList(long selectedMusicalId) {
 			return adminRepository.showList(selectedMusicalId);
+		}
+		
+		//회원 정보 수정
+		public Customer updateCustomer(Map<String, String> updatedData, HttpServletRequest request) {
+			// TODO Auto-generated method stub
+			return null;
 		}
 		
 	}

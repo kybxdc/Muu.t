@@ -2,9 +2,9 @@ import classes from './CustomerModal.module.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
-export default function CustomerModal({ customer_num, memberList }) {
-    const selectedMember = memberList.find(member => member.customer_num === customer_num);
-
+export default function CustomerModal({id, member}) {
+    const selectedMember = member;
+    const customer_num = id;
     const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState({
         newId: selectedMember.customer_id,
@@ -13,11 +13,24 @@ export default function CustomerModal({ customer_num, memberList }) {
         newPhone: selectedMember.customer_phone,
         newAddr: selectedMember.customer_address,
         newStatus: selectedMember.customer_status,
-         newGrade: {
+        newGrade: {
         customer_grade: selectedMember.grade.customer_grade,  // 키: 값 형식으로 수정
         discount_rate: selectedMember.grade.discount_rate      // 키: 값 형식으로 수정
     }
       });
+
+      useEffect(() => {
+        axios.defaults.withCredentials = true;
+        axios.post('http://localhost:9090/admin/update', updatedData)
+          .then((response) => {
+            setMember(response.data);  // 서버에서 반환된 최신 데이터를 사용
+            setIsEditing(false);  // 수정 완료 후 편집 상태 종료
+            alert('정보 변경이 완료되었습니다.')
+          })
+          .catch((error) => {
+            console.error("Error updating data:", error);
+          })}
+      ,[]);}
 
       function handleUpdate(){
         const updatedData = {
@@ -32,18 +45,7 @@ export default function CustomerModal({ customer_num, memberList }) {
             discount_rate : formData.newGrade.discount_rate,
           }
         };
-        useEffect(() => {
-        axios.defaults.withCredentials = true;
-        axios.post('http://localhost:9090/admin/update', updatedData)
-          .then((response) => {
-            setMember(response.data);  // 서버에서 반환된 최신 데이터를 사용
-            setIsEditing(false);  // 수정 완료 후 편집 상태 종료
-            alert('정보 변경이 완료되었습니다.')
-          })
-          .catch((error) => {
-            console.error("Error updating data:", error);
-          })}
-      ,[]);}
+        
 
     function handleEditClick(){
         setIsEditing((editing)=>!editing);
