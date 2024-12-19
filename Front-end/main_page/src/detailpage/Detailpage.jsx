@@ -55,7 +55,7 @@ export default function Detailpage() {
         <section className={styles.product_content}>
           {TabSelect === "InfoImgs" && <InfoImgs descImgs={musical.musical_description} />}
           {TabSelect === "Review" && <Review />}
-          {TabSelect === "Place" && <Place />}
+          {TabSelect === "Place" && <Place {...musical} />}
         </section>
       </main>
 

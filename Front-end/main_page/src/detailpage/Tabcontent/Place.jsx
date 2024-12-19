@@ -1,34 +1,31 @@
 import { useEffect } from "react";
 import styles from "./Place.module.css";
 
-export default function Place() {
+export default function Place({ hall_name, hall_addr, hall_la, hall_lo }) {
   useEffect(() => {
-    // 카카오 지도 API 스크립트 로드
-    const script = document.createElement("script");
-    script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=d29771b6cd552cca9b895a120a4a7b15";
-    script.async = true;
-
-    script.onload = () => {
-      // 스크립트가 로드된 후에 지도 초기화
-      const container = document.getElementById("map");
-      const options = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667),
-        level: 3,
-      };
-      new kakao.maps.Map(container, options);
+    // 지도 초기화
+    const container = document.getElementById("map");
+    const options = {
+      center: new kakao.maps.LatLng(hall_la, hall_lo), // 위도와 경도
+      level: 3, // 확대 레벨
     };
+    const map = new kakao.maps.Map(container, options);
 
-    document.head.appendChild(script);
+    // 마커가 표시될 위치입니다
+    const markerPosition = new kakao.maps.LatLng(hall_la, hall_lo);
 
-    // 컴포넌트가 언마운트될 때 스크립트를 제거
-    return () => {
-      document.head.removeChild(script);
-    };
-  }, []);
+    // 마커를 생성합니다
+    const marker = new kakao.maps.Marker({
+      position: markerPosition,
+    });
+    marker.setMap(map);
+  }, [hall_la, hall_lo]); // 위도와 경도가 변경될 때마다 지도 재렌더링
 
   return (
     <div className={styles.Place}>
-      <div id="map" style={{ width: "500px", height: "400px" }}></div>
+      <div>장소: {hall_name}</div>
+      <div>주소: {hall_addr}</div>
+      <div id="map" style={{ width: "100%", height: "600px" }}></div>
     </div>
   );
 }
