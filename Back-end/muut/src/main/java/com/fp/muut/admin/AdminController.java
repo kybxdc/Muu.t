@@ -27,10 +27,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fp.muut.dto.HallListDTO;
 import com.fp.muut.dto.MusicalDTO;
 import com.fp.muut.dto.MusicalListDTO;
 import com.fp.muut.dto.PerformanceDTO;
 import com.fp.muut.entity.Customer;
+import com.fp.muut.entity.Hall_Info;
 import com.fp.muut.entity.Musical;
 import com.fp.muut.entity.Performance;
 
@@ -146,5 +148,12 @@ public class AdminController {
 		adminService.deleteShow(selectedId);
 		return "redirect:/success";
 	}
+	
+	//공연장 목록 조회
+	@GetMapping("/hallList")
+	public List<HallListDTO> halls(){
+		return adminService.halls();
+	}
+	
 	
 }

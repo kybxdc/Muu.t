@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fp.muut.dto.HallListDTO;
 import com.fp.muut.dto.MusicalDTO;
 import com.fp.muut.dto.MusicalListDTO;
 import com.fp.muut.dto.PerformanceDTO;
@@ -72,10 +73,14 @@ public class AdminService {
 		public  Musical findByNumber(String musical_title){
 			return adminRepository.findByNumber(musical_title);
 		}
+		
+		//공연장 전체 목록 조회 검색
+		public List<HallListDTO> halls(){
+			return adminRepository.findAllHall();
+		}
 				
 		//공연장 검색
 		public Hall_Info findByhall(String hall_name){
-			System.out.println("서비스 홀네임 : "+hall_name);
 			return adminRepository.findByhall(hall_name);
 		}
 		

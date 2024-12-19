@@ -11,33 +11,33 @@ export default function Join() {
   const [customer_pw2, setCustomer_pw2] = useState(''); // 비밀번호 상태
   const [pw_check, setPw_check] = useState("none"); // 비밀번호 확인용
 
-const [isIdCheck, setIsIdCheck] = useState(false); // 중복 검사를 했는지 안했는지
-const [isIdAvailable, setIsIdAvailable] = useState(false); // 아이디 사용 가능한지 아닌지
+// const [isIdCheck, setIsIdCheck] = useState(false); // 중복 검사를 했는지 안했는지
+// const [isIdAvailable, setIsIdAvailable] = useState(false); // 아이디 사용 가능한지 아닌지
     
 const handleIdChange = (e) => {
       setCustomer_id(e.target.value); // 아이디 입력값 상태 업데이트
       idCheckHandler(e.target.value);
     };
   
-const idCheckHandler = async (id) => {
-  try{
-    const responseData = await idDuplicateCheck(id)
-    if (responseData) {
-      setIdError('사용 가능한 아이디입니다.');
-      setIsIdCheck(true);
-      setIsIdAvailable(true);
-      return true;
-    } else {
-      setIdError('이미 사용중인 아이디입니다.');
-      setIsIdAvailable(false);
-      return false;
-    }
-  } catch (error) {
-    alert('서버 오류입니다. 관리자에게 문의하세요.');
-    console.error(error);
-    return false;
-  }
-}
+// const idCheckHandler = async (id) => {
+//   try{
+//     const responseData = await idDuplicateCheck(id)
+//     if (responseData) {
+//       setIdError('사용 가능한 아이디입니다.');
+//       setIsIdCheck(true);
+//       setIsIdAvailable(true);
+//       return true;
+//     } else {
+//       setIdError('이미 사용중인 아이디입니다.');
+//       setIsIdAvailable(false);
+//       return false;
+//     }
+//   } catch (error) {
+//     alert('서버 오류입니다. 관리자에게 문의하세요.');
+//     console.error(error);
+//     return false;
+//   }
+// }
 
     const handlePasswordChange = (e) => {
       setCustomer_pw(e.target.value); // 비밀번호 입력값 상태 업데이트
@@ -51,9 +51,9 @@ const idCheckHandler = async (id) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const user = {customer_id, customer_pw};
-    if(!isIdCheck){
-      return;
-    }
+    // if(!isIdCheck){
+    //   return;
+    // }
     if (customer_pw != customer_pw2){
       setPw_check("block");
       return;

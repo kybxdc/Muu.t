@@ -1,5 +1,5 @@
 import { useState, useEffect} from 'react';
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import classes from './MyMain.module.css';
 import MyCalander from './MyCalender/MyCalender';
@@ -15,7 +15,7 @@ import handleLogout from '../login/Logout';
 import MyReservDetail from './MyReserv/MyReservDetail';
 
 export default function MyMain() {
-
+  const navigate = useNavigate();
     const [selectedMenu, setSelectedMenu] = useState();
     const [selectedReserv, setSelectedReserv] = useState();
     function handleSelect(menu) {
@@ -87,6 +87,8 @@ export default function MyMain() {
       <div className={classes.menu_item} id="GradeInfo"><a onClick={() => {handleSelect("GradeInfo")}}>회원등급</a></div>
       <div className={classes.menu_item} id="MyCalander"><a onClick={() => {handleSelect("MyCalander")}}>마이캘린더</a></div>
       <div className={classes.menu_item} id="MyInfo"><a onClick={() => {handleSelect("MyInfo")}}>회원정보수정</a></div>
+      {member?.grade?.customer_grade === 'ADMIN' && (
+      <div className={classes.menu_item} id="goAdmin"><a onClick={() => {navigate("/admin/main")}}>관리자페이지</a></div>)}
       </nav>
       <div className={classes.container}>
         <aside className={classes.sidebar}>
