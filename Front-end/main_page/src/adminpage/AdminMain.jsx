@@ -8,6 +8,7 @@ import AdminMusical from './musical/AdminMusical';
 import AdminCustomer from './customer/AdminCustomer';
 import MusicaDetail from './musical/MusicalDetail';
 import { handleLogout } from '../login/Logout';
+import AdminHall from './hall/AdminHall';
 
 export default function AdminMain() {
     const [selectedMenu, setSelectedMenu] = useState();
@@ -33,6 +34,8 @@ export default function AdminMain() {
         adminmenu = <MusicaDetail />;
     } else if (selectedMenu === 'AdminCustomer') {
         adminmenu = <AdminCustomer />;
+    } else if (selectedMenu === 'AdminHall') {
+        adminmenu = <AdminHall />;
     } else if (selectedMenu === 'MyInfo') {
         adminmenu = (<MyInfo 
           grade={member?.grade?.customer_grade || 'null'}
@@ -61,7 +64,7 @@ export default function AdminMain() {
                 <div className={classes.logo} onClick={() => setSelectedMenu(null)}> 관리자 페이지 </div>
                 <div className={classes.top_menu}>
                 <div className={classes.menu_item} id="AdminMusical"><a onClick={() => {handleSelect("AdminMusical")}}>공연 관리</a></div>
-                <div className={classes.menu_item} id=""><a onClick={() => {handleSelect("")}}>공연장 정보 관리</a></div>
+                <div className={classes.menu_item} id="AdminHall"><a onClick={() => {handleSelect("AdminHall")}}>공연장 정보 관리</a></div>
                 <div className={classes.menu_item} id="AdminCustomer"><a onClick={() => {handleSelect("AdminCustomer")}}>회원 관리</a></div>
                 </div>
             </nav>
@@ -73,7 +76,7 @@ export default function AdminMain() {
                         <ul className={classes.submenu}>
                             <li><a onClick={() => {handleSelect("AdminMusical")}}>공연 정보 관리</a></li>
                             <li><a onClick={() => {handleSelect("MusicaDetail")}}>공연 상세 조회</a></li>
-                            <li><a onClick={() => {handleSelect("")}}>공연장 정보 관리</a></li>
+                            <li><a onClick={() => {handleSelect("AdminHall")}}>공연장 정보 관리</a></li>
                         </ul>
                         <li><div>회원 관리</div></li>
                         <ul className={classes.submenu}>

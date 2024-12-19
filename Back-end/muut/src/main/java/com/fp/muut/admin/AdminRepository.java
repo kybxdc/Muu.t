@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fp.muut.dto.HallListDTO;
 import com.fp.muut.dto.MusicalDTO;
 import com.fp.muut.dto.MusicalListDTO;
 import com.fp.muut.dto.PerformanceDTO;
@@ -65,7 +66,6 @@ public class AdminRepository {
 		
 	//공연장 검색
 		public Hall_Info findByhall(String hall_name){
-			System.out.println("레파지토리 홀네임 : "+hall_name);
 			return em.createQuery("select h from Hall_Info h where h.hall_name = :hall_name", Hall_Info.class).setParameter("hall_name", hall_name).getSingleResult();
 		}
 
@@ -79,6 +79,17 @@ public class AdminRepository {
 		public void deleteById(String performance_id){
 			em.createQuery("delete from Performance p where p.id = :id").setParameter("id", performance_id).executeUpdate();
 			em.flush(); 
+		}
+
+		//공연장전체조회
+		public List<HallListDTO> findAllHall() {
+			List<Hall_Info> hl = em.createQuery("select h from Hall_Info h", Hall_Info.class).getResultList();
+			List<HallListDTO> hallList = new ArrayList<>();
+			for (Hall_Info h : hl) {
+				HallListDTO dto = new HallListDTO(h);
+			    hallList.add(dto);
+			}
+			return hallList;
 		}
 		
 		

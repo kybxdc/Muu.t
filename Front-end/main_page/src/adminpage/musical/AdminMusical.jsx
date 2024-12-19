@@ -3,9 +3,10 @@ import classes from './AdminMusical.module.css';
 import axios from 'axios';
 import Modal from "../../mainpage/Modal";
 import MusicalModal from './MusicalModal';
+import { useNavigate } from 'react-router-dom';
 
 export default function AdminMusical(){
-
+    const navigate = useNavigate();
     //상세정보 입력용 modal
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
@@ -44,7 +45,8 @@ export default function AdminMusical(){
                     <th className={classes.info}>지역</th>
                     <th className={classes.info}>공연 시작일</th>
                     <th className={classes.info}>공연 종료일</th>
-                    <th className={classes.info}>상세 정보</th>
+                    <th className={classes.info}>회차 정보</th>
+                    <th className={classes.info}>가격 정보</th>
                 </tr>
             </thead>
             <tbody>
@@ -57,6 +59,7 @@ export default function AdminMusical(){
                     <td className={classes.info}>{musical.musical_start_date}</td>
                     <td className={classes.info}>{musical.musical_end_date}</td>
                     <td className={classes.info}><button className={classes.input_btn} onClick={()=>openModal(musical.id)}>입력</button></td>
+                    <td className={classes.info}><button className={classes.input_btn} onClick={()=>{navigate(`../seatgrade/${musical.id}`)}}>설정</button></td>
                 </tr>
             ))}
             </tbody>
