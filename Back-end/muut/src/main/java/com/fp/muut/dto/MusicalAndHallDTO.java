@@ -24,6 +24,8 @@ public class MusicalAndHallDTO {
 	private String musical_actor;
 	private String hall_name;
 	private String hall_addr;
+	private String hall_la;
+	private String hall_lo;
 }
 
 
