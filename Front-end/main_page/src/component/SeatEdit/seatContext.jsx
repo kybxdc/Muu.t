@@ -22,7 +22,7 @@ export const Seat = createContext({
 
 export default function SeatProvider({ children, apiLoc }) {
   const hall_id = useParams().hall_id || undefined;
-  const performance_id = useParams().performance_id || undefined;
+  const musical_id = useParams().musical_id || undefined;
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [seatData, setSeatData] = useState({});
   const [seats, setSeats] = useState([]);
@@ -32,7 +32,7 @@ export default function SeatProvider({ children, apiLoc }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (performance_id == undefined) {
+      if (musical_id == undefined) {
         try {
           const response = await fetch(`/api/seat/getseat/${hall_id}`);
           if (!response.ok) {
@@ -47,10 +47,10 @@ export default function SeatProvider({ children, apiLoc }) {
       if (hall_id == undefined) {
         try {
           const response = await fetch(
-            `/api/seat/getseatposition/${performance_id}`
+            `/api/seat/getseatposition/${musical_id}`
           );
           const response2 = await fetch(
-            `/api/seat/getseat/performance/${performance_id}`
+            `/api/seat/getseat/musical/${musical_id}`
           );
           const result = await response.json();
           const data = await response2.json();
@@ -194,7 +194,7 @@ export default function SeatProvider({ children, apiLoc }) {
     console.log(JSON.stringify(seats));
     let uri = hall_id
       ? `/api/seat/saveposition/h/${hall_id}`
-      : `/api/seat/saveposition/p/${performance_id}`;
+      : `/api/seat/saveposition/m/${musical_id}`;
     try {
       const response = await fetch(uri, {
         method: "POST",
