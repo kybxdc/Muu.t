@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.fp.muut.dto.PerformanceReserveDTO;
+import com.fp.muut.dto.PerformanceSelectDTO;
 import com.fp.muut.entity.Hall_Info;
 import com.fp.muut.entity.Musical;
 import com.fp.muut.entity.Performance;
@@ -29,15 +31,17 @@ public class PerformanceRepository {
                 .orElse(null);
 	}
 
-	public List<Performance> findPfByIdAndDate(Long musical_id, Date performance_date) {
+	public List<PerformanceSelectDTO> findPfByIdAndDate(Long musical_id, Date performance_date) {
 	    return em.createQuery(
-	        "SELECT p FROM Performance p WHERE p.musical.id = :musical_id AND p.performance_date = :performance_date", 
-	        Performance.class
+	        "SELECT new com.fp.muut.dto.PerformanceSelectDTO ( p.id, p.performance_date, p.performance_start_time )" +
+	        " FROM Performance p WHERE p.musical.id = :musical_id AND p.performance_date = :performance_date", 
+	        PerformanceSelectDTO.class
 	    )
 	    .setParameter("musical_id", musical_id)
 	    .setParameter("performance_date", performance_date)
 	    .getResultList();
 	}
+
 
 
 }

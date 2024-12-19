@@ -8,7 +8,7 @@ export default function BookingTime({ selectedDate, performances, onPerformanceS
           <div
             key={index}
             className={styles.performance_start_time}
-            onClick={() => onPerformanceSelect(performance.id)} // 선택된 Performance ID 전달
+            onClick={() => onPerformanceSelect(performance.performance_id)} // 선택된 Performance ID 전달
             style={{ cursor: "pointer" }} // 클릭 가능한 UI 표시
           >
             {performance.performance_start_time}
