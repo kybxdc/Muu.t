@@ -27,6 +27,7 @@ public class PerformanceRepository {
                 .getResultStream()
                 .findFirst()
                 .orElse(null);
+		
 	}
 
 	public List<Performance> findPfByIdAndDate(Long musical_id, Date performance_date) {

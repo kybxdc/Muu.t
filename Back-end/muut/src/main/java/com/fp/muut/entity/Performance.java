@@ -43,10 +43,6 @@ public class Performance {
 	private Date performance_date;
 	private String performance_start_time;
 	
-	// Performance_Seats 양방향 매핑
-	@OneToOne(mappedBy = "performance")
-	private Performance_Seats performance_Seats;
-	
 	// Reservation 양방향 매핑
 //	@OneToMany(mappedBy = "performance")
 //	private List<Reservation> reservations = new ArrayList<>();

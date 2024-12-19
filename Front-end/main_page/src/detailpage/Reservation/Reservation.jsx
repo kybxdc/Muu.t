@@ -21,6 +21,7 @@ export default function Reservation({ musical }) {
         .post("http://localhost:9090/setPerformance/BookingTime", requestData)
         .then((response) => {
           setPerformances(response.data); // 받아온 Performance 데이터 설정
+          console.log(response.data)
         })
         .catch((error) => {
           console.error("Error fetching performance data:", error);

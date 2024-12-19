@@ -61,8 +61,8 @@ public class SeatService {
 		String seatPath = "./seatData/";
 		if(id_type.equals("h")) {
 			seatPath+= "seatData"+id+".json";
-		}else if(id_type.equals("p")) {
-			seatPath+= "PerFormance"+id+".json";
+		}else if(id_type.equals("m")) {
+			seatPath+= "Musical"+id+".json";
 		}else {
 			seatPath=null;
 		}
@@ -78,8 +78,8 @@ public class SeatService {
 		seatRepository.saveSeats(id, seatPath, id_type);
 	}
 
-	public String findSeatByPerformanceId(Long performance_id, String seat_type) {
-		String positionPath = seatRepository.findSeatByPerformanceId(performance_id, seat_type);
+	public String findSeatByMusicalId(Long musical_id, String seat_type) {
+		String positionPath = seatRepository.findSeatByMusicalId(musical_id, seat_type);
 		
 		String seatData = null;
 		
@@ -94,10 +94,14 @@ public class SeatService {
 		return seatData;
 	}
 
-	public Long getSeatDataByPerformance(Long performance_id) {
+	public Long getSeatDataByMusical(Long musical_id) {
 		// performance_id로 hall_id 검색
-		Long hall_id = seatRepository.findHall_IdByPerformance_Id(performance_id);
+		Long hall_id = seatRepository.findHall_IdByMusical_Id(musical_id);
 		return hall_id;
+	}
+
+	public Long findMusicalByPerformanceId(Long performance_id) {
+		return seatRepository.findMusicalByPerformanceId(performance_id);
 	}
 	
 	
