@@ -58,7 +58,7 @@ export default function MyInfo({grade, memberId, name, password, phone, addr}) {
     };
     
     return(
-        <div className={classes.width_limit}>
+        <div>
          <main style={{marginTop:'5%', marginBottom:'20%'}}>
         <h2 style={{ marginLeft: '20px'}}>회원정보수정</h2>
         <p style={{ marginLeft: '20px'}}>회원님은 

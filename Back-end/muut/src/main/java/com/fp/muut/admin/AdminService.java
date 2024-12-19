@@ -1,6 +1,7 @@
 package com.fp.muut.admin;
 
 import java.sql.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -57,7 +58,6 @@ public class AdminService {
 //	
 
 	// 뮤지컬 조회
-	//@Transactional(readOnly = true)
 		public List<Musical> findId(String musical_title) {
 			return adminRepository.findByName(musical_title);
 		}
@@ -102,26 +102,32 @@ public class AdminService {
 			}
 
 		//뮤지컬 상세정보수정
-//		@Transactional
-//		public Performance updateShow(Map<String, String> updatedData, HttpServletRequest request) {
-//			Performance performance = adminRepository.findById(updatedData.get("id"));
-//     		String performanceDateStr = updatedData.get("performance_date");
-//     		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//             try {
-//                 // String → java.util.Date 변환
-//                 java.util.Date performanceDate = dateFormat.parse(performanceDateStr);
-//                 System.out.println("Converted Date: " + performanceDate);
-//             } catch (ParseException e) {
-//                 System.out.println("Date parsing error: " + e.getMessage());
-//             }
-//			performance.setPerformance_date(performanceDate);
-//			performance.setPerformance_start_time(updatedData.get("performance_time"));
-//			
-//			
-//			adminRepository.update(performance);
-//			return performance;
-//		}
-//		
+		@Transactional
+		public Performance updateShow(Map<String, String> updatedData, HttpServletRequest request) {
+			
+			Performance performance = adminRepository.findById(updatedData.get("id"));
+     		String performanceDateStr = updatedData.get("performance_date");
+     		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+             try {
+                 // String → java.util.Date 변환
+                 java.util.Date performanceDate = dateFormat.parse(performanceDateStr);
+                 System.out.println("Converted Date: " + performanceDate);
+                 performance.setPerformance_date(performanceDate);
+                 performance.setPerformance_start_time(updatedData.get("performance_start_time"));
+                 adminRepository.update(performance);
+                 
+             } catch (ParseException e) {
+                 System.out.println("Date parsing error: " + e.getMessage());
+             }
+             return performance;
+		}
+		
+		//뮤지컬 회차 삭제
+		@Transactional
+		public void deleteShow(String selectedId) {
+			adminRepository.deleteById(selectedId);
+		}
+		
 		
 		
 	}

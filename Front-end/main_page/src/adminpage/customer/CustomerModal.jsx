@@ -177,8 +177,7 @@ export default function CustomerModal({id, member}) {
           <br/>
           <br/>
       <button onClick={isEditing ? handleUpdate : handleEditClick}
-      className={isEditing ? classes.changePassword : classes.submit_btn}
-      style={{}}>
+      className={isEditing ? classes.changePassword : classes.submit_btn}>
         {isEditing ? '수정완료' : '회원정보수정'}
       </button>
    </main>

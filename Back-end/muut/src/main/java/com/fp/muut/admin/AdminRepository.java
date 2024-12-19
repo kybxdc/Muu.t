@@ -55,7 +55,7 @@ public class AdminRepository {
 		
 	//공연상세 중복체크용
 		public Performance findById(String performance_id){
-			return em.createQuery("select p from Performance p where p.performance_id = :performance_id", Performance.class).setParameter("performance_id", performance_id).getSingleResult();
+			return em.createQuery("select p from Performance p where p.id = :performance_id", Performance.class).setParameter("performance_id", performance_id).getSingleResult();
 		}
 		
 	//뮤지컬 제목 검색
@@ -75,7 +75,11 @@ public class AdminRepository {
 			return performanceList;
 		}
 		
-		
+	//공연삭제
+		public void deleteById(String performance_id){
+			em.createQuery("delete from Performance p where p.id = :id").setParameter("id", performance_id).executeUpdate();
+			em.flush(); 
+		}
 		
 		
 		

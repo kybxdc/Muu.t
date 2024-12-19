@@ -129,15 +129,22 @@ public class AdminController {
 	}
 	
 	//뮤지컬 상세정보변경
-//	@PostMapping("/updateShow")
-//	public Performance updateShow(@RequestBody Map<String, String> updatedData, HttpServletRequest request) {
-//		Performance performance = adminService.updateShow(updatedData, request);
-//		if (performance != null) {
-//	        return performance;
-//	    } else {
-//	        return null;
-//	    }
-//	}
+	@PostMapping("/updateShow")
+	public Performance updateShow(@RequestBody Map<String, String> updatedData, HttpServletRequest request) {
+		Performance performance = adminService.updateShow(updatedData, request);
+		if (performance != null) {
+	        return performance;
+	    } else {
+	        return null;
+	    }
+	}
 	
+	//뮤지컬 공연 삭제
+	@PostMapping("/deleteShow/{selectedMusicalId}")
+	public String deleteShow(@PathVariable("selectedMusicalId") long selectedMusicalId) {
+		String selectedId = String.valueOf(selectedMusicalId);
+		adminService.deleteShow(selectedId);
+		return "redirect:/success";
+	}
 	
 }

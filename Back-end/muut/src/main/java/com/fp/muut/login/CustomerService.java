@@ -69,10 +69,7 @@ public class CustomerService {
 	//회원탈퇴
 		public Customer dropOut(String customer_id) {
 				Customer customer = customerRepository.findById(customer_id);
-				Grade drop = new Grade();
-				drop.setCustomer_grade("drop");
-				drop.setDiscount_rate("0");
-				customer.setDiscound(drop);
+				customer.setCustomer_status("탈퇴");
 				customerRepository.save(customer);
 				return customer;
 		}

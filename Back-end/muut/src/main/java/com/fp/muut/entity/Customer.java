@@ -74,7 +74,7 @@ public class Customer {
 		this.customer_status = customer_status;
 		this.grade = grade;
 		this.customer_total_cash = customer_total_cash;
-	}
+	}	
 
 
 	

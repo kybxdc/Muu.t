@@ -15,18 +15,18 @@ export default function MusicaDetail(){
 
           //정보수정용 modal
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedId, setSelectedId] = useState(null);
     const [selectedDetail, setselectedDetail] = useState([]);
    
     const openModal = (id) => {
-        setSelectedId(id); // 선택된 ID 저장
-        const show = musicalList.find((m) => m.id === id);
+        const show = showMusical.find((m) => m.id === id);
         setselectedDetail(show);
+        console.log(show);
+        
         setIsModalOpen(true);
     };
 
     const closeModal = () => {
-        setSelectedId(null); // 선택된 ID 초기화
+        setselectedDetail(null); // 선택된 ID 초기화
         setIsModalOpen(false);
     };
 
@@ -74,7 +74,7 @@ export default function MusicaDetail(){
                 </tr>
             </thead>
             <tbody>
-            {showMusical.map((showMusical, id) => (
+            {showMusical.sort((a, b) => new Date(a.performance_date)-new Date(b.performance_date)).map((showMusical, id) => (
                 <tr key={id}>
                     <td className={classes.info}>{showMusical.id}</td>
                     <td className={classes.info}>{selectedMusical}</td>
