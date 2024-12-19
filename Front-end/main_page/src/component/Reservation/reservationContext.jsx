@@ -24,7 +24,7 @@ export default function ReservationProvider({ children }) {
   const [reserveInfo, setReserveInfo] = useState({});
   const [seats, setSeats] = useState([]);
   const [selectedSeats, setSelectedSeats] = useState([]);
-  const [ticketPrice, setTicketPrice] = useState(JSON.parse(sessionStorage.getItem("ticketPrice"))||0);
+  const [ticketPrice, setTicketPrice] = useState(0);
   const [isChecked, setIsChecked] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
   const [customer, setCustomer] = useState({});
@@ -54,9 +54,6 @@ export default function ReservationProvider({ children }) {
 
         const result = await response.json();
         setSeats(result);
-        if(JSON.parse(sessionStorage.getItem("selectedSeats"))){
-          setSelectedSeats(JSON.parse(sessionStorage.getItem("selectedSeats")));
-        }
       } catch (error) {
         console.log(error);
       }
@@ -96,7 +93,6 @@ export default function ReservationProvider({ children }) {
       }
       setSelectedSeats((prevSelect) => {
         const seats = [...prevSelect, seatId].sort();
-        sessionStorage.setItem("selectedSeats",JSON.stringify(seats));
         return seats;
       });
       setTicketPrice(
@@ -104,14 +100,12 @@ export default function ReservationProvider({ children }) {
             const price = Number(prevPrice) + Number(findSeat.grade.price);
             charge.current = (price*0.03);
             totalPrice.current = (price+Number(price*0.03));
-            sessionStorage.setItem("ticketPrice",price)
             return price;
         }
       );
     } else {
       setSelectedSeats((prevSelect) => {
         const seats = prevSelect.filter((id) => id != seatId)
-        sessionStorage.setItem("selectedSeats",JSON.stringify(seats));
         return seats;
       });
       setTicketPrice(
@@ -119,7 +113,6 @@ export default function ReservationProvider({ children }) {
             const price = Number(prevPrice) - Number(findSeat.grade.price)
             charge.current = (price*0.03);
             totalPrice.current = (price+Number(price*0.03));
-            sessionStorage.setItem("ticketPrice",price)
             return price;
         }
       );
