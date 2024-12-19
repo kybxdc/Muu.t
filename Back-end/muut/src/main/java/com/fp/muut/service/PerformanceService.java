@@ -12,6 +12,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fp.muut.dto.PerformanceDummyData;
 import com.fp.muut.dto.PerformanceReserveDTO;
+import com.fp.muut.dto.PerformanceSelectDTO;
 import com.fp.muut.entity.Hall_Info;
 import com.fp.muut.entity.Musical;
 import com.fp.muut.entity.Performance;
@@ -67,10 +68,10 @@ public class PerformanceService {
 	    }
     }
 
-	public List<Performance> findPf(PerformanceReserveDTO request) {
+	public List<PerformanceSelectDTO> findPf(PerformanceReserveDTO request) {
 		Long musical_id = request.getMusicalId();
 		Date performance_date = request.getDate();
-		List<Performance> performances = performanceRepository.findPfByIdAndDate(musical_id, performance_date);
+		List<PerformanceSelectDTO> performances = performanceRepository.findPfByIdAndDate(musical_id, performance_date);
 		return performances;
 	}
 
