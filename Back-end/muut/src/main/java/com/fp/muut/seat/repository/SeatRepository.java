@@ -3,8 +3,9 @@ package com.fp.muut.seat.repository;
 import org.springframework.stereotype.Repository;
 
 import com.fp.muut.entity.Hall_Info;
+import com.fp.muut.entity.Musical;
 import com.fp.muut.entity.Performance;
-import com.fp.muut.entity.Performance_Seats;
+import com.fp.muut.entity.Musical_Seats;
 import com.fp.muut.entity.Seat_Position;
 
 import jakarta.persistence.EntityManager;
@@ -43,41 +44,46 @@ public class SeatRepository {
 			seat_Position.setPosition(seats);
 			
 			em.persist(seat_Position);
-		}else if(id_type.equals("p")) {
-			Performance_Seats performance_Seats = em.find(Performance_Seats.class, id);
+		}else if(id_type.equals("m")) {
+			Musical_Seats musical_Seats = em.find(Musical_Seats.class, id);
 			
-			if(performance_Seats==null) {
-				performance_Seats = new Performance_Seats();
+			if(musical_Seats==null) {
+				musical_Seats = new Musical_Seats();
 			}
-			Performance performance = em.find(Performance.class, id);
+			Musical musical = em.find(Musical.class, id);
 			
-			performance_Seats.setPerformance(performance);
-			performance_Seats.setPosition(seats);
+			musical_Seats.setMusical(musical);
+			musical_Seats.setPosition(seats);
 			
-			em.persist(performance_Seats);
+			em.persist(musical_Seats);
 		}
 	}
 
-	public String findSeatByPerformanceId(Long performance_id, String seat_type) {
+	public String findSeatByMusicalId(Long musical_id, String seat_type) {
 		String position = null;
 		if(seat_type.equals("grade")) {
-			position = em.createQuery("select ps.position from Performance p join p.performance_Seats ps where p.id=:performance_id",String.class)
-					.setParameter("performance_id", performance_id)
+			position = em.createQuery("select ms.position from Musical m join m.musical_Seats ms where m.id=:musical_id",String.class)
+					.setParameter("musical_id", musical_id)
 					.getSingleResult();				
 		}
 		if(seat_type.equals("non_grade")) {
-			position = em.createQuery("select sp.position from Performance p join p.hall_Info hi join hi.seat_Position sp where p.id=:performance_id",String.class)
-					.setParameter("performance_id", performance_id)
+			position = em.createQuery("select sp.position from Musical m join m.hall_Info hi join hi.seat_Position sp where m.id=:musical_id",String.class)
+					.setParameter("musical_id", musical_id)
 					.getSingleResult();				
 		}
 		
 		return position;
 	}
 
-	public Long findHall_IdByPerformance_Id(Long performance_id) {
-		return em.createQuery("select hi.id from Performance p join p.hall_Info hi where p.id=:performance_id",Long.class)
-				.setParameter("performance_id", performance_id)
+	public Long findHall_IdByMusical_Id(Long musical_id) {
+		return em.createQuery("select hi.id from Musical m join m.hall_Info hi where m.id=:musical_id",Long.class)
+				.setParameter("musical_id", musical_id)
 				.getSingleResult();
+	}
+
+	public Long findMusicalByPerformanceId(Long performance_id) {
+		return em.createQuery("select m.id from Performance p join p.musical m where p.id=:performance_id",Long.class)
+				.setParameter("performance_id", performance_id).getSingleResult();
 	}
 
 }

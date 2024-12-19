@@ -34,9 +34,9 @@ public class SeatController {
 		return ResponseEntity.ok(seatService.getSeat(hall_id));
 	}
 	
-	@GetMapping("getseat/performance/{performance_id}")
-	public ResponseEntity<Object> getSeatByPerformance(@PathVariable Long performance_id){
-		Long hall_id = seatService.getSeatDataByPerformance(performance_id);
+	@GetMapping("getseat/musical/{musical_id}")
+	public ResponseEntity<Object> getSeatByPerformance(@PathVariable Long musical_id){
+		Long hall_id = seatService.getSeatDataByMusical(musical_id);
 		return getSeat(hall_id);
 	} 
 	
@@ -48,18 +48,17 @@ public class SeatController {
 		return ResponseEntity.ok("좌석위치 잘 넣었음");
 	}
 	
-	@PostMapping("/saveposition/p/{performance_id}")
-	public ResponseEntity<String> savePositions(@RequestBody String seats, @PathVariable Long performance_id) {
+	@PostMapping("/saveposition/m/{musical_id}")
+	public ResponseEntity<String> savePositions(@RequestBody String seats, @PathVariable Long musical_id) {
 
-		seatService.saveSeats(performance_id, seats,"p");
+		seatService.saveSeats(musical_id, seats,"m");
 		
 		return ResponseEntity.ok("좌석위치 잘 넣었음");
 	}
 	
-	@GetMapping("/getseatposition/{performance_id}")
-	public ResponseEntity<String> getPosition(@PathVariable Long performance_id){
-		System.out.println(performance_id);
-		String seatData = seatService.findSeatByPerformanceId(performance_id, "non_grade");
+	@GetMapping("/getseatposition/{musical_id}")
+	public ResponseEntity<String> getPosition(@PathVariable Long musical_id){
+		String seatData = seatService.findSeatByMusicalId(musical_id, "non_grade");
 		
 		if(seatData!=null) {
 			return ResponseEntity.ok(seatData);
@@ -70,8 +69,9 @@ public class SeatController {
 	
 	@GetMapping("/getseatposition/grade/{performance_id}")
 	public ResponseEntity<String> getGradePosition(@PathVariable Long performance_id){
-		System.out.println(performance_id);
-		String seatData = seatService.findSeatByPerformanceId(performance_id, "grade");
+		
+		Long musical_id = seatService.findMusicalByPerformanceId(performance_id);
+		String seatData = seatService.findSeatByMusicalId(musical_id, "grade");
 		
 		if(seatData!=null) {
 			return ResponseEntity.ok(seatData);

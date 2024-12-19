@@ -46,7 +46,7 @@ const router = createBrowserRouter([
       {path: 'seatedit/:hall_id', element: <SeatProvider><SeatEdit /></SeatProvider>},
       {path: 'main', element: <AdminMain />},
       {path: 'seatinfo/:hall_id', element: <SeatInfo />},
-      {path: 'seatgrade/:performance_id', element: <SeatProvider><SeatGrade /></SeatProvider>},
+      {path: 'seatgrade/:musical_id', element: <SeatProvider><SeatGrade /></SeatProvider>},
     ]
   },
 ]);
