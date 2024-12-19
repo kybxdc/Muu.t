@@ -1,0 +1,21 @@
+.info {
+    padding: 10px;
+    vertical-align: middle;
+  }
+  
+  .reserveTh {
+    padding: 10px;
+    background-color: #f4f4f4;
+    cursor: pointer;
+  }
+
+  .Musical_detail {
+    border-radius: 8px;
+    border: 1px solid #CCC;
+    color: black;
+    background-color: white;
+    padding: 0.6em 1.2em;
+    transition: border-color 0.25s;
+    border-collapse: collapse;
+    margin: 10px;
+  }

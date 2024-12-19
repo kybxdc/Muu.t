@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import classes from './MyReserv.module.css';
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-export default function MyReserv() {
-
+export default function MyReserv({ showReserve }) {
+const navigate = useNavigate();
 const [selectedReserve, setSelectedReserve] = useState("PreReservs");
 const [activeColumn, setActiveColumn] = useState("PreReservs");
 const [reserveList, setReserveList] = useState();
@@ -18,6 +19,14 @@ function handleSelect(selectedButton) {
     setSelectedReserve(selectedButton);
     setActiveColumn(selectedButton);
 }
+function showDetail(){
+  const musical = {
+    title: reserv.musical_title,  // 예시: reserv.musical_title → musical.title
+    image: reserv.musical_image,  // 예시: reserv.musical_image → musical.image
+  };
+  // 변환된 musical 객체를 state로 전달하며 detailpage로 이동
+  navigate("/detailpage", { state: { musical } });
+};
 
 
 useEffect(() => {
@@ -36,10 +45,10 @@ if (selectedReserve === "PreReservs") {
   if(PreReservs.length > 0) {
     myreserv = PreReservs.map((reserv) => (
       <tr className={classes.reserveTb} key={reserv.reservation_num}>
-        <td className={classes.reserveTb}><img src={reserv.musical_image} style={{ width: '80px' }} /></td>
-        <td className={classes.reserveTb}>{reserv.musical_title}</td>
+        <td className={classes.reserveTb}><img src={reserv.musical_image} style={{ width: '80px' }} onClick={showDetail}/></td>
+        <td className={classes.reserveTb} onClick={showDetail}>{reserv.musical_title}</td>
         <td className={classes.reserveTb}>{reserv.performance_date} {reserv.performance_start_time}</td>
-        <td className={classes.reserveTb}><button className={classes.Musical_detail}>상세</button> <button className={classes.cancel}>취소</button></td>
+        <td className={classes.reserveTb}><button className={classes.Musical_detail} onClick={showReserve(reserv.reservation_num)}>상세</button> <button className={classes.cancel}>취소</button></td>
       </tr>))
     }else{
       myreserv = <tr><td className={classes.reserveTb} colSpan="4">아직 예매내역이 없습니다</td></tr>
@@ -48,10 +57,10 @@ if (selectedReserve === "PreReservs") {
     if(pastReservs.length > 0){
       myreserv = pastReservs.map((reserv) => (
         <tr className={classes.reserveTb} key={reserv.reservation_num}>
-        <td className={classes.reserveTb}><img src={reserv.musical_image} style={{ width: '80px' }} /></td>
-        <td className={classes.reserveTb}>{reserv.musical_title}</td>
+        <td className={classes.reserveTb}><img src={reserv.musical_image} style={{ width: '80px' }} onClick={showDetail}/></td>
+        <td className={classes.reserveTb} onClick={showDetail}>{reserv.musical_title}</td>
         <td className={classes.reserveTb}>{reserv.performance_date} {reserv.performance_start_time}</td>
-          <td className={classes.reserveTb}><button className={classes.Musical_detail}>상세</button></td>
+          <td className={classes.reserveTb}><button className={classes.Musical_detail} onClick={showReserve(reserv.reservation_num)}>상세</button></td>
         </tr>))
     } else{
       myreserv = <tr><td className={classes.reserveTb} colSpan="4">아직 예매내역이 없습니다</td></tr>

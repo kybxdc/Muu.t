@@ -48,6 +48,7 @@ export default function Login() {
                     return;
                   }else{
                       alert("환영합니다. 익명");
+                      Cookies.set("customer_id", customer_id);
                       document.location.href="/";
                     }
                     }

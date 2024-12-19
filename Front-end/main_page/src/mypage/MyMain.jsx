@@ -12,13 +12,20 @@ import axios from 'axios';
 import Header from "../mainpage/components/Header";
 import Footer from "../mainpage/components/Footer";
 import handleLogout from '../login/Logout';
+import MyReservDetail from './MyReserv/MyReservDetail';
 
 export default function MyMain() {
 
     const [selectedMenu, setSelectedMenu] = useState();
+    const [selectedReserv, setSelectedReserv] = useState();
     function handleSelect(menu) {
         setSelectedMenu(menu); // 선택한 메뉴 상태 업데이트
       }
+
+      const showReserve = (reservation_num) => {
+        setSelectedMenu('MyReservDetail'); // 메뉴 변경
+        setSelectedReserv(reservation_num); // reserv.num 저장
+      };
 
     const [member, setMember] = useState();
     useEffect(() => {
@@ -47,7 +54,9 @@ export default function MyMain() {
           addr={member?.customer_address || 'null'}
         />);
     } else if (selectedMenu === 'MyReserv'){
-        mainmenu = <MyReserv />;
+        mainmenu = <MyReserv showReserve={showReserve} />;
+    } else if (selectedMenu === 'MyReservDetail') {
+      mainmenu = <MyReservDetail reservation_num={selectedReserv}/>;
     }else if (selectedMenu === 'MyAccount'){
         mainmenu = <MyAccount />;
     }else if (selectedMenu === 'DropOut'){

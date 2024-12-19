@@ -75,6 +75,9 @@ export default function Calendar() {
     return acc;
   }, {});
 
+function showReserve(){
+  window.location.href = "https://www.example.com";
+}
 
   return (
     <div className="calendar" style={{marginBottom:'20%'}}>
@@ -97,6 +100,7 @@ export default function Calendar() {
               src={reserveDates[day]} // 매핑된 이미지 URL
               alt="예약한 뮤지컬 포스터"
               className="reserve-image"
+              onclick={showReserve()}
             />
           )}
           <span className={`day-number-overlay ${reserveDates[day] ? 'reserved-day' : ''}`}>{day}</span>

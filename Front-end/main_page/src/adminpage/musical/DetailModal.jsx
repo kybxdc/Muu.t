@@ -5,8 +5,9 @@ import axios from 'axios';
 export default function DetailModal({ showMusical }){
     const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState({
+        id : showMusical.id,
         newDate: showMusical.performance_date,
-        newTime:showMusical.performance_start_time,
+        newTime: showMusical.performance_start_time,
       });
 
         function handleEditClick(){
@@ -21,16 +22,28 @@ export default function DetailModal({ showMusical }){
               }
       
           function handleUpdate(){
-            const updatedData = {
-              id: showMusical.id,
-              performance_date: formData.newDate,
-              performance_start_time: formData.newTime,
-            };
+              const updatedData = {
+                id: showMusical.id,
+                performance_date: formData.newDate,
+                performance_start_time: formData.newTime,
+              };
+              axios.defaults.withCredentials = true;
+              axios.post('http://localhost:9090/admin/updateShow', updatedData)
+                .then((response) => {
+                  alert('정보 변경이 완료되었습니다.')
+                  setFormData(response.data);  // 서버에서 반환된 최신 데이터를 사용
+                  setIsEditing(false);  // 수정 완료 후 편집 상태 종료
+                })
+                .catch((error) => {
+                  alert(console.error("Error updating data:", error));
+                });
+          };
+
+          function handleDelete(){
             axios.defaults.withCredentials = true;
-            axios.post('http://localhost:9090/admin/updateShow', updatedData)
+            axios.post(`http://localhost:9090/admin/deleteShow/${showMusical.id}`)
               .then((response) => {
-                alert('정보 변경이 완료되었습니다.')
-                setFormData(response.data);  // 서버에서 반환된 최신 데이터를 사용
+                alert('공연 삭제가 완료되었습니다.')
                 setIsEditing(false);  // 수정 완료 후 편집 상태 종료
               })
               .catch((error) => {
@@ -62,7 +75,7 @@ export default function DetailModal({ showMusical }){
                                   onChange={handleChange}
                                 />
                               ) : (
-                                <span>{formData.newDate}</span>
+                                <span>{formData.newDate.split('T')[0]}</span>
                               )}
                             </td>
                           </tr>
@@ -84,8 +97,8 @@ export default function DetailModal({ showMusical }){
                             </td>
                           </tr>
 
-                <button onClick={isEditing ? handleUpdate : handleEditClick} className={isEditing ? classes.changePassword : classes.submit_btn}> {isEditing ? '수정완료' : '공연정보수정'}</button>
-              <p></p> <button onClick={()=>{}} className={classes.changePassword} style={{alignItems : 'right'}}> 삭제 </button>
+                <button onClick={isEditing ? handleUpdate : handleEditClick} className={classes.submit_btn}> {isEditing ? '수정완료' : '공연정보수정'}</button>
+              <p></p> <button onClick={handleDelete} className={classes.changePassword} style={{alignItems : 'right'}}> 삭제 </button>
             </form>
         </>
     )
