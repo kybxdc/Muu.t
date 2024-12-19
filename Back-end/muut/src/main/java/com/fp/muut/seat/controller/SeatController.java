@@ -80,4 +80,9 @@ public class SeatController {
 		return ResponseEntity.status(500).body("좌석 불러오기 실패");
 	}
 	
+	@GetMapping("/gethall/{musical_id}")
+	public Long getHall(@PathVariable Long musical_id) {
+		return seatService.findHallByMusical(musical_id);
+	}
+	
 }

@@ -103,6 +103,10 @@ public class SeatService {
 	public Long findMusicalByPerformanceId(Long performance_id) {
 		return seatRepository.findMusicalByPerformanceId(performance_id);
 	}
+
+	public Long findHallByMusical(Long musical_id) {
+		return seatRepository.findHall_IdByMusical_Id(musical_id);
+	}
 	
 	
 }

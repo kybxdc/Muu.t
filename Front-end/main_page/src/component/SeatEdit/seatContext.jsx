@@ -1,5 +1,5 @@
 import { createContext, useRef, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const Seat = createContext({
   seats: [],
@@ -29,6 +29,7 @@ export default function SeatProvider({ children, apiLoc }) {
   const [grade, setGrade] = useState("");
   const [price, setPrice] = useState("");
   const GRID_SIZE = useRef(30);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,6 +53,14 @@ export default function SeatProvider({ children, apiLoc }) {
           const response2 = await fetch(
             `/api/seat/getseat/musical/${musical_id}`
           );
+          if(!response.ok||!response2.ok){
+            const response_hall = await fetch(
+              `/api/seat/gethall/${musical_id}`
+            ) 
+            const hall_id = await response_hall.json();
+            alert("우선 좌석 배치도를 등록해주세요")
+            navigate(`../seatinfo/${hall_id}`);
+          }
           const result = await response.json();
           const data = await response2.json();
           setSeatData(data);
@@ -209,7 +218,9 @@ export default function SeatProvider({ children, apiLoc }) {
       const result = await response.text();
       console.log("서버 응답 : " + result);
       alert("저장성공!");
+      navigate("../main");
     } catch (error) {
+      alert("저장실패!");
       console.log("에러발생 : " + error);
     }
   };
@@ -233,6 +244,7 @@ export default function SeatProvider({ children, apiLoc }) {
         seat["grade"] = {grade:grade, price:price};
         console.log(seat);
       }
+      alert("등급 적용!");
     });
   }
 

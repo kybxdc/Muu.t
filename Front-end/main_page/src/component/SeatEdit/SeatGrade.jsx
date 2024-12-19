@@ -13,6 +13,7 @@ export default function SeatGrade() {
     handleSubmitGrade,
     handleChangePrice,
   } = useContext(Seat);
+
   return (
     <>
       <SeatEditorGrid>

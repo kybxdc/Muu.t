@@ -140,7 +140,6 @@ export default function SeatInfo() {
             </label>
           </div>
         ))}
-  <button onClick={()=>{console.log(sessionStorage.getItem("customer_id"))}} hidden={true}>테스트를 위한 버튼</button>
       <button
         type="submit"
         disabled={colObject["A"] ? false : true}
