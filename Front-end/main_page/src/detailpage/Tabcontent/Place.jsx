@@ -23,8 +23,10 @@ export default function Place({ hall_name, hall_addr, hall_la, hall_lo }) {
 
   return (
     <div className={styles.Place}>
-      <div>장소: {hall_name}</div>
-      <div>주소: {hall_addr}</div>
+      <div className={styles.Place_detail_box}>
+        <p>장소: {hall_name}</p>
+        <p>주소: {hall_addr}</p>
+      </div>
       <div id="map" style={{ width: "100%", height: "600px" }}></div>
     </div>
   );

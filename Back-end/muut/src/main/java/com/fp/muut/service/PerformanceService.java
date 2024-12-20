@@ -71,25 +71,9 @@ public class PerformanceService {
 	public List<PerformanceSelectDTO> findPf(PerformanceReserveDTO request) {
 		Long musical_id = request.getMusicalId();
 		Date performance_date = request.getDate();
+		
 		List<PerformanceSelectDTO> performances = performanceRepository.findPfByIdAndDate(musical_id, performance_date);
 		return performances;
 	}
-
-//	public void savePf() {
-//		Performance performance = new Performance();
-//		
-//		Musical musical = performanceRepository.findMuById(3L);
-//		performance.setMusical(musical);
-//		performance.setHall_Info(musical.getHall_Info());
-//		
-//		Calendar calendar = Calendar.getInstance();
-//	    calendar.set(2024, Calendar.DECEMBER, 19, 0, 0, 0); // Month는 0부터 시작 (12월은 11)
-//	    calendar.set(Calendar.MILLISECOND, 0);
-//	    Date date = calendar.getTime();
-//		performance.setPerformance_date(date);
-//		performance.setPerformance_start_time("18:00");
-//
-//		performanceRepository.savePf(performance);
-//	}
 
 }

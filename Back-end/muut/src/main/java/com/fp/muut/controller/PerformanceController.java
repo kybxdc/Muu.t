@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fp.muut.dto.PerformanceReserveDTO;
 import com.fp.muut.dto.PerformanceSelectDTO;
@@ -24,9 +25,9 @@ public class PerformanceController {
 	
 	// Performance 더미 데이터 저장
 	@GetMapping("/savePerformance")
-	public String savePerformance() {
+	public ModelAndView savePerformance() {
 		performanceService.savePf();
-		return "/savePf";
+		return new ModelAndView("savePf");
 	}
 	
 	// 상세페이지의 회차선택 칸에 performance 데이터 전송

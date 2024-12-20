@@ -5,29 +5,37 @@ import BookingSeat from "./BookingSeat/BookingSeat";
 import styles from "./Reservation.module.css";
 import axios from "axios";
 
-export default function Reservation({ musical }) {
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [performances, setPerformances] = useState([]);
-  const [selectedPerformanceId, setSelectedPerformanceId] = useState(null); // 선택된 Performance ID
+export default function Reservation(props) {
+  const [remainSeatCount, setRemainSeatCount] = useState(null);
 
   useEffect(() => {
-    if (selectedDate && musical) {
-      const requestData = {
-        date: selectedDate,
-        musicalId: musical.id,
-      };
-
-      axios
-        .post("http://localhost:9090/setPerformance/BookingTime", requestData)
-        .then((response) => {
-          setPerformances(response.data); // 받아온 Performance 데이터 설정
-          console.log(response.data)
-        })
-        .catch((error) => {
-          console.error("Error fetching performance data:", error);
-        });
-    }
-  }, [selectedDate, musical]);
+    const fetchSeatsCount = async () => {
+      if (!props.selectedPerformanceId) return; // Performance ID가 없으면 종료
+      console.log("props.selectedPerformanceId == ", props.selectedPerformanceId);
+  
+      try {
+        const response = await fetch(
+          `/api/seat/getseatposition/grade/${props.selectedPerformanceId}`
+        );
+        const response2 = await fetch(
+          `/api/reserve/sold/${props.selectedPerformanceId}`
+        );
+  
+        const result = await response.json();
+        const result2 = await response2.json();
+        let array = result2.map((seat) => seat.id);
+        setRemainSeatCount(result.length - array.length);
+        console.log("Remaining seats1:", result.length);
+        console.log("Remaining seats2:", array.length);
+        console.log("Remaining seats:", result.length - array.length);
+      } catch (error) {
+        console.error("Error fetching seat data:", error);
+      }
+    };
+  
+    fetchSeatsCount();
+  }, [props.selectedPerformanceId]); // selectedPerformanceId가 변경될 때 호출
+  
 
   return (
     <div className={styles.reserve_tab}>
@@ -35,9 +43,10 @@ export default function Reservation({ musical }) {
         <h3 className={styles.reserve_head}>관람일</h3>
         <div className={styles.reserve_calendar_box}>
           <BookingCalendar
-            selectedDate={selectedDate}
-            setSelectedDate={setSelectedDate}
-            musical={musical}
+            selectedDate={props.selectedDate}
+            setSelectedDate={props.setSelectedDate}
+            musical={props.musical}
+            performances={props.performances}
           />
         </div>
       </div>
@@ -45,16 +54,19 @@ export default function Reservation({ musical }) {
         <h3 className={styles.reserve_head}>회차</h3>
         <div className={styles.reserve_time_tem}>
           <BookingTime
-            selectedDate={selectedDate}
-            performances={performances}
-            onPerformanceSelect={setSelectedPerformanceId} // 선택 이벤트 핸들러 전달
+            // selectedDate={selectedDate}
+            performances={props.performances}
+            onPerformanceSelect={props.setSelectedPerformanceId} // 선택 이벤트 핸들러 전달
           />
         </div>
       </div>
       <div className={styles.reserve_seat}>
         <h3 className={styles.reserve_head}>예매가능좌석</h3>
         <div className={styles.reserve_seat_tem}>
-          <BookingSeat performanceId={selectedPerformanceId} />
+          <BookingSeat
+            performanceId={props.selectedPerformanceId}
+            remainSeatCount={remainSeatCount}
+          />
         </div>
       </div>
     </div>

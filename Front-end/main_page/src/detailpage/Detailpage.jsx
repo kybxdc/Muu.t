@@ -19,10 +19,43 @@ import Reservation from "./Reservation/Reservation";
 
 import Cookies from "js-cookie";
 
-
 export default function Detailpage() {
   const location = useLocation();
-  const { musical } = location.state || {};
+  const { musical, defaultDate, defaultPerformanceId } = location.state || {};
+
+  const [performances, setPerformances] = useState([]);
+
+  const removeTimeFromDate = (date) => {
+    const newDate = new Date(date);
+    newDate.setHours(0, 0, 0, 0); // 시간을 00:00:00으로 설정
+    return newDate;
+  };
+
+  // 상태 초기화
+  const [selectedDate, setSelectedDate] = useState(
+    removeTimeFromDate(defaultDate || new Date())
+  ); // 전달된 기본값 사용
+  const [selectedPerformanceId, setSelectedPerformanceId] = useState(
+    defaultPerformanceId || null
+  );
+
+  useEffect(() => {
+    if (selectedDate && musical) {
+      const requestData = {
+        date: selectedDate,
+        musicalId: musical.id,
+      };
+
+      axios
+        .post("http://localhost:9090/setPerformance/BookingTime", requestData)
+        .then((response) => {
+          setPerformances(response.data); // 받아온 Performance 데이터 설정
+        })
+        .catch((error) => {
+          console.error("Error fetching performance data:", error);
+        });
+    }
+  }, [selectedDate, musical]);
 
   const [TabSelect, setTabSelect] = useState("InfoImgs");
   const tabs = [
@@ -31,29 +64,42 @@ export default function Detailpage() {
     { id: "Place", label: "장소정보" },
   ];
 
-  console.log(Cookies.get("customer_id"))
   return (
     <div>
       {/* Header */}
       <Header />
 
       {/* Main */}
-      <main className={[styles.detail_main, styles.width_limit].join(" ")} >
+      <main className={[styles.detail_main, styles.width_limit].join(" ")}>
         <section className={styles.product_info}>
-          <ProductInfoDetail musical={musical}/>
+          <ProductInfoDetail musical={musical} />
         </section>
         <section className={styles.product_reserve}>
-          <Reservation musical={musical}/>
+          <Reservation
+            musical={musical}
+            selectedDate={selectedDate}
+            setSelectedDate={setSelectedDate}
+            performances={performances}
+            setPerformances={setPerformances}
+            selectedPerformanceId={selectedPerformanceId}
+            setSelectedPerformanceId={setSelectedPerformanceId}
+          />
         </section>
         <section className={styles.product_tab}>
           {tabs.map((tab) => (
-            <TabButton key={tab.id} onSelect={() => setTabSelect(tab.id)} isSelected={TabSelect === tab.id} >
+            <TabButton
+              key={tab.id}
+              onSelect={() => setTabSelect(tab.id)}
+              isSelected={TabSelect === tab.id}
+            >
               {tab.label}
             </TabButton>
           ))}
         </section>
         <section className={styles.product_content}>
-          {TabSelect === "InfoImgs" && <InfoImgs descImgs={musical.musical_description} />}
+          {TabSelect === "InfoImgs" && (
+            <InfoImgs descImgs={musical.musical_description} />
+          )}
           {TabSelect === "Review" && <Review />}
           {TabSelect === "Place" && <Place {...musical} />}
         </section>

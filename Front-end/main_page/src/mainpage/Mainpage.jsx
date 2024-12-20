@@ -19,8 +19,8 @@ import SidePopup from "./SidePopup/SidePopup";
 
 function Mainpage() {
   // Musical 데이터 상태
-  const [musicals, setMusicals] = useState([]); 
-  
+  const [musicals, setMusicals] = useState([]);
+
   useEffect(() => {
     // Musical 데이터 호출
     axios
@@ -32,7 +32,7 @@ function Mainpage() {
         console.error("There was an error fetching musicals!", error);
       });
   }, []);
-  
+
   return (
     <>
       <div className={styles.mainpage_wrap}>
@@ -42,11 +42,28 @@ function Mainpage() {
         {/* Main */}
         <main className={[styles.mainpage, styles.main].join(" ")}>
           <TopBanner musicals={musicals} />
-          <section className={[styles.main_section, styles.width_limit, styles.section1].join(" ")} >
+          <section
+            className={[
+              styles.main_section,
+              styles.width_limit,
+              styles.section1,
+            ].join(" ")}
+          >
             <ul className={styles.product_grid}>
               {musicals.map((musical, index) => (
-                <li key={index} className={[styles.product_grid, styles.item].join(" ")} >
-                  <Link to="/detailpage" state={{musical}}>
+                <li
+                  key={index}
+                  className={[styles.product_grid, styles.item].join(" ")}
+                >
+                  <Link
+                    to="/detailpage"
+                    state={{
+                      musical,
+                      defaultDate: new Date(), // 오늘 날짜를 기본 관람일로 설정
+                      defaultPerformanceId:
+                        musical.performances?.[0]?.id || null, // 첫 번째 회차 ID
+                    }}
+                  >
                     <Product_grid {...musical} />
                   </Link>
                 </li>
@@ -56,7 +73,7 @@ function Mainpage() {
         </main>
 
         {/* Footer */}
-        <Footer/>
+        <Footer />
       </div>
       {/* <SidePopup /> */}
     </>
