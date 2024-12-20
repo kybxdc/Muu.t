@@ -8,6 +8,10 @@
   justify-content: space-between;
 }
 
+.reserve_head {
+  padding: 0 20px;
+}
+
 .reserve_date {
   width: 100%;
   border-right: 1px solid rgb(206, 206, 206);

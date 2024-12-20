@@ -1,4 +1,15 @@
-.Place{
+#map{
     min-height: 600px;
     width: 100%;
+}
+
+.Place_detail_box {
+    margin: 20px;
+}
+
+.Place_detail {
+    margin: 5px;
+    left: 0;
+    color: rgb(99, 98, 98);
+    width: 300px;
 }

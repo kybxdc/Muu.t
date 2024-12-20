@@ -1,14 +1,28 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
 
 import styles from "./BookingSeat.module.css";
 
-export default function BookingSeat({performanceId}) {
+export default function BookingSeat({ performanceId, remainSeatCount }) {
+  
+
   return (
-    <div>
-      {/* <Link to={`/reservation/${performanceId}/seatview`}> */}
-        <button onClick={()=>{window.open(`/reservation/${performanceId}/seatview`,"팝업창",                // 팝업 이름
-  "width=2000,height=1000,scrollbars=yes,resizable=yes" )}}>예매</button>
-      {/* </Link> */}
+    <div className={styles.remainSeatCount}>
+      <div className={styles.remainSeatCount_info}>
+        <p className={styles.remainSeatCount_info_title}>잔여좌석</p>
+        <p>{remainSeatCount}석</p>
+      </div>
+      <button
+        className={styles.reserve_button}
+        onClick={() => {
+          window.open(
+            `/reservation/${performanceId}/seatview`,
+            "팝업창", // 팝업 이름
+            "width=2000,height=1000,scrollbars=yes,resizable=yes"
+          );
+        }}
+      >
+        예매하기
+      </button>
     </div>
   );
 }
