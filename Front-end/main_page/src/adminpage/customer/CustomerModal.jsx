@@ -28,9 +28,9 @@ export default function CustomerModal({id, member}) {
           customer_phone: formData.newPhone,
           customer_address: formData.newAddr,
           customer_status : formData.newStatus,
-          grade : {customer_grade : formData.newGrade.customer_grade,
-            discount_rate : selectedMember.grade.discount_rate
-          }
+          // grade : {customer_grade : formData.newGrade.customer_grade,
+          //   discount_rate : selectedMember.grade.discount_rate
+          // }
           
         }
          axios.post('http://localhost:9090/admin/update', updatedData).then((response) => {
@@ -163,7 +163,7 @@ export default function CustomerModal({id, member}) {
           <tr className={classes.info}>
             <td className={classes.info1}>등급</td>
             <td className={classes.info}>
-              {isEditing ? (
+              {/* {isEditing ? (
                 <select className={classes.info_input} name="newGrade" required value={formData.newGrade.customer_grade} onChange={handleChange}>
                 <option value="BASIC">BASIC</option>
                 <option value="FAMILY">FAMILY</option>
@@ -171,9 +171,9 @@ export default function CustomerModal({id, member}) {
                 <option value="VVIP">VVIP</option>
                 <option value="ADMIN">ADMIN</option>
               </select>
-              ) : (
+              ) : ( */}
                 <span>{formData.newGrade.customer_grade}</span>
-              )}
+              {/* )} */}
             </td>
           </tr>
           </tbody>

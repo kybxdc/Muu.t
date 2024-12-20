@@ -99,12 +99,6 @@ public class AdminService {
 				customer.setCustomer_phone(updatedData.get("customer_phone"));
 				customer.setCustomer_address(updatedData.get("customer_address"));
 				customer.setCustomer_status(updatedData.get("customer_status"));
-				Grade grade = new Grade();
-				System.out.println("모르겠다"+updatedData.get("customer_grade"));
-				grade.setCustomer_grade(updatedData.get("customer_grade"));
-				String rate = grade.getDiscountRate(updatedData.get("customer_grade"));
-				grade.setDiscount_rate(rate);
-				customer.setDiscound(grade);
 
 				mypageRepository.save(customer);
 				
