@@ -1,0 +1,15 @@
+.pay_label {
+  font-size: large;
+  font-weight: bold;
+}
+
+.n_img {
+  width: 95px;
+  cursor: pointer;
+}
+
+.pay_body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
