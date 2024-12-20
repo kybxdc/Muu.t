@@ -28,7 +28,10 @@ export default function CustomerModal({id, member}) {
           customer_phone: formData.newPhone,
           customer_address: formData.newAddr,
           customer_status : formData.newStatus,
-          customer_grade : formData.newGrade.customer_grade
+          grade : {customer_grade : formData.newGrade.customer_grade,
+            discount_rate : selectedMember.grade.discount_rate
+          }
+          
         }
          axios.post('http://localhost:9090/admin/update', updatedData).then((response) => {
                 setSelectedMember(response);

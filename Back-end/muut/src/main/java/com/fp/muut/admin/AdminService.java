@@ -101,7 +101,6 @@ public class AdminService {
 				customer.setCustomer_status(updatedData.get("customer_status"));
 				Grade grade = new Grade();
 				System.out.println("모르겠다"+updatedData.get("customer_grade"));
-				System.out.println(updatedData.get("grade.customer_grade"));
 				grade.setCustomer_grade(updatedData.get("customer_grade"));
 				String rate = grade.getDiscountRate(updatedData.get("customer_grade"));
 				grade.setDiscount_rate(rate);
