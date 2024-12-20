@@ -29,6 +29,7 @@ const router = createBrowserRouter([
       // { path: "/login", element: <Login />, errorElement: <ErrorPage /> },
       // { path: "/join", element: <Join />, errorElement: <ErrorPage /> },
       { path: "/mypage", element: <ProtectedRoute><MyMain /></ProtectedRoute>, errorElement: <ErrorPage /> },
+      // { path: "/mypage/myReserv", element: <MyMain />, errorElement: <ErrorPage /> },
       {path:"/mypage/myReservDetail/:reserv_id", element: <MyReservDetail />, errorElement: <ErrorPage /> },
       { path: "/detailpage", element: <Detailpage />, errorElement: <ErrorPage /> },
       {path:"/test",element: <Test/>}

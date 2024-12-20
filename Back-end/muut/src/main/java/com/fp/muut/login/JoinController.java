@@ -39,7 +39,6 @@ public class JoinController {
 	@PostMapping("/join")
 	public String add(@RequestBody Customer customer) throws IllegalAccessException {
 		loginService.join(customer);
-		System.out.println(customer);
 		return "redirect:/";
 	}
 	

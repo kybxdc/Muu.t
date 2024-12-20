@@ -16,7 +16,7 @@ export default function Join() {
     
 const handleIdChange = (e) => {
       setCustomer_id(e.target.value); // 아이디 입력값 상태 업데이트
-      idCheckHandler(e.target.value);
+      // idCheckHandler(e.target.value);
     };
   
 // const idCheckHandler = async (id) => {
@@ -50,7 +50,9 @@ const handleIdChange = (e) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const user = {customer_id, customer_pw};
+    const grade = {customer_grade : "BASIC", discount_rate : "0"};
+    const customer_status = "Active";
+    const user = {customer_id, customer_pw, grade, customer_status};
     // if(!isIdCheck){
     //   return;
     // }

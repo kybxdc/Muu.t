@@ -17,8 +17,8 @@ export default function AdminHall(){
           }, []);
 
     return(
-        <div className={classes.customerMain}>
-            <main>
+        <div >
+            <main className={classes.customerMain}> 
                 <h2>공연장 목록</h2>
             <table className={classes.member}>
                 <thead>

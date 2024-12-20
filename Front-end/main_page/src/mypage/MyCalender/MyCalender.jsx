@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import './MyCalender.css';
 import axios from 'axios';
 
-export default function Calendar() {
+export default function Calendar({ showReserve }) {
   const today = new Date();
   const [currentMonth, setCurrentMonth] = useState(today.getMonth());
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
-
+  
   // 월 이름 배열
   const monthNames = [
     'January', 'February', 'March', 'April', 'May', 'June',
@@ -70,14 +70,13 @@ export default function Calendar() {
       reserveDate.getFullYear() === currentYear &&
       reserveDate.getMonth() === currentMonth
     ) {
-      acc[reserveDate.getDate()] = reserv.musical_image;
-    }
+      acc[reserveDate.getDate()] = {
+        poster : reserv.musical_image,
+        reservation_num: reserv.reservation_num,
+       };
+      }
     return acc;
   }, {});
-
-function showReserve(){
-  window.location.href = "https://www.example.com";
-}
 
   return (
     <div className="calendar" style={{marginBottom:'20%'}}>
@@ -97,10 +96,10 @@ function showReserve(){
                <div className="image-container">
           {reserveDates[day] && (
             <img
-              src={reserveDates[day]} // 매핑된 이미지 URL
+              src={reserveDates[day].poster} // 매핑된 이미지 URL
               alt="예약한 뮤지컬 포스터"
               className="reserve-image"
-              onclick={showReserve()}
+              onClick={()=>showReserve(reserveDates[day].reservation_num)}
             />
           )}
           <span className={`day-number-overlay ${reserveDates[day] ? 'reserved-day' : ''}`}>{day}</span>

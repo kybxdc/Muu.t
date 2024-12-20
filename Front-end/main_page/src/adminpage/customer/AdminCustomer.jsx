@@ -23,6 +23,12 @@ export default function AdminCustomer(){
         setSelectedId(null); // 선택된 ID 초기화
         setSelectedMember(null);
         setIsModalOpen(false);
+         axios.get('http://localhost:9090/member/customer').then((response) => {
+            setMemberList(response.data);
+              })
+              .catch((error) => {
+                console.error("There was an error!", error);
+              });
     };
 
     const [memberList, setMemberList] = useState([]);
@@ -37,8 +43,9 @@ export default function AdminCustomer(){
           }, []);
 
     return(
-        <div className={classes.customerMain}>
-            <main>
+        
+        <div >
+            <main className={classes.customerMain}>
                 <h2>회원 목록</h2>
             <table className={classes.member}>
                 <thead>
@@ -59,7 +66,9 @@ export default function AdminCustomer(){
                         <td className={classes.info}>{member.customer_id}</td>
                         <td className={classes.info}>{member?.customer_name||'null'}</td>
                         <td className={classes.info}>{member?.grade?.customer_grade||'null'}</td>
-                        <td className={classes.info}>{member?.customer_status}</td>
+                        <td className={classes.info} style={{
+                            color: member?.customer_status === "Inactive" ? "#fa2828" : "inherit",
+                        }}>{member?.customer_status}</td>
                         <td><button className={classes.input_btn} onClick={()=>openModal(member.customer_num)}>보기</button></td>
                     </tr>
                     ))}
