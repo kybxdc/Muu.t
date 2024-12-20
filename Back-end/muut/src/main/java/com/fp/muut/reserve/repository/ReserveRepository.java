@@ -41,9 +41,14 @@ public class ReserveRepository {
 		em.persist(reservation);
 	}
 
-	public List<String> findSoldSeats(Long performance_id) {
+	public String findSoldSeats(Long performance_id) {
 		return em.createQuery("select r.seat_num from Reservation r join r.performance p where p.id=:performance_id",String.class)
-				.setParameter("performance_id", performance_id).getResultList();
+				.setParameter("performance_id", performance_id).getSingleResult();
+	}
+
+	public String getReserveSeats(Long reservation_num) {
+		return em.createQuery("select r.seat_num from Reservation r where r.reservation_num=:reservation_num",String.class)
+				.setParameter("reservation_num", reservation_num).getSingleResult();
 	}
 	
 	
