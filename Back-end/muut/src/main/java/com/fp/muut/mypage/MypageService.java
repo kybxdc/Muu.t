@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.fp.muut.dto.ReservationDTO;
+import com.fp.muut.dto.ReservationInfoDTO;
 import com.fp.muut.entity.Customer;
 import com.fp.muut.entity.Grade;
 import com.fp.muut.entity.Reservation;
@@ -44,5 +45,9 @@ public class MypageService {
 
 	public List<ReservationDTO> findReserv(String customer_id) {
 		return mypageRepository.findAll(customer_id);
+	}
+
+	public ReservationInfoDTO showInfo(long reservation_num) {
+		return mypageRepository.findbyInfo(reservation_num);
 	}
 }

@@ -75,8 +75,8 @@ public class SeatRepository {
 		return position;
 	}
 
-	public Long findHall_IdByMusical_Id(Long musical_id) {
-		return em.createQuery("select hi.id from Musical m join m.hall_Info hi where m.id=:musical_id",Long.class)
+	public Hall_Info findHall_IdByMusical_Id(Long musical_id) {
+		return em.createQuery("select m.hall_Info from Musical m where m.id=:musical_id",Hall_Info.class)
 				.setParameter("musical_id", musical_id)
 				.getSingleResult();
 	}
@@ -84,6 +84,10 @@ public class SeatRepository {
 	public Long findMusicalByPerformanceId(Long performance_id) {
 		return em.createQuery("select m.id from Performance p join p.musical m where p.id=:performance_id",Long.class)
 				.setParameter("performance_id", performance_id).getSingleResult();
+	}
+
+	public String findHallName(Long hall_id) {
+		return em.find(Hall_Info.class, hall_id).getHall_name();
 	}
 
 }

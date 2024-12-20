@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { Seat } from "./seatContext";
 
-export default function SeatEditorGrid({children}) {
-    const { handleRowSelect, seatData, selectAll, handleClearSelect, save_seats, selectedSeats } = useContext(Seat);
+export default function SeatEditorGrid({children, isGrade=true}) {
+    const { handleRowSelect, seatData, selectAll, handleClearSelect, save_seats, selectedSeats, seats } = useContext(Seat);
   return (
     <>
       <div className="stage-position">
@@ -34,7 +34,13 @@ export default function SeatEditorGrid({children}) {
           )}
         </div>
         <div>
-          <button className="save-button" type="button" onClick={save_seats}>
+          <button className="save-button" type="button" onClick={()=>{
+            if(!isGrade){
+              alert("등급이 전부 저장되지 않았습니다. \n대상: " + seats.filter(seat=>seat.grade=="ALL").map(seat=>seat.id));
+              return;
+            }  
+            save_seats();
+          }}>
             저장
           </button>
         </div>

@@ -1,3 +1,33 @@
-*{
-    
+.info_body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.col_input {
+  margin-bottom: 20px;
+  display: block;
+}
+
+.row_input_div {
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: center;
+}
+
+.row_input {
+  margin: 0px 6px 0px 6px;
+}
+
+.link_admin {
+  position: absolute;
+  left: 30px;
+  top: 30px;
+  font-size: large;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: #ccc;
+  color: black;
+  text-decoration: none;
+  padding: 10px;
 }

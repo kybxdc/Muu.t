@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fp.muut.dto.ReservationDTO;
+import com.fp.muut.dto.ReservationInfoDTO;
 import com.fp.muut.entity.Customer;
 import com.fp.muut.entity.Reservation;
 
@@ -39,4 +40,16 @@ public class MypageRepository {
 		        "WHERE c.customer_id = :customer_id", ReservationDTO.class).setParameter("customer_id", customer_id).getResultList();
 				
 	}
+
+	public ReservationInfoDTO findbyInfo(long reservation_num) {
+		return em.createQuery("SELECT new com.fp.muut.dto.ReservationInfoDTO(r.reservation_num, c.customer_name, r.reservation_date, r.payment_amount, " +
+	              "p.performance_date, p.performance_start_time, hi.hall_name, m.musical_title) " +
+	              "FROM Reservation r " +
+	              "JOIN r.customer c " +  // RESERVATION과 CUSTOMER 연결
+	              "JOIN r.performance p " +  // RESERVATION과 PERFORMANCE 연결
+	              "JOIN p.hall_Info hi " +  // PERFORMANCE와 HALL_INFO 연결
+	              "JOIN p.musical m " +
+	              "WHERE r.reservation_num =: reservation_num", ReservationInfoDTO.class).setParameter("reservation_num", reservation_num).getSingleResult();
+	}
+
 }

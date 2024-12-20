@@ -3,13 +3,13 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 
 export default function CustomerModal({id, member}) {
-    const selectedMember = member;
+    const [selectedMember, setSelectedMember] = useState(member);
     const customer_num = id;
     const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState({
         newId: selectedMember.customer_id,
         newName: selectedMember.customer_name,
-        newPassword: selectedMember.customer_password,
+        newPassword: selectedMember.customer_pw,
         newPhone: selectedMember.customer_phone,
         newAddr: selectedMember.customer_address,
         newStatus: selectedMember.customer_status,
@@ -18,7 +18,6 @@ export default function CustomerModal({id, member}) {
         // discount_rate: selectedMember.grade.discount_rate}      // 키: 값 형식으로 수정
   
       });
-
 
       function handleUpdate(){
         const updatedData = {
@@ -29,10 +28,13 @@ export default function CustomerModal({id, member}) {
           customer_phone: formData.newPhone,
           customer_address: formData.newAddr,
           customer_status : formData.newStatus,
-          // grade : { customer_grade : formData.newGrade.customer_grade,
-          //   discount_rate : formData.newGrade.discount_rate,
+          // grade : {customer_grade : formData.newGrade.customer_grade,
+          //   discount_rate : selectedMember.grade.discount_rate
+          // }
+          
         }
          axios.post('http://localhost:9090/admin/update', updatedData).then((response) => {
+                setSelectedMember(response);
                 setIsEditing(false);  // 수정 완료 후 편집 상태 종료
                 alert('정보 변경이 완료되었습니다.')
               })
@@ -61,6 +63,7 @@ export default function CustomerModal({id, member}) {
         <main style={{marginTop:'5%', marginBottom:'20%', alignItems:'center'}}>
              <h2 style={{ marginLeft: '20px'}}>회원정보수정</h2>
              <table>
+              <tbody>
               <tr className={classes.info}>
             <td className={classes.info1}>아이디</td>
             <td className={classes.info}>
@@ -68,7 +71,7 @@ export default function CustomerModal({id, member}) {
               <input
               className={classes.info_input}
               type="text"
-              name="newName"
+              name="newId"
               required
               value={formData.newId}
               onChange={handleChange}
@@ -148,14 +151,10 @@ export default function CustomerModal({id, member}) {
             <td className={classes.info1}>상태</td>
             <td className={classes.info}>
               {isEditing ? (
-                <input
-                  className={classes.info_input}
-                  type="text"
-                  name="newStatus"
-                  required
-                  value={formData.newStatus}
-                  onChange={handleChange}
-                />
+                <select className={classes.info_input} name="newStatus" required value={formData.newStatus} onChange={handleChange}>
+                  <option value="Active">Active</option>
+                  <option value="Inactive">Inactive</option>
+                </select>
               ) : (
                 <span>{formData.newStatus}</span>
               )}
@@ -165,14 +164,19 @@ export default function CustomerModal({id, member}) {
             <td className={classes.info1}>등급</td>
             <td className={classes.info}>
               {isEditing ? (
-                <input
-                  className={classes.info_input} type="text" name="newGrade.customer_grade"
-                  required value={formData.newGrade.customer_grade} onChange={handleChange}/>
+                <select className={classes.info_input} name="newGrade" required value={formData.newGrade.customer_grade} onChange={handleChange}>
+                <option value="BASIC">BASIC</option>
+                <option value="FAMILY">FAMILY</option>
+                <option value="VIP">VIP</option>
+                <option value="VVIP">VVIP</option>
+                <option value="ADMIN">ADMIN</option>
+              </select>
               ) : (
                 <span>{formData.newGrade.customer_grade}</span>
               )}
             </td>
           </tr> */}
+          </tbody>
           </table>
           <br/>
           <br/>

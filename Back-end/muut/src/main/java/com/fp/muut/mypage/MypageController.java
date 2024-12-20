@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fp.muut.dto.PerformanceDTO;
 import com.fp.muut.dto.ReservationDTO;
+import com.fp.muut.dto.ReservationInfoDTO;
 import com.fp.muut.entity.Customer;
 import com.fp.muut.entity.Reservation;
 import com.fp.muut.login.CustomerRepository;
@@ -59,7 +61,7 @@ public class MypageController {
 	    }
 	}
 	
-	//예매 내역 조회
+	//예매 목록 조회
 	@GetMapping("/reserve")
 	public List<ReservationDTO> getReserve(HttpSession session, Model model) {
 		Customer loginCustomer = (Customer) session.getAttribute("loginCustomer");
@@ -69,6 +71,11 @@ public class MypageController {
 		return reserv;
 	}
 	
+	//예매 내역 조회
+		@GetMapping("/reserve/showInfo/{reservation_num}")
+		public ReservationInfoDTO showInfo(@PathVariable("reservation_num") long reservation_num){
+			return mypageSevice.showInfo(reservation_num);
+		}
 	
 	
 }

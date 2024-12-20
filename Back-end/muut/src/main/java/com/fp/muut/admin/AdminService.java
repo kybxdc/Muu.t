@@ -99,8 +99,7 @@ public class AdminService {
 				customer.setCustomer_phone(updatedData.get("customer_phone"));
 				customer.setCustomer_address(updatedData.get("customer_address"));
 				customer.setCustomer_status(updatedData.get("customer_status"));
-				//customer.setDiscound(null);
-				
+
 				mypageRepository.save(customer);
 				
 				return customer;
