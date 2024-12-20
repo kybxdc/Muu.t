@@ -90,7 +90,8 @@ export default function ReservationProvider({ children }) {
       try {
         const response = await fetch(`/api/reserve/sold/${performance_id}`);
         const result = await response.json();
-        setSoldSeats(result);
+        let array =result.map(seat=>seat.id);
+        setSoldSeats(array);
       } catch (e) {
         console.log(e);
       }

@@ -17,6 +17,7 @@ import ReservationProvider from "./component/Reservation/reservationContext";
 import "./App.css"; // 폰트만 적용중
 import MyReservDetail from "./mypage/MyReserv/MyReservDetail";
 import ProtectedRoute from "./mypage/ProtectedRoute";
+import Test from "./Test";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
       { path: "/mypage", element: <ProtectedRoute><MyMain /></ProtectedRoute>, errorElement: <ErrorPage /> },
       {path:"/mypage/myReservDetail/:reserv_id", element: <MyReservDetail />, errorElement: <ErrorPage /> },
       { path: "/detailpage", element: <Detailpage />, errorElement: <ErrorPage /> },
+      {path:"/test",element: <Test/>}
     ]
   },
   {

@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { ReservationCtx } from "../reservationContext";
 
 export default function Payment() {
-    const {reserveInfo, totalPrice, customer, selectedSeats, performance_id, handleBeforeUnload} = useContext(ReservationCtx);
+    const {reserveInfo, totalPrice, customer, selectedSeats, performance_id, handleBeforeUnload, seats} = useContext(ReservationCtx);
     const [UUID, setUUID] = useState();
       
     useEffect(()=>{
@@ -16,6 +16,9 @@ export default function Payment() {
       }
       fetchUUID();
     },[])
+
+    let reserveSeats = seats.filter(seat=>selectedSeats.includes(seat.id))
+                            .map(seat=>({id:seat.id, grade:seat.grade.grade, price:seat.grade.price}));
 
   var oPay = Naver.Pay.create({
     mode: "development",
@@ -34,7 +37,7 @@ export default function Payment() {
               body: JSON.stringify({
                 "customer": `${customer.customer_email}`,
                 "payment_amount": `${totalPrice}`,
-                "seat_num": JSON.stringify(selectedSeats),
+                "seat_num": JSON.stringify(reserveSeats),
                 "performance": `${performance_id}`,
               })
             })
