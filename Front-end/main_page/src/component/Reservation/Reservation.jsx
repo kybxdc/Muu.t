@@ -4,7 +4,7 @@ import { ReservationCtx } from "./reservationContext";
 import { useContext, useEffect, useState} from "react";
 
 export default function Reservation() {
-  const {reserveInfo, selectedSeats, seats, ticketPrice, isChecked, isChecked2, totalPrice, charge} = useContext(ReservationCtx);
+  const {reserveInfo, selectedSeats, seats, ticketPrice, isChecked, isChecked2, totalPrice, charge, handleBeforeUnload} = useContext(ReservationCtx);
   const navigate = useNavigate();
   const location = useLocation();
   const [curLoc, setCurLoc] = useState();
@@ -35,11 +35,6 @@ export default function Reservation() {
   },[location])
   
   useEffect(() => {
-    const handleBeforeUnload = (e) => {
-      e.preventDefault();
-      e.returnValue = ""; // 브라우저에서 경고 대화 상자를 표시
-    };
-  
     window.addEventListener("beforeunload", handleBeforeUnload);
   
     return () => {

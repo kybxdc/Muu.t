@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fp.muut.seat.repository.SeatRepository;
 import com.fp.muut.seat.service.SeatService;
 
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class SeatController {
 
 	private final SeatService seatService;
+	private final SeatRepository seatRepository;
 	
 	@PostMapping("/seatinfo")
 	public ResponseEntity<String> getCol(@RequestBody Map.Entry<String, Object> seats) {
@@ -81,8 +83,12 @@ public class SeatController {
 	}
 	
 	@GetMapping("/gethall/{musical_id}")
-	public Long getHall(@PathVariable Long musical_id) {
+	public Map<String,Object> getHall(@PathVariable Long musical_id) {
 		return seatService.findHallByMusical(musical_id);
 	}
 	
+	@GetMapping("/hall/{hall_id}")
+	public String findHallName(@PathVariable Long hall_id) {
+		return seatRepository.findHallName(hall_id);
+	}
 }
