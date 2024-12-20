@@ -70,6 +70,10 @@ export default function ReservationProvider({ children }) {
       const response = await fetch(
         `/api/reserve/${Cookies.get("customer_id")}`
       );
+      if(!response.ok){
+        alert("로그인 후 이용가능합니다.");
+        window.close();
+      }
       const result = await response.json();
       setCustomer(result);
     };
