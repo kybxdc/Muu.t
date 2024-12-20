@@ -21,7 +21,7 @@ public class Grade {
 //	@OneToMany(mappedBy = "grade")
 //	private List<Customer> customers = new ArrayList<>();
 	
-	  public String getDiscountRate() {
+	  public String getDiscountRate(String customer_grade) {
 	        switch (customer_grade) {
 		        case "ADMIN":
 	                return "30";    

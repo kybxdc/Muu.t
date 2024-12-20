@@ -43,8 +43,8 @@ if (selectedReserve === "PreReservs") {
         <tr className={classes.reserveTb} key={reserv.reservation_num}>
           <td className={classes.reserveTb}><img src={reserv.musical_image} style={{ width: '80px' }} onClick={()=>{navigate(`/detailpage`, { state: { musical }})}}/></td>
           <td className={classes.reserveTb} onClick={()=>{navigate(`/detailpage`, { state: { musical }})}}>{reserv.musical_title}</td>
-          <td className={classes.reserveTb}>{reserv.performance_date} {reserv.performance_start_time}</td>
-          <td className={classes.reserveTb}><button className={classes.Musical_detail} onClick={showReserve(reserv.reservation_num)}>상세</button> <button className={classes.cancel}>취소</button></td>
+          <td className={classes.reserveTb}>{new Date(reserv.performance_date).toLocaleDateString()} {reserv.performance_start_time}</td>
+          <td className={classes.reserveTb}><button className={classes.Musical_detail} onClick={()=>showReserve(reserv.reservation_num)}>상세</button> <button className={classes.cancel}>취소</button></td>
         </tr>)
     })
     }else{
@@ -61,8 +61,8 @@ if (selectedReserve === "PreReservs") {
           <tr className={classes.reserveTb} key={reserv.reservation_num}>
           <td className={classes.reserveTb}><img src={reserv.musical_image} style={{ width: '80px' }} onClick={()=>{{navigate(`/detailpage`, { state: { musical }})}}}></img></td>
           <td className={classes.reserveTb} onClick={()=>{{navigate(`/detailpage`, { state: { musical }})}}}>{reserv.musical_title}</td>
-          <td className={classes.reserveTb}>{reserv.performance_date} {reserv.performance_start_time}</td>
-            <td className={classes.reserveTb}><button className={classes.Musical_detail} onClick={showReserve(reserv.reservation_num)}>상세</button></td>
+          <td className={classes.reserveTb}>{new Date(reserv.performance_date).toLocaleDateString()} {reserv.performance_start_time}</td>
+            <td className={classes.reserveTb}><button className={classes.Musical_detail} onClick={()=>showReserve(reserv.reservation_num)}>상세</button></td>
           </tr>)
       })
     }else{

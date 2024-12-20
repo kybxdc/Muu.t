@@ -29,8 +29,8 @@ export default function ReservationProvider({ children }) {
   const [isChecked2, setIsChecked2] = useState(false);
   const [customer, setCustomer] = useState({});
   const [soldSeats, setSoldSeats] = useState([]);
-  const totalPrice = useRef(ticketPrice+Number(ticketPrice*0.03));
-  const charge = useRef(ticketPrice*0.03); // 수수료
+  const totalPrice = useRef(ticketPrice + Number(ticketPrice * 0.03));
+  const charge = useRef(ticketPrice * 0.03); // 수수료
 
   useEffect(() => {
     const fetchInfo = async () => {
@@ -51,7 +51,10 @@ export default function ReservationProvider({ children }) {
         const response = await fetch(
           `/api/seat/getseatposition/grade/${performance_id}`
         );
-
+        if (!response.ok) {
+          alert("좌석이 없습니다. 관리자에게 문의하세요.");
+          window.close();
+        }
         const result = await response.json();
         setSeats(result);
       } catch (error) {
@@ -62,27 +65,33 @@ export default function ReservationProvider({ children }) {
     fetchSeats();
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     const fetchUser = async () => {
-      const response = await fetch(`/api/reserve/${Cookies.get("customer_id")}`);
+      const response = await fetch(
+        `/api/reserve/${Cookies.get("customer_id")}`
+      );
+      if(!response.ok){
+        alert("로그인 후 이용가능합니다.");
+        window.close();
+      }
       const result = await response.json();
       setCustomer(result);
-    }
+    };
     fetchUser();
-  },[])
+  }, []);
 
-  useEffect(()=>{
-    const fetchSoldSeats = async()=>{
-      try{
+  useEffect(() => {
+    const fetchSoldSeats = async () => {
+      try {
         const response = await fetch(`/api/reserve/sold/${performance_id}`);
         const result = await response.json();
         setSoldSeats(result);
-      }catch(e){
+      } catch (e) {
         console.log(e);
       }
-    }
+    };
     fetchSoldSeats();
-  },[])
+  }, []);
 
   function handleSeatClick(e, seatId) {
     let findSeat = seats.find((seat) => seat.id == seatId);
@@ -95,30 +104,26 @@ export default function ReservationProvider({ children }) {
         const seats = [...prevSelect, seatId].sort();
         return seats;
       });
-      setTicketPrice(
-        (prevPrice) =>{ 
-            const price = Number(prevPrice) + Number(findSeat.grade.price);
-            charge.current = (price*0.03);
-            totalPrice.current = (price+Number(price*0.03));
-            return price;
-        }
-      );
+      setTicketPrice((prevPrice) => {
+        const price = Number(prevPrice) + Number(findSeat.grade.price);
+        charge.current = price * 0.03;
+        totalPrice.current = price + Number(price * 0.03);
+        return price;
+      });
     } else {
       setSelectedSeats((prevSelect) => {
-        const seats = prevSelect.filter((id) => id != seatId)
+        const seats = prevSelect.filter((id) => id != seatId);
         return seats;
       });
-      setTicketPrice(
-        (prevPrice) => {
-            const price = Number(prevPrice) - Number(findSeat.grade.price)
-            charge.current = (price*0.03);
-            totalPrice.current = (price+Number(price*0.03));
-            return price;
-        }
-      );
+      setTicketPrice((prevPrice) => {
+        const price = Number(prevPrice) - Number(findSeat.grade.price);
+        charge.current = price * 0.03;
+        totalPrice.current = price + Number(price * 0.03);
+        return price;
+      });
     }
   }
-  
+
   const reserveCtx = {
     reserveInfo: reserveInfo,
     seats: seats,

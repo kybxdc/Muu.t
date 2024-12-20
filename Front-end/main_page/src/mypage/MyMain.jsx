@@ -43,7 +43,7 @@ export default function MyMain() {
     if (selectedMenu === 'GradeInfo') {
         mainmenu = <GradeInfo />;
     } else if (selectedMenu === 'MyCalander') {
-        mainmenu = <MyCalander />;
+        mainmenu = <MyCalander  showReserve={showReserve} />;
     } else if (selectedMenu === 'MyInfo') {
         mainmenu = (<MyInfo 
           grade={member?.grade?.customer_grade || 'null'}

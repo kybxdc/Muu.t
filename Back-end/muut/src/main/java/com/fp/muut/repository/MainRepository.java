@@ -21,7 +21,7 @@ public class MainRepository {
 	        "    m.id, m.musical_title, m.musical_description, m.musical_genre, " +
 	        "    m.musical_run_time, m.musical_area, m.musical_age, m.musical_entrpsnm, " +
 	        "    m.musical_image, m.musical_seat_grade_info, m.musical_start_date, " +
-	        "    m.musical_end_date, m.musical_actor, h.hall_name, h.hall_addr" +
+	        "    m.musical_end_date, m.musical_actor, h.hall_name, h.hall_addr, h.hall_la, h.hall_lo" +
 	        ") " +
 	        "FROM Musical m " +
 	        "LEFT JOIN m.hall_Info h", 
