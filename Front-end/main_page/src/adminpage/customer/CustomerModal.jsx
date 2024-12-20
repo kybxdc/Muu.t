@@ -163,10 +163,10 @@ export default function CustomerModal({id, member}) {
               {isEditing ? (
                 <select className={classes.info_input} name="newGrade" required value={formData.newGrade.customer_grade} onChange={handleChange}>
                 <option value="BASIC">BASIC</option>
-                <option value="BASIC">FAMILY</option>
-                <option value="BASIC">VIP</option>
-                <option value="BASIC">VVIP</option>
-                <option value="BASIC">ADMIN</option>
+                <option value="FAMILY">FAMILY</option>
+                <option value="VIP">VIP</option>
+                <option value="VVIP">VVIP</option>
+                <option value="ADMIN">ADMIN</option>
               </select>
               ) : (
                 <span>{formData.newGrade.customer_grade}</span>

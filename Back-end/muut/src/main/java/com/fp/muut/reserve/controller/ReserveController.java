@@ -50,8 +50,13 @@ public class ReserveController {
 	
 	@GetMapping("/sold/{performance_id}")
 	public ResponseEntity<Object> checkSoldSeats(@PathVariable Long performance_id) {
-		List<String> soldSeats = reserveService.findSoldSeats(performance_id);
+		String soldSeats = reserveService.findSoldSeats(performance_id);
 		return ResponseEntity.ok(soldSeats);
+	}
+	
+	@GetMapping("getReserveSeats/{reservation_num}")
+	public String getReserveSeats(@PathVariable Long reservation_num) {
+		return reserveService.getReserveSeats(reservation_num);
 	}
 	
 }

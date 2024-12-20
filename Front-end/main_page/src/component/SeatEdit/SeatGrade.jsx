@@ -1,8 +1,10 @@
+import GradeModal from "./GradeModal";
 import { Seat } from "./seatContext";
 import SeatEditorGrid from "./SeatEditorGrid";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 
 export default function SeatGrade() {
+  const dialog = useRef();
   const {
     seats,
     handleSelectSeats,
@@ -14,9 +16,14 @@ export default function SeatGrade() {
     handleChangePrice,
   } = useContext(Seat);
 
+  function modalHandler(){
+    dialog.current.open();
+  }
+
   return (
     <>
-      <SeatEditorGrid>
+      <GradeModal ref={dialog}/>
+      <SeatEditorGrid isGrade={!(seats.filter(seat=>seat.grade=="ALL").length>0)}>
         {seats.map((seat) => {
           return (
             <div
@@ -47,6 +54,9 @@ export default function SeatGrade() {
           <input type="text" onChange={handleChangePrice} value={price} placeholder="가격"/>
           <button className="button" onClick={handleSubmitGrade} disabled={price&&grade ? false : true}>
             등급적용
+          </button>
+          <button className="button" onClick={modalHandler}>
+            등급적용 현황
           </button>
         </div>
       </SeatEditorGrid>

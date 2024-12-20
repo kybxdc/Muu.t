@@ -15,6 +15,7 @@ export const Seat = createContext({
   setSeats: () => {},
   grade: undefined,
   price: undefined,
+  gradeSeats: [],
   handleChangeGrade: () => {},
   handleSubmitGrade: () => {},
   handleChangePrice: () => {},
@@ -28,6 +29,7 @@ export default function SeatProvider({ children, apiLoc }) {
   const [seats, setSeats] = useState([]);
   const [grade, setGrade] = useState("");
   const [price, setPrice] = useState("");
+  const [gradeSeats, setGradeSeats] = useState([]);
   const GRID_SIZE = useRef(30);
   const navigate = useNavigate();
 
@@ -57,9 +59,9 @@ export default function SeatProvider({ children, apiLoc }) {
             const response_hall = await fetch(
               `/api/seat/gethall/${musical_id}`
             ) 
-            const hall_id = await response_hall.json();
-            alert("우선 좌석 배치도를 등록해주세요")
-            navigate(`../seatinfo/${hall_id}`);
+            const hall = await response_hall.json();
+            navigate(`../seatinfo/${hall.id}`,alert(`우선 좌석 배치도를 등록해주세요. 공연장: ${hall.name}`));
+            
           }
           const result = await response.json();
           const data = await response2.json();
@@ -71,7 +73,7 @@ export default function SeatProvider({ children, apiLoc }) {
       }
     };
     fetchData();
-  }, [hall_id]);
+  }, []);
 
   useEffect(() => {
     if (hall_id != undefined) {
@@ -228,6 +230,7 @@ export default function SeatProvider({ children, apiLoc }) {
   function handleChangeGrade(e) {
     setGrade(e.target.value.toUpperCase());
   }
+  
   function handleChangePrice(e) {
     if (isNaN(e.target.value)) {
       alert("숫자를 입력하세요")
@@ -242,9 +245,9 @@ export default function SeatProvider({ children, apiLoc }) {
     seats.map((seat) => {
       if (selectedSeats.includes(seat.id)) {
         seat["grade"] = {grade:grade, price:price};
-        console.log(seat);
       }
     });
+    setGradeSeats(seats.filter(seat=>seat.grade!="ALL").sort());
     alert("등급 적용!");
   }
 
@@ -262,6 +265,7 @@ export default function SeatProvider({ children, apiLoc }) {
     setSeats: setSeats,
     grade: grade,
     price: price,
+    gradeSeats: gradeSeats,
     handleChangeGrade: handleChangeGrade,
     handleSubmitGrade: handleSubmitGrade,
     handleChangePrice: handleChangePrice,

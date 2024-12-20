@@ -91,22 +91,12 @@ public class ReserveService {
 		reserveRepository.saveReserve(reservation);
 	}
 
-	public List<String> findSoldSeats(Long performnace_id) {
-		List<String> soldSeats = reserveRepository.findSoldSeats(performnace_id);
-		List<String> mergedList = new ArrayList<>();
-		
-		ObjectMapper om = new ObjectMapper();
-		
-		try {
-			for(String seats : soldSeats) {
-				List<String> parsed = om.readValue(seats, new TypeReference<List<String>>() {});
-				mergedList.addAll(parsed);
-			}			
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return mergedList; 
+	public String findSoldSeats(Long performnace_id) {
+		return reserveRepository.findSoldSeats(performnace_id);
+	}
+
+	public String getReserveSeats(Long reservation_num) {
+		return reserveRepository.getReserveSeats(reservation_num);
 	}
 
 }

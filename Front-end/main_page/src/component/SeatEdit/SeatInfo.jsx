@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import './SeatInfo.module.css'
+import Input from "../Util/Input/Input"
 
 export default function SeatInfo() {
   const [cols, setCols] = useState("");
   const [colObject, setColObject] = useState({});
+  const [hallName,setHallName] = useState("");
 
   const navigate = useNavigate();
 
@@ -14,7 +15,21 @@ export default function SeatInfo() {
     if(!/^\d+$/.test(hall_id)){
       navigate("/");
     }
-  },[hall_id, navigate])
+    (async function(){
+      try{
+        const response = await fetch(`/api/seat/hall/${hall_id}`);
+        
+        if(response.ok){
+          setHallName(await response.text());
+        }else{
+          alert("불러오기 실패");
+          navigate("/admin/main");
+        }
+      }catch(e){
+        console.log(e);
+      }
+    })()
+  },[])
 
   function makeRow(e) {
     e.preventDefault();
@@ -87,10 +102,10 @@ export default function SeatInfo() {
 
   return (
     <>
-      <h1>관리자 페이지(좌석 정보 입력)</h1>
+      <h1>{hallName}(좌석 정보 입력)</h1>
       <label>
         마지막 열 : &nbsp;
-        <input
+        <Input
           type="text"
           name="cols"
           value={cols}
@@ -144,10 +159,11 @@ export default function SeatInfo() {
         type="submit"
         disabled={colObject["A"] ? false : true}
         onClick={handleSubmit}
+        className="button"
       >
         전송
       </button>
-      <button onClick={makeRow}>열 입력</button>
+      <button onClick={makeRow} className="button">열 입력</button>
     </>
   );
 }

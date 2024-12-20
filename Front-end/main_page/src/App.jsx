@@ -15,10 +15,9 @@ import Reservation from "./component/Reservation/Reservation";
 import AdminMain from "./adminpage/AdminMain";
 import ReservationProvider from "./component/Reservation/reservationContext";
 import "./App.css"; // 폰트만 적용중
-import PaymentSuc from "./component/Reservation/Payment/PaymentSuc";
 import MyReservDetail from "./mypage/MyReserv/MyReservDetail";
 import ProtectedRoute from "./mypage/ProtectedRoute";
-import MyReserv from "./mypage/MyReserv/MyReserv";
+import Test from "./Test";
 
 const router = createBrowserRouter([
   {
@@ -33,7 +32,7 @@ const router = createBrowserRouter([
       // { path: "/mypage/myReserv", element: <MyMain />, errorElement: <ErrorPage /> },
       {path:"/mypage/myReservDetail/:reserv_id", element: <MyReservDetail />, errorElement: <ErrorPage /> },
       { path: "/detailpage", element: <Detailpage />, errorElement: <ErrorPage /> },
-      {path:"/paymentsuc", element: <PaymentSuc/>}
+      {path:"/test",element: <Test/>}
     ]
   },
   {
