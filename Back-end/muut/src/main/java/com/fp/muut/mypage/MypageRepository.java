@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fp.muut.dto.ReservationDTO;
-import com.fp.muut.dto.ReservationDetailDTO;
 import com.fp.muut.dto.ReservationInfoDTO;
 import com.fp.muut.entity.Customer;
 import com.fp.muut.entity.Reservation;
@@ -43,7 +42,7 @@ public class MypageRepository {
 	}
 
 	public ReservationInfoDTO findbyInfo(long reservation_num) {
-		return em.createQuery("SELECT new com.fp.muut.dto.ReservationInfoDTO(r.reservation_num, c.customer_name, r.reservation_date, " +
+		return em.createQuery("SELECT new com.fp.muut.dto.ReservationInfoDTO(r.reservation_num, c.customer_name, r.reservation_date, r.payment_amount, " +
 	              "p.performance_date, p.performance_start_time, hi.hall_name, m.musical_title) " +
 	              "FROM Reservation r " +
 	              "JOIN r.customer c " +  // RESERVATION과 CUSTOMER 연결
@@ -53,7 +52,4 @@ public class MypageRepository {
 	              "WHERE r.reservation_num =: reservation_num", ReservationInfoDTO.class).setParameter("reservation_num", reservation_num).getSingleResult();
 	}
 
-	public ReservationDetailDTO findbyDetail(long reservation_num) {
-		return null;
-	}
 }
