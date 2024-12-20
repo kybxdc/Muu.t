@@ -118,6 +118,8 @@
 .not-seat-view {
   width: 1150px;
   margin: 10px 100px;
+  position: relative;
+  left: 11vw;
 }
 
 .reservation-payment-info {
@@ -126,6 +128,6 @@
   align-items: center;
 }
 
-.locations{
+.locations {
   background-color: black;
 }

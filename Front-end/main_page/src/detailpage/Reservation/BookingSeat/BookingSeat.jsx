@@ -7,7 +7,7 @@ export default function BookingSeat({performanceId}) {
     <div>
       {/* <Link to={`/reservation/${performanceId}/seatview`}> */}
         <button onClick={()=>{window.open(`/reservation/${performanceId}/seatview`,"팝업창",                // 팝업 이름
-  "width=2000,height=1000,scrollbars=yes,resizable=yes" )}}>예매</button>
+  "width=1800,height=1000,scrollbars=yes,resizable=yes" )}}>예매</button>
       {/* </Link> */}
     </div>
   );
