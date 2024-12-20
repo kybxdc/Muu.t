@@ -17,6 +17,7 @@ export const ReservationCtx = createContext({
   handleSeatClick: () => {},
   setIsChecked: () => {},
   setIsChecked2: () => {},
+  handleBeforeUnload: ()=>{},
 });
 
 export default function ReservationProvider({ children }) {
@@ -31,6 +32,10 @@ export default function ReservationProvider({ children }) {
   const [soldSeats, setSoldSeats] = useState([]);
   const totalPrice = useRef(Math.floor(ticketPrice + Number(ticketPrice * 0.03)));
   const charge = useRef(Math.floor(ticketPrice * 0.03)); // 수수료
+  const handleBeforeUnload = useRef((e)=>{
+    e.preventDefault();
+    e.returnValue = "";
+  });
 
   useEffect(() => {
     const fetchInfo = async () => {
@@ -139,6 +144,7 @@ export default function ReservationProvider({ children }) {
     setIsChecked: setIsChecked,
     setIsChecked2: setIsChecked2,
     handleSeatClick: handleSeatClick,
+    handleBeforeUnload: handleBeforeUnload.current,
   };
 
   return (

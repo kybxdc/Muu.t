@@ -1,11 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { ReservationCtx } from "../reservationContext";
-import { useNavigate } from "react-router-dom";
 
 export default function Payment() {
-    const {reserveInfo, totalPrice, customer, selectedSeats, performance_id} = useContext(ReservationCtx);
+    const {reserveInfo, totalPrice, customer, selectedSeats, performance_id, handleBeforeUnload} = useContext(ReservationCtx);
     const [UUID, setUUID] = useState();
-    const navigate = useNavigate();
       
     useEffect(()=>{
       const fetchUUID = async () => {
@@ -41,7 +39,9 @@ export default function Payment() {
               })
             })
             if(response.ok){
-              navigate("/paymentsuc")
+              alert("결제가 성공하였습니다!");
+              window.removeEventListener("beforeunload",handleBeforeUnload);
+              window.close();
             }else{
               alert("실패")
             }

@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.springframework.stereotype.Service;
@@ -13,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fp.muut.entity.Hall_Info;
 import com.fp.muut.seat.repository.SeatRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -96,16 +99,20 @@ public class SeatService {
 
 	public Long getSeatDataByMusical(Long musical_id) {
 		// performance_id로 hall_id 검색
-		Long hall_id = seatRepository.findHall_IdByMusical_Id(musical_id);
-		return hall_id;
+		Hall_Info hall_id = seatRepository.findHall_IdByMusical_Id(musical_id);
+		return hall_id.getId();
 	}
 
 	public Long findMusicalByPerformanceId(Long performance_id) {
 		return seatRepository.findMusicalByPerformanceId(performance_id);
 	}
 
-	public Long findHallByMusical(Long musical_id) {
-		return seatRepository.findHall_IdByMusical_Id(musical_id);
+	public Map<String,Object> findHallByMusical(Long musical_id) {
+		Hall_Info hi = seatRepository.findHall_IdByMusical_Id(musical_id);
+		Map<String, Object> hall_id_name = new HashMap<>();
+		hall_id_name.put("id", hi.getId());
+		hall_id_name.put("name", hi.getHall_name());
+		return hall_id_name;
 	}
 	
 	
