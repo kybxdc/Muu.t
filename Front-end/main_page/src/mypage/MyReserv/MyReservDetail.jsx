@@ -23,7 +23,7 @@ export default function MyReservDetail(props){
                     <table>
                         <tr className={classes.info}>
                             <td className={classes.info}>취소 마감시간</td>
-                            <td className={classes.info1}></td>
+                            <td className={classes.info1}>공연 3일 전 23:59까지 접수 된 취소 건에 한 함</td>
                         </tr>
                         <tr className={classes.info}>
                             <td className={classes.info}>취소수수료</td>

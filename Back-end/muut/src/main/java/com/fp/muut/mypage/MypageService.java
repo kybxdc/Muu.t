@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.fp.muut.dto.ReservationDTO;
-import com.fp.muut.dto.ReservationDetailDTO;
 import com.fp.muut.dto.ReservationInfoDTO;
 import com.fp.muut.entity.Customer;
 import com.fp.muut.entity.Grade;
@@ -50,9 +49,5 @@ public class MypageService {
 
 	public ReservationInfoDTO showInfo(long reservation_num) {
 		return mypageRepository.findbyInfo(reservation_num);
-	}
-
-	public ReservationDetailDTO showDetail(long reservation_num) {
-		return mypageRepository.findbyDetail(reservation_num);
 	}
 }

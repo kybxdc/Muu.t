@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fp.muut.dto.PerformanceDTO;
 import com.fp.muut.dto.ReservationDTO;
-import com.fp.muut.dto.ReservationDetailDTO;
 import com.fp.muut.dto.ReservationInfoDTO;
 import com.fp.muut.entity.Customer;
 import com.fp.muut.entity.Reservation;
@@ -77,13 +76,6 @@ public class MypageController {
 		public ReservationInfoDTO showInfo(@PathVariable("reservation_num") long reservation_num){
 			return mypageSevice.showInfo(reservation_num);
 		}
-		
-	//예매 내역 상세 조회
-		@GetMapping("/reserve/showDetail/{reservation_num}")
-		public ReservationDetailDTO showDetail(@PathVariable("reservation_num") long reservation_num){
-			return mypageSevice.showDetail(reservation_num);
-		}
-		
 	
 	
 }

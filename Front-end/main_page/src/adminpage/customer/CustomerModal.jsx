@@ -13,9 +13,9 @@ export default function CustomerModal({id, member}) {
         newPhone: selectedMember.customer_phone,
         newAddr: selectedMember.customer_address,
         newStatus: selectedMember.customer_status,
-        newGrade: {
-        customer_grade: selectedMember.grade.customer_grade,  // 키: 값 형식으로 수정
-        discount_rate: selectedMember.grade.discount_rate}      // 키: 값 형식으로 수정
+        // newGrade: {
+        // customer_grade: selectedMember.grade.customer_grade,  // 키: 값 형식으로 수정
+        // discount_rate: selectedMember.grade.discount_rate}      // 키: 값 형식으로 수정
   
       });
 
@@ -160,10 +160,10 @@ export default function CustomerModal({id, member}) {
               )}
             </td>
           </tr>
-          <tr className={classes.info}>
+          {/* <tr className={classes.info}>
             <td className={classes.info1}>등급</td>
             <td className={classes.info}>
-              {/* {isEditing ? (
+              {isEditing ? (
                 <select className={classes.info_input} name="newGrade" required value={formData.newGrade.customer_grade} onChange={handleChange}>
                 <option value="BASIC">BASIC</option>
                 <option value="FAMILY">FAMILY</option>
@@ -171,11 +171,11 @@ export default function CustomerModal({id, member}) {
                 <option value="VVIP">VVIP</option>
                 <option value="ADMIN">ADMIN</option>
               </select>
-              ) : ( */}
+              ) : (
                 <span>{formData.newGrade.customer_grade}</span>
-              {/* )} */}
+              )}
             </td>
-          </tr>
+          </tr> */}
           </tbody>
           </table>
           <br/>
