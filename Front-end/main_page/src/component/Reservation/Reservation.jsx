@@ -35,13 +35,6 @@ export default function Reservation() {
   },[location])
   
   useEffect(() => {
-    if(seats.length<1){
-      return()=>{
-        alert("좌석이 없습니다. 관리자에게 문의하세요.");
-        window.close();
-      }
-    }
-
     const handleBeforeUnload = (e) => {
       e.preventDefault();
       e.returnValue = ""; // 브라우저에서 경고 대화 상자를 표시

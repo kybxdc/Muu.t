@@ -244,8 +244,8 @@ export default function SeatProvider({ children, apiLoc }) {
         seat["grade"] = {grade:grade, price:price};
         console.log(seat);
       }
-      alert("등급 적용!");
     });
+    alert("등급 적용!");
   }
 
   const seatCtx = {
