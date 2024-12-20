@@ -1,3 +1,8 @@
+.width_limit{
+  width: var(--all_width);
+  margin: 0 auto;
+}
+
 .info {
     padding: 10px;
     text-align: center;
@@ -6,15 +11,18 @@
 
 .member{
     border: 1px solid #e7e7e7;
+    width: 500px;
+    margin-left: 5%;
 }
 
 .customerMain{
   height: 100%; /* 높이를 100%로 설정 */
   min-width: 320px;
   display: flex; /* 플렉스 레이아웃 유지 */
+  flex-direction: column; /* 수직 정렬 */
   align-items: center; /* 가로 중앙 정렬 */
   position: relative; /* 상단 고정을 위한 상대 위치 */
-  margin: 5%;
+  margin: 1%;
 }
 
 .input_btn {
@@ -26,3 +34,4 @@ padding: 10px 20px;
 border-radius: 8px;
 font-weight: bold;
 }
+
