@@ -29,8 +29,8 @@ export default function ReservationProvider({ children }) {
   const [isChecked2, setIsChecked2] = useState(false);
   const [customer, setCustomer] = useState({});
   const [soldSeats, setSoldSeats] = useState([]);
-  const totalPrice = useRef(ticketPrice + Number(ticketPrice * 0.03));
-  const charge = useRef(ticketPrice * 0.03); // 수수료
+  const totalPrice = useRef(Math.floor(ticketPrice + Number(ticketPrice * 0.03)));
+  const charge = useRef(Math.floor(ticketPrice * 0.03)); // 수수료
 
   useEffect(() => {
     const fetchInfo = async () => {
@@ -106,8 +106,8 @@ export default function ReservationProvider({ children }) {
       });
       setTicketPrice((prevPrice) => {
         const price = Number(prevPrice) + Number(findSeat.grade.price);
-        charge.current = price * 0.03;
-        totalPrice.current = price + Number(price * 0.03);
+        charge.current = Math.floor(price * 0.03);
+        totalPrice.current = Math.floor(price + Number(price * 0.03));
         return price;
       });
     } else {
@@ -117,8 +117,8 @@ export default function ReservationProvider({ children }) {
       });
       setTicketPrice((prevPrice) => {
         const price = Number(prevPrice) - Number(findSeat.grade.price);
-        charge.current = price * 0.03;
-        totalPrice.current = price + Number(price * 0.03);
+        charge.current = Math.floor(price * 0.03);
+        totalPrice.current = Math.floor(price + Number(price * 0.03));
         return price;
       });
     }
