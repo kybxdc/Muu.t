@@ -8,7 +8,7 @@ WORKDIR /app
 COPY build/libs/muut.jar app.jar
 
 # 포트 설정 (Spring Boot 기본 8080)
-EXPOSE 8080
+EXPOSE 9090
 
 # JAR 파일 실행
 ENTRYPOINT ["java", "-jar", "app.jar"]
