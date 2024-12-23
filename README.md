@@ -111,4 +111,4 @@ git clone https://github.com/kybxdc/Muu.t.git
 
 ## **프로젝트 자료**
 - **PPT**: [발표 자료 링크](https://github.com/kybxdc/Muu.t/blob/develop/docs/Muu.t.pdf)
-- **ERD**: [ERD 링크](https://...)
+- **ERD**: [ERD 링크](https://www.erdcloud.com/d/ZrPw9AyMmN9wyPDBs)
