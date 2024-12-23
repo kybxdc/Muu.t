@@ -1,15 +1,18 @@
 package com.fp.muut.seat.service;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -59,43 +62,89 @@ public class SeatService {
 		return json_seatData;
 	}
 
-	@Transactional
-	public void saveSeats(Long id, String seats, String id_type) {
-		String seatPath = "./seatData/";
-		if(id_type.equals("h")) {
-			seatPath+= "seatData"+id+".json";
-		}else if(id_type.equals("m")) {
-			seatPath+= "Musical"+id+".json";
-		}else {
-			seatPath=null;
-		}
-		
-		try(OutputStream out = new FileOutputStream(seatPath)){
-			out.write(seats.getBytes());
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		seatRepository.saveSeats(id, seatPath, id_type);
-	}
+//	@Transactional
+//	public void saveSeats(Long id, String seats, String id_type) {
+//		String seatPath = "./seatData/";
+//		if(id_type.equals("h")) {
+//			seatPath+= "seatData"+id+".json";
+//		}else if(id_type.equals("m")) {
+//			seatPath+= "Musical"+id+".json";
+//		}else {
+//			seatPath=null;
+//		}
+//		
+//		try(OutputStream out = new FileOutputStream(seatPath)){
+//			out.write(seats.getBytes());
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		seatRepository.saveSeats(id, seatPath, id_type);
+//	}
 
-	public String findSeatByMusicalId(Long musical_id, String seat_type) {
-		String positionPath = seatRepository.findSeatByMusicalId(musical_id, seat_type);
-		
-		String seatData = null;
-		
-		try(InputStream in = new FileInputStream(positionPath)){
-			seatData = new String(in.readAllBytes(),"utf-8");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		return seatData;
-	}
+    private static final Logger logger = LoggerFactory.getLogger(SeatService.class);
+
+    // 저장 경로 기본값은 Render의 `/tmp` 디렉토리
+    @Value("${seat.storage.path:/tmp/}")
+    private String seatStoragePath;
+
+    @Transactional
+    public void saveSeats(Long id, String seats, String id_type) {
+        String seatPath;
+        if ("h".equals(id_type)) {
+            seatPath = seatStoragePath + "seatData" + id + ".json";
+        } else if ("m".equals(id_type)) {
+            seatPath = seatStoragePath + "Musical" + id + ".json";
+        } else {
+            throw new IllegalArgumentException("Invalid id_type: " + id_type);
+        }
+
+        try (OutputStream out = new FileOutputStream(seatPath)) {
+            out.write(seats.getBytes(StandardCharsets.UTF_8));
+            logger.info("Seat data saved successfully at {}", seatPath);
+        } catch (IOException e) {
+            logger.error("Error saving seat data to file: {}", seatPath, e);
+            throw new RuntimeException("Failed to save seat data", e);
+        }
+
+        seatRepository.saveSeats(id, seatPath, id_type);
+    }
+
+    public String findSeatByMusicalId(Long musical_id, String seat_type) {
+        String positionPath = seatRepository.findSeatByMusicalId(musical_id, seat_type);
+
+        if (positionPath == null || positionPath.isEmpty()) {
+            throw new RuntimeException("Seat data file not found for musical_id: " + musical_id);
+        }
+
+        try (InputStream in = new FileInputStream(positionPath)) {
+            String seatData = new String(in.readAllBytes(), StandardCharsets.UTF_8);
+            logger.info("Seat data read successfully from {}", positionPath);
+            return seatData;
+        } catch (IOException e) {
+            logger.error("Error reading seat data from file: {}", positionPath, e);
+            throw new RuntimeException("Failed to read seat data", e);
+        }
+    }
+
+	
+//	public String findSeatByMusicalId(Long musical_id, String seat_type) {
+//		String positionPath = seatRepository.findSeatByMusicalId(musical_id, seat_type);
+//		
+//		String seatData = null;
+//		
+//		try(InputStream in = new FileInputStream(positionPath)){
+//			seatData = new String(in.readAllBytes(),"utf-8");
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		return seatData;
+//	}
 
 	public Long getSeatDataByMusical(Long musical_id) {
 		// performance_id로 hall_id 검색
