@@ -15,8 +15,6 @@ import Product_grid from "./Product_grid";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-import SidePopup from "./SidePopup/SidePopup";
-
 function Mainpage() {
   // Musical 데이터 상태
   const [musicals, setMusicals] = useState([]);
@@ -75,7 +73,6 @@ function Mainpage() {
         {/* Footer */}
         <Footer />
       </div>
-      {/* <SidePopup /> */}
     </>
   );
 }
