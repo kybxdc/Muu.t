@@ -20,14 +20,14 @@ export default function Reservation(props) {
         const response2 = await fetch(
           `/api/reserve/sold/${props.selectedPerformanceId}`
         );
-  
+        
         const result = await response.json();
-        const result2 = await response2.json();
-        let array = result2.map((seat) => seat.id);
+        let array=[];
+        if(response2.ok){
+          const result2 = await response2.json();
+          array = result2.map((seat) => seat.id);
+        }
         setRemainSeatCount(result.length - array.length);
-        console.log("Remaining seats1:", result.length);
-        console.log("Remaining seats2:", array.length);
-        console.log("Remaining seats:", result.length - array.length);
       } catch (error) {
         console.error("Error fetching seat data:", error);
       }
