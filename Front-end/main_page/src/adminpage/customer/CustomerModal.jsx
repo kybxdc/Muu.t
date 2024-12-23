@@ -33,7 +33,7 @@ export default function CustomerModal({id, member}) {
           // }
           
         }
-         axios.post('http://localhost:9090/admin/update', updatedData).then((response) => {
+         axios.post('https://muu-t-1.onrender.com/admin/update', updatedData).then((response) => {
                 setSelectedMember(response);
                 setIsEditing(false);  // 수정 완료 후 편집 상태 종료
                 alert('정보 변경이 완료되었습니다.')

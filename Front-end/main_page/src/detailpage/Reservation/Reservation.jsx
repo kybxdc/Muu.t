@@ -16,10 +16,10 @@ export default function Reservation(props) {
   
       try {
         const response = await fetch(
-          `/api/seat/getseatposition/grade/${props.selectedPerformanceId}`
+          `https://muu-t-1.onrender.com/api/seat/getseatposition/grade/${props.selectedPerformanceId}`
         );
         const response2 = await fetch(
-          `/api/reserve/sold/${props.selectedPerformanceId}`
+          `https://muu-t-1.onrender.com/api/reserve/sold/${props.selectedPerformanceId}`
         );
         
         let result = [];

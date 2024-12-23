@@ -37,7 +37,7 @@ export default function SeatProvider({ children, apiLoc }) {
     const fetchData = async () => {
       if (musical_id == undefined) {
         try {
-          const response = await fetch(`/api/seat/getseat/${hall_id}`);
+          const response = await fetch(`https://muu-t-1.onrender.com/api/seat/getseat/${hall_id}`);
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
           }
@@ -50,14 +50,14 @@ export default function SeatProvider({ children, apiLoc }) {
       if (hall_id == undefined) {
         try {
           const response = await fetch(
-            `/api/seat/getseatposition/${musical_id}`
+            `https://muu-t-1.onrender.com/api/seat/getseatposition/${musical_id}`
           );
           const response2 = await fetch(
-            `/api/seat/getseat/musical/${musical_id}`
+            `https://muu-t-1.onrender.com/api/seat/getseat/musical/${musical_id}`
           );
           if(!response.ok||!response2.ok){
             const response_hall = await fetch(
-              `/api/seat/gethall/${musical_id}`
+              `https://muu-t-1.onrender.com/api/seat/gethall/${musical_id}`
             ) 
             const hall = await response_hall.json();
             navigate(`../seatinfo/${hall.id}`,alert(`우선 좌석 배치도를 등록해주세요. 공연장: ${hall.name}`));
@@ -204,8 +204,8 @@ export default function SeatProvider({ children, apiLoc }) {
   const save_seats = async () => {
     console.log(JSON.stringify(seats));
     let uri = hall_id
-      ? `/api/seat/saveposition/h/${hall_id}`
-      : `/api/seat/saveposition/m/${musical_id}`;
+      ? `https://muu-t-1.onrender.com/api/seat/saveposition/h/${hall_id}`
+      : `https://muu-t-1.onrender.com/api/seat/saveposition/m/${musical_id}`;
     try {
       const response = await fetch(uri, {
         method: "POST",

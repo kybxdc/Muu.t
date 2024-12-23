@@ -10,7 +10,7 @@ export default function ReservInfoDetail({id}){
 
         useEffect(() => {
         axios.defaults.withCredentials = true;
-         axios.get(`http://localhost:9090/mypage/reserve/showInfo/${reservation_num}`).then((response) => {
+         axios.get(`https://muu-t-1.onrender.com/mypage/reserve/showInfo/${reservation_num}`).then((response) => {
                 setReservation(response.data);
                   })
                   .catch((error) => {
@@ -21,7 +21,7 @@ export default function ReservInfoDetail({id}){
         useEffect(()=>{
             const fetchReserveSeats = async ()=>{
                 try{
-                    const response = await fetch(`/api/reserve/getReserveSeats/${reservation_num}`);
+                    const response = await fetch(`https://muu-t-1.onrender.com/api/reserve/getReserveSeats/${reservation_num}`);
                     const data = await response.json();
                     setSeats(data);
                 }catch(e){

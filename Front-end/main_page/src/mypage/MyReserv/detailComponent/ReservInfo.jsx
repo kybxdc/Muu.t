@@ -6,7 +6,7 @@ export default function ReservInfo({id}){
     const [reservation, setReservation] = useState([]);
     useEffect(() => {
       axios.defaults.withCredentials = true;
-      axios.get(`http://localhost:9090/mypage/reserve/showInfo/${reservation_num}`).then((response) => {
+      axios.get(`https://muu-t-1.onrender.com/mypage/reserve/showInfo/${reservation_num}`).then((response) => {
         setReservation(response.data);
           })
           .catch((error) => {

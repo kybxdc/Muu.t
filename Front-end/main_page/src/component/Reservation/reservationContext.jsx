@@ -40,7 +40,7 @@ export default function ReservationProvider({ children }) {
   useEffect(() => {
     const fetchInfo = async () => {
       try {
-        const response = await fetch(`/api/reserve/info/${performance_id}`);
+        const response = await fetch(`https://muu-t-1.onrender.com/api/reserve/info/${performance_id}`);
         const result = await response.json();
         setReserveInfo(result);
       } catch (e) {
@@ -54,7 +54,7 @@ export default function ReservationProvider({ children }) {
     const fetchSeats = async () => {
       try {
         const response = await fetch(
-          `/api/seat/getseatposition/grade/${performance_id}`
+          `https://muu-t-1.onrender.com/api/seat/getseatposition/grade/${performance_id}`
         );
         if (!response.ok) {
           alert("좌석이 없습니다. 관리자에게 문의하세요.");
@@ -73,7 +73,7 @@ export default function ReservationProvider({ children }) {
   useEffect(() => {
     const fetchUser = async () => {
       const response = await fetch(
-        `/api/reserve/${Cookies.get("customer_id")}`
+        `https://muu-t-1.onrender.com/api/reserve/${Cookies.get("customer_id")}`
       );
       if(!response.ok){
         alert("로그인 후 이용가능합니다.");
@@ -88,7 +88,7 @@ export default function ReservationProvider({ children }) {
   useEffect(() => {
     const fetchSoldSeats = async () => {
       try {
-        const response = await fetch(`/api/reserve/sold/${performance_id}`);
+        const response = await fetch(`https://muu-t-1.onrender.com/api/reserve/sold/${performance_id}`);
         const result = await response.json();
         let array =result.map(seat=>seat.id);
         setSoldSeats(array);

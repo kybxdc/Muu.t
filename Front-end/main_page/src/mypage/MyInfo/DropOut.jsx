@@ -6,7 +6,7 @@ function handleDropout(){
         //탈퇴처리하기
         axios.defaults.withCredentials = true;
         try {
-          axios.get('http://localhost:9090/member/dropout');
+          axios.get('https://muu-t-1.onrender.com/member/dropout');
           alert('그동안 이용해주셔서 감사합니다.');
           window.location.href = '/';
         } catch (error) {

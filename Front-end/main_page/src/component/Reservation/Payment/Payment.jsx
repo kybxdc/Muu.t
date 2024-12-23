@@ -17,7 +17,7 @@ export default function Payment() {
   useEffect(() => {
     const fetchUUID = async () => {
       try {
-        const response = await fetch("/api/reserve/uuid");
+        const response = await fetch("https://muu-t-1.onrender.com/api/reserve/uuid");
         setUUID(await response.text());
       } catch (e) {
         console.log(e);
@@ -43,7 +43,7 @@ export default function Payment() {
       if (oData.resultCode === "Success") {
         const paySuc = async () => {
           try {
-            const response = await fetch("/api/reserve/save", {
+            const response = await fetch("https://muu-t-1.onrender.com/api/reserve/save", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",

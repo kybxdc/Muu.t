@@ -54,7 +54,7 @@ export default function Calendar({ showReserve }) {
   const [reserveList, setReserveList] = useState([]);
   useEffect(() => {
     axios.defaults.withCredentials = true;
-    axios.get('http://localhost:9090/mypage/reserve').then((response) => {
+    axios.get('https://muu-t-1.onrender.com/mypage/reserve').then((response) => {
       setReserveList(response.data);
       
         })

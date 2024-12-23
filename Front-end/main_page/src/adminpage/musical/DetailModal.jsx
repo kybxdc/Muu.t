@@ -28,7 +28,7 @@ export default function DetailModal({ showMusical }){
                 performance_start_time: formData.newTime,
               };
               axios.defaults.withCredentials = true;
-              axios.post('http://localhost:9090/admin/updateShow', updatedData)
+              axios.post('https://muu-t-1.onrender.com/admin/updateShow', updatedData)
                 .then((response) => {
                   alert('정보 변경이 완료되었습니다.')
                   setFormData(response.data);  // 서버에서 반환된 최신 데이터를 사용
@@ -41,7 +41,7 @@ export default function DetailModal({ showMusical }){
 
           function handleDelete(){
             axios.defaults.withCredentials = true;
-            axios.post(`http://localhost:9090/admin/deleteShow/${showMusical.id}`)
+            axios.post(`https://muu-t-1.onrender.com/admin/deleteShow/${showMusical.id}`)
               .then((response) => {
                 alert('공연 삭제가 완료되었습니다.')
                 setIsEditing(false);  // 수정 완료 후 편집 상태 종료

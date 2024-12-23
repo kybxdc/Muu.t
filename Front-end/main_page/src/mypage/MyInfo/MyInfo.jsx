@@ -15,7 +15,7 @@ export default function MyInfo({grade, memberId, name, password, phone, addr}) {
       const [member, setMember] = useState(null);
       useEffect(() => {
         axios.defaults.withCredentials = true;
-        axios.get('http://localhost:9090/mypage/customer').then((response) => {
+        axios.get('https://muu-t-1.onrender.com/mypage/customer').then((response) => {
               setMember(response.data);
             })
             .catch((error) => {
@@ -46,7 +46,7 @@ export default function MyInfo({grade, memberId, name, password, phone, addr}) {
         customer_address: formData.newAddr,
       };
       axios.defaults.withCredentials = true;
-      axios.post('http://localhost:9090/mypage/update', updatedData)
+      axios.post('https://muu-t-1.onrender.com/mypage/update', updatedData)
         .then((response) => {
           alert('정보 변경이 완료되었습니다.')
           setMember(response.data);  // 서버에서 반환된 최신 데이터를 사용

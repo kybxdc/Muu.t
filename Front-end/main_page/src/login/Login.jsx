@@ -27,7 +27,7 @@ export default function Login() {
       } else{
           try {
               axios.defaults.withCredentials = true;
-              await axios.post('http://localhost:9090/member/login',
+              await axios.post('https://muu-t-1.onrender.com/member/login',
                 {customer_id: customer_id, customer_pw: customer_pw})
                 .then((res) =>{
                   if (res.data.customer_id === undefined || res.data.customer_pw === null) {
@@ -67,7 +67,7 @@ export default function Login() {
         {currentView === "Login" && (
           <>
         <header>
-          <img src="./src/img/Muut_logo.png" witdh="300px" height="300px" ></img>
+          <img src="/Muut_logo.png" witdh="300px" height="300px" ></img>
         </header>
         <div className={styles.loginMain}>
           <input type='email' className={styles.login_input} value={customer_id} placeholder='아이디(아이디는 이메일형식입니다)'  onChange={handleIdChange}/><br/>
