@@ -56,7 +56,7 @@ public class JoinController {
 
         ResponseCookie idCookie = ResponseCookie.from("customer_id", customer_id)
                 .httpOnly(false)
-                .secure(false)
+                .secure(true)
                 .sameSite("None")
                 .path("/")
                 .build();
