@@ -23,7 +23,7 @@ export default function AdminCustomer(){
         setSelectedId(null); // 선택된 ID 초기화
         setSelectedMember(null);
         setIsModalOpen(false);
-         axios.get('http://localhost:9090/member/customer').then((response) => {
+         axios.get('https://muu-t.onrender.com/member/customer').then((response) => {
             setMemberList(response.data);
               })
               .catch((error) => {
@@ -34,7 +34,7 @@ export default function AdminCustomer(){
     const [memberList, setMemberList] = useState([]);
         useEffect(() => {
           axios.defaults.withCredentials = true;
-          axios.get('http://localhost:9090/member/customer').then((response) => {
+          axios.get('https://muu-t.onrender.com/member/customer').then((response) => {
             setMemberList(response.data);
               })
               .catch((error) => {

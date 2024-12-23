@@ -62,7 +62,7 @@ const handleIdChange = (e) => {
     }else{
     try {
       setPw_check("none");
-      await axios.post('http://localhost:9090/member/join', user);
+      await axios.post('https://muu-t.onrender.com/member/join', user);
       alert('Muu.t의 회원이 되어주셔서 감사합니다!');
       console.log(customer_pw);
       console.log(customer_id)

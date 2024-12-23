@@ -19,7 +19,7 @@ export default function MusicalModal({id}){
         formData.append("id", id); // ID 추가
         formData.append("file", file); // 파일 추가
         try {
-            const response = await fetch("http://localhost:9090/admin/updateMusical", {
+            const response = await fetch("https://muu-t.onrender.com/admin/updateMusical", {
                 method: "POST",
                 body: formData,
             });

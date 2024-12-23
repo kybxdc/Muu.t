@@ -20,7 +20,7 @@ export default function AdminMain() {
     const [member, setMember] = useState();
     useEffect(() => {
       axios.defaults.withCredentials = true;
-      axios.get('http://localhost:9090/mypage/customer').then((response) => {
+      axios.get('https://muu-t.onrender.com/mypage/customer').then((response) => {
             setMember(response.data);
           })
           .catch((error) => {

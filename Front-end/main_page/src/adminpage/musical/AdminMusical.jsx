@@ -14,7 +14,7 @@ export default function AdminMusical(){
     
     useEffect(() => {
         axios.defaults.withCredentials = true;
-        axios.get('http://localhost:9090/admin/showList').then((response) => {
+        axios.get('https://muu-t.onrender.com/admin/showList').then((response) => {
             setMusicalList(response.data);
             console.log(response.data)
             })

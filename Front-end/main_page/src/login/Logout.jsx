@@ -1,6 +1,6 @@
 import axios from "axios";
 export const handleLogout = () => {
-    axios.get('http://localhost:9090/member/logout', { withCredentials: true }) // 로그아웃 API 호출
+    axios.get('https://muu-t.onrender.com/member/logout', { withCredentials: true }) // 로그아웃 API 호출
     .then(() => {
       sessionStorage.clear(); // 세션 스토리지 초기화
       window.location.href = '/';

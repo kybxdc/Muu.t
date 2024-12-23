@@ -18,7 +18,7 @@ export default function SeatInfo() {
     }
     (async function () {
       try {
-        const response = await fetch(`/api/seat/hall/${hall_id}`);
+        const response = await fetch(`https://muu-t.onrender.com/api/seat/hall/${hall_id}`);
 
         if (response.ok) {
           setHallName(await response.text());
@@ -81,7 +81,7 @@ export default function SeatInfo() {
 
     if (!nullCheck) {
       try {
-        const response = await fetch("/api/seat/seatinfo", {
+        const response = await fetch("https://muu-t.onrender.com/api/seat/seatinfo", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

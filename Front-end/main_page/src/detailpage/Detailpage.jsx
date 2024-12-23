@@ -44,7 +44,7 @@ export default function Detailpage() {
       };
 
       axios
-        .post("http://localhost:9090/setPerformance/BookingTime", requestData)
+        .post("https://muu-t.onrender.com/setPerformance/BookingTime", requestData)
         .then((response) => {
           setPerformances(response.data); // 받아온 Performance 데이터 설정
         })

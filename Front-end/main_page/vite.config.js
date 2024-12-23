@@ -6,12 +6,12 @@ export default defineConfig({
   plugins: [react()],
   server: {
     historyApiFallback: true,
-    proxy: {
-      '/api':{
-        target: 'http://localhost:9090',
-        changeOrigin: true,
-        secure: false,
-      }
-    }
+    // proxy: {
+    //   '/api':{
+    //     target: 'http://localhost:9090',
+    //     changeOrigin: true,
+    //     secure: false,
+    //   }
+    // }
   }
 })

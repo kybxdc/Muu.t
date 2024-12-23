@@ -27,7 +27,7 @@ export default function Login() {
       } else{
           try {
               axios.defaults.withCredentials = true;
-              await axios.post('http://localhost:9090/member/login',
+              await axios.post('https://muu-t.onrender.com/member/login',
                 {customer_id: customer_id, customer_pw: customer_pw})
                 .then((res) =>{
                   if (res.data.customer_id === undefined || res.data.customer_pw === null) {

@@ -22,7 +22,7 @@ function handleSelect(selectedButton) {
 
 useEffect(() => {
   axios.defaults.withCredentials = true;
-  axios.get('http://localhost:9090/mypage/reserve').then((response) => {
+  axios.get('https://muu-t.onrender.com/mypage/reserve').then((response) => {
     setReserveList(response.data);
       })
       .catch((error) => {

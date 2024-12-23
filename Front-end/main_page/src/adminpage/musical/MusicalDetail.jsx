@@ -32,7 +32,7 @@ export default function MusicaDetail(){
 
       useEffect(() => {
           axios.defaults.withCredentials = true;
-          axios.get('http://localhost:9090/admin/showList').then((response) => {
+          axios.get('https://muu-t.onrender.com/admin/showList').then((response) => {
               setMusicalList(response.data);
               })
               .catch((error) => {
@@ -46,7 +46,7 @@ export default function MusicaDetail(){
                  
             if (selectedMusical) {
                 axios.defaults.withCredentials = true;
-                axios.get(`http://localhost:9090/admin/showList/${selectedMusical}`).then((response) => {
+                axios.get(`https://muu-t.onrender.com/admin/showList/${selectedMusical}`).then((response) => {
                     setShowMusical(response.data);
                     })
                 .catch((error) => {

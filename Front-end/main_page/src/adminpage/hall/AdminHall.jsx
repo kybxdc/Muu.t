@@ -8,7 +8,7 @@ export default function AdminHall(){
     const [hallList, setHallList] = useState([]);
         useEffect(() => {
           axios.defaults.withCredentials = true;
-          axios.get('http://localhost:9090/admin/hallList').then((response) => {
+          axios.get('https://muu-t.onrender.com/admin/hallList').then((response) => {
             setHallList(response.data);
               })
               .catch((error) => {
