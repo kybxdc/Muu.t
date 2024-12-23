@@ -9,8 +9,10 @@ export default function Reservation(props) {
 
   useEffect(() => {
     const fetchSeatsCount = async () => {
-      if (!props.selectedPerformanceId) return; // Performance ID가 없으면 종료
-      // console.log("props.selectedPerformanceId == ", props.selectedPerformanceId);
+      if (!props.selectedPerformanceId) {
+        setRemainSeatCount(0);
+        return; // Performance ID가 없으면 종료
+      } 
   
       try {
         const response = await fetch(
@@ -30,8 +32,6 @@ export default function Reservation(props) {
           array = result2.map((seat) => seat.id);
         }
         setRemainSeatCount(result.length - array.length);
-        // console.log("result.length == ",result.length);
-        // console.log("array.length == ",array.length);
       } catch (error) {
         console.error("Error fetching seat data:", error);
       }
