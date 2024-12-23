@@ -1,10 +1,6 @@
-import { useState } from "react";
-
 import styles from "./BookingSeat.module.css";
 
 export default function BookingSeat({ performanceId, remainSeatCount }) {
-  
-
   return (
     <div className={styles.remainSeatCount}>
       <div className={styles.remainSeatCount_info}>
@@ -12,14 +8,19 @@ export default function BookingSeat({ performanceId, remainSeatCount }) {
         <p>{remainSeatCount}석</p>
       </div>
       <button
-        className={styles.reserve_button}
+        className={`${styles.reserve_button} ${
+          remainSeatCount === 0 ? styles.disabled_button : ""
+        }`}
         onClick={() => {
-          window.open(
-            `/reservation/${performanceId}/seatview`,
-            "팝업창", // 팝업 이름
-            "width=2000,height=1000,scrollbars=yes,resizable=yes"
-          );
+          if (remainSeatCount !== 0) {
+            window.open(
+              `/reservation/${performanceId}/seatview`,
+              "팝업창", // 팝업 이름
+              "width=2000,height=1000,scrollbars=yes,resizable=yes"
+            );
+          }
         }}
+        disabled={remainSeatCount === 0} // 0일 경우 버튼 비활성화
       >
         예매하기
       </button>

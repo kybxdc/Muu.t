@@ -3,7 +3,6 @@ import BookingCalendar from "./BookingCalendar/BookingCalendar";
 import BookingTime from "./BookingTime/BookingTime";
 import BookingSeat from "./BookingSeat/BookingSeat";
 import styles from "./Reservation.module.css";
-import axios from "axios";
 
 export default function Reservation(props) {
   const [remainSeatCount, setRemainSeatCount] = useState(null);
@@ -11,7 +10,7 @@ export default function Reservation(props) {
   useEffect(() => {
     const fetchSeatsCount = async () => {
       if (!props.selectedPerformanceId) return; // Performance ID가 없으면 종료
-      console.log("props.selectedPerformanceId == ", props.selectedPerformanceId);
+      // console.log("props.selectedPerformanceId == ", props.selectedPerformanceId);
   
       try {
         const response = await fetch(
@@ -21,13 +20,18 @@ export default function Reservation(props) {
           `/api/reserve/sold/${props.selectedPerformanceId}`
         );
         
-        const result = await response.json();
+        let result = [];
+        if(response.ok){
+          result = await response.json();
+        }
         let array=[];
         if(response2.ok){
           const result2 = await response2.json();
           array = result2.map((seat) => seat.id);
         }
         setRemainSeatCount(result.length - array.length);
+        // console.log("result.length == ",result.length);
+        // console.log("array.length == ",array.length);
       } catch (error) {
         console.error("Error fetching seat data:", error);
       }

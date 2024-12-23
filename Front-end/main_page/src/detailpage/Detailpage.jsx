@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import React from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 import styles from "./Detailpage.module.css";
@@ -16,8 +15,6 @@ import InfoImgs from "./Tabcontent/InfoImgs";
 import Review from "./Tabcontent/Review";
 import Place from "./Tabcontent/Place";
 import Reservation from "./Reservation/Reservation";
-
-import Cookies from "js-cookie";
 
 export default function Detailpage() {
   const location = useLocation();
