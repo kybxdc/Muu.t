@@ -71,7 +71,6 @@ export default function MyMain() {
                             <p>아이디: <strong>{member?.customer_id|| 'null'}</strong></p>
                             <p>이름: <strong>{member?.customer_name || 'null'}</strong></p>
                             <p>비밀번호: *****</p>
-                            <p>최근 예약 내역 : 뮤지컬 상세 페이지로 연결</p>
                             <button className={classes.submit_btn} onClick={() => {handleSelect("MyInfo")}}>회원정보수정</button>
                         </div>
             </main>
