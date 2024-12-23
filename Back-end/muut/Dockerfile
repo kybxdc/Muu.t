@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # JAR 파일 복사
-COPY build/libs/muut.jar app.jar
+COPY build/libs/muut-0.0.1-SNAPSHOT.jar app.jar
 
 # 포트 설정 (Spring Boot 기본 8080)
 EXPOSE 9090
