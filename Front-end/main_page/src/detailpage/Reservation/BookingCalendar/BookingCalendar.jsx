@@ -5,9 +5,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import styles from "./BookingCalendar.module.css";
 
 export default function BookingCalendar({ selectedDate, setSelectedDate, musical, performances }) {
-  // const activeDates = performances?.map((performance) => new Date(performance.performance_date)) || [];
-  // console.log("performances == ", performances);
-  // console.log("activeDates == ",activeDates);
 
   return (
     <div>
@@ -18,9 +15,7 @@ export default function BookingCalendar({ selectedDate, setSelectedDate, musical
         onChange={(date) => setSelectedDate(date)}
         inline
         minDate={new Date()}
-        // filterDate={(date) =>
-        //   activeDates.some((activeDate) => activeDate.toDateString() === date.toDateString())
-        // }
+        maxDate={new Date("2024-12-28")}
         renderCustomHeader={({
           date,
           decreaseMonth,
