@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 
 const ProtectedRoute =({children})=>{
     const user = Cookies.get("customer_id")
-    if(user == null) {
+    if(user === null) {
         alert("로그인이 필요한 서비스입니다.")
         return <Navigate to ="/"/>; //메인페이지로 이동
        }
