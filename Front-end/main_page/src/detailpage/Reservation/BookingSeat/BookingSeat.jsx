@@ -20,7 +20,7 @@ export default function BookingSeat({ performanceId, remainSeatCount }) {
             );
           }
         }}
-        disabled={remainSeatCount === 0} // 0일 경우 버튼 비활성화
+        disabled={false} // 0일 경우 버튼 비활성화
       >
         예매하기
       </button>
