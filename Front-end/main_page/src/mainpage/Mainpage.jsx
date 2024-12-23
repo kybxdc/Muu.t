@@ -22,7 +22,7 @@ function Mainpage() {
   useEffect(() => {
     // Musical 데이터 호출
     axios
-      .get("https://muu-t.onrender.comhttps://muu-t.onrender.com/api/musicals")
+      .get("https://muu-t.onrender.com/api/musicals")
       .then((response) => {
         setMusicals(response.data);
       })
