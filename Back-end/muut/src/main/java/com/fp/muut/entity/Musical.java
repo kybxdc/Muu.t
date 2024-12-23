@@ -24,8 +24,7 @@ import lombok.Setter;
 public class Musical {
 	@Id
 	@Column(name = "musical_id")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_generator1")
-    @SequenceGenerator(name = "seq_generator1", sequenceName = "musical_sequence", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	// hall_id 외래키 참조

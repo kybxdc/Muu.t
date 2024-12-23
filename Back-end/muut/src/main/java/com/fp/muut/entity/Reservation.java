@@ -17,8 +17,7 @@ import lombok.Setter;
 @Getter @Setter
 public class Reservation {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_generator4")
-    @SequenceGenerator(name = "seq_generator4", sequenceName = "reservation_sequence", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long reservation_num;
 	
 	// customer_num 외래키 참조

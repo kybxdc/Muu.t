@@ -22,8 +22,7 @@ import lombok.Setter;
 @Getter @Setter
 public class Customer {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_generator5")
-    @SequenceGenerator(name = "seq_generator5", sequenceName = "customer_sequence", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long customer_num;
 	
 	private String customer_id;

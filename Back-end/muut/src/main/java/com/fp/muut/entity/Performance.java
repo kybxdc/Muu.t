@@ -24,8 +24,7 @@ import lombok.Setter;
 public class Performance {
 	@Id
 	@Column(name="performance_id")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_generator3")
-    @SequenceGenerator(name = "seq_generator3", sequenceName = "performance_sequence", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	// musical_id 외래키 참조
