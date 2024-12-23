@@ -3,8 +3,20 @@
     width: 100%;
 }
 
+.Place h1 {
+    font-size: 24px;
+    margin-bottom: 16px;
+    text-align: center;
+    color: #333;
+    margin-top: 48px;
+}
+
 .Place_detail_box {
     margin: 20px;
+}
+
+.Place_detail_box p {
+    color: #444;
 }
 
 .Place_detail {

@@ -1,3 +1,49 @@
-.Review{
-    min-height: 600px;
+.Review {
+    padding: 20px;
+    /* background-color: #f4f4f4; */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.Review h1 {
+    font-size: 24px;
+    margin-bottom: 16px;
+    text-align: center;
+    color: #333;
+}
+
+.ReviewList {
+    list-style: none;
+    padding: 0;
+}
+
+.ReviewItem {
+    padding: 16px;
+    border-bottom: 1px solid #ddd;
+}
+
+.ReviewHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.UserId {
+    font-weight: bold;
+    color: #555;
+}
+
+.Rating {
+    color: #ffcc00;
+}
+
+.Comment {
+    margin: 8px 0;
+    color: #444;
+}
+
+.Date {
+    font-size: 12px;
+    color: #888;
+    text-align: right;
 }

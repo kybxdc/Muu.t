@@ -8,6 +8,7 @@ export default function InfoImgs({ descImgs }) {
 
   return (
     <div className={styles.dIbox}>
+      <h1>상세정보</h1>
       {parsedDescImgs.map((m_img, index) => (
         <img className={styles.description_img} key={index} src={m_img} alt={`Description ${index}`} />
       ))}
