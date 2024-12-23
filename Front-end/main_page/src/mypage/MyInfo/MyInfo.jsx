@@ -1,5 +1,5 @@
 import axios from 'axios';
-import classes from './Myinfo.module.css'
+import classes from './MyInfo.module.css'
 import { useState, useEffect } from 'react';
 
 export default function MyInfo({grade, memberId, name, password, phone, addr}) {
