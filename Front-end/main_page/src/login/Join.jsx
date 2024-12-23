@@ -78,7 +78,7 @@ const handleIdChange = (e) => {
          {currentView === "Join" && (
       <>
         <header>
-          <img src="./src/img/Muut_logo.png" witdh="300px" height="300px" ></img>
+          <img src="/Muut_logo.png" witdh="300px" height="300px" ></img>
         </header>
         <div className={styles.joinMain}>
           <h2>회원 정보를 입력해 주세요</h2>
