@@ -23,6 +23,7 @@ export default function Place({ hall_name, hall_addr, hall_la, hall_lo }) {
 
   return (
     <div className={styles.Place}>
+      <h1>장소정보</h1>
       <div className={styles.Place_detail_box}>
         <p>장소: {hall_name}</p>
         <p>주소: {hall_addr}</p>
