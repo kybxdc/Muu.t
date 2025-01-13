@@ -1,62 +1,81 @@
 package com.fp.muut.entity;
 
-import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fp.muut.entity.embedded.ReviewPK;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.SequenceGenerator;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
-//@Entity
-@Table(name = "CUSTOMER")
+@Entity
 @Getter @Setter
 public class Customer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_generator1")
-    @SequenceGenerator(name = "seq_generator1", sequenceName = "customer_sequence", allocationSize = 1)
-    @Column(name = "customer_num")
-    private Long customerNum; // 고객번호
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_generator5")
+    @SequenceGenerator(name = "seq_generator5", sequenceName = "customer_sequence", allocationSize = 1)
+	private Long customer_num;
+	
+	private String customer_id;
+	private String customer_pw;
+	private String customer_name;
+	private String customer_phone;
+	private String customer_address;
+	private String customer_status;
+	
+	// customer_grade 외래키 참조
+	@ManyToOne
+	@JoinColumn(name = "customer_grade")
+	@Setter(value = AccessLevel.NONE)
+	private Grade grade;
+	
+	private String customer_total_cash;
+	
+	// Resrvation 양방향 매핑
+//	@OneToMany(mappedBy = "customer")
+//	private List<Reservation> reservations = new ArrayList<>();
 
-    @Column(name = "customer_id", nullable = false, length = 100)
-    private String customerId; // 고객 아이디
+	// Review 양방향 매핑
+//	@OneToMany(mappedBy = "customer")
+//	private List<Review> reviews = new ArrayList<>();
 
-    @Column(name = "customer_pw", length = 100)
-    private String customerPw; // 고객 비밀번호
-
-    @Column(name = "customer_name", length = 100)
-    private String customerName; // 고객 이름
-
-    @Column(name = "customer_phone", length = 100)
-    private String customerPhone; // 고객 전화번호
-
-    @Column(name = "customer_address", length = 1000)
-    private String customerAddress; // 고객 주소
-
-    @Column(name = "customer_grade", nullable = false, length = 100)
-    private String customerGrade; // 고객 등급
-
-    @Column(name = "customer_total_cash", length = 100)
-    private String customerTotalCash; // 결제한 티켓 가격 총 누적합
-    
-//    @ManyToOne
-    @JoinColumn(name = "customer_grade", insertable = false, updatable = false)
-    private Discount discount; // 등급별 할인율과의 연관관계 매핑
-
-    // 기본 생성자
+	// Review 양방향 매핑
+//	@OneToMany(mappedBy = "customer")
+//	private List<Expectation> expectations = new ArrayList<>();
+	
+	public void setDiscound(Grade grade) {
+		this.grade = grade;
+//		grade.getCustomers().add(this);
+	}
+	
+	// 기본 생성자
     public Customer() {}
 
-    // 매개변수가 있는 생성자
-    public Customer(String customerId, String customerPw, String customerName, 
-    				String customerPhone, String customerAddress, String customerGrade, String customerTotalCash) {
-        this.customerId = customerId;
-        this.customerPw = customerPw;
-        this.customerName = customerName;
-        this.customerPhone = customerPhone;
-        this.customerAddress = customerAddress;
-        this.customerGrade = customerGrade;
-        this.customerTotalCash = customerTotalCash;
-    }
+	public Customer(Long customer_num, String customer_id, String customer_pw, String customer_name,
+			String customer_phone, String customer_address, String customer_status, Grade grade,
+			String customer_total_cash) {
+		super();
+		this.customer_num = customer_num;
+		this.customer_id = customer_id;
+		this.customer_pw = customer_pw;
+		this.customer_name = customer_name;
+		this.customer_phone = customer_phone;
+		this.customer_address = customer_address;
+		this.customer_status = customer_status;
+		this.grade = grade;
+		this.customer_total_cash = customer_total_cash;
+	}	
 
-    @Override
-    public String toString() {
-        return "Customer [customerNum=" + customerNum + ", customerId=" + customerId + 
-        		", customerName=" + customerName + ", customerGrade=" + customerGrade + "]";
-    }
+
+	
 }

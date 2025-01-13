@@ -1,0 +1,43 @@
+.info {
+    vertical-align: middle;
+    width: 100px;
+  }
+
+  .info1 {
+    vertical-align: middle;
+    width: 400px;
+  }
+
+  .Musical_detail {
+    border-radius: 8px;
+    border: 1px solid #CCC;
+    color: black;
+    background-color: white;
+    padding: 0.6em 1.2em;
+    transition: border-color 0.25s;
+    border-collapse: collapse;
+    margin: 10px;
+  }
+
+  .btn_div {
+    margin: 10px;
+    display: flex; /* 플렉스 레이아웃 사용 */
+    justify-content: space-between; /* 양쪽 정렬 */
+  }
+
+  .list_btn {
+    border-radius: 8px;
+    border: 1px solid #fa2828;
+    background-color: #f9f9f9;
+    color: #fa2828;
+    cursor: pointer;
+    padding: 0.6em 1.2em;
+  }
+  .cancel_btn {
+    border-radius: 8px;
+    border: 1px solid #f9f9f9;
+    background-color: #fa2828;
+    color: #f9f9f9;
+    cursor: pointer;
+    padding: 0.6em 1.2em;
+  }

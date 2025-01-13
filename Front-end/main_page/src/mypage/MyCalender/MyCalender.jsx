@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './MyCalender.css';
-import { Reservs } from '../MyReserv/Reservs';
+import axios from 'axios';
 
-export default function Calendar() {
+export default function Calendar({ showReserve }) {
   const today = new Date();
   const [currentMonth, setCurrentMonth] = useState(today.getMonth());
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
-
+  
   // 월 이름 배열
   const monthNames = [
     'January', 'February', 'March', 'April', 'May', 'June',
@@ -49,22 +49,37 @@ export default function Calendar() {
   const days = Array.from({ length: firstDay }, () => null).concat(
     Array.from({ length: daysInMonth }, (_, i) => i + 1)
   );
+  
+  //예약 내역 받아오기
+  const [reserveList, setReserveList] = useState([]);
+  useEffect(() => {
+    axios.defaults.withCredentials = true;
+    axios.get('http://localhost:9090/mypage/reserve').then((response) => {
+      setReserveList(response.data);
+      
+        })
+        .catch((error) => {
+          console.error("There was an error!", error);
+        });
+    }, []);
 
  // 예약된 날짜와 이미지 매핑
- const reserveDates = Reservs.reduce((acc, reserv) => {
-  const reserveDate = new Date(reserv.date);
-  if (
-    reserveDate.getFullYear() === currentYear &&
-    reserveDate.getMonth() === currentMonth
-  ) {
-    acc[reserveDate.getDate()] = reserv.img;
-  }
-  return acc;
-}, {});
-
+ const reserveDates = reserveList.reduce((acc, reserv) => {
+    const reserveDate = new Date(reserv.performance_date);
+    if (
+      reserveDate.getFullYear() === currentYear &&
+      reserveDate.getMonth() === currentMonth
+    ) {
+      acc[reserveDate.getDate()] = {
+        poster : reserv.musical_image,
+        reservation_num: reserv.reservation_num,
+       };
+      }
+    return acc;
+  }, {});
 
   return (
-    <div className="calendar">
+    <div className="calendar" style={{marginBottom:'20%'}}>
       <header className="calendar-header">
         <button onClick={prevMonth}>&lt;</button>
         <h2>{`${monthNames[currentMonth]} ${currentYear}`}</h2>
@@ -81,9 +96,10 @@ export default function Calendar() {
                <div className="image-container">
           {reserveDates[day] && (
             <img
-              src={reserveDates[day]} // 매핑된 이미지 URL
+              src={reserveDates[day].poster} // 매핑된 이미지 URL
               alt="예약한 뮤지컬 포스터"
               className="reserve-image"
+              onClick={()=>showReserve(reserveDates[day].reservation_num)}
             />
           )}
           <span className={`day-number-overlay ${reserveDates[day] ? 'reserved-day' : ''}`}>{day}</span>

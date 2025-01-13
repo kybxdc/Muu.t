@@ -1,0 +1,109 @@
+.drag-area {
+    width: 300vw;
+    height: 300vh;
+    position: relative;
+    /* top: 20px; */
+    /* left: 20px; */
+    padding: 4px;
+    background-size: 30px 30px;
+    background-image: linear-gradient(to right, #ddd 1px, transparent 1px),
+                      linear-gradient(to bottom, #ddd 1px, transparent 1px);
+  }
+
+.stage-position{
+    background-color: #ccc;
+    border: 1px dashed black;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.stage-position #stage{
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+.seat{
+    width: 20px;
+    height: 20px;
+    display: flex;
+    color: black;
+    background-color: powderblue;
+    font-weight: bold;
+    font-size: 10px;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid black;
+    border-radius: 2px;
+    position: absolute;
+    cursor: pointer;
+    transition: transform 0.2s;
+    user-select: none;
+}
+
+.selected-seat{
+    background-color: orange !important;
+}
+
+.save-button{
+    right: 20px;
+    bottom: 20px;
+    display: block;
+    z-index: 999;
+    position: fixed;
+    width: 73px;
+    height: 40px;
+    background: yellowgreen;
+    font-weight: bold;
+    border: 2px solid green;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.save-button:hover{
+    background-color: yellow;
+}
+
+.save-button:active{
+    background-color: yellowgreen;
+}
+
+.selectRowButton{
+    position: fixed;
+    z-index: 999;
+    bottom: 20px;
+}
+
+.button{
+    margin: 3px 3px;
+    font-weight: bold;
+    border: 2px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button:hover{
+    background-color: rgba(86, 230, 255, 0.966);
+}
+
+.row-button, .row-button:active{
+    background-color: burlywood;
+}
+
+.select-clear-button, .select-clear-button:active{
+    background-color: tomato
+}
+
+.edit-nav{
+    background-color: #CCC;
+    width: 8%;
+    height: 92%;
+    position: absolute;
+    display: flex;
+    right: 20px;
+    margin-top: 0px;
+    border: 1px solid;
+    border-radius: 10px;
+    opacity: 0.7;
+}

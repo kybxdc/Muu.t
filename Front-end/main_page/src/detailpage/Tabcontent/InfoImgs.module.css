@@ -1,0 +1,19 @@
+:root {
+    --all_width: 1120px;
+}
+
+.dIbox{
+    width: var(--all_width);
+}
+
+.dIbox h1 {
+    font-size: 24px;
+    margin-bottom: 16px;
+    text-align: center;
+    color: #333;
+    margin-top: 48px;
+}
+
+.description_img{
+    width: 100%;
+}

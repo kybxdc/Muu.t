@@ -1,0 +1,112 @@
+.top_navbar {
+  display: flex;
+  align-items: center;
+  background-color: #333;
+  color: white;
+}
+
+.top_navbar .logo {
+  font-weight: bold;
+  cursor: pointer;
+  padding: 40px 40px;
+  margin-right: 40px;
+}
+
+.top_navbar .top_menu {
+  display: flex;
+  gap: 10px;
+    }
+
+.top_navbar .menu_item {
+  position: relative;
+  width: 200px;
+  margin-left: 30px;
+}
+
+.menu_item a {
+  color: white;
+  padding: 1%;
+  cursor: pointer;
+  font-size: 18px;
+  position: relative;
+}
+
+.menu_item a:hover {
+  color: #fa2828;
+}
+
+/* Sidebar */
+.container {
+  display: flex;
+}
+
+.sidebar {
+  width: 200px;
+  background-color: #f5f5f5;
+  padding: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin-bottom: 15px;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+.sidebar a:hover {
+  color: #fa2828;
+}
+
+/* Main content */
+.content {
+  padding: 20px;
+  flex: 1;
+  display: block;
+}
+
+.user_info p {
+  margin: 10px 0;
+}
+
+.submit_btn {
+  background-color: #fa2828;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  font-size: 0.9em;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.submit_btn:hover {
+  background-color: #fa2828;
+}
+
+.submenu {
+  list-style: none;
+  padding-left: 30px; /* 들여쓰기 */
+  margin-top: 5px;
+}
+
+.submenu li {
+  margin-bottom: 10px;
+}
+
+.submenu a {
+  color: #555;
+  font-size: 13px;
+}
+
+.submenu a:hover {
+  color: #fa2828;
+  cursor: pointer;
+}
+

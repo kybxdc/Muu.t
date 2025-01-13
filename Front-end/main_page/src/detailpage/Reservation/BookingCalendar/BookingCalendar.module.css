@@ -1,0 +1,94 @@
+/* 기본 틀 */
+:global(.react-datepicker) {
+  font-family: "Helvetica Neue", helvetica, arial, sans-serif;
+  font-size: 0.8rem;
+  background-color: white;
+  color: #000;
+  border-radius: 0.3rem;
+  display: inline-block;
+  position: relative;
+  line-height: initial;
+  border: none;
+}
+
+/* 달력 헤더 스타일 */
+:global(.react-datepicker__header) {
+  color: black; /* 헤더 텍스트 색상 */
+  padding: 10px; /* 내부 여백 */
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: white;
+  border: none;
+  text-align: center;
+}
+
+/* 현재 월/연도 텍스트 스타일 */
+:global(.react-datepicker__current-month) {
+  color: black; /* 텍스트 색상 */
+  font-size: 1.2rem;
+}
+
+/* 이전/다음 버튼 스타일 */
+:global(.react-datepicker__navigation) {
+  top: 10px; /* 버튼 위치 조정 */
+  width: 30px;
+  height: 30px;
+  margin: 0 15px; /* 좌우 간격 추가 */
+}
+
+:global(.react-datepicker__navigation--previous) {
+  border-right-color: white; /* 이전 버튼 화살표 색상 */
+}
+
+:global(.react-datepicker__navigation--next) {
+  border-left-color: white; /* 다음 버튼 화살표 색상 */
+}
+
+/* 사용자 정의 헤더 버튼 스타일 */
+.button {
+  margin: 0 30px; /* 버튼 간격 조정 */
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+
+/* 날짜 셀 기본 스타일 */
+:global(.react-datepicker__day) {
+  box-sizing: border-box; /* border를 포함해 크기 유지 */
+  border: 1px solid transparent; /* 초기 상태에서 border 공간 확보 */
+  border-radius: 50%; /* 원형 셀 */
+  transition: border 0.2s ease, background-color 0.2s ease; /* 부드러운 전환 */
+}
+
+/* 선택된 날짜 스타일 */
+:global(.react-datepicker__day--selected) {
+  background-color: red;
+  color: white;
+  font-weight: bold;
+}
+
+/* 선택된 날짜에 마우스 오버 시 스타일 */
+:global(.react-datepicker__day--selected:not([aria-disabled="true"]):hover) {
+  background-color: red;
+  border-color: transparent;
+  color: white;
+  font-weight: bold;
+  border-radius: 50%; /* 원형 셀 */
+}
+
+/* 비활성화된 날짜 스타일 */
+:global(.react-datepicker__day--disabled) {
+  color: #ccc;
+  border: 1px;
+  pointer-events: none; /* 클릭 비활성화 */
+}
+
+/* 호버 시 스타일 */
+:global(.react-datepicker__day:not([aria-disabled="true"]):hover) {
+  border: 1px solid black;
+  cursor: pointer;
+  border-radius: 50%; /* 원형 셀 */
+}
+

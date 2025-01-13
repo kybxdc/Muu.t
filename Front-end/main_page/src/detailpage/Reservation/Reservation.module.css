@@ -1,0 +1,42 @@
+.reserve_tab {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  min-height: 300px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.reserve_head {
+  padding: 0 20px;
+}
+
+.reserve_date {
+  width: 100%;
+  border-right: 1px solid rgb(206, 206, 206);
+  padding: 10px;
+}
+
+.reserve_calendar_box{
+  justify-items: center;
+}
+
+.reserve_calendar {
+  padding: 20px;
+  width: 300px;
+  height: 250px;
+  border-radius: 10px;
+  background-color: rgb(191, 235, 222);
+}
+
+.reserve_time {
+  width: 100%;
+  border-right: 1px solid rgb(206, 206, 206);
+  padding: 10px;
+}
+
+.reserve_seat {
+  width: 100%;
+  padding: 10px;
+}

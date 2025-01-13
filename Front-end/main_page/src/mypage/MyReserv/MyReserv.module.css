@@ -1,0 +1,52 @@
+.Musical_detail {
+  border-radius: 8px;
+  border: 1px solid #fa2828;
+  color: #fa2828;
+  background-color: white;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+.cancel {
+  border-radius: 8px;
+  border: 1px solid white;
+  color: white;
+  background-color: #fa2828;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+.reserve {
+  width: 100%;
+  border-collapse: collapse; /* 테이블의 테두리를 합침 */
+  table-layout: fixed;
+  display: block;
+  align-items: center;
+  
+}
+
+.reserveTb {
+  padding: 10px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.reserveTh {
+  padding: 10px;
+  background-color: #f4f4f4;
+  cursor: pointer;
+}
+
+.active {
+  padding: 10px;
+  border-radius: 8px;
+  border: 2px solid #fa2828;
+}

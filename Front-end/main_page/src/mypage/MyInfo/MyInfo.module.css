@@ -1,0 +1,49 @@
+.width_limit{
+  width: var(--all_width);
+  margin: 0 auto;
+}
+
+.submit_btn {
+  border-radius: 8px;
+  border: 1px solid #fa2828;
+  color: #fa2828;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+.changePassword{
+  background-color:  #fa2828;
+  border: 1px solid #fa2828;
+  border-radius: 8px;
+  color:white;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+.info {
+  padding: 10px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.info1 {
+  padding: 10px;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: bold;
+}
+
+.info_input {
+  width: 300px; 
+  height: 50px;
+  border: 1px solid;
+  border-radius: 8px;
+}

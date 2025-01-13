@@ -1,63 +1,128 @@
 package com.fp.muut.service;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.fp.muut.entity.Musical;
 import com.fp.muut.repository.APIRepository;
 import com.fp.muut.dto.Dbs;
+import com.fp.muut.dto.HallInfoDTO;
 import com.fp.muut.dto.MusicalDTO;
+import com.fp.muut.dto.dbs_hallInfo;
+import com.fp.muut.entity.Hall_Info;
+import com.fp.muut.entity.Musical;
+import com.fp.muut.entity.Performance;
 
 import lombok.RequiredArgsConstructor;
+
+import com.fp.muut.service.CutUnnecessaryParts;
 
 @Service
 @RequiredArgsConstructor
 public class APIService {
     private final APIRepository apiRepository;
+    private final CutUnnecessaryParts cutUnnecessaryParts;
+    private static final String SERVICE_KEY = "3ca6587ae8704899b3e865e74484f3bb";
 
     @Transactional
     public void save() throws IOException {
-        int musicalIdStart = 132238;
-        String musicalId = "";
+        // 여러 공연 정보를 가져오는 API URL
+        String apiUrl = "http://www.kopis.or.kr/openApi/restful/pblprfr?"
+        		+ "service=" + SERVICE_KEY
+        		+ "&stdate=20241201"
+        		+ "&eddate=20241203"
+        		+ "&cpage=1"
+        		+ "&rows=30"
+        		+ "&signgucode=11"
+        		+ "&signgucodesub=1111"
+        		+ "&shcate=GGGA";
 
-        for (int i = 0; i < 10; i++) {
-            musicalId = "PF" + (musicalIdStart + i);
+        // 외부 API 호출
+        RestTemplate restTemplate = new RestTemplate();
+        String response = restTemplate.getForObject(apiUrl, String.class);
 
-            // 외부 API 호출
-            String url = "http://www.kopis.or.kr/openApi/restful/pblprfr/" + musicalId + "?service=3ca6587ae8704899b3e865e74484f3bb";
-            RestTemplate restTemplate = new RestTemplate();
-            String response = restTemplate.getForObject(url, String.class);
+        // XML 파싱 및 데이터 변환
+        XmlMapper xmlMapper = new XmlMapper();
+        Dbs dbs = xmlMapper.readValue(response, Dbs.class);
 
-            // XML 파싱 및 데이터 변환
-            XmlMapper xmlMapper = new XmlMapper();
-            Dbs dbs = xmlMapper.readValue(response, Dbs.class);
+        if (dbs != null && dbs.getMuDTOlist() != null) {
+            List<MusicalDTO> musicalDTOList = dbs.getMuDTOlist();
 
-            if (dbs != null && dbs.getMuDTOlist() != null) {
-                for (MusicalDTO mdto : dbs.getMuDTOlist()) {
-                    Musical musical = new Musical();
-                    musical.setMusicalTitle(mdto.getMusicalTitle());
-                    musical.setHallId(1L);
-                    musical.setMusicalGenre(mdto.getMusicalGenre());
-                    musical.setMusicalRunTime(mdto.getMusicalRunTime());
-                    musical.setMusicalArea(mdto.getMusicalArea());
-                    musical.setMusicalAge(mdto.getMusicalAge());
-                    musical.setMusicalEntrpsnm(mdto.getMusicalEntrpsnm());
-                    musical.setMusicalImage(mdto.getMusicalImage());
-                    musical.setActor(mdto.getActor());
-                    musical.setMusicalStartDate(mdto.getMusicalStartDate());
-                    musical.setMusicalEndDate(mdto.getMusicalEndDate());
-                	musical.setMusicalSeatGradeInfo(mdto.getMusicalSeatGradeInfo());
-                	musical.setMusicalDescription(mdto.getMusicalDescription());
+            // 각 공연의 mt20id를 사용하여 상세 정보 처리
+            for (MusicalDTO mdto : musicalDTOList) {
+                String mt20id = mdto.getMusicalId();
+                String detailUrl = "http://www.kopis.or.kr/openApi/restful/pblprfr/" 
+                					+ mt20id 
+                					+ "?service="
+                					+ SERVICE_KEY;
 
-                    // 데이터베이스 저장
-                    apiRepository.save(musical);
+                // 상세 정보 API 호출
+                String detailResponse = restTemplate.getForObject(detailUrl, String.class);
+
+                // 상세 정보 XML 파싱
+                Dbs detailDbs = xmlMapper.readValue(detailResponse, Dbs.class);
+
+                if (detailDbs != null && detailDbs.getMuDTOlist() != null) {
+                    for (MusicalDTO detailMdto : detailDbs.getMuDTOlist()) {
+                        // 엔티티 생성 및 데이터 매핑
+                        Musical musical = new Musical();
+                        musical.setMusical_title(cutUnnecessaryParts.cutName(detailMdto.getMusicalTitle(), "["));
+                        musical.setMusical_genre(detailMdto.getMusicalGenre());
+                        musical.setMusical_run_time(detailMdto.getMusicalRunTime());
+                        musical.setMusical_area(detailMdto.getMusicalArea());
+                        musical.setMusical_age(detailMdto.getMusicalAge());
+                        musical.setMusical_entrpsnm(detailMdto.getMusicalEntrpsnm());
+                        musical.setMusical_image(detailMdto.getMusicalImage());
+                        musical.setMusical_actor(detailMdto.getActor());
+                        musical.setMusical_start_date(detailMdto.getMusicalStartDate());
+                        musical.setMusical_end_date(detailMdto.getMusicalEndDate());
+                        musical.setMusical_seat_grade_info(detailMdto.getMusicalSeatGradeInfo());
+                        // 뮤지컬 상세설명 이미지 styurls(JSON)를 String으로 변환
+                        if (detailMdto.getMusicalDescription() != null) {
+                            ObjectMapper objectMapper = new ObjectMapper();
+                            String styurlsJson = objectMapper.writeValueAsString(detailMdto.getMusicalDescription());
+                            musical.setMusical_description(styurlsJson);
+                        }
+                        // Hall_Info 외래키 설정
+                        Hall_Info hallInfo = apiRepository.findHallByID(detailMdto.getHall_API_id());
+                        if (hallInfo == null) {
+                            // 4. 해당 홀 ID로 API 요청하여 홀 정보 저장
+                            String hallApiUrl = "http://kopis.or.kr/openApi/restful/prfplc/" 
+                            					+ detailMdto.getHall_API_id()
+                            					+ "?service="
+                            					+ SERVICE_KEY;
+                            String hallResponse = restTemplate.getForObject(hallApiUrl, String.class);
+
+                            dbs_hallInfo hallDbs = xmlMapper.readValue(hallResponse, dbs_hallInfo.class);
+                            if (hallDbs != null && hallDbs.getHIDTOlist() != null) {
+                                for (HallInfoDTO hallDto : hallDbs.getHIDTOlist()) {
+                                    hallInfo = new Hall_Info();
+                                    hallInfo.setHall_API_id(hallDto.getHall_API_id());
+                                    hallInfo.setHall_name(cutUnnecessaryParts.cutName(hallDto.getHall_name(), "("));
+                                    hallInfo.setHall_addr(hallDto.getHall_addr());
+                                    hallInfo.setHall_la(hallDto.getHall_la());
+                                    hallInfo.setHall_lo(hallDto.getHall_lo());
+
+                                    apiRepository.save_hallInfo(hallInfo);
+                                }
+                            }
+                        }
+
+                        // 5. 홀 정보 설정 후 뮤지컬 저장
+                        musical.setHall_Info(hallInfo);
+                        
+                        // 데이터베이스 저장
+                        apiRepository.save(musical);
+                        
+                    }
                 }
             }
         }
     }
+    
 }
-

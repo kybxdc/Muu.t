@@ -1,57 +1,81 @@
 package com.fp.muut.entity;
 
-import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "MUSICAL")
 @Getter @Setter
 public class Musical {
-
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_generator5")
-    @SequenceGenerator(name = "seq_generator5", sequenceName = "musical_sequence", allocationSize = 1)
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "musical_id")
-    private Long musicalId; // 뮤지컬 ID
+	@Column(name = "musical_id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_generator1")
+    @SequenceGenerator(name = "seq_generator1", sequenceName = "musical_sequence", allocationSize = 1)
+	private Long id;
+	
+	// hall_id 외래키 참조
+	@ManyToOne
+	@JoinColumn(name = "hall_id")
+	@Setter(value = AccessLevel.NONE)
+	private Hall_Info hall_Info;
+	
+	private String musical_title;
+	
+	@Column(name = "musical_description", length = 1000)
+	private String musical_description;	
+	private String musical_genre;
+	private String musical_run_time;
+	private String musical_area;
+	private String musical_age;
+	private String musical_entrpsnm;
+	private String musical_image;
+	private String musical_seat_grade_info;
+	@Temporal(TemporalType.DATE) // 날짜만 저장
+	private java.util.Date musical_start_date;
+	@Temporal(TemporalType.DATE) // 날짜만 저장
+	private java.util.Date musical_end_date;
+	private String musical_actor;
+	
+	// 임시
+//	private String hall_name_tem;
+//	private String hallId_mt10id;
+	
+	// Musical_Seats 양방향 매핑
+	@OneToOne(mappedBy = "musical")
+	private Musical_Seats musical_Seats;
+	
+	// Performance 양방향 매핑
+//	@OneToMany(mappedBy = "musical")
+//	private List<Performance> performances = new ArrayList<>();
+	
+	// Review 양방향 매핑
+//	@OneToMany(mappedBy = "musical")
+//	private List<Review> reviews = new ArrayList<>(); 
 
-    @Column(name = "hall_id")
-    private Long hallId; // 홀 ID
-
-    @Column(name = "musical_title", length = 100)
-    private String musicalTitle; // 뮤지컬 제목
-
-    @Column(name = "musical_description", length = 1000)
-    private String musicalDescription; // 뮤지컬 설명
-
-    @Column(name = "musical_genre", length = 100)
-    private String musicalGenre; // 뮤지컬 장르
-
-    @Column(name = "musical_run_time", length = 100)
-    private String musicalRunTime; // 상영 시간
-
-    @Column(name = "musical_area", length = 1000)
-    private String musicalArea; // 상영 지역
-
-    @Column(name = "musical_age", length = 100)
-    private String musicalAge; // 관람 연령
-
-    @Column(name = "musical_entrpsnm", length = 100)
-    private String musicalEntrpsnm; // 기획사명
-
-    @Column(name = "musical_image", length = 1000)
-    private String musicalImage; // 뮤지컬 이미지
-
-    @Column(name = "musical_seat_grade_info", length = 1000)
-    private String musicalSeatGradeInfo; // 좌석 등급 정보
-
-    @Column(name = "musical_start_date")
-    private java.util.Date musicalStartDate; // 시작 날짜
-
-    @Column(name = "musical_end_date")
-    private java.util.Date musicalEndDate; // 종료 날짜
-
-    @Column(name = "actor", length = 100)
-    private String actor; // 배우
+	// Expectation 양방향 매핑
+//	@OneToMany(mappedBy = "musical")
+//	private List<Expectation> expectations = new ArrayList<>(); 
+	
+	public void setHall_Info(Hall_Info hall_Info) {
+		this.hall_Info = hall_Info;
+//		hall_Info.getMusicals().add(this);
+	}
+	
 }
+
+
