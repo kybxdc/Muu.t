@@ -19,7 +19,7 @@ export default function SeatInfo() {
     (async function () {
       try {
         const response = await fetch(`/api/seat/hall/${hall_id}`);
-
+        
         if (response.ok) {
           setHallName(await response.text());
         } else {

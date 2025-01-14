@@ -15,7 +15,6 @@ export default function BookingCalendar({ selectedDate, setSelectedDate, musical
         onChange={(date) => setSelectedDate(date)}
         inline
         minDate={new Date()}
-        maxDate={new Date("2024-12-28")}
         renderCustomHeader={({
           date,
           decreaseMonth,
