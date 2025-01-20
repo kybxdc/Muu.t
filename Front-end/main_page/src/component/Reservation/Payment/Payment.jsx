@@ -34,7 +34,7 @@ export default function Payment() {
       price: seat.grade.price,
     }));
 
-  var oPay = Naver.Pay.create({
+  const oPay = Naver.Pay.create({
     mode: "development",
     clientId: "HN3GGCMDdTgGUfl0kFCo",
     chainId: "ZW5xd1JZNSt4dWt",
